@@ -1,4 +1,4 @@
-package app;
+package gr2181.smittesporer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class Calc {
      * @throws IllegalArgumentException if n is larger than the operand count
      */
     public double peekOperand(int n) {
-        if (n > getOperandCount()) {
+        if (n >= getOperandCount()) {
             throw new IllegalArgumentException("Cannot peek at position " + n + " when the operand count is " + getOperandCount());
         }
         return operandStack.get(getOperandCount() - n - 1);
@@ -57,6 +57,7 @@ public class Calc {
      * @return the top operand
      * @throws IllegalStateException if the stack is empty
      */
+    
     public double popOperand() {
         if (getOperandCount() == 0) {
             throw new IllegalStateException("Cannot pop from an empty stack");
@@ -73,8 +74,13 @@ public class Calc {
      * @throws IllegalStateException if the operand stack is empty
      */
     public double performOperation(UnaryOperator<Double> op) throws IllegalStateException {
-        // TODO
-        return 0.0;
+        if (getOperandCount() < 1) {
+            throw new IllegalStateException("Too few operands (" + getOperandCount() + ") on the stack");
+        }
+        double op1 = popOperand();
+        double result = op.apply(op1);
+        pushOperand(result);
+        return result;
     }
 
     /**
@@ -91,7 +97,7 @@ public class Calc {
         }
         var op1 = popOperand();
         var op2 = popOperand();
-        var result = op.apply(op1, op2);
+        var result = op.apply(op2, op1);
         pushOperand(result);
         return result;
     }
@@ -102,7 +108,13 @@ public class Calc {
      * @throws IllegalStateException if the operand count is less than two
      */
     public void swap() {
-        // TODO
+        if(getOperandCount() < 2) {
+            throw new IllegalStateException("Not enough items to swap");
+        }
+        double op1 = popOperand();
+        double op2 = popOperand();
+        pushOperand(op1);
+        pushOperand(op2);
     }
 
     /**
@@ -111,6 +123,19 @@ public class Calc {
      * @throws IllegalStateException if the operand stack is empty
      */
     public void dup() {
-        // TODO
+        if(getOperandCount() == 0) {
+            throw new IllegalStateException("stack is empty cant duplicate");
+        }
+        double op1 = this.peekOperand();
+        this.pushOperand(op1);
+    }
+
+
+    //help method
+    public void printStack() {
+        for (double nmb : this.operandStack) {
+            System.out.print(nmb + ", ");
+        }
+        System.out.print("\n");
     }
 }

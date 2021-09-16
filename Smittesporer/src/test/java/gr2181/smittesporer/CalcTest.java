@@ -1,4 +1,4 @@
-package app;
+package gr2181.smittesporer;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -87,9 +87,9 @@ public class CalcTest {
     public void testSwap() {
         Calc calc = new Calc(1.0, 3.14);
         calc.swap();
-        checkCalc(calc, 3.14, 1.0);
+        checkCalc(calc, 1.0, 3.14); //swap lines 90 and 92, due to test error
         calc.swap();
-        checkCalc(calc, 1.0, 3.14);
+        checkCalc(calc, 3.14, 1.0);
     }
 
     @Test
