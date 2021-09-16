@@ -1,10 +1,10 @@
-package smittesporer;
-
-private String name, email, password;
+package gr2181.smittesporer;
 
 public class User {
 
-    public User (String name, String email, String password) {
+    private String name, email, password;
+
+    public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -36,6 +36,7 @@ public class User {
 
     public static void main(String[] args) {
         User newUser = new User("tuva", "tuvaco@stud.ntnu.no", "ntnu");
+        System.out.println(newUser.getEmail());
     }
 
 }

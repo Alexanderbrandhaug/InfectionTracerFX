@@ -1,4 +1,4 @@
-package app;
+package gr2181.smittesporer;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,14 +22,14 @@ import org.testfx.matcher.control.LabeledMatchers;
 /**
  * TestFX App test
  */
-public class AppTest extends ApplicationTest {
+public class CalcControllerTest extends ApplicationTest {
 
-    private AppController controller;
+    private CalcController controller;
     private Parent root;
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("App.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Calc.fxml"));
         root = fxmlLoader.load();
         controller = fxmlLoader.getController();
         stage.setScene(new Scene(root));
