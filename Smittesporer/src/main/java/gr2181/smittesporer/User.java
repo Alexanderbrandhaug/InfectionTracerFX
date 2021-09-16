@@ -2,20 +2,29 @@ package gr2181.smittesporer;
 
 public class User {
 
-    private String name, email, password;
+    private String forname, lastname, email, password;
 
-    public User(String name, String email, String password) {
-        this.name = name;
+    public User(String forname, String lastname, String email, String password) {
+        this.forname = forname;
+        this.lastname = lastname;
         this.email = email;
         this.password = password;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setForName(String forname) {
+        this.forname = forname;
     }
 
-    public String getName() {
-        return this.name;
+    public String getForName() {
+        return this.forname;
+    }
+
+    public void setLastName(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getLastName() {
+        return this.lastname;
     }
 
     public void setEmail(String email) {
@@ -35,8 +44,8 @@ public class User {
     }
 
     public static void main(String[] args) {
-        User newUser = new User("tuva", "tuvaco@stud.ntnu.no", "ntnu");
-        System.out.println(newUser.getEmail());
+        User newUser = new User("tuva", "placeholder", "tuvaco@stud.ntnu.no", "ntnu");
+        System.out.println(newUser.getLastName());
     }
 
 }
