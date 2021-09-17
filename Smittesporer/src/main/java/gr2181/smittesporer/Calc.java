@@ -6,7 +6,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.UnaryOperator;
 
 public class Calc {
-    
+
     private final List<Double> operandStack;
 
     public Calc(double... operands) {
@@ -39,7 +39,8 @@ public class Calc {
      */
     public double peekOperand(int n) {
         if (n >= getOperandCount()) {
-            throw new IllegalArgumentException("Cannot peek at position " + n + " when the operand count is " + getOperandCount());
+            throw new IllegalArgumentException(
+                    "Cannot peek at position " + n + " when the operand count is " + getOperandCount());
         }
         return operandStack.get(getOperandCount() - n - 1);
     }
@@ -57,17 +58,17 @@ public class Calc {
      * @return the top operand
      * @throws IllegalStateException if the stack is empty
      */
-    
+
     public double popOperand() {
         if (getOperandCount() == 0) {
             throw new IllegalStateException("Cannot pop from an empty stack");
         }
         return operandStack.remove(operandStack.size() - 1);
     }
-    
+
     /**
-     * Performs the provided operation in the top operand, and
-     * replaces it with the result.
+     * Performs the provided operation in the top operand, and replaces it with the
+     * result.
      *
      * @param op the operation to perform
      * @return the result of performing the operation
@@ -84,8 +85,8 @@ public class Calc {
     }
 
     /**
-     * Performs the provided operation in the two topmost operands, and
-     * replaces them with the result.
+     * Performs the provided operation in the two topmost operands, and replaces
+     * them with the result.
      *
      * @param op the operation to perform
      * @return the result of performing the operation
@@ -108,7 +109,7 @@ public class Calc {
      * @throws IllegalStateException if the operand count is less than two
      */
     public void swap() {
-        if(getOperandCount() < 2) {
+        if (getOperandCount() < 2) {
             throw new IllegalStateException("Not enough items to swap");
         }
         double op1 = popOperand();
@@ -123,15 +124,14 @@ public class Calc {
      * @throws IllegalStateException if the operand stack is empty
      */
     public void dup() {
-        if(getOperandCount() == 0) {
+        if (getOperandCount() == 0) {
             throw new IllegalStateException("stack is empty cant duplicate");
         }
         double op1 = this.peekOperand();
         this.pushOperand(op1);
     }
 
-
-    //help method
+    // help method
     public void printStack() {
         for (double nmb : this.operandStack) {
             System.out.print(nmb + ", ");
