@@ -1,4 +1,9 @@
 gr2181\smittesporer\CalcController.class
+<<<<<<< HEAD
 gr2181\smittesporer\CalcApp.class
 gr2181\smittesporer\User.class
+=======
+gr2181\smittesporer\MainController.class
+gr2181\smittesporer\App.class
+>>>>>>> master
 gr2181\smittesporer\Calc.class
