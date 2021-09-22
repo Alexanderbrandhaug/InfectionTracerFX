@@ -9,6 +9,6 @@
       <TextField focusTraversable="false" layoutX="244.0" layoutY="132.0" promptText="Email" />
       <TextField focusTraversable="false" layoutX="244.0" layoutY="208.0" promptText="Password" />
       <Button layoutX="244.0" layoutY="275.0" mnemonicParsing="false" onAction="#loginBtn" text="Login" />
-      <Button layoutX="353.0" layoutY="275.0" mnemonicParsing="false" text="Register" />
+      <Button layoutX="353.0" layoutY="275.0" mnemonicParsing="false" onAction="#registerBtn" text="Register" />
    </children>
 </Pane>
