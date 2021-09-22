@@ -1,19 +1,20 @@
 package gr2181.smittesporer;
 
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 public class User {
 
     private String forname, lastname, email, password;
 
     public User(String forname, String lastname, String email, String password) {
+
         this.forname = forname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
     }
 
-    public void setForName(String forname) {
-        this.forname = forname;
-    }
 
     public String getForName() {
         return this.forname;
@@ -43,9 +44,24 @@ public class User {
         return this.password;
     }
 
+    public void setForname(String forname){
+        Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
+        Matcher match = pattern.matcher(forname);
+        boolean a = match.find();
+        if(a){
+           System.out.println("PRINT DAWDWADWA");
+        }else{
+            this.forname = forname;
+        }
+       
+    }
+
     public static void main(String[] args) {
         User newUser = new User("tuva", "placeholder", "tuvaco@stud.ntnu.no", "ntnu");
-        System.out.println(newUser.getLastName());
+        newUser.setForname("21321");
+        System.out.println(newUser.getForName());
+    
+    
     }
 
 }
