@@ -14,6 +14,15 @@ public class RegistrationController {
 
     @FXML
     void CancelRegisterBtn(ActionEvent event) {
+
+        try {
+            
+            window1.setScene(new Scene(FXMLLoader.load(getClass().getResource("login.fxml"))));
+            window1.show();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
            
 
 
