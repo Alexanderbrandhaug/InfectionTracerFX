@@ -14,7 +14,7 @@ public class User {
     public void setForName(String forname){
     	Pattern pattern = Pattern.compile("[^a-zA-Z]");
         Matcher match = pattern.matcher(forname);
-        if(match.find() || forname.isEmpty()){
+        if (match.find() || forname.isEmpty()){
            throw new IllegalArgumentException("Invalid forname");
         }
         forname.trim();
@@ -53,18 +53,19 @@ public class User {
 
     public void setPassword(String password) {
     	if(password.length()>=8) {
-    		Pattern letter = Pattern.compile("[a-zA-z]");
+            Pattern letter = Pattern.compile("[a-zA-z]");
             Pattern digit = Pattern.compile("[0-9]");
             Matcher hasLetter = letter.matcher(password);
             Matcher hasDigit = digit.matcher(password);
             
             if (hasLetter.find() && hasDigit.find()){
-            	throw new IllegalArgumentException("Illegal password");
+            	this.password = password;
+            } else {
+                throw new IllegalArgumentException("Not correct");
             }
-            this.password = password;
 
         } else {
-        	throw new IllegalArgumentException("Illegal password");
+        	throw new IllegalArgumentException("Not enough");
         }
     }
 
@@ -75,8 +76,8 @@ public class User {
 
     public static void main(String[] args) {
     	User newUser = new User();
-        newUser.setForName("");
-        System.out.println(newUser.getForName());
+        newUser.setLastName("");
+        System.out.println(newUser.getLastName());
     
     
     }
