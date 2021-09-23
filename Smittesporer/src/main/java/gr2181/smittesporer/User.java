@@ -14,7 +14,7 @@ public class User {
     public void setForName(String forname){
     	Pattern pattern = Pattern.compile("[^a-zA-Z]");
         Matcher match = pattern.matcher(forname);
-        if(match.find()){
+        if(match.find() || forname.isEmpty()){
            throw new IllegalArgumentException("Invalid forname");
         }
         forname.trim();
@@ -28,7 +28,7 @@ public class User {
     public void setLastName(String lastname) {
     	Pattern pattern = Pattern.compile("[^a-zA-Z]");
         Matcher match = pattern.matcher(lastname);
-        if(match.find()){
+        if(match.find() || lastname.isEmpty()){
            throw new IllegalArgumentException("Invalid lastname");
         }
         lastname.trim();
@@ -41,7 +41,7 @@ public class User {
 
     
     public void setEmail(String email) {
-    	if (!email.contains("@") || !email.contains(".com")) {
+    	if (!email.contains("@") || !email.contains(".com") || email.isEmpty()) {
     		throw new IllegalArgumentException("Invalid email");
     	}
     	this.email = email;
@@ -75,7 +75,7 @@ public class User {
 
     public static void main(String[] args) {
     	User newUser = new User();
-        newUser.setForName("28");
+        newUser.setForName("");
         System.out.println(newUser.getForName());
     
     
