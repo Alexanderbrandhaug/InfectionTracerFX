@@ -74,9 +74,8 @@ public class User {
        
 
     public static void main(String[] args) {
-        //User newUser = new User("tuva", "placeholder", "tuvaco@stud.ntnu.no", "ntnu");
     	User newUser = new User();
-        newUser.setForName("lol");
+        newUser.setForName("28");
         System.out.println(newUser.getForName());
     
     
