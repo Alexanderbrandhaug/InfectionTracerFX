@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------
+Test set: test.java.gr2181.smittesporer.UserTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.036 s <<< FAILURE! - in test.java.gr2181.smittesporer.UserTest
+test.java.gr2181.smittesporer.UserTest.testEmail  Time elapsed: 0.018 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
+	at test.java.gr2181.smittesporer.UserTest.testEmail(UserTest.java:63)
+
+test.java.gr2181.smittesporer.UserTest.testSetForname  Time elapsed: 0.001 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
+	at test.java.gr2181.smittesporer.UserTest.testSetForname(UserTest.java:48)
+
+test.java.gr2181.smittesporer.UserTest.testPassword  Time elapsed: 0.001 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
+	at test.java.gr2181.smittesporer.UserTest.testPassword(UserTest.java:77)
+
+test.java.gr2181.smittesporer.UserTest.testConstructor  Time elapsed: 0.001 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
+	at test.java.gr2181.smittesporer.UserTest.testConstructor(UserTest.java:20)
+
