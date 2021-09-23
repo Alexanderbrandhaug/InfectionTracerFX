@@ -17,8 +17,7 @@ public class LoginController {
 
         try {
 
-            window1.setScene(new Scene(FXMLLoader.load(getClass().getResource("main.fxml"))));
-            window1.show();
+            App.changeScene("main.fxml");
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -31,8 +30,7 @@ public class LoginController {
 
         try {
 
-            window1.setScene(new Scene(FXMLLoader.load(getClass().getResource("registration.fxml"))));
-            window1.show();
+            App.changeScene("registration.fxml");
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
