@@ -1,0 +1,4 @@
+--patch-module
+Smittesporer=_
+--add-reads
+Smittesporer=ALL-UNNAMED
