@@ -1,4 +1,4 @@
-package test.java.gr2181.smittesporer;
+package gr2181.smittesporer;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Assertions;
