@@ -1,7 +1,7 @@
 # Group gr2181 repository 
 
 ## Om prosjektet
-Dette er en Smittesporer app, som registrerer nærkontaktene til personer, og varsler nærkontater dersom man skulle bli smittet. Applikasjonen er laget med JavaFx og lagrer informasjonen i "skyen" (For release 1 lagres det lokalt).
+Dette er en Smittesporer app som registrerer nærkontaktene til personer, og varsler nærkontater dersom man skulle bli smittet. Applikasjonen er laget med JavaFx og lagrer informasjonen i "skyen" (For release 1 lagres det lokalt).
 Selve applikasjonen finner man [her](Smittesporer), her finner man også relevant README fil.
 
 ## Gitpod oppsett
