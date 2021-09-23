@@ -19,7 +19,6 @@ public class LoginController {
 
             App.changeScene("main.fxml");
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -32,7 +31,6 @@ public class LoginController {
 
             App.changeScene("registration.fxml");
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
