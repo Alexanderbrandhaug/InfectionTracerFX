@@ -9,30 +9,31 @@ public class User {
 
     public User(String forname, String lastname, String email, String password) {
         setForName(forname);
+        setLastName(lastname);
         setEmail(email);
-        this.lastname = lastname;
-        this.password = password;
+        setPassword(password);
+
     }
 
-    public void setForName(String forname){
-    	Pattern pattern = Pattern.compile("[^a-zA-Z]");
+    public void setForName(String forname) {
+        Pattern pattern = Pattern.compile("[^a-zA-Z]");
         Matcher match = pattern.matcher(forname);
-        if (match.find() || forname.isEmpty()){
-           throw new IllegalArgumentException("Invalid forname");
+        if (match.find() || forname.isEmpty()) {
+            throw new IllegalArgumentException("Invalid forname");
         }
         forname.trim();
         this.forname = forname;
     }
-    
+
     public String getForName() {
         return this.forname;
     }
 
     public void setLastName(String lastname) {
-    	Pattern pattern = Pattern.compile("[^a-zA-Z]");
+        Pattern pattern = Pattern.compile("[^a-zA-Z]");
         Matcher match = pattern.matcher(lastname);
-        if(match.find() || lastname.isEmpty()){
-           throw new IllegalArgumentException("Invalid lastname");
+        if (match.find() || lastname.isEmpty()) {
+            throw new IllegalArgumentException("Invalid lastname");
         }
         lastname.trim();
         this.lastname = lastname;
@@ -42,12 +43,11 @@ public class User {
         return this.lastname;
     }
 
-    
     public void setEmail(String email) {
-    	if (!email.contains("@") || !email.contains(".com") || email.isEmpty()) {
-    		throw new IllegalArgumentException("Invalid email");
-    	}
-    	this.email = email;
+        if (!email.contains("@") || !email.contains(".com") || email.isEmpty()) {
+            throw new IllegalArgumentException("Invalid email");
+        }
+        this.email = email;
     }
 
     public String getEmail() {
@@ -55,34 +55,32 @@ public class User {
     }
 
     public void setPassword(String password) {
-    	if(password.length()>=8) {
+        if (password.length() >= 8) {
             Pattern letter = Pattern.compile("[a-zA-z]");
             Pattern digit = Pattern.compile("[0-9]");
             Matcher hasLetter = letter.matcher(password);
             Matcher hasDigit = digit.matcher(password);
-            
-            if (hasLetter.find() && hasDigit.find()){
-            	this.password = password;
+
+            if (hasLetter.find() && hasDigit.find()) {
+                this.password = password;
             } else {
                 throw new IllegalArgumentException("Not correct");
             }
 
         } else {
-        	throw new IllegalArgumentException("Not enough");
+            throw new IllegalArgumentException("Not enough");
         }
     }
 
     public String getPassword() {
         return this.password;
     }
-       
 
     public static void main(String[] args) {
-    	User newUser = new User("Alex", "test", "alex@gmail.com", "password321");
-        newUser.setLastName("");
+        User newUser = new User("Alex", "test", "alex@gmail.com", "password321");
+        // newUser.setLastName("");
         System.out.println(newUser.getLastName());
-    
-    
+
     }
 
 }
