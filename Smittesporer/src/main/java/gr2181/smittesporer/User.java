@@ -7,20 +7,31 @@ public class User {
 
     private String forname, lastname, email, password;
 
-    public User(String forname, String lastname, String email, String password) {
+    public User() {
 
-        this.forname = forname;
-        this.lastname = lastname;
-        this.email = email;
-        this.password = password;
     }
 
-
+    public void setForName(String forname){
+    	Pattern pattern = Pattern.compile("[^a-zA-Z]");
+        Matcher match = pattern.matcher(forname);
+        if (match.find() || forname.isEmpty()){
+           throw new IllegalArgumentException("Invalid forname");
+        }
+        forname.trim();
+        this.forname = forname;
+    }
+    
     public String getForName() {
         return this.forname;
     }
 
     public void setLastName(String lastname) {
+    	Pattern pattern = Pattern.compile("[^a-zA-Z]");
+        Matcher match = pattern.matcher(lastname);
+        if(match.find() || lastname.isEmpty()){
+           throw new IllegalArgumentException("Invalid lastname");
+        }
+        lastname.trim();
         this.lastname = lastname;
     }
 
@@ -28,8 +39,12 @@ public class User {
         return this.lastname;
     }
 
+    
     public void setEmail(String email) {
-        this.email = email;
+    	if (!email.contains("@") || !email.contains(".com") || email.isEmpty()) {
+    		throw new IllegalArgumentException("Invalid email");
+    	}
+    	this.email = email;
     }
 
     public String getEmail() {
@@ -37,29 +52,32 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+    	if(password.length()>=8) {
+            Pattern letter = Pattern.compile("[a-zA-z]");
+            Pattern digit = Pattern.compile("[0-9]");
+            Matcher hasLetter = letter.matcher(password);
+            Matcher hasDigit = digit.matcher(password);
+            
+            if (hasLetter.find() && hasDigit.find()){
+            	this.password = password;
+            } else {
+                throw new IllegalArgumentException("Not correct");
+            }
+
+        } else {
+        	throw new IllegalArgumentException("Not enough");
+        }
     }
 
     public String getPassword() {
         return this.password;
     }
-
-    public void setForname(String forname){
-        Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
-        Matcher match = pattern.matcher(forname);
-        boolean a = match.find();
-        if(a){
-           System.out.println("PRINT DAWDWADWA");
-        }else{
-            this.forname = forname;
-        }
        
-    }
 
     public static void main(String[] args) {
-        User newUser = new User("tuva", "placeholder", "tuvaco@stud.ntnu.no", "ntnu");
-        newUser.setForname("21321");
-        System.out.println(newUser.getForName());
+    	User newUser = new User();
+        newUser.setLastName("");
+        System.out.println(newUser.getLastName());
     
     
     }
