@@ -7,8 +7,11 @@ public class User {
 
     private String forname, lastname, email, password;
 
-    public User() {
-
+    public User(String forname, String lastname, String email, String password) {
+        setForName(forname);
+        setEmail(email);
+        this.lastname = lastname;
+        this.password = password;
     }
 
     public void setForName(String forname){
@@ -75,7 +78,7 @@ public class User {
        
 
     public static void main(String[] args) {
-    	User newUser = new User();
+    	User newUser = new User("Alex", "test", "alex@gmail.com", "password321");
         newUser.setLastName("");
         System.out.println(newUser.getLastName());
     
