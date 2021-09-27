@@ -21,8 +21,7 @@ public class User {
         if (match.find() || forname.isEmpty()) {
             throw new IllegalArgumentException("Invalid forname");
         }
-        forname.trim();
-        this.forname = forname;
+        this.forname = forname.trim();
     }
 
     public String getForName() {
@@ -30,13 +29,13 @@ public class User {
     }
 
     public void setLastName(String lastname) {
+
         Pattern pattern = Pattern.compile("[^a-zA-Z]");
         Matcher match = pattern.matcher(lastname);
         if (match.find() || lastname.isEmpty()) {
             throw new IllegalArgumentException("Invalid lastname");
         }
-        lastname.trim();
-        this.lastname = lastname;
+        this.lastname = lastname.trim();
     }
 
     public String getLastName() {
