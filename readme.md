@@ -12,4 +12,4 @@ Selve applikasjonen finner man [her](Smittesporer), her finner man også relevan
 - Deretter kjør `mvn compile javafx:run`.
 - Når applikasjonen er ferdig bygget og kjørt, åpne port 6080 for å se applikasjonen.
 - For å kjøre tester bruk `mvn test` i terminalen.
-- For å generere [Jacoco Test-rapport](https://www.eclemma.org/jacoco/) bruk `mvn jacoco:report` i terminalen.
+- For å sjekke kodekvalitet vha Jacoco, Checkstyles og Spotbugs bruk `mvn verify`i terminalen.
