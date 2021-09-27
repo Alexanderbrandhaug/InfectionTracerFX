@@ -20,18 +20,22 @@ import java.util.Objects;
 	public void start(final Stage primaryStage) throws Exception {
 <span class="nc" id="L21">		App.primaryStage = primaryStage;</span>
 <span class="nc" id="L22">		primaryStage.setTitle(&quot;Smittesporer&quot;);</span>
-<span class="nc" id="L23">		primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource(&quot;login.fxml&quot;))));</span>
+<span class="nc" id="L23">		primaryStage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource(&quot;login.fxml&quot;)))));</span>
 <span class="nc" id="L24">		primaryStage.show();</span>
 <span class="nc" id="L25">	}</span>
 
-	public static void changeScene(String fxml) throws IOException {
-<span class="nc" id="L28">		Parent pane = FXMLLoader.load(Objects.requireNonNull(App.class.getResource(fxml)));</span>
-<span class="nc" id="L29">		primaryStage.getScene().setRoot(pane);</span>
-<span class="nc" id="L30">		primaryStage.sizeToScene();</span>
-<span class="nc" id="L31">	}</span>
+	public static void changeScene(String fxml) {
+		try {
+<span class="nc" id="L29">			Parent pane = FXMLLoader.load(Objects.requireNonNull(App.class.getResource(fxml)));</span>
+<span class="nc" id="L30">			primaryStage.getScene().setRoot(pane);</span>
+<span class="nc" id="L31">			primaryStage.sizeToScene();</span>
+<span class="nc" id="L32">		} catch (IOException e) {</span>
+<span class="nc" id="L33">			e.printStackTrace();</span>
+<span class="nc" id="L34">		}</span>
+<span class="nc" id="L35">	}</span>
 
 	public static void main(String[] args) {
-<span class="nc" id="L34">		Application.launch(args);</span>
-<span class="nc" id="L35">	}</span>
+<span class="nc" id="L38">		Application.launch(args);</span>
+<span class="nc" id="L39">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

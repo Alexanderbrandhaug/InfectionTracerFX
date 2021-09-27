@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="gr2181.smittesporer.UserTest" time="0.036" tests="4" errors="0" skipped="0" failures="0">
-=======
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="gr2181.smittesporer.UserTest" time="0.138" tests="4" errors="0" skipped="0" failures="4">
->>>>>>> 30-add-jacoco-plugin-to-project
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="gr2181.smittesporer.UserTest" time="0.06" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="16"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-<<<<<<< HEAD
     <property name="java.class.path" value="C:\Users\Alex\ITP-smittesporer\gr2181\Smittesporer\target\test-classes;C:\Users\Alex\.m2\repository\org\openjfx\javafx-controls\16\javafx-controls-16.jar;C:\Users\Alex\.m2\repository\org\openjfx\javafx-graphics\16\javafx-graphics-16.jar;C:\Users\Alex\.m2\repository\org\openjfx\javafx-base\16\javafx-base-16.jar;C:\Users\Alex\.m2\repository\org\openjfx\javafx-fxml\16\javafx-fxml-16.jar;C:\Users\Alex\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.2\junit-jupiter-api-5.7.2.jar;C:\Users\Alex\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Alex\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Alex\.m2\repository\org\junit\platform\junit-platform-commons\1.7.2\junit-platform-commons-1.7.2.jar;C:\Users\Alex\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.2\junit-jupiter-engine-5.7.2.jar;C:\Users\Alex\.m2\repository\org\junit\platform\junit-platform-engine\1.7.2\junit-platform-engine-1.7.2.jar;C:\Users\Alex\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.7.2\junit-jupiter-params-5.7.2.jar;C:\Users\Alex\.m2\repository\org\testfx\testfx-core\4.0.16-alpha\testfx-core-4.0.16-alpha.jar;C:\Users\Alex\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Alex\.m2\repository\org\assertj\assertj-core\3.13.2\assertj-core-3.13.2.jar;C:\Users\Alex\.m2\repository\org\testfx\testfx-junit5\4.0.16-alpha\testfx-junit5-4.0.16-alpha.jar;C:\Users\Alex\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\Alex\.m2\repository\org\eclipse\jgit\org.eclipse.jgit\5.4.0.201906121030-r\org.eclipse.jgit-5.4.0.201906121030-r.jar;C:\Users\Alex\.m2\repository\com\jcraft\jsch\0.1.55\jsch-0.1.55.jar;C:\Users\Alex\.m2\repository\com\jcraft\jzlib\1.1.1\jzlib-1.1.1.jar;C:\Users\Alex\.m2\repository\com\googlecode\javaewah\JavaEWAH\1.1.6\JavaEWAH-1.1.6.jar;C:\Users\Alex\.m2\repository\org\slf4j\slf4j-api\1.7.2\slf4j-api-1.7.2.jar;C:\Users\Alex\.m2\repository\org\bouncycastle\bcpg-jdk15on\1.61\bcpg-jdk15on-1.61.jar;C:\Users\Alex\.m2\repository\org\bouncycastle\bcprov-jdk15on\1.61\bcprov-jdk15on-1.61.jar;C:\Users\Alex\.m2\repository\org\bouncycastle\bcpkix-jdk15on\1.61\bcpkix-jdk15on-1.61.jar;"/>
-=======
-    <property name="java.class.path" value="C:\Users\brand\ITP-smittesporer\gr2181\Smittesporer\target\test-classes;C:\Users\brand\.m2\repository\org\openjfx\javafx-controls\16\javafx-controls-16.jar;C:\Users\brand\.m2\repository\org\openjfx\javafx-graphics\16\javafx-graphics-16.jar;C:\Users\brand\.m2\repository\org\openjfx\javafx-base\16\javafx-base-16.jar;C:\Users\brand\.m2\repository\org\openjfx\javafx-fxml\16\javafx-fxml-16.jar;C:\Users\brand\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.2\junit-jupiter-api-5.7.2.jar;C:\Users\brand\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\brand\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\brand\.m2\repository\org\junit\platform\junit-platform-commons\1.7.2\junit-platform-commons-1.7.2.jar;C:\Users\brand\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.2\junit-jupiter-engine-5.7.2.jar;C:\Users\brand\.m2\repository\org\junit\platform\junit-platform-engine\1.7.2\junit-platform-engine-1.7.2.jar;C:\Users\brand\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.7.2\junit-jupiter-params-5.7.2.jar;C:\Users\brand\.m2\repository\org\testfx\testfx-core\4.0.16-alpha\testfx-core-4.0.16-alpha.jar;C:\Users\brand\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\brand\.m2\repository\org\assertj\assertj-core\3.13.2\assertj-core-3.13.2.jar;C:\Users\brand\.m2\repository\org\testfx\testfx-junit5\4.0.16-alpha\testfx-junit5-4.0.16-alpha.jar;C:\Users\brand\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\brand\.m2\repository\org\eclipse\jgit\org.eclipse.jgit\5.4.0.201906121030-r\org.eclipse.jgit-5.4.0.201906121030-r.jar;C:\Users\brand\.m2\repository\com\jcraft\jsch\0.1.55\jsch-0.1.55.jar;C:\Users\brand\.m2\repository\com\jcraft\jzlib\1.1.1\jzlib-1.1.1.jar;C:\Users\brand\.m2\repository\com\googlecode\javaewah\JavaEWAH\1.1.6\JavaEWAH-1.1.6.jar;C:\Users\brand\.m2\repository\org\slf4j\slf4j-api\1.7.2\slf4j-api-1.7.2.jar;C:\Users\brand\.m2\repository\org\bouncycastle\bcpg-jdk15on\1.61\bcpg-jdk15on-1.61.jar;C:\Users\brand\.m2\repository\org\bouncycastle\bcprov-jdk15on\1.61\bcprov-jdk15on-1.61.jar;C:\Users\brand\.m2\repository\org\bouncycastle\bcpkix-jdk15on\1.61\bcpkix-jdk15on-1.61.jar;"/>
->>>>>>> 30-add-jacoco-plugin-to-project
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -22,9 +14,8 @@
     <property name="java.vm.specification.version" value="16"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="NO"/>
-<<<<<<< HEAD
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-16.0.1\bin"/>
-    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter C:\Users\Alex\AppData\Local\Temp\surefire1931473657480812874 2021-09-24T12-54-43_518-jvmRun1 surefire2437680030447815845tmp surefire_04486823285984756529tmp"/>
+    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter C:\Users\Alex\AppData\Local\Temp\surefire7141406127249880954 2021-09-27T11-23-49_610-jvmRun1 surefire756153056342146921tmp surefire_06675671259824498776tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Alex\ITP-smittesporer\gr2181\Smittesporer\target\test-classes;C:\Users\Alex\.m2\repository\org\openjfx\javafx-controls\16\javafx-controls-16.jar;C:\Users\Alex\.m2\repository\org\openjfx\javafx-graphics\16\javafx-graphics-16.jar;C:\Users\Alex\.m2\repository\org\openjfx\javafx-base\16\javafx-base-16.jar;C:\Users\Alex\.m2\repository\org\openjfx\javafx-fxml\16\javafx-fxml-16.jar;C:\Users\Alex\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.2\junit-jupiter-api-5.7.2.jar;C:\Users\Alex\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Alex\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Alex\.m2\repository\org\junit\platform\junit-platform-commons\1.7.2\junit-platform-commons-1.7.2.jar;C:\Users\Alex\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.2\junit-jupiter-engine-5.7.2.jar;C:\Users\Alex\.m2\repository\org\junit\platform\junit-platform-engine\1.7.2\junit-platform-engine-1.7.2.jar;C:\Users\Alex\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.7.2\junit-jupiter-params-5.7.2.jar;C:\Users\Alex\.m2\repository\org\testfx\testfx-core\4.0.16-alpha\testfx-core-4.0.16-alpha.jar;C:\Users\Alex\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Alex\.m2\repository\org\assertj\assertj-core\3.13.2\assertj-core-3.13.2.jar;C:\Users\Alex\.m2\repository\org\testfx\testfx-junit5\4.0.16-alpha\testfx-junit5-4.0.16-alpha.jar;C:\Users\Alex\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\Alex\.m2\repository\org\eclipse\jgit\org.eclipse.jgit\5.4.0.201906121030-r\org.eclipse.jgit-5.4.0.201906121030-r.jar;C:\Users\Alex\.m2\repository\com\jcraft\jsch\0.1.55\jsch-0.1.55.jar;C:\Users\Alex\.m2\repository\com\jcraft\jzlib\1.1.1\jzlib-1.1.1.jar;C:\Users\Alex\.m2\repository\com\googlecode\javaewah\JavaEWAH\1.1.6\JavaEWAH-1.1.6.jar;C:\Users\Alex\.m2\repository\org\slf4j\slf4j-api\1.7.2\slf4j-api-1.7.2.jar;C:\Users\Alex\.m2\repository\org\bouncycastle\bcpg-jdk15on\1.61\bcpg-jdk15on-1.61.jar;C:\Users\Alex\.m2\repository\org\bouncycastle\bcprov-jdk15on\1.61\bcprov-jdk15on-1.61.jar;C:\Users\Alex\.m2\repository\org\bouncycastle\bcpkix-jdk15on\1.61\bcpkix-jdk15on-1.61.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -45,36 +36,11 @@
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="16.0.1+9-24"/>
     <property name="user.name" value="Alex"/>
-=======
-    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-16.0.2\bin"/>
-    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter C:\Users\brand\AppData\Local\Temp\surefire13197422606112593560 2021-09-23T21-55-56_699-jvmRun1 surefire16086168053764954402tmp surefire_011976598608117784004tmp"/>
-    <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\brand\ITP-smittesporer\gr2181\Smittesporer\target\test-classes;C:\Users\brand\.m2\repository\org\openjfx\javafx-controls\16\javafx-controls-16.jar;C:\Users\brand\.m2\repository\org\openjfx\javafx-graphics\16\javafx-graphics-16.jar;C:\Users\brand\.m2\repository\org\openjfx\javafx-base\16\javafx-base-16.jar;C:\Users\brand\.m2\repository\org\openjfx\javafx-fxml\16\javafx-fxml-16.jar;C:\Users\brand\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.2\junit-jupiter-api-5.7.2.jar;C:\Users\brand\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\brand\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\brand\.m2\repository\org\junit\platform\junit-platform-commons\1.7.2\junit-platform-commons-1.7.2.jar;C:\Users\brand\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.2\junit-jupiter-engine-5.7.2.jar;C:\Users\brand\.m2\repository\org\junit\platform\junit-platform-engine\1.7.2\junit-platform-engine-1.7.2.jar;C:\Users\brand\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.7.2\junit-jupiter-params-5.7.2.jar;C:\Users\brand\.m2\repository\org\testfx\testfx-core\4.0.16-alpha\testfx-core-4.0.16-alpha.jar;C:\Users\brand\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\brand\.m2\repository\org\assertj\assertj-core\3.13.2\assertj-core-3.13.2.jar;C:\Users\brand\.m2\repository\org\testfx\testfx-junit5\4.0.16-alpha\testfx-junit5-4.0.16-alpha.jar;C:\Users\brand\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\brand\.m2\repository\org\eclipse\jgit\org.eclipse.jgit\5.4.0.201906121030-r\org.eclipse.jgit-5.4.0.201906121030-r.jar;C:\Users\brand\.m2\repository\com\jcraft\jsch\0.1.55\jsch-0.1.55.jar;C:\Users\brand\.m2\repository\com\jcraft\jzlib\1.1.1\jzlib-1.1.1.jar;C:\Users\brand\.m2\repository\com\googlecode\javaewah\JavaEWAH\1.1.6\JavaEWAH-1.1.6.jar;C:\Users\brand\.m2\repository\org\slf4j\slf4j-api\1.7.2\slf4j-api-1.7.2.jar;C:\Users\brand\.m2\repository\org\bouncycastle\bcpg-jdk15on\1.61\bcpg-jdk15on-1.61.jar;C:\Users\brand\.m2\repository\org\bouncycastle\bcprov-jdk15on\1.61\bcprov-jdk15on-1.61.jar;C:\Users\brand\.m2\repository\org\bouncycastle\bcpkix-jdk15on\1.61\bcpkix-jdk15on-1.61.jar;"/>
-    <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="C:\Users\brand"/>
-    <property name="user.language" value="no"/>
-    <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="jdk.module.path" value="C:\Users\brand\ITP-smittesporer\gr2181\Smittesporer\target\classes;C:\Users\brand\.m2\repository\org\openjfx\javafx-controls\16\javafx-controls-16-win.jar;C:\Users\brand\.m2\repository\org\openjfx\javafx-graphics\16\javafx-graphics-16-win.jar;C:\Users\brand\.m2\repository\org\openjfx\javafx-base\16\javafx-base-16-win.jar;C:\Users\brand\.m2\repository\org\openjfx\javafx-fxml\16\javafx-fxml-16-win.jar"/>
-    <property name="java.version.date" value="2021-07-20"/>
-    <property name="java.home" value="C:\Program Files\Java\jdk-16.0.2"/>
-    <property name="file.separator" value="\"/>
-    <property name="basedir" value="C:\Users\brand\ITP-smittesporer\gr2181\Smittesporer"/>
-    <property name="java.vm.compressedOopsMode" value="32-bit"/>
-    <property name="line.separator" value="&#10;"/>
-    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\brand\.m2\repository\org\apache\maven\surefire\surefire-booter\3.0.0-M5\surefire-booter-3.0.0-M5.jar;C:\Users\brand\.m2\repository\org\apache\maven\surefire\surefire-api\3.0.0-M5\surefire-api-3.0.0-M5.jar;C:\Users\brand\.m2\repository\org\apache\maven\surefire\surefire-logger-api\3.0.0-M5\surefire-logger-api-3.0.0-M5.jar;C:\Users\brand\.m2\repository\org\apache\maven\surefire\surefire-shared-utils\3.0.0-M4\surefire-shared-utils-3.0.0-M4.jar;C:\Users\brand\.m2\repository\org\apache\maven\surefire\surefire-extensions-spi\3.0.0-M5\surefire-extensions-spi-3.0.0-M5.jar;C:\Users\brand\ITP-smittesporer\gr2181\Smittesporer\target\test-classes;C:\Users\brand\.m2\repository\org\openjfx\javafx-controls\16\javafx-controls-16.jar;C:\Users\brand\.m2\repository\org\openjfx\javafx-graphics\16\javafx-graphics-16.jar;C:\Users\brand\.m2\repository\org\openjfx\javafx-base\16\javafx-base-16.jar;C:\Users\brand\.m2\repository\org\openjfx\javafx-fxml\16\javafx-fxml-16.jar;C:\Users\brand\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.2\junit-jupiter-api-5.7.2.jar;C:\Users\brand\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\brand\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\brand\.m2\repository\org\junit\platform\junit-platform-commons\1.7.2\junit-platform-commons-1.7.2.jar;C:\Users\brand\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.2\junit-jupiter-engine-5.7.2.jar;C:\Users\brand\.m2\repository\org\junit\platform\junit-platform-engine\1.7.2\junit-platform-engine-1.7.2.jar;C:\Users\brand\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.7.2\junit-jupiter-params-5.7.2.jar;C:\Users\brand\.m2\repository\org\testfx\testfx-core\4.0.16-alpha\testfx-core-4.0.16-alpha.jar;C:\Users\brand\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\brand\.m2\repository\org\assertj\assertj-core\3.13.2\assertj-core-3.13.2.jar;C:\Users\brand\.m2\repository\org\testfx\testfx-junit5\4.0.16-alpha\testfx-junit5-4.0.16-alpha.jar;C:\Users\brand\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\brand\.m2\repository\org\eclipse\jgit\org.eclipse.jgit\5.4.0.201906121030-r\org.eclipse.jgit-5.4.0.201906121030-r.jar;C:\Users\brand\.m2\repository\com\jcraft\jsch\0.1.55\jsch-0.1.55.jar;C:\Users\brand\.m2\repository\com\jcraft\jzlib\1.1.1\jzlib-1.1.1.jar;C:\Users\brand\.m2\repository\com\googlecode\javaewah\JavaEWAH\1.1.6\JavaEWAH-1.1.6.jar;C:\Users\brand\.m2\repository\org\slf4j\slf4j-api\1.7.2\slf4j-api-1.7.2.jar;C:\Users\brand\.m2\repository\org\bouncycastle\bcpg-jdk15on\1.61\bcpg-jdk15on-1.61.jar;C:\Users\brand\.m2\repository\org\bouncycastle\bcprov-jdk15on\1.61\bcprov-jdk15on-1.61.jar;C:\Users\brand\.m2\repository\org\bouncycastle\bcpkix-jdk15on\1.61\bcpkix-jdk15on-1.61.jar;C:\Users\brand\.m2\repository\org\apache\maven\surefire\surefire-junit-platform\3.0.0-M5\surefire-junit-platform-3.0.0-M5.jar;C:\Users\brand\.m2\repository\org\apache\maven\surefire\common-java5\3.0.0-M5\common-java5-3.0.0-M5.jar;C:\Users\brand\.m2\repository\org\junit\platform\junit-platform-launcher\1.7.2\junit-platform-launcher-1.7.2.jar"/>
-    <property name="user.script" value=""/>
-    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="java.runtime.version" value="16.0.2+7-67"/>
-    <property name="user.name" value="brand"/>
->>>>>>> 30-add-jacoco-plugin-to-project
     <property name="path.separator" value=";"/>
     <property name="os.version" value="10.0"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="file.encoding" value="Cp1252"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-<<<<<<< HEAD
     <property name="localRepository" value="C:\Users\Alex\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\Alex\AppData\Local\Temp\"/>
@@ -90,45 +56,8 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="60.0"/>
   </properties>
-  <testcase name="testEmail" classname="gr2181.smittesporer.UserTest" time="0.022"/>
+  <testcase name="testEmail" classname="gr2181.smittesporer.UserTest" time="0.036"/>
   <testcase name="testSetForname" classname="gr2181.smittesporer.UserTest" time="0.001"/>
   <testcase name="testPassword" classname="gr2181.smittesporer.UserTest" time="0.001"/>
   <testcase name="testConstructor" classname="gr2181.smittesporer.UserTest" time="0.002"/>
-=======
-    <property name="localRepository" value="C:\Users\brand\.m2\repository"/>
-    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
-    <property name="java.io.tmpdir" value="C:\Users\brand\AppData\Local\Temp\"/>
-    <property name="java.version" value="16.0.2"/>
-    <property name="user.dir" value="C:\Users\brand\ITP-smittesporer\gr2181\Smittesporer"/>
-    <property name="os.arch" value="amd64"/>
-    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="sun.os.patch.level" value=""/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\brand\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\brand\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\Maven\apache-maven-3.8.2\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\nodejs;C:\Users\brand\AppData\Local\Microsoft\WindowsApps;C:\Users\brand\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\brand\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl;."/>
-    <property name="java.vm.info" value="mixed mode"/>
-    <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="java.vm.version" value="16.0.2+7-67"/>
-    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-    <property name="java.class.version" value="60.0"/>
-  </properties>
-  <testcase name="testEmail" classname="gr2181.smittesporer.UserTest" time="0.087">
-    <failure type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
-	at Smittesporer@0.0.1-SNAPSHOT/gr2181.smittesporer.UserTest.testEmail(UserTest.java:63)
-]]></failure>
-  </testcase>
-  <testcase name="testSetForname" classname="gr2181.smittesporer.UserTest" time="0.002">
-    <failure type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
-	at Smittesporer@0.0.1-SNAPSHOT/gr2181.smittesporer.UserTest.testSetForname(UserTest.java:48)
-]]></failure>
-  </testcase>
-  <testcase name="testPassword" classname="gr2181.smittesporer.UserTest" time="0.002">
-    <failure type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
-	at Smittesporer@0.0.1-SNAPSHOT/gr2181.smittesporer.UserTest.testPassword(UserTest.java:77)
-]]></failure>
-  </testcase>
-  <testcase name="testConstructor" classname="gr2181.smittesporer.UserTest" time="0.002">
-    <failure type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
-	at Smittesporer@0.0.1-SNAPSHOT/gr2181.smittesporer.UserTest.testConstructor(UserTest.java:20)
-]]></failure>
-  </testcase>
->>>>>>> 30-add-jacoco-plugin-to-project
 </testsuite>

@@ -1,24 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: gr2181.smittesporer.UserTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.036 s - in gr2181.smittesporer.UserTest
-=======
-Tests run: 4, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.138 s <<< FAILURE! - in gr2181.smittesporer.UserTest
-gr2181.smittesporer.UserTest.testEmail  Time elapsed: 0.087 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
-	at Smittesporer@0.0.1-SNAPSHOT/gr2181.smittesporer.UserTest.testEmail(UserTest.java:63)
-
-gr2181.smittesporer.UserTest.testSetForname  Time elapsed: 0.002 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
-	at Smittesporer@0.0.1-SNAPSHOT/gr2181.smittesporer.UserTest.testSetForname(UserTest.java:48)
-
-gr2181.smittesporer.UserTest.testPassword  Time elapsed: 0.002 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
-	at Smittesporer@0.0.1-SNAPSHOT/gr2181.smittesporer.UserTest.testPassword(UserTest.java:77)
-
-gr2181.smittesporer.UserTest.testConstructor  Time elapsed: 0.002 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
-	at Smittesporer@0.0.1-SNAPSHOT/gr2181.smittesporer.UserTest.testConstructor(UserTest.java:20)
-
->>>>>>> 30-add-jacoco-plugin-to-project
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.06 s - in gr2181.smittesporer.UserTest
