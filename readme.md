@@ -1,7 +1,7 @@
 # Group gr2181 repository 
 
 ## Om prosjektet
-Dette er en Smittesporer app som registrerer nærkontaktene til personer, og varsler nærkontater dersom man skulle bli smittet. Applikasjonen er laget med JavaFx og lagrer informasjonen i "skyen" (For release 1 lagres det lokalt).
+Dette er en Smittesporer app som registrerer nærkontaktene til personer, og varsler nærkontater dersom man skulle bli smittet. Applikasjonen er laget med JavaFx, og lagrer og skriver informasjonen til/fra "skyen" (For release 1 lagres det lokalt) ved bruk av JSON-objekter.
 Selve applikasjonen finner man [her](Smittesporer), her finner man også relevant README fil.
 
 ## Gitpod oppsett
@@ -12,3 +12,4 @@ Selve applikasjonen finner man [her](Smittesporer), her finner man også relevan
 - Deretter kjør `mvn compile javafx:run`.
 - Når applikasjonen er ferdig bygget og kjørt, åpne port 6080 for å se applikasjonen.
 - For å kjøre tester bruk `mvn test` i terminalen.
+- For å generere [Jacoco Test-rapport](https://www.eclemma.org/jacoco/) bruk 'mvn Jacoco:report' i terminalen.
