@@ -1,0 +1,6 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+javafx-template,gr2181.smittesporer,MainController,4,0,0,0,2,0,2,0,2,0
+javafx-template,gr2181.smittesporer,User,20,36,0,0,6,15,3,7,3,7
+javafx-template,gr2181.smittesporer,LoginController,22,0,0,0,12,0,3,0,3,0
+javafx-template,gr2181.smittesporer,App,40,0,0,0,12,0,4,0,4,0
+javafx-template,gr2181.smittesporer,RegistrationController,22,0,0,0,12,0,3,0,3,0

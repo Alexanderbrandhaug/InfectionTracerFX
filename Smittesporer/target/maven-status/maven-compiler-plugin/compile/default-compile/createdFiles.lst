@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 gr2181\smittesporer\FileHandler$1.class
+=======
+>>>>>>> 30-add-jacoco-plugin-to-project
 module-info.class
 gr2181\smittesporer\App.class
 gr2181\smittesporer\FileHandler.class
