@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="no"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">javafx-template</a> &gt; <a href="index.source.html" class="el_package">gr2181.smittesporer</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">package gr2181.smittesporer;
+
+public class User {
+
+    private String forname, lastname, email, password;
+
+<span class="fc" id="L7">    public User(String forname, String lastname, String email, String password) {</span>
+<span class="fc" id="L8">        this.forname = forname;</span>
+<span class="fc" id="L9">        this.lastname = lastname;</span>
+<span class="fc" id="L10">        this.email = email;</span>
+<span class="fc" id="L11">        this.password = password;</span>
+<span class="fc" id="L12">    }</span>
+
+    public void setForName(String forname) {
+<span class="fc" id="L15">        this.forname = forname;</span>
+<span class="fc" id="L16">    }</span>
+
+    public String getForName() {
+<span class="fc" id="L19">        return this.forname;</span>
+    }
+
+    public void setLastName(String lastname) {
+<span class="nc" id="L23">        this.lastname = lastname;</span>
+<span class="nc" id="L24">    }</span>
+
+    public String getLastName() {
+<span class="nc" id="L27">        return this.lastname;</span>
+    }
+
+    public void setEmail(String email) {
+<span class="fc" id="L31">        this.email = email;</span>
+<span class="fc" id="L32">    }</span>
+
+    public String getEmail() {
+<span class="fc" id="L35">        return this.email;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="fc" id="L39">        this.password = password;</span>
+<span class="fc" id="L40">    }</span>
+
+    public String getPassword() {
+<span class="fc" id="L43">        return this.password;</span>
+    }
+
+    public static void main(String[] args) {
+<span class="nc" id="L47">        User newUser = new User(&quot;tuva&quot;, &quot;placeholder&quot;, &quot;tuvaco@stud.ntnu.no&quot;, &quot;ntnu&quot;);</span>
+<span class="nc" id="L48">        System.out.println(newUser.getLastName());</span>
+<span class="nc" id="L49">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
