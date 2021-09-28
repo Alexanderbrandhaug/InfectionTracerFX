@@ -6,8 +6,8 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr2181.smittesporer.LoginController">
    <children>
-      <TextField focusTraversable="false" layoutX="244.0" layoutY="132.0" promptText="Email" />
-      <TextField focusTraversable="false" layoutX="244.0" layoutY="208.0" promptText="Password" />
+      <TextField fx:id="email_txt" focusTraversable="false" layoutX="244.0" layoutY="132.0" promptText="Email" />
+      <TextField fx:id="password_txt" focusTraversable="false" layoutX="244.0" layoutY="208.0" promptText="Password" />
       <Button layoutX="244.0" layoutY="275.0" mnemonicParsing="false" onAction="#loginBtn" text="Login" />
       <Button layoutX="353.0" layoutY="275.0" mnemonicParsing="false" onAction="#registerBtn" text="Register" />
    </children>

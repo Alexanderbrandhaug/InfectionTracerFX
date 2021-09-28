@@ -1,18 +1,39 @@
 package gr2181.smittesporer;
 
+import java.util.ArrayList;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class User {
 
     private String forname, lastname, email, password;
+    private SortedMap<String, String> closeContacts;
 
     public User(String forname, String lastname, String email, String password) {
         setForName(forname);
         setLastName(lastname);
         setEmail(email);
         setPassword(password);
+        closeContacts = new TreeMap<>();
 
+    }
+
+    public User(String forname, String lastname, String email, String password, SortedMap<String, String> closeContacts) {
+        this.forname = forname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.closeContacts = closeContacts;
+    }
+
+    public SortedMap<String, String> getCloseContacts() {
+        return closeContacts;
+    }
+
+    public void setCloseContacts(SortedMap<String, String> closeContacts) {
+        this.closeContacts = closeContacts;
     }
 
     public void setForName(String forname) {
