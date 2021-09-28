@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class RegistrationController {
+public class RegistrationController extends AbstractController {
 
 
     final FileHandler file_handler = new FileHandler();
