@@ -7,3 +7,10 @@ Klasser og kontrollere finner man i mappen [src/main/java/gr2181/smittesporer](s
 FXML-filer finner man under [src/main/java/gr2181/resources](src/main/java/gr2181/resources/). <br>
 Test-filer finner man under [src/test/java/gr2181/smittesporer](src/test/java/gr2181/smittesporer/). <br>
 
+# Brukerhistorier
+
+- Som Navn Navnesen som er smittet av koronaviruset, vil jeg logge meg inn på brukeren min på smittestopp-applikasjonen og varsle nærkontaktene mine om at jeg er smittet av koronaviruset, slik at de kan bli varslet og holde seg i karantene i tilfelle de er smittet av meg.
+
+- Som Navn Navnesen som er utsatt for å bli smittet av koronaviruset, vil jeg registrere en bruker på smittestopp-applikasjonen og registrere mine nærkontakter samt datoen jeg var med dem, slik at de kan bli varslet og holde seg i karantene om jeg blir smittet og så jeg kan bli varslet og holde meg i karantene om en av dem blir smittet.
+
+
