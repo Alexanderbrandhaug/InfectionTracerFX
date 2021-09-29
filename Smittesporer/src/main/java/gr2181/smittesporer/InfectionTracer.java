@@ -13,10 +13,12 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.SortedMap;
+import java.nio.charset.StandardCharsets;
 
 public class InfectionTracer {
 
     private final FileHandler fileHandler = new FileHandler();
+
     // Method to add a close contact for a user
     // Use email for now, as each user has a unique email
     public void addCloseContact(String username, String email) throws IOException {
@@ -25,7 +27,7 @@ public class InfectionTracer {
             return;
         }
         List<User> allUsers = fileHandler.getUsers();
-        FileWriter writer = new FileWriter("src/main/resources/gr2181/smittesporer/users.json");
+        FileWriter writer = new FileWriter("src/main/resources/gr2181/smittesporer/users.json", StandardCharsets.UTF_8);
 
         for (User current_user : allUsers) {
             if (current_user.getEmail().contains(username)) {
@@ -37,7 +39,8 @@ public class InfectionTracer {
         writer.flush();
         writer.close();
     }
-    public SortedMap<String, String> getRelevantMap(String username) throws FileNotFoundException {
+
+    public SortedMap<String, String> getRelevantMap(String username) throws IOException {
         List<User> users = fileHandler.getUsers();
         for (User currentUser : users) {
             if (currentUser.getEmail().contains(username)) {
