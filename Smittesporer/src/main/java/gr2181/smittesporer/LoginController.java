@@ -18,18 +18,21 @@ public class LoginController extends AbstractController {
 
     @FXML
     void loginBtn(ActionEvent event) {
-        App.changeScene("main.fxml");
-        // try {
-        // for (User ele : fileHandler.getUsers()) {
-        // if (email_txt.getText().equals(ele.getEmail()) &&
-        // password_txt.getText().equals(ele.getPassword())) {
-        // App.changeScene("main.fxml");
-        // }
-        // }
-        // } catch (Exception FileNotFoundException) {
-        // createErrorDialogBox("Error Dialog", "Invalid Email/Password combination",
-        // "Oops, the Email and password combination does not exist");
-        // }
+
+        try {
+            for (User ele : fileHandler.getUsers()) {
+                if (email_txt.getText().equals(ele.getEmail()) && password_txt.getText().equals(ele.getPassword())) {
+                    username = email_txt.getText();
+                    App.changeScene("main.fxml");
+                    return;
+                }
+
+            }
+            createErrorDialogBox("Error Dialog", "Invalid Email/Password combination",
+                    "Oops, the Email and password combination does not exist");
+        } catch (Exception FileNotFoundException) {
+
+        }
 
     }
 
