@@ -28,7 +28,7 @@ public class RegistrationController extends AbstractController {
 
     @FXML
     void CancelRegisterBtn(ActionEvent event) throws IOException {
-        screencontroller.SwitchToLogin();
+        screencontroller.switchToLogin(event);
     }
 
     @FXML
@@ -38,7 +38,7 @@ public class RegistrationController extends AbstractController {
             User new_user = new User(forename_txt.getText(), lastname_txt.getText(), email_txt.getText(),
                     password_txt.getText());
             file_handler.insertUser(new_user);
-            screencontroller.SwitchToMain();
+            screencontroller.switchToMain(event);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

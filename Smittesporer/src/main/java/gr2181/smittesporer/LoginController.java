@@ -1,6 +1,8 @@
 package gr2181.smittesporer;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -24,7 +26,7 @@ public class LoginController extends AbstractController {
             for (User ele : fileHandler.getUsers()) {
                 if (email_txt.getText().equals(ele.getEmail()) && password_txt.getText().equals(ele.getPassword())) {
                     username = email_txt.getText();
-                    screencontroller.SwitchToMain();
+                    screencontroller.switchToMain(event);
                     return;
                 }
 
@@ -38,8 +40,8 @@ public class LoginController extends AbstractController {
     }
 
     @FXML
-    void registerBtn(ActionEvent event) {
-        screencontroller.SwitchToRegistration();
+    void registerBtn(ActionEvent event) throws IOException {
+        screencontroller.switchToRegistration(event);
     }
 
 }

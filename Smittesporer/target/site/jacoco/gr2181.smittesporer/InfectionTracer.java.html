@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="no"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InfectionTracer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">javafx-template</a> &gt; <a href="index.source.html" class="el_package">gr2181.smittesporer</a> &gt; <span class="el_source">InfectionTracer.java</span></div><h1>InfectionTracer.java</h1><pre class="source lang-java linenums">package gr2181.smittesporer;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.SortedMap;
+import java.nio.charset.StandardCharsets;
+
+<span class="nc" id="L18">public class InfectionTracer {</span>
+
+<span class="nc" id="L20">    private final FileHandler fileHandler = new FileHandler();</span>
+
+    // Method to add a close contact for a user
+    // Use email for now, as each user has a unique email
+    public void addCloseContact(String username, String email) throws IOException {
+<span class="nc bnc" id="L25" title="All 2 branches missed.">        if (!fileHandler.checkUserList(email)) {</span>
+<span class="nc" id="L26">            System.out.println(&quot;No such user in file!&quot;);</span>
+<span class="nc" id="L27">            return;</span>
+        }
+<span class="nc" id="L29">        List&lt;User&gt; allUsers = fileHandler.getUsers();</span>
+<span class="nc" id="L30">        FileWriter writer = new FileWriter(&quot;src/main/resources/gr2181/smittesporer/users.json&quot;, StandardCharsets.UTF_8);</span>
+
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        for (User current_user : allUsers) {</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">            if (current_user.getEmail().contains(username)) {</span>
+<span class="nc" id="L34">                current_user.getCloseContacts().put(email, LocalDate.now().toString());</span>
+            }
+<span class="nc" id="L36">        }</span>
+<span class="nc" id="L37">        Gson gson = new Gson();</span>
+<span class="nc" id="L38">        gson.toJson(allUsers, writer);</span>
+<span class="nc" id="L39">        writer.flush();</span>
+<span class="nc" id="L40">        writer.close();</span>
+<span class="nc" id="L41">    }</span>
+
+    public SortedMap&lt;String, String&gt; getRelevantMap(String username) throws IOException {
+<span class="nc" id="L44">        List&lt;User&gt; users = fileHandler.getUsers();</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        for (User currentUser : users) {</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">            if (currentUser.getEmail().contains(username)) {</span>
+<span class="nc" id="L47">                return currentUser.getCloseContacts();</span>
+            }
+<span class="nc" id="L49">        }</span>
+<span class="nc" id="L50">        return null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

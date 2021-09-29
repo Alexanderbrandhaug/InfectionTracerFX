@@ -40,9 +40,8 @@ public class FileHandler {
             } else {
                 System.out.println("User already in file!");
             }
-        } catch (Exception e) {
-            e.getStackTrace();
-
+        } catch (IOException e) {
+            e.printStackTrace();
             // } finally {
             // writer.close();
         }
@@ -68,8 +67,8 @@ public class FileHandler {
             }
             reader.close();
             return user_list;
-        } catch (Exception e) {
-            e.getStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
             // } finally {
             // reader.close();
         }
