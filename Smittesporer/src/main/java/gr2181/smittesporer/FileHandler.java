@@ -1,4 +1,5 @@
 package gr2181.smittesporer;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -18,7 +19,7 @@ public class FileHandler {
     final Gson gson;
 
     public FileHandler() {
-        filePath = "src/main/resources/gr2181/smittesporer/users.json"; //"src/main/java/gr2181/smittesporer/users.json";
+        filePath = "src/main/resources/gr2181/smittesporer/users.json"; // "src/main/java/gr2181/smittesporer/users.json";
         gson = new Gson();
 
     }
@@ -33,8 +34,7 @@ public class FileHandler {
             writer.flush();
             writer.close();
             System.out.println("User added!");
-        }
-        else {
+        } else {
             System.out.println("User already in file!");
         }
     }
@@ -44,7 +44,8 @@ public class FileHandler {
     // This is so the insertUsers function can add the earlier users as well
     public List<User> checkUserList(User user) throws IOException {
         JsonReader reader = new JsonReader(new FileReader(filePath));
-        List<User> user_list = new Gson().fromJson(reader, new TypeToken<List<User>>() {}.getType());
+        List<User> user_list = new Gson().fromJson(reader, new TypeToken<List<User>>() {
+        }.getType());
         if (user_list == null) {
             return new ArrayList<>();
         }
@@ -57,11 +58,13 @@ public class FileHandler {
         reader.close();
         return user_list;
     }
+
     // Function to check if a user in is the users.json file
     // returns true if user is in the file
     public boolean checkUserList(String email) throws IOException {
         JsonReader reader = new JsonReader(new FileReader(filePath));
-        List<User> user_list = gson.fromJson(reader, new TypeToken<List<User>>() {}.getType());
+        List<User> user_list = gson.fromJson(reader, new TypeToken<List<User>>() {
+        }.getType());
         for (User current_user : user_list) {
             if (current_user.getEmail().contentEquals(email)) {
                 reader.close();
@@ -73,6 +76,7 @@ public class FileHandler {
 
     public List<User> getUsers() throws FileNotFoundException {
         JsonReader reader = new JsonReader(new FileReader(filePath));
-        return gson.fromJson(reader, new TypeToken<List<User>>() {}.getType());
+        return gson.fromJson(reader, new TypeToken<List<User>>() {
+        }.getType());
     }
 }
