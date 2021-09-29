@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 public class LoginController extends AbstractController {
 
     private FileHandler fileHandler = new FileHandler();
+    private ScreenController screencontroller = new ScreenController();
 
     @FXML
     private TextField email_txt;
@@ -23,7 +24,7 @@ public class LoginController extends AbstractController {
             for (User ele : fileHandler.getUsers()) {
                 if (email_txt.getText().equals(ele.getEmail()) && password_txt.getText().equals(ele.getPassword())) {
                     username = email_txt.getText();
-                    App.changeScene("main.fxml");
+                    screencontroller.SwitchToMain();
                     return;
                 }
 
@@ -38,7 +39,7 @@ public class LoginController extends AbstractController {
 
     @FXML
     void registerBtn(ActionEvent event) {
-        App.changeScene("registration.fxml");
+        screencontroller.SwitchToRegistration();
     }
 
 }

@@ -14,24 +14,12 @@ import java.util.Objects;
  */
 public class App extends Application {
 
-	private static Stage primaryStage;
-
 	@Override
-	public void start(final Stage primaryStage) throws Exception {
-		App.primaryStage = primaryStage;
-		primaryStage.setTitle("Smittesporer");
-		primaryStage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")))));
-		primaryStage.show();
-	}
-
-	public static void changeScene(String fxml) {
-		try {
-			Parent pane = FXMLLoader.load(Objects.requireNonNull(App.class.getResource(fxml)));
-			primaryStage.getScene().setRoot(pane);
-			primaryStage.sizeToScene();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void start(Stage stage) throws Exception {
+		Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 
 	public static void main(String[] args) {
