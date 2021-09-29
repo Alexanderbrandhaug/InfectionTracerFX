@@ -13,8 +13,12 @@ public class ScreenController {
     private Scene scene;
     private Parent root;
 
-    public void switchToMain(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("main.fxml"));
+    public void switchToMain(ActionEvent event, String username) throws IOException {
+        System.out.println( getClass().getResource(getClass().getSimpleName() + ".class") );
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+        root = loader.load();
+        MainController mainController = loader.getController();
+        mainController.setUsername(username);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

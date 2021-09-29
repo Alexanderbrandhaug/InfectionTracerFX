@@ -25,16 +25,15 @@ public class LoginController extends AbstractController {
         try {
             for (User ele : fileHandler.getUsers()) {
                 if (email_txt.getText().equals(ele.getEmail()) && password_txt.getText().equals(ele.getPassword())) {
-                    username = email_txt.getText();
-                    screencontroller.switchToMain(event);
+                    screencontroller.switchToMain(event, email_txt.getText());
                     return;
                 }
 
             }
             createErrorDialogBox("Error Dialog", "Invalid Email/Password combination",
                     "Oops, the Email and password combination does not exist");
-        } catch (Exception FileNotFoundException) {
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
