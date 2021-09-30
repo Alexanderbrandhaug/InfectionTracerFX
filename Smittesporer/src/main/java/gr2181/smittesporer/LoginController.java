@@ -23,7 +23,7 @@ public class LoginController extends AbstractController {
             for (User ele : fileHandler.getUsers()) {
                 if (email_txt.getText().equals(ele.getEmail()) && password_txt.getText().equals(ele.getPassword())) {
                     username = email_txt.getText();
-                    App.changeScene("main.fxml");
+                    App.changeScene("Main.fxml");
                     return;
                 }
 
@@ -38,7 +38,7 @@ public class LoginController extends AbstractController {
 
     @FXML
     void registerBtn(ActionEvent event) {
-        App.changeScene("registration.fxml");
+        App.changeScene("Registration.fxml");
     }
 
 }

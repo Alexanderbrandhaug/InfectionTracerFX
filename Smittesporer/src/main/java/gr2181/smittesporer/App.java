@@ -20,7 +20,7 @@ public class App extends Application {
 	public void start(final Stage primaryStage) throws Exception {
 		App.primaryStage = primaryStage;
 		primaryStage.setTitle("Smittesporer");
-		primaryStage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")))));
+		primaryStage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")))));
 		primaryStage.show();
 	}
 
