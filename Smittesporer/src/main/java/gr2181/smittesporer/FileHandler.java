@@ -26,11 +26,11 @@ public class FileHandler {
 
     // Function that attempts to insert user into users.json
     public void insertUser(User user) {
-
+        FileWriter writer = null;
         try {
 
             List<User> registered_users = checkUserList(user);
-            FileWriter writer = new FileWriter(filePath, StandardCharsets.UTF_8);
+             writer = new FileWriter(filePath, StandardCharsets.UTF_8);
             if (registered_users != null) {
                 registered_users.add(user);
                 gson.toJson(registered_users, writer);
@@ -42,8 +42,15 @@ public class FileHandler {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            // } finally {
-            // writer.close();
+             } finally {
+                 try{
+                     if(writer != null){
+                         writer.close();
+                     }
+                 }catch (IOException e){
+                     e.printStackTrace();
+                 }
+             
         }
     }
 
@@ -51,9 +58,10 @@ public class FileHandler {
     // Returns list of users if user not in file
     // This is so the insertUsers function can add the earlier users as well
     public List<User> checkUserList(User user) {
+        JsonReader reader = null;
         try {
 
-            JsonReader reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8));
+            reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8));
             List<User> user_list = new Gson().fromJson(reader, new TypeToken<List<User>>() {
             }.getType());
             if (user_list == null) {
@@ -69,8 +77,13 @@ public class FileHandler {
             return user_list;
         } catch (IOException e) {
             e.printStackTrace();
-            // } finally {
-            // reader.close();
+            } finally {
+                try{
+                    if(reader != null)
+                        reader.close();
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }
         }
         return null;
     }
