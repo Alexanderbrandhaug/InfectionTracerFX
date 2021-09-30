@@ -1,15 +1,17 @@
 package gr2181.smittesporer;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Type;
+import java.util.*;
 
 public class FileHandler {
 
@@ -17,7 +19,7 @@ public class FileHandler {
     final Gson gson;
 
     public FileHandler() {
-        filePath = "src/main/resources/gr2181/smittesporer/users.json"; //"src/main/java/gr2181/smittesporer/users.json";
+        filePath = "src/main/resources/gr2181/smittesporer/users.json"; // "src/main/java/gr2181/smittesporer/users.json";
         gson = new Gson();
 
     }
@@ -28,21 +30,11 @@ public class FileHandler {
         if (registered_users != null) {
             FileWriter writer = new FileWriter(filePath);
             registered_users.add(user);
-            JsonArray all_data_array = new JsonArray();
-            for (User current_user : registered_users) {
-                JsonObject each_data = new JsonObject();
-                each_data.addProperty("forname", current_user.getForName());
-                each_data.addProperty("lastname", current_user.getLastName());
-                each_data.addProperty("email", current_user.getEmail());
-                each_data.addProperty("password", current_user.getPassword());
-                all_data_array.add(each_data);
-            }
-            gson.toJson(all_data_array, writer);
+            gson.toJson(registered_users, writer);
             writer.flush();
             writer.close();
             System.out.println("User added!");
-        }
-        else {
+        } else {
             System.out.println("User already in file!");
         }
     }
@@ -50,9 +42,10 @@ public class FileHandler {
     // Function to check if a user is already registered
     // Returns list of users if user not in file
     // This is so the insertUsers function can add the earlier users as well
-    private List<User> checkUserList(User user) throws IOException {
+    public List<User> checkUserList(User user) throws IOException {
         JsonReader reader = new JsonReader(new FileReader(filePath));
-        List<User> user_list = new Gson().fromJson(reader, new TypeToken<List<User>>() {}.getType());
+        List<User> user_list = new Gson().fromJson(reader, new TypeToken<List<User>>() {
+        }.getType());
         if (user_list == null) {
             return new ArrayList<>();
         }
@@ -64,5 +57,26 @@ public class FileHandler {
         }
         reader.close();
         return user_list;
+    }
+
+    // Function to check if a user in is the users.json file
+    // returns true if user is in the file
+    public boolean checkUserList(String email) throws IOException {
+        JsonReader reader = new JsonReader(new FileReader(filePath));
+        List<User> user_list = gson.fromJson(reader, new TypeToken<List<User>>() {
+        }.getType());
+        for (User current_user : user_list) {
+            if (current_user.getEmail().contentEquals(email)) {
+                reader.close();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<User> getUsers() throws FileNotFoundException {
+        JsonReader reader = new JsonReader(new FileReader(filePath));
+        return gson.fromJson(reader, new TypeToken<List<User>>() {
+        }.getType());
     }
 }
