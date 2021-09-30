@@ -25,7 +25,7 @@ public class RegistrationController extends AbstractController {
 
     @FXML
     void CancelRegisterBtn(ActionEvent event) {
-        App.changeScene("login.fxml");
+        App.changeScene("Login.fxml");
     }
 
     @FXML
@@ -35,7 +35,7 @@ public class RegistrationController extends AbstractController {
             User new_user = new User(forename_txt.getText(), lastname_txt.getText(), email_txt.getText(),
                     password_txt.getText());
             file_handler.insertUser(new_user);
-            App.changeScene("login.fxml");
+            App.changeScene("Login.fxml");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
