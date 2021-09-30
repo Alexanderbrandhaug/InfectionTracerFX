@@ -3,7 +3,7 @@ Målet med denne applikasjonen er å gi enkeltpersoner en oversikt over deres n�
 
 ## Filstruktur
 De ulike filene er fordelt i 3 mapper. <br>
-Klasser og kontrollere finner man i mappen [src/main/java/gr2181/smittesporer](src/main/java/gr2181/smittesporer/).<br>
+Klasser og kontrollere finner man i mappen [src/main/java/gr2181/infectiontracer](src/main/java/gr2181/infectiontracer/).<br>
 FXML-filer finner man under [src/main/java/gr2181/resources](src/main/java/gr2181/resources/). <br>
-Test-filer finner man under [src/test/java/gr2181/smittesporer](src/test/java/gr2181/smittesporer/). <br>
+Test-filer finner man under [src/test/java/gr2181/infectiontracer](src/test/java/gr2181/infectiontracer/). <br>
 
