@@ -10,5 +10,4 @@ Selve applikasjonen finner man [her](Infectiontracer), her finner man også rele
 - Vent på at den virtuelle maskinen er klar.
 - kjør `mvn compile javafx:run`.
 - Når applikasjonen er ferdig bygget og kjørt, åpne port 6080 for å se applikasjonen.
-- For å kjøre kun tester bruk `mvn test` i terminalen.
-- For å sjekke tester, samt kodekvalitet vha Jacoco, Checkstyles og Spotbugs bruk `mvn verify`i terminalen.
+- For å kjøre tester og sjekke kodekvalitet vha Jacoco, Checkstyles og Spotbugs - bruk `mvn verify`i terminalen.
