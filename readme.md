@@ -8,8 +8,7 @@ Selve applikasjonen finner man [her](Infectiontracer), her finner man også rele
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2181/gr2181)
 - Trykk på lenken over.
 - Vent på at den virtuelle maskinen er klar.
-- Gå inn i Infectiontracer prosjektet ved `cd Infectiontracer` i terminalen.
-- Deretter kjør `mvn compile javafx:run`.
+- kjør `mvn compile javafx:run`.
 - Når applikasjonen er ferdig bygget og kjørt, åpne port 6080 for å se applikasjonen.
-- For å kjøre tester bruk `mvn test` i terminalen.
-- For å sjekke kodekvalitet vha Jacoco, Checkstyles og Spotbugs bruk `mvn verify`i terminalen.
+- For å kjøre kun tester bruk `mvn test` i terminalen.
+- For å sjekke tester, samt kodekvalitet vha Jacoco, Checkstyles og Spotbugs bruk `mvn verify`i terminalen.
