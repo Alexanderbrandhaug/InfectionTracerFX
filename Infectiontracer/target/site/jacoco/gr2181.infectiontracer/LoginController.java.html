@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="no"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoginController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">javafx-template</a> &gt; <a href="index.source.html" class="el_package">gr2181.infectiontracer</a> &gt; <span class="el_source">LoginController.java</span></div><h1>LoginController.java</h1><pre class="source lang-java linenums">package gr2181.infectiontracer;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
+
+<span class="nc" id="L11">public class LoginController extends AbstractController {</span>
+
+<span class="nc" id="L13">    private FileHandler fileHandler = new FileHandler();</span>
+<span class="nc" id="L14">    private ScreenController screencontroller = new ScreenController();</span>
+
+    @FXML
+    private TextField email_txt;
+
+    @FXML
+    private PasswordField password_txt;
+
+    @FXML
+    void loginBtn(ActionEvent event) {
+
+        try {
+<span class="nc bnc" id="L26" title="All 2 branches missed.">            for (User ele : fileHandler.getUsers()) {</span>
+<span class="nc bnc" id="L27" title="All 4 branches missed.">                if (email_txt.getText().equals(ele.getEmail()) &amp;&amp; password_txt.getText().equals(ele.getPassword())) {</span>
+<span class="nc" id="L28">                    screencontroller.switchToMain(event, email_txt.getText());</span>
+<span class="nc" id="L29">                    return;</span>
+                }
+
+<span class="nc" id="L32">            }</span>
+<span class="nc" id="L33">            createErrorDialogBox(&quot;Error Dialog&quot;, &quot;Invalid Email/Password combination&quot;,</span>
+                    &quot;Oops, the Email and password combination does not exist&quot;);
+<span class="nc" id="L35">        } catch (Exception e) {</span>
+<span class="nc" id="L36">            e.printStackTrace();</span>
+<span class="nc" id="L37">        }</span>
+
+<span class="nc" id="L39">    }</span>
+
+    @FXML
+    void registerBtn(ActionEvent event) throws IOException {
+<span class="nc" id="L43">        screencontroller.switchToRegistration(event);</span>
+<span class="nc" id="L44">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
