@@ -18,12 +18,12 @@ import java.util.ResourceBundle;
 // This class is meant to be inherited by all controllers in the project
 // This will make it easier to preserve information across scenes with different controllers
 // Also some javafx dialogs methods in this class will make it easier to provide feedback to the user
-public class AbstractController implements Initializable {
+public class AbstractController {
 
     // this will be email for now
     String username;
 
-    public void setUsername(String username) {this.username = username;}
+    void setUsername(String username) {this.username = username;}
 
     protected void createErrorDialogBox(String setTitle, String setHeaderText, String setContentText) {
         Alert alert = new Alert(AlertType.ERROR);
@@ -33,8 +33,4 @@ public class AbstractController implements Initializable {
         alert.showAndWait();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
 }
