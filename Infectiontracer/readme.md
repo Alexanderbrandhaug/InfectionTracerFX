@@ -1,4 +1,4 @@
-# Smittesporer
+# Infectiontracer
 Målet med denne applikasjonen er å gi enkeltpersoner en oversikt over deres nærkontakter, samt varslinger dersom noen av de tester positivt på coronavirus. Dette gjøres ved å registrere en bruker, og deretter legge inn nærkontakter som senere kan varsles.
 
 ## Filstruktur
