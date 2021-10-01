@@ -11,3 +11,4 @@ Selve applikasjonen finner man [her](Infectiontracer), her finner man også rele
 - kjør `mvn compile javafx:run`.
 - Når applikasjonen er ferdig bygget og kjørt, åpne port 6080 for å se applikasjonen.
 - For å kjøre tester og sjekke kodekvalitet vha Jacoco, Checkstyles og Spotbugs - bruk `mvn verify`i terminalen.
+- Du kan logge inn med brukernavn: test@gmail.com og passordet: Passord123, eller du kan lage deg din egen bruker.
