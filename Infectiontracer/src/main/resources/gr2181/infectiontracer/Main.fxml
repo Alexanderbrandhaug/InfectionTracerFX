@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" >
+   <children>
+      <VBox prefHeight="451.0" prefWidth="440.0" spacing="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="35.0" prefWidth="452.0" spacing="10.0">
+               <children>
+                  <Label text="Logget inn som:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="username_lbl" text="Generisk navn">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox spacing="10.0">
+               <children>
+                  <Label text="Smittestatus:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="infectionStatus" text="Frisk/Smittet">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox spacing="10.0">
+               <children>
+                  <Label text="Antall nærkontakter:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="numberOfContacts" text="tilfeldig tall">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="30.0" top="75.0" />
+         </padding>
+      </VBox>
+      <VBox layoutX="467.0" prefHeight="720.0" prefWidth="800.0" spacing="40.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TableView fx:id="contactTable" prefHeight="460.0" prefWidth="800.0">
+              <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="400.0" text="Navn" />
+                <TableColumn fx:id="DateColumn" prefWidth="400.0" text="Dato lagt til" />
+              </columns>
+            </TableView>
+            <HBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <TextField fx:id="contactNameTxt" />
+                  <Button mnemonicParsing="false" onAction="#addContact" text="Legg til ny nærkontakt" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="75.0">
+               <children>
+                  <Button fx:id="fireHealthyUser" mnemonicParsing="false" prefHeight="97.0" prefWidth="198.0" style="-fx-background-color: GREEN;" text="Jeg har blitt frisk" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="fireInfectedUser" mnemonicParsing="false" prefHeight="97.0" prefWidth="198.0" style="-fx-background-color: RED;" text="Jeg har blitt smittet" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
