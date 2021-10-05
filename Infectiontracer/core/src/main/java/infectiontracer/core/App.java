@@ -1,4 +1,4 @@
-package gr2181.infectiontracer;
+package infectiontracer.core;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

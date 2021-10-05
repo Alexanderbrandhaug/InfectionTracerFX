@@ -1,4 +1,4 @@
-package gr2181.infectiontracer;
+package infectiontracer.core;
 
 import java.util.ArrayList;
 import java.util.SortedMap;
@@ -20,7 +20,8 @@ public class User {
 
     }
 
-    public User(String forname, String lastname, String email, String password, SortedMap<String, String> closeContacts) {
+    public User(String forname, String lastname, String email, String password,
+            SortedMap<String, String> closeContacts) {
         this.forname = forname;
         this.lastname = lastname;
         this.email = email;

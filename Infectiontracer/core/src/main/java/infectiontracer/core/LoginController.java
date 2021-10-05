@@ -1,4 +1,4 @@
-package gr2181.infectiontracer;
+package infectiontracer.core;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

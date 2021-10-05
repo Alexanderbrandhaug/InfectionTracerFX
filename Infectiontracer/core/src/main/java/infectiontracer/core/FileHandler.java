@@ -1,4 +1,4 @@
-package gr2181.infectiontracer;
+package infectiontracer.core;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -19,7 +19,7 @@ public class FileHandler {
     final Gson gson;
 
     public FileHandler() {
-        filePath = "src/main/resources/gr2181/infectiontracer/users.json"; // "src/main/java/gr2181/infectiontracer/users.json";
+        filePath = "src/main/resources/infectiontracer/core/users.json"; // "src/main/java/gr2181/infectiontracer/users.json";
         gson = new Gson();
 
     }
@@ -30,7 +30,7 @@ public class FileHandler {
         try {
 
             List<User> registered_users = checkUserList(user);
-             writer = new FileWriter(filePath, StandardCharsets.UTF_8);
+            writer = new FileWriter(filePath, StandardCharsets.UTF_8);
             if (registered_users != null) {
                 registered_users.add(user);
                 gson.toJson(registered_users, writer);
@@ -42,15 +42,15 @@ public class FileHandler {
             }
         } catch (IOException e) {
             e.printStackTrace();
-             } finally {
-                 try{
-                     if(writer != null){
-                         writer.close();
-                     }
-                 }catch (IOException e){
-                     e.printStackTrace();
-                 }
-             
+        } finally {
+            try {
+                if (writer != null) {
+                    writer.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
@@ -77,13 +77,13 @@ public class FileHandler {
             return user_list;
         } catch (IOException e) {
             e.printStackTrace();
-            } finally {
-                try{
-                    if(reader != null)
-                        reader.close();
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
+        } finally {
+            try {
+                if (reader != null)
+                    reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }

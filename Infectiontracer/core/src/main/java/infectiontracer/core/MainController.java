@@ -1,4 +1,4 @@
-package gr2181.infectiontracer;
+package infectiontracer.core;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,8 +37,10 @@ public class MainController extends AbstractController {
 
     @FXML
     private TableView<CloseContact> contactTable;
-    @FXML private TableColumn<CloseContact, String> nameColumn;
-    @FXML private TableColumn<CloseContact, LocalDate> DateColumn;
+    @FXML
+    private TableColumn<CloseContact, String> nameColumn;
+    @FXML
+    private TableColumn<CloseContact, LocalDate> DateColumn;
 
     @FXML
     private TextField contactNameTxt;
@@ -64,6 +66,7 @@ public class MainController extends AbstractController {
         DateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         refreshContactTable();
     }
+
     // Function to refresh tableview after every insertion of a close contact
     private void refreshContactTable() {
         try {
@@ -73,11 +76,11 @@ public class MainController extends AbstractController {
             }
             ObservableList<CloseContact> contactList = FXCollections.observableArrayList();
             for (Map.Entry<String, String> entry : currentMap.entrySet()) {
-               CloseContact closeContact = new CloseContact(entry.getKey(), LocalDate.parse(entry.getValue()));
-               contactList.add(closeContact);
+                CloseContact closeContact = new CloseContact(entry.getKey(), LocalDate.parse(entry.getValue()));
+                contactList.add(closeContact);
             }
             contactTable.setItems(contactList);
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

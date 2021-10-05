@@ -1,4 +1,4 @@
-package gr2181.infectiontracer;
+package infectiontracer.core;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -14,16 +14,18 @@ public class ScreenController {
     private Parent root;
 
     public void switchToMain(ActionEvent event, String username) throws IOException {
-        //root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        // root = FXMLLoader.load(getClass().getResource("Main.fxml"));
         MainController mainController = new MainController(username);
         FXMLLoader loader = new FXMLLoader();
         loader.setController(mainController);
         loader.setLocation(getClass().getResource("Main.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+        // FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
         root = loader.load();
-        /*MainController mainController = loader.getController();
-        mainController.setUsername(username);*/
+        /*
+         * MainController mainController = loader.getController();
+         * mainController.setUsername(username);
+         */
 
         scene = new Scene(root);
         stage.setScene(scene);

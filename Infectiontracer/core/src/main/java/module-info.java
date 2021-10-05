@@ -3,5 +3,6 @@ module Infectiontracer {
     requires javafx.fxml;
     requires javafx.controls;
     requires com.google.gson;
-    opens gr2181.infectiontracer;
+
+    opens infectiontracer.core;
 }

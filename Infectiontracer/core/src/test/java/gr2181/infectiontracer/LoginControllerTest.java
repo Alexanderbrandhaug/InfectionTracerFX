@@ -1,10 +1,10 @@
-package gr2181.infectiontracer;
+package infectiontracer.core;
 
 import java.io.IOException;
 
 import org.testfx.framework.junit5.ApplicationTest;
 
-import gr2181.infectiontracer.LoginController;
+import infectiontracer.core.LoginController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

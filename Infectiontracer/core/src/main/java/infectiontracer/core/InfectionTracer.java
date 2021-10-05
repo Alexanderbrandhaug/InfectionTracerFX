@@ -1,4 +1,4 @@
-package gr2181.infectiontracer;
+package infectiontracer.core;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -23,35 +23,35 @@ public class InfectionTracer {
     // Use email for now, as each user has a unique email
     public void addCloseContact(String username, String email) throws IOException {
         FileWriter writer = null;
-       
+
         if (!fileHandler.checkUserList(email)) {
             System.out.println("No such user in file!");
             return;
         }
-        try{
-        List<User> allUsers = fileHandler.getUsers();
-         writer = new FileWriter("src/main/resources/gr2181/infectiontracer/users.json", StandardCharsets.UTF_8);
+        try {
+            List<User> allUsers = fileHandler.getUsers();
+            writer = new FileWriter("src/main/resources/infectiontracer/core/users.json", StandardCharsets.UTF_8);
 
-        for (User current_user : allUsers) {
-            if (current_user.getEmail().contains(username)) {
-                current_user.getCloseContacts().put(email, LocalDate.now().toString());
+            for (User current_user : allUsers) {
+                if (current_user.getEmail().contains(username)) {
+                    current_user.getCloseContacts().put(email, LocalDate.now().toString());
+                }
+            }
+            Gson gson = new Gson();
+            gson.toJson(allUsers, writer);
+            writer.flush();
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (writer != null)
+                    writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        Gson gson = new Gson();
-        gson.toJson(allUsers, writer);
-        writer.flush();
-        writer.close();
-      
-    } catch(IOException e){
-        e.printStackTrace();
-     }  finally{
-         try{
-             if(writer != null)
-             writer.close();
-         } catch(IOException e){
-             e.printStackTrace();
-         }
-     }
     }
 
     public SortedMap<String, String> getRelevantMap(String username) throws IOException {

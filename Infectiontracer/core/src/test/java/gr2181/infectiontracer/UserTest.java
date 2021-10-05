@@ -1,9 +1,9 @@
-package gr2181.infectiontracer;
+package infectiontracer.core;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import gr2181.infectiontracer.User;
+import infectiontracer.core.*;
 
 public class UserTest {
     private User user;

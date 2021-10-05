@@ -1,4 +1,4 @@
-package gr2181.infectiontracer;
+package infectiontracer.core;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -23,7 +23,9 @@ public class AbstractController {
     // this will be email for now
     String username;
 
-    void setUsername(String username) {this.username = username;}
+    void setUsername(String username) {
+        this.username = username;
+    }
 
     protected void createErrorDialogBox(String setTitle, String setHeaderText, String setContentText) {
         Alert alert = new Alert(AlertType.ERROR);
