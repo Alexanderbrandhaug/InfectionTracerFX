@@ -13,13 +13,14 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.*;
 
+
 public class FileHandler {
 
     final String filePath;
     final Gson gson;
 
     public FileHandler() {
-        filePath = "/fxui/src/main/resources/infectiontracer/users.json"; // "src/main/java/gr2181/infectiontracer/users.json";
+        filePath = "src/main/resources/infectiontracer/ui/users.json"; // "src/main/java/gr2181/infectiontracer/users.json";
         gson = new Gson();
 
     }

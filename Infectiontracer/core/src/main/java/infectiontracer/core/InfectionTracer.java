@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.SortedMap;
 import java.nio.charset.StandardCharsets;
 
+
 public class InfectionTracer {
 
     private final FileHandler fileHandler = new FileHandler();
@@ -30,7 +31,7 @@ public class InfectionTracer {
         }
         try {
             List<User> allUsers = fileHandler.getUsers();
-            writer = new FileWriter("/fxui/src/main/resources/infectiontracer/users.json", StandardCharsets.UTF_8);
+            writer = new FileWriter("src/main/resources/infectiontracer/ui/users.json", StandardCharsets.UTF_8);
 
             for (User current_user : allUsers) {
                 if (current_user.getEmail().contains(username)) {
