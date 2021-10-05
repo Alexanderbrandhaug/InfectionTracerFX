@@ -1,4 +1,4 @@
-package infectiontracer.core;
+package infectiontracer.ui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.SortedMap;
+import infectiontracer.core.*;
 
 public class MainController extends AbstractController {
 

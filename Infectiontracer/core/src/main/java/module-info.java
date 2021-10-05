@@ -1,8 +1,9 @@
-module Infectiontracer {
-    requires javafx.graphics;
-    requires javafx.fxml;
-    requires javafx.controls;
-    requires com.google.gson;
+module infectiontracer.core {
+  requires javafx.graphics;
+  requires javafx.fxml;
+  requires javafx.controls;
+  requires com.google.gson;
 
-    opens infectiontracer.core;
+  exports infectiontracer.core;
+
 }

@@ -1,4 +1,4 @@
-package infectiontracer.core;
+package infectiontracer.ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import infectiontracer.core.*;
 
 public class LoginController extends AbstractController {
 

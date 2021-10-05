@@ -1,4 +1,4 @@
-package infectiontracer.core;
+package infectiontracer.ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

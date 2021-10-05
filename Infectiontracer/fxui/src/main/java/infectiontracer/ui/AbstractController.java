@@ -1,4 +1,4 @@
-package infectiontracer.core;
+package infectiontracer.ui;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert.AlertType;
+import infectiontracer.core.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;

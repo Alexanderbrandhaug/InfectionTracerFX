@@ -19,7 +19,7 @@ public class FileHandler {
     final Gson gson;
 
     public FileHandler() {
-        filePath = "src/main/resources/infectiontracer/core/users.json"; // "src/main/java/gr2181/infectiontracer/users.json";
+        filePath = "/fxui/src/main/resources/infectiontracer/users.json"; // "src/main/java/gr2181/infectiontracer/users.json";
         gson = new Gson();
 
     }

@@ -1,10 +1,11 @@
-package infectiontracer.core;
+package infectiontracer.ui;
 
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import infectiontracer.core.*;
 
 public class RegistrationController extends AbstractController {
 
