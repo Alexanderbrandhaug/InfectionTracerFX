@@ -44,6 +44,12 @@ public class MainController extends AbstractController {
     private TableColumn<CloseContact, LocalDate> DateColumn;
 
     @FXML
+    private TableColumn<CloseContact, boleean> healthStatusColumn;
+
+    @FXML
+    private TableColumn<CloseContact, String> dateOfInfectionColumn;
+
+    @FXML
     private TextField contactNameTxt;
 
     @FXML
@@ -65,6 +71,8 @@ public class MainController extends AbstractController {
     private void initializeContactTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         DateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        healthStatusColumn.setCellValueFactory(new PropertyValueFactory<>("infected"));
+        dateOfInfectionColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfInfected"));
         refreshContactTable();
     }
 
