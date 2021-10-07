@@ -13,6 +13,7 @@ public class ScreenController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    
 
     public void switchToMain(ActionEvent event, String username) throws IOException {
         // root = FXMLLoader.load(getClass().getResource("Main.fxml"));

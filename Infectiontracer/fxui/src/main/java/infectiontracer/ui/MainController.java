@@ -19,6 +19,8 @@ import java.util.Map;
 import java.util.SortedMap;
 import infectiontracer.core.*;
 
+
+
 public class MainController extends AbstractController {
 
     MainController(String username) {
@@ -44,7 +46,7 @@ public class MainController extends AbstractController {
     private TableColumn<CloseContact, LocalDate> DateColumn;
 
     @FXML
-    private TableColumn<CloseContact, boleean> healthStatusColumn;
+    private TableColumn<CloseContact, Boolean> healthStatusColumn;
 
     @FXML
     private TableColumn<CloseContact, String> dateOfInfectionColumn;
@@ -57,6 +59,7 @@ public class MainController extends AbstractController {
 
     @FXML
     private Button fireInfectedUser;
+    boolean healthStatus = false;
 
     @FXML
     void addContact(ActionEvent event) {
@@ -85,7 +88,9 @@ public class MainController extends AbstractController {
             }
             ObservableList<CloseContact> contactList = FXCollections.observableArrayList();
             for (Map.Entry<String, String> entry : currentMap.entrySet()) {
-                CloseContact closeContact = new CloseContact(entry.getKey(), LocalDate.parse(entry.getValue()));
+                //user.setEmail(entry.getKey());
+                
+                CloseContact closeContact = new CloseContact(entry.getKey(), LocalDate.parse(entry.getValue()),healthStatus,"test");
                 contactList.add(closeContact);
             }
             contactTable.setItems(contactList);

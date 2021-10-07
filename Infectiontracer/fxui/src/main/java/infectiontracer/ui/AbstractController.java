@@ -24,7 +24,7 @@ public class AbstractController {
     // this will be email for now
     String username;
 
-    void setUsername(String username) {
+    void setUser(String username) {
         this.username = username;
     }
 

@@ -5,13 +5,13 @@ import java.time.format.DateTimeFormatter;
 
 public class CloseContact {
 
-    private User user;
+    private String name;
     private LocalDate date;
     private boolean infected;
     private String dateOfInfected;
 
-    public CloseContact(User user, LocalDate date, boolean infected, String dateOfInfected) {
-        this.user = user;
+    public CloseContact(String name, LocalDate date, boolean infected, String dateOfInfected) {
+        this.name = name;
         this.date = date;
         this.infected = infected;
         this.dateOfInfected = "";
@@ -33,6 +33,14 @@ public class CloseContact {
         this.date = date;
     }
 
+    public void setName(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return name;
+
+    }
+
     public void setDateOfInfected() {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-LLLL-dd");
@@ -44,14 +52,5 @@ public class CloseContact {
         return this.dateOfInfected;
     }
 
-    public static void main(String[] args) {
-       User user = new User("Alex", "test", "alex@gmail.com", "password321");
-       LocalDate date = LocalDate.now();
-       CloseContact closeContact = new CloseContact(user, date, false, "");
-       closeContact.setInfected(true);
-       closeContact.setDateOfInfected();
-       System.out.println(closeContact.getInfected());
-       System.out.println(closeContact.getDateOfInfected());
-    }
-
+  
 }
