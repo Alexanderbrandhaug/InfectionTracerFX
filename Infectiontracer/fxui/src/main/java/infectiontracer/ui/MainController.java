@@ -60,48 +60,50 @@ public class MainController extends AbstractController {
     @FXML
     private Button fireInfectedUser;
     boolean healthStatus = false;
+    ObservableList<CloseContact> contactList = FXCollections.observableArrayList();
+    
+  //  Filehandler filehandler = new FileHandler();
 
     @FXML
-    void addContact(ActionEvent event) {
+    void addContact(ActionEvent event)throws IOException {
         try {
             infectionTracer.addCloseContact(username, contactNameTxt.getText());
-            refreshContactTable();
+            SortedMap<String, String> currentMap = infectionTracer.getRelevantMap(username);
+            contactList.clear();
+            for (Map.Entry<String, String> entry : currentMap.entrySet()) {
+              
+                System.out.println(contactList.toString());
+                CloseContact closeContact = new CloseContact(entry.getKey(), LocalDate.parse(entry.getValue()), healthStatus, "test");
+                
+                contactList.add(closeContact);
+                
+                }
+                contactTable.setItems(contactList);
+                System.out.println(contactList.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void initializeContactTable() {
+    // Function to refresh tableview after every insertion of a close contact
+    @FXML
+    private void initialize()throws IOException {
+        SortedMap<String, String> currentMap = infectionTracer.getRelevantMap(username);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         DateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         healthStatusColumn.setCellValueFactory(new PropertyValueFactory<>("infected"));
         dateOfInfectionColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfInfected"));
-        refreshContactTable();
-    }
-
-    // Function to refresh tableview after every insertion of a close contact
-    private void refreshContactTable() {
-        try {
-            SortedMap<String, String> currentMap = infectionTracer.getRelevantMap(username);
             if (currentMap == null) {
                 return;
             }
-            ObservableList<CloseContact> contactList = FXCollections.observableArrayList();
+            
             for (Map.Entry<String, String> entry : currentMap.entrySet()) {
                 //user.setEmail(entry.getKey());
                 
                 CloseContact closeContact = new CloseContact(entry.getKey(), LocalDate.parse(entry.getValue()),healthStatus,"test");
                 contactList.add(closeContact);
-            }
-            contactTable.setItems(contactList);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                contactTable.setItems(contactList);
     }
 
-    @FXML
-    private void initialize() {
-        initializeContactTable();
-    }
-
+}
 }
