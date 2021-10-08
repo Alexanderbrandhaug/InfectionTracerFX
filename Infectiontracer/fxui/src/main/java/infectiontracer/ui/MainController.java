@@ -12,11 +12,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import java.util.List;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Map;
-import java.util.SortedMap;
 import infectiontracer.core.*;
 
 public class MainController extends AbstractController {
@@ -37,11 +36,21 @@ public class MainController extends AbstractController {
     private Label numberOfContacts;
 
     @FXML
-    private TableView<CloseContact> contactTable;
+    private TableView<User> contactTable;
     @FXML
-    private TableColumn<CloseContact, String> nameColumn;
+    private TableColumn<User, String> nameColumn;
+
     @FXML
-    private TableColumn<CloseContact, LocalDate> DateColumn;
+    private TableColumn<User, String> lastnameColumn;
+
+    @FXML
+    private TableColumn<User, String> emailColumn;
+
+    @FXML
+    private TableColumn<User, Boolean> healthstatusColumn;
+
+    @FXML
+    private TableColumn<User, String> dateOfInfectionColumn;
 
     @FXML
     private TextField contactNameTxt;
@@ -51,44 +60,57 @@ public class MainController extends AbstractController {
 
     @FXML
     private Button fireInfectedUser;
+    ObservableList<User> contactList = FXCollections.observableArrayList();
+
+    // Filehandler filehandler = new FileHandler();
 
     @FXML
-    void addContact(ActionEvent event) {
+    void addContact(ActionEvent event) throws IOException {
         try {
             infectionTracer.addCloseContact(username, contactNameTxt.getText());
-            refreshContactTable();
+            List<User> currentMap = infectionTracer.getRelevantMap(username);
+            contactList.clear();
+            for (User user : currentMap) {
+
+                System.out.println(contactList.toString());
+                User closeContact = new User(user.getForname(), user.getLastname(), user.getEmail(), user.getPassword(),
+                        user.getHealthStatus(), user.getDateOfInfection());
+
+                contactList.add(closeContact);
+
+            }
+            contactTable.setItems(contactList);
+            System.out.println(contactList.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void initializeContactTable() {
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        DateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        refreshContactTable();
     }
 
     // Function to refresh tableview after every insertion of a close contact
-    private void refreshContactTable() {
+    @FXML
+    private void initialize() {
         try {
-            SortedMap<String, String> currentMap = infectionTracer.getRelevantMap(username);
+
+            List<User> currentMap = infectionTracer.getRelevantMap(username);
+
+            nameColumn.setCellValueFactory(new PropertyValueFactory<>("forname"));
+            lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+            emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+            healthstatusColumn.setCellValueFactory(new PropertyValueFactory<>("healthStatus"));
+            dateOfInfectionColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfInfection"));
             if (currentMap == null) {
                 return;
             }
-            ObservableList<CloseContact> contactList = FXCollections.observableArrayList();
-            for (Map.Entry<String, String> entry : currentMap.entrySet()) {
-                CloseContact closeContact = new CloseContact(entry.getKey(), LocalDate.parse(entry.getValue()));
+            for (User user : currentMap) {
+                // user.setEmail(entry.getKey());
+                User closeContact = new User(user.getForname(), user.getLastname(), user.getEmail(), user.getPassword(),
+                        user.getHealthStatus(), user.getDateOfInfection());
                 contactList.add(closeContact);
+                contactTable.setItems(contactList);
             }
-            contactTable.setItems(contactList);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
-    @FXML
-    private void initialize() {
-        initializeContactTable();
     }
-
 }

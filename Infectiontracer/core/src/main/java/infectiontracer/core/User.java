@@ -1,43 +1,71 @@
 package infectiontracer.core;
 
 import java.util.ArrayList;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class User {
 
-    private String forname, lastname, email, password;
-    private SortedMap<String, String> closeContacts;
+    private String forname, lastname, email, password, dateOfInfection;
+    private Boolean healthStatus;
+    private List<User> closeContacts;
 
-    public User(String forname, String lastname, String email, String password) {
-        setForName(forname);
-        setLastName(lastname);
+    public User(String forname, String lastname, String email, String password, Boolean healthStatus,
+            String dateOfInfection) {
+        setForname(forname);
+        setLastname(lastname);
         setEmail(email);
         setPassword(password);
-        closeContacts = new TreeMap<>();
+        this.healthStatus = healthStatus;
+        closeContacts = new ArrayList<User>();
+        this.dateOfInfection = dateOfInfection;
 
     }
 
-    public User(String forname, String lastname, String email, String password,
-            SortedMap<String, String> closeContacts) {
+    public User(String forname, String lastname, String email, String password, Boolean healthStatus,
+            String dateOfInfection, List<User> closeContacts) {
         this.forname = forname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.closeContacts = closeContacts;
+        this.healthStatus = healthStatus;
+        this.dateOfInfection = dateOfInfection;
     }
 
-    public SortedMap<String, String> getCloseContacts() {
-        return closeContacts;
+    public void setDateOfInfected() {
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-LLLL-dd");
+        String formattedString = today.format(formatter);
+        this.dateOfInfection = formattedString;
     }
 
-    public void setCloseContacts(SortedMap<String, String> closeContacts) {
-        this.closeContacts = closeContacts;
+    public String getDateOfInfection() {
+        return this.dateOfInfection;
     }
 
-    public void setForName(String forname) {
+    public void setInfected(boolean infected) {
+        this.healthStatus = true;
+    }
+
+    public boolean getHealthStatus() {
+        return this.healthStatus;
+    }
+
+    public void addCloseContact(User user) {
+        if (!closeContacts.contains(user)) {
+            closeContacts.add(user);
+        }
+    }
+
+    public List<User> getAllCloseContacts() {
+        return this.closeContacts;
+    }
+
+    public void setForname(String forname) {
         Pattern pattern = Pattern.compile("[^a-zA-Z]");
         Matcher match = pattern.matcher(forname);
         if (match.find() || forname.isEmpty()) {
@@ -46,11 +74,11 @@ public class User {
         this.forname = forname.trim();
     }
 
-    public String getForName() {
+    public String getForname() {
         return this.forname;
     }
 
-    public void setLastName(String lastname) {
+    public void setLastname(String lastname) {
 
         Pattern pattern = Pattern.compile("[^a-zA-Z]");
         Matcher match = pattern.matcher(lastname);
@@ -60,7 +88,7 @@ public class User {
         this.lastname = lastname.trim();
     }
 
-    public String getLastName() {
+    public String getLastname() {
         return this.lastname;
     }
 
@@ -98,9 +126,6 @@ public class User {
     }
 
     public static void main(String[] args) {
-        User newUser = new User("Alex", "test", "alex@gmail.com", "password321");
-        // newUser.setLastName("");
-        System.out.println(newUser.getLastName());
 
     }
 

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="451.0" prefWidth="440.0" spacing="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -66,8 +66,11 @@
          <children>
             <TableView fx:id="contactTable" prefHeight="460.0" prefWidth="800.0">
               <columns>
-                <TableColumn fx:id="nameColumn" prefWidth="400.0" text="Navn" />
-                <TableColumn fx:id="DateColumn" prefWidth="400.0" text="Dato lagt til" />
+                <TableColumn fx:id="nameColumn" prefWidth="130.0" text="Fornavn" />
+                <TableColumn fx:id="lastnameColumn" minWidth="0.0" prefWidth="134.0" text="Etternavn" />
+                  <TableColumn fx:id="emailColumn" maxWidth="279.0" prefWidth="141.0" text="Epost" />
+                  <TableColumn fx:id="healthstatusColumn" minWidth="5.0" prefWidth="176.0" text="Smittestatus" />
+                  <TableColumn fx:id="dateOfInfectionColumn" prefWidth="218.0" text="Dato påvist smitte" />
               </columns>
             </TableView>
             <HBox alignment="CENTER" spacing="20.0">

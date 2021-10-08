@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.SortedMap;
 import java.nio.charset.StandardCharsets;
 
-
 public class InfectionTracer {
 
     private final FileHandler fileHandler = new FileHandler();
@@ -35,15 +34,25 @@ public class InfectionTracer {
 
             for (User current_user : allUsers) {
                 if (current_user.getEmail().contains(username)) {
-                    current_user.getCloseContacts().put(email, LocalDate.now().toString());
+                    for (User current_user2 : allUsers) {
+                        if (current_user2.getEmail().equals(email)) {
+                            current_user.addCloseContact(new User(current_user2.getForname(),
+                                    current_user2.getLastname(), current_user2.getEmail(), current_user2.getPassword(),
+                                    current_user2.getHealthStatus(), current_user2.getDateOfInfection()));
+
+                        }
+                    }
                 }
             }
+
             Gson gson = new Gson();
             gson.toJson(allUsers, writer);
             writer.flush();
             writer.close();
 
-        } catch (IOException e) {
+        } catch (
+
+        IOException e) {
             e.printStackTrace();
         } finally {
             try {
@@ -55,11 +64,12 @@ public class InfectionTracer {
         }
     }
 
-    public SortedMap<String, String> getRelevantMap(String username) throws IOException {
+    public List<User> getRelevantMap(String username) throws IOException {
         List<User> users = fileHandler.getUsers();
+        System.out.println(users.toString());
         for (User currentUser : users) {
             if (currentUser.getEmail().contains(username)) {
-                return currentUser.getCloseContacts();
+                return currentUser.getAllCloseContacts();
             }
         }
         return null;
