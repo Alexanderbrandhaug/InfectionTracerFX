@@ -7,9 +7,9 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="infectiontracer.ui.LoginController">
    <children>
-      <TextField fx:id="email_txt" focusTraversable="false" layoutX="244.0" layoutY="132.0" promptText="Email" />
+      <TextField fx:id="email_txt" layoutX="244.0" layoutY="132.0" promptText="Email" />
+      <PasswordField fx:id="password_txt" layoutX="244.0" layoutY="193.0" promptText="Password" />
       <Button layoutX="244.0" layoutY="275.0" mnemonicParsing="false" onAction="#loginBtn" text="Login" />
       <Button layoutX="353.0" layoutY="275.0" mnemonicParsing="false" onAction="#registerBtn" text="Register" />
-      <PasswordField fx:id="password_txt" layoutX="244.0" layoutY="194.0" promptText="Password" />
    </children>
 </Pane>
