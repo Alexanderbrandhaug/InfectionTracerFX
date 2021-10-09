@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -12,23 +14,47 @@
    <children>
       <AnchorPane layoutX="305.0" prefHeight="465.0" prefWidth="380.0" style="-fx-background-color: white;">
          <children>
-            <TextField fx:id="email_txt" layoutX="113.0" layoutY="115.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-            <PasswordField fx:id="password_txt" layoutX="113.0" layoutY="172.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-            <Button layoutX="193.0" layoutY="241.0" mnemonicParsing="false" onAction="#loginBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #0598ff;" text="Login" textFill="WHITE" />
-            <Button layoutX="193.0" layoutY="399.0" mnemonicParsing="false" onAction="#registerBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #0598ff;" text="Register" textFill="WHITE" />
+            <TextField fx:id="email_txt" layoutX="118.0" layoutY="165.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <PasswordField fx:id="password_txt" layoutX="118.0" layoutY="219.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button layoutX="192.0" layoutY="270.0" mnemonicParsing="false" onAction="#loginBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #0598ff;" text="Login" textFill="WHITE" />
+            <Button layoutX="275.0" layoutY="399.0" mnemonicParsing="false" onAction="#registerBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #0598ff;" text="Register" textFill="WHITE" />
             <Text fill="#0598ff" layoutX="31.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dont have an account? Create one here for free">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text fill="#0598ff" layoutX="123.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User login">
+            <Button fx:id="closeBtnLogin" layoutX="350.0" mnemonicParsing="false" onAction="#closeLogin" style="-fx-background-color: white;" text="X" textFill="#0598ff">
                <font>
-                  <Font size="22.0" />
-               </font>
-            </Text>
-            <Button fx:id="closeBtnLogin" layoutX="351.0" mnemonicParsing="false" onAction="#closeLogin" style="-fx-background-color: white;" text="X" textFill="#0598ff" />
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+            <ImageView fitHeight="56.0" fitWidth="70.0" layoutX="165.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@6372974_account_avatar_log%20in_login_register_icon.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="465.0" prefWidth="320.0" style="-fx-background-color: #0598ff;" />
+      <AnchorPane prefHeight="465.0" prefWidth="320.0" style="-fx-background-color: #0598ff;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="78.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@spreading.png" />
+               </image></ImageView>
+            <Text fill="WHITE" layoutX="69.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Infectiontracer">
+               <font>
+                  <Font name="Symbol" size="28.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="14.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Keep track of your closest contacts,">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="14.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Let them know if you get infected">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Text>
+         </children></AnchorPane>
    </children>
 </Pane>
