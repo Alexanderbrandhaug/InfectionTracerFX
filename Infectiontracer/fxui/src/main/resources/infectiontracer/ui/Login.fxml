@@ -3,13 +3,32 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="infectiontracer.ui.LoginController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="680.0" style="-fx-border-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="infectiontracer.ui.LoginController">
    <children>
-      <TextField fx:id="email_txt" layoutX="244.0" layoutY="132.0" promptText="Email" />
-      <PasswordField fx:id="password_txt" layoutX="244.0" layoutY="193.0" promptText="Password" />
-      <Button layoutX="244.0" layoutY="275.0" mnemonicParsing="false" onAction="#loginBtn" text="Login" />
-      <Button layoutX="353.0" layoutY="275.0" mnemonicParsing="false" onAction="#registerBtn" text="Register" />
+      <AnchorPane layoutX="305.0" prefHeight="465.0" prefWidth="380.0" style="-fx-background-color: white;">
+         <children>
+            <TextField fx:id="email_txt" layoutX="113.0" layoutY="115.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <PasswordField fx:id="password_txt" layoutX="113.0" layoutY="172.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button layoutX="193.0" layoutY="241.0" mnemonicParsing="false" onAction="#loginBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #0598ff;" text="Login" textFill="WHITE" />
+            <Button layoutX="193.0" layoutY="399.0" mnemonicParsing="false" onAction="#registerBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #0598ff;" text="Register" textFill="WHITE" />
+            <Text fill="#0598ff" layoutX="31.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dont have an account? Create one here for free">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text fill="#0598ff" layoutX="123.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User login">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Button fx:id="closeBtnLogin" layoutX="351.0" mnemonicParsing="false" onAction="#closeLogin" style="-fx-background-color: white;" text="X" textFill="#0598ff" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="465.0" prefWidth="320.0" style="-fx-background-color: #0598ff;" />
    </children>
 </Pane>
