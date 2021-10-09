@@ -36,10 +36,10 @@ public class RegistrationController extends AbstractController {
     void RegisterBtn(ActionEvent event) {
 
         try {
-            boolean test = false;
+          //  boolean test = false;
             String test1 = "";
             User new_user = new User(forename_txt.getText(), lastname_txt.getText(), email_txt.getText(),
-                    password_txt.getText(), test, test1);
+                    password_txt.getText(), test1, test1);
             file_handler.insertUser(new_user);
             screencontroller.switchToLogin(event);
         } catch (Exception e) {
