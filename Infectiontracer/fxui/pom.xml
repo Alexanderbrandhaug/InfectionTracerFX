@@ -36,6 +36,12 @@
             <artifactId>javafx-fxml</artifactId>
             <version>16</version>
         </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>2.2</version>
+            <scope>test</scope>
+            </dependency>
 
         <!-- junit testing with jupiter -->
         <dependency>
