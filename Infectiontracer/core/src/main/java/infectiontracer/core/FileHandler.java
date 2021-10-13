@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.*;
 
-
 public class FileHandler {
 
     final String filePath;
@@ -91,22 +90,34 @@ public class FileHandler {
 
     // Function to check if a user in is the users.json file
     // returns true if user is in the file
-    public boolean checkUserList(String email) throws IOException {
-        JsonReader reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8));
-        List<User> user_list = gson.fromJson(reader, new TypeToken<List<User>>() {
-        }.getType());
-        for (User current_user : user_list) {
-            if (current_user.getEmail().contentEquals(email)) {
-                reader.close();
-                return true;
+    public boolean checkUserList(String email) {
+        try (JsonReader reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8))) {
+
+            while (reader.hasNext()) {
+                List<User> user_list = gson.fromJson(reader, new TypeToken<List<User>>() {
+                }.getType());
+                for (User current_user : user_list) {
+                    if (current_user.getEmail().equals(email)) {
+                        reader.close();
+                        return true;
+                    }
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return false;
     }
 
-    public List<User> getUsers() throws IOException {
-        JsonReader reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8));
-        return gson.fromJson(reader, new TypeToken<List<User>>() {
-        }.getType());
+    public List<User> getUsers() {
+        try (JsonReader reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8))) {
+            while (reader.hasNext()) {
+                return gson.fromJson(reader, new TypeToken<List<User>>() {
+                }.getType());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
