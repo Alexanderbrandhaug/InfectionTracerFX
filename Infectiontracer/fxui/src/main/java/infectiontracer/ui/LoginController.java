@@ -8,12 +8,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import infectiontracer.core.*;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
 
 public class LoginController extends AbstractController {
 
     private FileHandler fileHandler = new FileHandler();
     private ScreenController screencontroller = new ScreenController();
+    
 
+    @FXML
+    private Button closeBtnLogin;
     @FXML
     private TextField email_txt;
 
@@ -44,4 +50,10 @@ public class LoginController extends AbstractController {
         screencontroller.switchToRegistration(event);
     }
 
+    @FXML
+    void closeLogin(ActionEvent event) {
+        Stage stage = (Stage)closeBtnLogin.getScene().getWindow();
+        stage.close();
+    }
+    
 }
