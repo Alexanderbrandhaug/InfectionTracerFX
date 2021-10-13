@@ -9,30 +9,29 @@ import java.time.format.DateTimeFormatter;
 
 public class User {
 
-    private String forname, lastname, email, password, dateOfInfection;
-    private Boolean healthStatus;
+    private String forname, lastname, email, password, dateOfInfection,healthStatus;
     private List<User> closeContacts;
 
-    public User(String forname, String lastname, String email, String password, Boolean healthStatus,
+    public User(String forname, String lastname, String email, String password, String healthStatus,
             String dateOfInfection) {
         setForname(forname);
         setLastname(lastname);
         setEmail(email);
         setPassword(password);
-        this.healthStatus = healthStatus;
+        this.healthStatus = "Frisk";
         closeContacts = new ArrayList<User>();
         this.dateOfInfection = dateOfInfection;
 
     }
 
-    public User(String forname, String lastname, String email, String password, Boolean healthStatus,
+    public User(String forname, String lastname, String email, String password, String healthStatus,
             String dateOfInfection, List<User> closeContacts) {
         this.forname = forname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.closeContacts = closeContacts;
-        this.healthStatus = healthStatus;
+        this.healthStatus = "Frisk";
         this.dateOfInfection = dateOfInfection;
     }
 
@@ -47,11 +46,11 @@ public class User {
         return this.dateOfInfection;
     }
 
-    public void setInfected(boolean infected) {
-        this.healthStatus = true;
+    public void setInfected(String infected) {
+        this.healthStatus = infected;
     }
 
-    public boolean getHealthStatus() {
+    public String getHealthStatus() {
         return this.healthStatus;
     }
 
