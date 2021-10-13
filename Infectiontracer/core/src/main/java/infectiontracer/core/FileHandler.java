@@ -15,13 +15,17 @@ import java.util.*;
 
 public class FileHandler {
 
-    final String filePath;
+    private String filePath;
     final Gson gson;
 
     public FileHandler() {
         filePath = "src/main/resources/infectiontracer/ui/users.json"; // "src/main/java/gr2181/infectiontracer/users.json";
         gson = new Gson();
 
+    }
+
+    public void setFilePath(String path) {
+        this.filePath = path;
     }
 
     // Function that attempts to insert user into users.json

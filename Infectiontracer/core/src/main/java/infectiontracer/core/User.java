@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 public class User {
 
-    private String forname, lastname, email, password, dateOfInfection,healthStatus;
+    private String forname, lastname, email, password, dateOfInfection, healthStatus;
     private List<User> closeContacts;
 
     public User(String forname, String lastname, String email, String password, String healthStatus,
@@ -26,10 +26,10 @@ public class User {
 
     public User(String forname, String lastname, String email, String password, String healthStatus,
             String dateOfInfection, List<User> closeContacts) {
-        this.forname = forname;
-        this.lastname = lastname;
-        this.email = email;
-        this.password = password;
+        setForname(forname);
+        setLastname(lastname);
+        setEmail(email);
+        setPassword(password);
         this.closeContacts = closeContacts;
         this.healthStatus = "Frisk";
         this.dateOfInfection = dateOfInfection;

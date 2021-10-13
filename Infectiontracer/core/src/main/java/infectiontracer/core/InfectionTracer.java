@@ -14,10 +14,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.SortedMap;
 import java.nio.charset.StandardCharsets;
+import java.lang.IllegalArgumentException;
 
 public class InfectionTracer {
 
     private final FileHandler fileHandler = new FileHandler();
+    private String path = "src/main/resources/infectiontracer/ui/users.json";
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
     // Method to add a close contact for a user
     // Use email for now, as each user has a unique email
@@ -25,12 +31,12 @@ public class InfectionTracer {
         FileWriter writer = null;
 
         if (!fileHandler.checkUserList(email)) {
-            System.out.println("No such user in file!");
-            return;
+            throw new IllegalArgumentException("The user does not exist");
+
         }
         try {
             List<User> allUsers = fileHandler.getUsers();
-            writer = new FileWriter("src/main/resources/infectiontracer/ui/users.json", StandardCharsets.UTF_8);
+            writer = new FileWriter(path, StandardCharsets.UTF_8);
 
             for (User current_user : allUsers) {
                 if (current_user.getEmail().contains(username)) {
@@ -75,10 +81,10 @@ public class InfectionTracer {
         return null;
     }
 
-    public User getActiveUser(String username) throws IOException{
-        List<User> users  = fileHandler.getUsers();
-        for(User user : users){
-            if(username.equals(user.getEmail())){
+    public User getActiveUser(String username) throws IOException {
+        List<User> users = fileHandler.getUsers();
+        for (User user : users) {
+            if (username.equals(user.getEmail())) {
                 return user;
             }
         }
