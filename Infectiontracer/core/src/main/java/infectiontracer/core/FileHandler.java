@@ -12,38 +12,41 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.*;
+import java.lang.IllegalArgumentException;
 
 public class FileHandler {
 
-    private String filePath;
+    private String filePath = "src/main/resources/infectiontracer/ui/users.json";
     final Gson gson;
 
     public FileHandler() {
-        filePath = "src/main/resources/infectiontracer/ui/users.json"; // "src/main/java/gr2181/infectiontracer/users.json";
+          // "src/main/java/gr2181/infectiontracer/users.json";
         gson = new Gson();
 
     }
 
-    public void setFilePath(String path) {
-        this.filePath = path;
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     // Function that attempts to insert user into users.json
     public void insertUser(User user) {
         FileWriter writer = null;
         try {
-
-            List<User> registered_users = checkUserList(user);
+            
+            List<User> registered_users = getUsers();
             writer = new FileWriter(filePath, StandardCharsets.UTF_8);
-            if (registered_users != null) {
+            for(User newUser: registered_users){
+                if(user.getEmail().equals(newUser.getEmail())){
+                    throw new IllegalArgumentException("Email already exists");
+                }
+            }
                 registered_users.add(user);
                 gson.toJson(registered_users, writer);
                 writer.flush();
                 writer.close();
                 System.out.println("User added!");
-            } else {
-                System.out.println("User already in file!");
-            }
+           
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -58,10 +61,12 @@ public class FileHandler {
         }
     }
 
+
+    // IS THIS METHOD REALLY NEEDED?
     // Function to check if a user is already registered
     // Returns list of users if user not in file
     // This is so the insertUsers function can add the earlier users as well
-    public List<User> checkUserList(User user) {
+    public List<User> getUserList(User user) {
         JsonReader reader = null;
         try {
 
@@ -72,7 +77,7 @@ public class FileHandler {
                 return new ArrayList<>();
             }
             for (User current_user : user_list) {
-                if (current_user.getEmail().contentEquals(user.getEmail())) {
+                if (current_user.getEmail().equals(user.getEmail())) {
                     reader.close();
                     return null;
                 }
@@ -122,6 +127,6 @@ public class FileHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return new ArrayList<>();
     }
 }

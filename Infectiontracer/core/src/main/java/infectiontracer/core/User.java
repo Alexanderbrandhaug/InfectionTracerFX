@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.lang.IllegalArgumentException;
+
 
 public class User {
 
@@ -24,16 +26,6 @@ public class User {
 
     }
 
-    public User(String forname, String lastname, String email, String password, String healthStatus,
-            String dateOfInfection, List<User> closeContacts) {
-        setForname(forname);
-        setLastname(lastname);
-        setEmail(email);
-        setPassword(password);
-        this.closeContacts = closeContacts;
-        this.healthStatus = "Frisk";
-        this.dateOfInfection = dateOfInfection;
-    }
 
     public void setDateOfInfected() {
         LocalDate today = LocalDate.now();
@@ -53,11 +45,25 @@ public class User {
     public String getHealthStatus() {
         return this.healthStatus;
     }
+    //Helper method to check if the user that is being added as a closecontact already
+    //exists as a closecontact for the active user
+    public boolean checkIfUserAlreadyExists(String email){
+        for(User newUser: closeContacts){
+            if(newUser.getEmail().equals(email)){
+                return true;
+            }
+        }
+        return false;
+    }
 
+    //Adding a closecontact to the current user
     public void addCloseContact(User user) {
-        if (!closeContacts.contains(user)) {
+        if (closeContacts.contains(user) || checkIfUserAlreadyExists(user.getEmail())) {
+            throw new IllegalArgumentException("User is already added");
+        }else{
             closeContacts.add(user);
         }
+        
     }
 
     public List<User> getAllCloseContacts() {

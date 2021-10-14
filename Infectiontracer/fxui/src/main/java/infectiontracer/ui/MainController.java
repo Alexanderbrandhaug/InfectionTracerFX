@@ -67,7 +67,8 @@ public class MainController extends AbstractController {
     @FXML
     void addContact(ActionEvent event) throws IOException {
         try {
-            infectionTracer.addCloseContact(username, contactNameTxt.getText());
+            System.out.println(username);
+            infectionTracer.addCloseContact2(username, contactNameTxt.getText());
             List<User> currentMap = infectionTracer.getRelevantMap(username);
             contactList.clear();
             for (User user : currentMap) {
