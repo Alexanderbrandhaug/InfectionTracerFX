@@ -1,99 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1273.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="1129.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="451.0" prefWidth="440.0" spacing="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Button fx:id="fireHealthyUser" layoutX="135.0" layoutY="569.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="131.0" style="-fx-background-color: GREEN; -fx-opacity: 0.4;" text="I am healthy" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="fireInfectedUser" layoutX="321.0" layoutY="569.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="132.0" style="-fx-background-color: RED; -fx-opacity: 0.4;" text="I am infected" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <AnchorPane layoutX="-133.0" layoutY="-142.0" prefHeight="210.0" prefWidth="1262.0" style="-fx-background-color: #0598ff;">
          <children>
-            <HBox prefHeight="35.0" prefWidth="452.0" spacing="10.0">
-               <children>
-                  <Label text="Logget inn som:">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="username_lbl" prefHeight="35.0" prefWidth="228.0">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox spacing="10.0">
-               <children>
-                  <Label text="Smittestatus:">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="infectionStatus" prefHeight="35.0" prefWidth="254.0">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox spacing="10.0">
-               <children>
-                  <Label text="Antall nærkontakter:">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="numberOfContacts">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
+            <Label fx:id="username_lbl" layoutX="193.0" layoutY="163.0" prefHeight="35.0" prefWidth="203.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="157.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@16671574911586787867-128.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="1153.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@16301547491543238901-128.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="1173.0" layoutY="168.0" mnemonicParsing="false" onAction="#MainToLogin" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: #0598ff;" text="Log out" />
+            <Text fill="WHITE" layoutX="401.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back to Infectiontracer" wrappingWidth="594.2476806640625">
+               <font>
+                  <Font size="39.0" />
+               </font>
+            </Text>
+            <Button fx:id="closeBtnRegistration" layoutX="1233.0" layoutY="136.0" mnemonicParsing="false" onAction="#closeRegistration" style="-fx-background-color: #0598ff;" text="X" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
          </children>
-         <padding>
-            <Insets left="30.0" top="75.0" />
-         </padding>
-      </VBox>
-      <VBox layoutX="467.0" prefHeight="720.0" prefWidth="800.0" spacing="40.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <TableView fx:id="contactTable" prefHeight="460.0" prefWidth="800.0">
-              <columns>
-                <TableColumn fx:id="nameColumn" prefWidth="130.0" text="Fornavn" />
-                <TableColumn fx:id="lastnameColumn" minWidth="0.0" prefWidth="134.0" text="Etternavn" />
-                  <TableColumn fx:id="emailColumn" maxWidth="279.0" prefWidth="141.0" text="Epost" />
-                  <TableColumn fx:id="healthstatusColumn" minWidth="5.0" prefWidth="176.0" text="Smittestatus" />
-                  <TableColumn fx:id="dateOfInfectionColumn" prefWidth="218.0" text="Dato påvist smitte" />
-              </columns>
-            </TableView>
-            <HBox alignment="CENTER" spacing="20.0">
-               <children>
-                  <TextField fx:id="contactNameTxt" />
-                  <Button mnemonicParsing="false" onAction="#addContact" text="Legg til ny nærkontakt" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" spacing="75.0">
-               <children>
-                  <Button fx:id="fireHealthyUser" mnemonicParsing="false" prefHeight="97.0" prefWidth="198.0" style="-fx-background-color: GREEN;" text="Jeg har blitt frisk" textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="fireInfectedUser" mnemonicParsing="false" prefHeight="97.0" prefWidth="198.0" style="-fx-background-color: RED;" text="Jeg har blitt smittet" textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
+      </AnchorPane>
+      <Button layoutX="416.0" layoutY="389.0" mnemonicParsing="false" onAction="#addContact" prefHeight="45.0" prefWidth="75.0" style="-fx-background-color: transparent;" text="Add" textFill="#0598ff">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Text layoutX="129.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a new close contact by their registerd email to be notified if they get infected, and to let them know if you get infected" wrappingWidth="299.3356647491455">
+         <font>
+            <Font size="17.0" />
+         </font></Text>
+      <ImageView fitHeight="69.0" fitWidth="75.0" layoutX="22.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@19256548621558965385-128.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="contactNameTxt" layoutX="130.0" layoutY="388.0" prefHeight="31.0" prefWidth="280.0" promptText="Add new close contact" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" text="Close contact email" />
+      <TableView fx:id="contactTable" layoutX="625.0" layoutY="116.0" prefHeight="628.0" prefWidth="505.0">
+        <columns>
+          <TableColumn fx:id="nameColumn" prefWidth="88.58746337890625" text="First name" />
+          <TableColumn fx:id="lastnameColumn" minWidth="0.0" prefWidth="107.0865478515625" text="Last name" />
+            <TableColumn fx:id="healthstatusColumn" minWidth="5.0" prefWidth="95.36578369140625" text="Health status" />
+            <TableColumn fx:id="emailColumn" maxWidth="579.349853515625" minWidth="0.0" prefWidth="109.304931640625" text="Email" />
+            <TableColumn fx:id="dateOfInfectionColumn" prefWidth="111.6951904296875" text="Infection date" />
+        </columns>
+      </TableView>
+      <HBox layoutX="440.0" layoutY="835.0" spacing="10.0" />
+      <Label fx:id="infectionStatus" layoutX="146.0" layoutY="218.0" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="77.0" fitWidth="106.0" layoutX="21.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@18667309301583900707-128.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="142.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check out your health status. If you are infected, you need to be in quarantine for 10 days" wrappingWidth="281.54135715675613">
+         <font>
+            <Font size="19.0" />
+         </font></Text>
+      <ImageView fitHeight="69.0" fitWidth="86.0" layoutX="24.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@13252117381571183079-128.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="122.0" layoutY="512.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Let your close contacts know your health status" wrappingWidth="308.5008544921875">
+         <font>
+            <Font size="19.0" />
+         </font></Text>
+      <Label fx:id="numberOfContacts" layoutX="857.0" layoutY="70.0" prefHeight="43.0" prefWidth="52.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Text layoutX="144.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your health status:" wrappingWidth="185.28124428082003">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Line endX="578.0" layoutX="47.0" layoutY="273.0" startX="-47.0000114440918" style="-fx-opacity: 0.2;" />
+      <Line endX="587.0" endY="-18.662841796875" layoutX="38.0" layoutY="482.0" startX="-37.999996185302734" startY="-18.662841796875" style="-fx-opacity: 0.2;" />
+      <Line endX="7.0" endY="-39.00000762939453" layoutX="618.0" layoutY="107.0" startX="7.0" startY="9.0" style="-fx-opacity: 0.2;" />
+      <Text layoutX="643.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of close contacts:" wrappingWidth="208.67315667489197">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

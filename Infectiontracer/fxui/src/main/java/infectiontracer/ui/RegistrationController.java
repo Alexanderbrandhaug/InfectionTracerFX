@@ -33,7 +33,7 @@ public class RegistrationController extends AbstractController {
     private Button closeBtnRegistration;
 
     @FXML
-    void BackToLoginBtn(ActionEvent event) throws IOException {
+    void RegisterToLogin(ActionEvent event) throws IOException {
         screencontroller.switchToLogin(event);
     }
 
