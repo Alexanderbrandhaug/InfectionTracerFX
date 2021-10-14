@@ -62,6 +62,10 @@ public class MainController extends AbstractController {
 
     @FXML
     private Button fireInfectedUser;
+
+    @FXML
+    private Button closeBtnMain;
+    
     ObservableList<User> contactList = FXCollections.observableArrayList();
     ScreenController screencontroller = new ScreenController();
 
@@ -125,6 +129,12 @@ public class MainController extends AbstractController {
     @FXML
     void MainToLogin(ActionEvent event) throws IOException {
         screencontroller.switchToLogin(event);
+    }
+
+    @FXML
+    void closeMain(ActionEvent event) {
+        Stage stage = (Stage)closeBtnMain.getScene().getWindow();
+        stage.close();
     }
 
 }
