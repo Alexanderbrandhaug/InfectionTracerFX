@@ -35,9 +35,9 @@ public class InfectionTracer {
         if (!fileHandler.checkUserList(email)) {
             throw new IllegalArgumentException("The user does not exist, or you are trying to add a user thats already added");
 
-
         }
         try {
+            
             List<User> allUsers = fileHandler.getUsers();
             writer = new FileWriter(path, StandardCharsets.UTF_8);
 
@@ -48,11 +48,12 @@ public class InfectionTracer {
                             current_user.addCloseContact(new User(current_user2.getForname(),
                                     current_user2.getLastname(), current_user2.getEmail(), current_user2.getPassword(),
                                     current_user2.getHealthStatus(), current_user2.getDateOfInfection()));
+                                         
                         }
                     }
                     }
                 }
-
+                
             Gson gson = new Gson();
             gson.toJson(allUsers, writer);
             writer.flush();

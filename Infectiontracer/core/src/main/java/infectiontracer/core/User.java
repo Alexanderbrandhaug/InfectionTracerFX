@@ -3,6 +3,7 @@ package infectiontracer.core;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+
 import java.util.regex.Matcher;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -47,7 +48,7 @@ public class User {
     }
     //Helper method to check if the user that is being added as a closecontact already
     //exists as a closecontact for the active user
-    public boolean checkIfUserAlreadyExists(String email){
+    public boolean checkIfUserAlreadyExistsAsCloseContact(String email){
         for(User newUser: closeContacts){
             if(newUser.getEmail().equals(email)){
                 return true;
@@ -58,8 +59,8 @@ public class User {
 
     //Adding a closecontact to the current user
     public void addCloseContact(User user) {
-        if (closeContacts.contains(user) || checkIfUserAlreadyExists(user.getEmail())) {
-            throw new IllegalArgumentException("User is already added");
+        if (closeContacts.contains(user) || checkIfUserAlreadyExistsAsCloseContact(user.getEmail())) {
+            System.out.println("User already exists as closecontact");
         }else{
             closeContacts.add(user);
         }
