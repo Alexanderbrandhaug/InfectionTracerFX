@@ -15,14 +15,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="1129.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="fireHealthyUser" layoutX="135.0" layoutY="569.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="131.0" style="-fx-background-color: GREEN; -fx-opacity: 0.4;" text="I am healthy" textFill="WHITE">
+      <Button fx:id="fireHealthyUser" layoutX="135.0" layoutY="569.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="125.0" style="-fx-background-color: GREEN; -fx-opacity: 0.4;" text="I am healthy" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="fireInfectedUser" layoutX="321.0" layoutY="569.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="132.0" style="-fx-background-color: RED; -fx-opacity: 0.4;" text="I am infected" textFill="WHITE">
+      <Button fx:id="fireInfectedUser" layoutX="321.0" layoutY="569.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="125.0" style="-fx-background-color: RED; -fx-opacity: 0.4;" text="I am infected" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
       </Button>
       <AnchorPane layoutX="-133.0" layoutY="-142.0" prefHeight="210.0" prefWidth="1262.0" style="-fx-background-color: #0598ff;">
@@ -55,11 +55,11 @@
             </Button>
          </children>
       </AnchorPane>
-      <Button layoutX="416.0" layoutY="389.0" mnemonicParsing="false" onAction="#addContact" prefHeight="45.0" prefWidth="75.0" style="-fx-background-color: transparent;" text="Add" textFill="#0598ff">
+      <Button layoutX="362.0" layoutY="394.0" mnemonicParsing="false" onAction="#addContact" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #0598ff;" text="Add" textFill="#fcfcfc">
          <font>
-            <Font size="16.0" />
+            <Font name="System Bold" size="12.0" />
          </font></Button>
-      <Text layoutX="129.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a new close contact by their registerd email to be notified if they get infected, and to let them know if you get infected" wrappingWidth="299.3356647491455">
+      <Text layoutX="142.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a new close contact by their registerd email to be notified if they get infected, and to let them know if you get infected" wrappingWidth="299.3356647491455">
          <font>
             <Font size="17.0" />
          </font></Text>
@@ -68,20 +68,20 @@
             <Image url="@19256548621558965385-128.png" />
          </image>
       </ImageView>
-      <TextField fx:id="contactNameTxt" layoutX="130.0" layoutY="388.0" prefHeight="31.0" prefWidth="280.0" promptText="Add new close contact" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" text="Close contact email" />
-      <TableView fx:id="contactTable" layoutX="625.0" layoutY="116.0" prefHeight="628.0" prefWidth="505.0">
+      <TextField fx:id="contactNameTxt" layoutX="146.0" layoutY="388.0" prefHeight="35.0" prefWidth="166.0" promptText="Add new close contact" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+      <TableView fx:id="contactTable" layoutX="612.0" layoutY="116.0" prefHeight="628.0" prefWidth="518.0" style="-fx-background-color: white;">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="88.58746337890625" text="First name" />
           <TableColumn fx:id="lastnameColumn" minWidth="0.0" prefWidth="107.0865478515625" text="Last name" />
-            <TableColumn fx:id="healthstatusColumn" minWidth="5.0" prefWidth="95.36578369140625" text="Health status" />
-            <TableColumn fx:id="emailColumn" maxWidth="579.349853515625" minWidth="0.0" prefWidth="109.304931640625" text="Email" />
+            <TableColumn fx:id="healthstatusColumn" minWidth="5.0" prefWidth="102.5" text="Health status" />
+            <TableColumn fx:id="emailColumn" maxWidth="579.349853515625" minWidth="0.0" prefWidth="102.5" text="Email" />
             <TableColumn fx:id="dateOfInfectionColumn" prefWidth="111.6951904296875" text="Infection date" />
         </columns>
       </TableView>
       <HBox layoutX="440.0" layoutY="835.0" spacing="10.0" />
-      <Label fx:id="infectionStatus" layoutX="146.0" layoutY="218.0" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" textFill="WHITE">
+      <Label fx:id="infectionStatus" layoutX="146.0" layoutY="218.0" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <ImageView fitHeight="77.0" fitWidth="106.0" layoutX="21.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
@@ -98,7 +98,7 @@
             <Image url="@13252117381571183079-128.png" />
          </image>
       </ImageView>
-      <Text layoutX="122.0" layoutY="512.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Let your close contacts know your health status" wrappingWidth="308.5008544921875">
+      <Text layoutX="142.0" layoutY="512.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Let your close contacts know your health status" wrappingWidth="308.5008544921875">
          <font>
             <Font size="19.0" />
          </font></Text>
@@ -109,12 +109,12 @@
       </Label>
       <Text layoutX="144.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your health status:" wrappingWidth="185.28124428082003">
          <font>
-            <Font size="19.0" />
+            <Font name="System Bold" size="19.0" />
          </font>
       </Text>
-      <Line endX="578.0" layoutX="47.0" layoutY="273.0" startX="-47.0000114440918" style="-fx-opacity: 0.2;" />
-      <Line endX="587.0" endY="-18.662841796875" layoutX="38.0" layoutY="482.0" startX="-37.999996185302734" startY="-18.662841796875" style="-fx-opacity: 0.2;" />
-      <Line endX="7.0" endY="-39.00000762939453" layoutX="618.0" layoutY="107.0" startX="7.0" startY="9.0" style="-fx-opacity: 0.2;" />
+      <Line endX="565.0" layoutX="47.0" layoutY="273.0" startX="-47.0000114440918" style="-fx-opacity: 0.2;" />
+      <Line endX="574.0" endY="-18.662841796875" layoutX="38.0" layoutY="482.0" startX="-37.999996185302734" startY="-18.662841796875" style="-fx-opacity: 0.2;" />
+      <Line endX="7.0" endY="-39.00000762939453" layoutX="605.0" layoutY="108.0" startX="7.0" startY="636.0" style="-fx-opacity: 0.2;" />
       <Text layoutX="643.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of close contacts:" wrappingWidth="208.67315667489197">
          <font>
             <Font size="18.0" />
