@@ -3,13 +3,15 @@ package infectiontracer.core;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+
 import java.util.regex.Matcher;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.lang.IllegalArgumentException;
 
 public class User {
 
-    private String forname, lastname, email, password, dateOfInfection,healthStatus;
+    private String forname, lastname, email, password, dateOfInfection, healthStatus;
     private List<User> closeContacts;
 
     public User(String forname, String lastname, String email, String password, String healthStatus,
@@ -54,10 +56,26 @@ public class User {
         return this.healthStatus;
     }
 
+    // Helper method to check if the user that is being added as a closecontact
+    // already
+    // exists as a closecontact for the active user
+    public boolean checkIfUserAlreadyExistsAsCloseContact(String email) {
+        for (User newUser : closeContacts) {
+            if (newUser.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Adding a closecontact to the current user
     public void addCloseContact(User user) {
-        if (!closeContacts.contains(user)) {
+        if (closeContacts.contains(user) || checkIfUserAlreadyExistsAsCloseContact(user.getEmail())) {
+            System.out.println("User already exists as closecontact");
+        } else {
             closeContacts.add(user);
         }
+
     }
 
     public List<User> getAllCloseContacts() {
@@ -122,10 +140,6 @@ public class User {
 
     public String getPassword() {
         return this.password;
-    }
-
-    public static void main(String[] args) {
-
     }
 
 }

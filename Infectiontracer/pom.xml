@@ -119,6 +119,12 @@
                             <goals>
                                 <goal>prepare-agent</goal>
                             </goals>
+                            <configuration>
+                <!-- Skip this phase if unit tests are skipped -->
+                <skip>${skip.unit.tests}</skip>
+                <destFile>${project.build.directory}/jacoco-ut.exec</destFile>
+                <propertyName>surefireArgLine</propertyName>
+            </configuration>
                         </execution>
                         <execution>
                             <id>jacoco-report</id>

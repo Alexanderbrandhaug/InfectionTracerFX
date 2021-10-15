@@ -14,23 +14,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.SortedMap;
 import java.nio.charset.StandardCharsets;
+import java.lang.IllegalArgumentException;
 
 public class InfectionTracer {
 
     private final FileHandler fileHandler = new FileHandler();
+    private String path = "src/main/resources/infectiontracer/ui/users.json";
 
-    // Method to add a close contact for a user
+    public void setPath(String path) {
+        this.path = path;
+        fileHandler.setFilePath(path);
+    }
+
+    // Method to add a close contact for the current active user
     // Use email for now, as each user has a unique email
-    public void addCloseContact(String username, String email) throws IOException {
+    public void addCloseContact2(String username, String email) throws IOException {
         FileWriter writer = null;
 
         if (!fileHandler.checkUserList(email)) {
-            System.out.println("No such user in file!");
-            return;
+            throw new IllegalArgumentException("The user does not exist");
+
         }
         try {
+
             List<User> allUsers = fileHandler.getUsers();
-            writer = new FileWriter("src/main/resources/infectiontracer/ui/users.json", StandardCharsets.UTF_8);
+            writer = new FileWriter(path, StandardCharsets.UTF_8);
 
             for (User current_user : allUsers) {
                 if (current_user.getEmail().contains(username)) {
@@ -64,6 +72,7 @@ public class InfectionTracer {
         }
     }
 
+    // retrieving all closecontact of a user with the help of the email
     public List<User> getRelevantMap(String username) throws IOException {
         List<User> users = fileHandler.getUsers();
         System.out.println(users.toString());
@@ -75,10 +84,11 @@ public class InfectionTracer {
         return null;
     }
 
-    public User getActiveUser(String username) throws IOException{
-        List<User> users  = fileHandler.getUsers();
-        for(User user : users){
-            if(username.equals(user.getEmail())){
+    // Helper method to get the currently logged in user
+    public User getActiveUser(String username) throws IOException {
+        List<User> users = fileHandler.getUsers();
+        for (User user : users) {
+            if (username.equals(user.getEmail())) {
                 return user;
             }
         }
