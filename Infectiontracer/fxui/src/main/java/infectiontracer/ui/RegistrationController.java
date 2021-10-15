@@ -31,9 +31,11 @@ public class RegistrationController extends AbstractController {
 
     @FXML
     private Button closeBtnRegistration;
+    @FXML
+    private Button registerBtnID;
 
     @FXML
-    void BackToLoginBtn(ActionEvent event) throws IOException {
+    void RegisterToLogin(ActionEvent event) throws IOException {
         screencontroller.switchToLogin(event);
     }
 
@@ -41,7 +43,7 @@ public class RegistrationController extends AbstractController {
     void RegisterBtn(ActionEvent event) {
 
         try {
-          //  boolean test = false;
+            // boolean test = false;
             String test1 = "";
             User new_user = new User(forename_txt.getText(), lastname_txt.getText(), email_txt.getText(),
                     password_txt.getText(), test1, test1);
@@ -56,7 +58,13 @@ public class RegistrationController extends AbstractController {
 
     @FXML
     void closeRegistration(ActionEvent event) {
-        Stage stage = (Stage)closeBtnRegistration.getScene().getWindow();
+        Stage stage = (Stage) closeBtnRegistration.getScene().getWindow();
         stage.close();
     }
+
+    @FXML
+    void BackToLoginBtn(ActionEvent event) throws IOException {
+        screencontroller.switchToLogin(event);
+    }
+
 }

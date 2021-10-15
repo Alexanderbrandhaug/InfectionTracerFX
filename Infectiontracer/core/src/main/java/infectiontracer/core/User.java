@@ -20,10 +20,21 @@ public class User {
         setLastname(lastname);
         setEmail(email);
         setPassword(password);
-        this.healthStatus = "Frisk";
+        this.healthStatus = "Covid19 Negative";
         closeContacts = new ArrayList<User>();
         this.dateOfInfection = dateOfInfection;
 
+    }
+
+    public User(String forname, String lastname, String email, String password, String healthStatus,
+            String dateOfInfection, List<User> closeContacts) {
+        this.forname = forname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.closeContacts = closeContacts;
+        this.healthStatus = "Covid19 Negative";
+        this.dateOfInfection = dateOfInfection;
     }
 
     public void setDateOfInfected() {
