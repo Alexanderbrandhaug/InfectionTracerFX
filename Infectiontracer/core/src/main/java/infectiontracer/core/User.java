@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.lang.IllegalArgumentException;
 
-
 public class User {
 
     private String forname, lastname, email, password, dateOfInfection, healthStatus;
@@ -26,7 +25,6 @@ public class User {
         this.dateOfInfection = dateOfInfection;
 
     }
-
 
     public void setDateOfInfected() {
         LocalDate today = LocalDate.now();
@@ -46,25 +44,27 @@ public class User {
     public String getHealthStatus() {
         return this.healthStatus;
     }
-    //Helper method to check if the user that is being added as a closecontact already
-    //exists as a closecontact for the active user
-    public boolean checkIfUserAlreadyExistsAsCloseContact(String email){
-        for(User newUser: closeContacts){
-            if(newUser.getEmail().equals(email)){
+
+    // Helper method to check if the user that is being added as a closecontact
+    // already
+    // exists as a closecontact for the active user
+    public boolean checkIfUserAlreadyExistsAsCloseContact(String email) {
+        for (User newUser : closeContacts) {
+            if (newUser.getEmail().equals(email)) {
                 return true;
             }
         }
         return false;
     }
 
-    //Adding a closecontact to the current user
+    // Adding a closecontact to the current user
     public void addCloseContact(User user) {
         if (closeContacts.contains(user) || checkIfUserAlreadyExistsAsCloseContact(user.getEmail())) {
             System.out.println("User already exists as closecontact");
-        }else{
+        } else {
             closeContacts.add(user);
         }
-        
+
     }
 
     public List<User> getAllCloseContacts() {
@@ -129,10 +129,6 @@ public class User {
 
     public String getPassword() {
         return this.password;
-    }
-
-    public static void main(String[] args) {
-
     }
 
 }

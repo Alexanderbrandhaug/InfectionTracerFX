@@ -20,7 +20,7 @@ public class FileHandler {
     final Gson gson;
 
     public FileHandler() {
-          // "src/main/java/gr2181/infectiontracer/users.json";
+        // "src/main/java/gr2181/infectiontracer/users.json";
         gson = new Gson();
 
     }
@@ -33,23 +33,23 @@ public class FileHandler {
     public void insertUser(User user) {
         FileWriter writer = null;
         try {
-            
+
             List<User> registered_users = getUsers();
-            if(registered_users == null){
-               registered_users = new ArrayList<>();
+            if (registered_users == null) {
+                registered_users = new ArrayList<>();
             }
             writer = new FileWriter(filePath, StandardCharsets.UTF_8);
-            for(User newUser: registered_users){
-                if(user.getEmail().equals(newUser.getEmail())){
+            for (User newUser : registered_users) {
+                if (user.getEmail().equals(newUser.getEmail())) {
                     throw new IllegalArgumentException("Email already exists");
                 }
             }
-                registered_users.add(user);
-                gson.toJson(registered_users, writer);
-                writer.flush();
-                writer.close();
-                System.out.println("User added!");
-           
+            registered_users.add(user);
+            gson.toJson(registered_users, writer);
+            writer.flush();
+            writer.close();
+            System.out.println("User added!");
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -63,19 +63,18 @@ public class FileHandler {
 
         }
     }
+
     // Function to check if a user in is the users.json file
     // returns true if user is in the file
     public boolean checkUserList(String email) {
         try (JsonReader reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8))) {
 
-            while (reader.hasNext()) {
-                List<User> user_list = gson.fromJson(reader, new TypeToken<List<User>>() {
-                }.getType());
-                for (User current_user : user_list) {
-                    if (current_user.getEmail().equals(email)) {
-                        reader.close();
-                        return true;
-                    }
+            List<User> user_list = gson.fromJson(reader, new TypeToken<List<User>>() {
+            }.getType());
+            for (User current_user : user_list) {
+                if (current_user.getEmail().equals(email)) {
+                    reader.close();
+                    return true;
                 }
             }
         } catch (IOException e) {
@@ -83,13 +82,12 @@ public class FileHandler {
         }
         return false;
     }
-    
 
     public List<User> getUsers() {
         try (JsonReader reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8))) {
-                return gson.fromJson(reader, new TypeToken<List<User>>() {
-                }.getType());
-                
+            return gson.fromJson(reader, new TypeToken<List<User>>() {
+            }.getType());
+
         } catch (IOException e) {
             e.printStackTrace();
         }

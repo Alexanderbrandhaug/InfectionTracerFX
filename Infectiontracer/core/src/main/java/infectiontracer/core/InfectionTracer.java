@@ -23,9 +23,8 @@ public class InfectionTracer {
 
     public void setPath(String path) {
         this.path = path;
+        fileHandler.setFilePath(path);
     }
-    
-        
 
     // Method to add a close contact for the current active user
     // Use email for now, as each user has a unique email
@@ -33,27 +32,27 @@ public class InfectionTracer {
         FileWriter writer = null;
 
         if (!fileHandler.checkUserList(email)) {
-            throw new IllegalArgumentException("The user does not exist, or you are trying to add a user thats already added");
+            throw new IllegalArgumentException("The user does not exist");
 
         }
         try {
-            
+
             List<User> allUsers = fileHandler.getUsers();
             writer = new FileWriter(path, StandardCharsets.UTF_8);
 
             for (User current_user : allUsers) {
                 if (current_user.getEmail().contains(username)) {
                     for (User current_user2 : allUsers) {
-                          if (current_user2.getEmail().equals(email)) {
+                        if (current_user2.getEmail().equals(email)) {
                             current_user.addCloseContact(new User(current_user2.getForname(),
                                     current_user2.getLastname(), current_user2.getEmail(), current_user2.getPassword(),
                                     current_user2.getHealthStatus(), current_user2.getDateOfInfection()));
-                                         
+
                         }
                     }
-                    }
                 }
-                
+            }
+
             Gson gson = new Gson();
             gson.toJson(allUsers, writer);
             writer.flush();
@@ -73,7 +72,7 @@ public class InfectionTracer {
         }
     }
 
-    //retrieving all closecontact of a user with the help of the email
+    // retrieving all closecontact of a user with the help of the email
     public List<User> getRelevantMap(String username) throws IOException {
         List<User> users = fileHandler.getUsers();
         System.out.println(users.toString());
@@ -85,7 +84,7 @@ public class InfectionTracer {
         return null;
     }
 
-    //Helper method to get the currently logged in user
+    // Helper method to get the currently logged in user
     public User getActiveUser(String username) throws IOException {
         List<User> users = fileHandler.getUsers();
         for (User user : users) {
