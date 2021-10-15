@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.util.List;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -47,7 +49,7 @@ public class MainController extends AbstractController {
     private TableColumn<User, String> emailColumn;
 
     @FXML
-    private TableColumn<User, Boolean> healthstatusColumn;
+    private TableColumn<User, String> healthstatusColumn;
 
     @FXML
     private TableColumn<User, String> dateOfInfectionColumn;
@@ -60,7 +62,12 @@ public class MainController extends AbstractController {
 
     @FXML
     private Button fireInfectedUser;
+
+    @FXML
+    private Button closeBtnMain;
+    
     ObservableList<User> contactList = FXCollections.observableArrayList();
+    ScreenController screencontroller = new ScreenController();
 
     // Filehandler filehandler = new FileHandler();
 
@@ -77,6 +84,7 @@ public class MainController extends AbstractController {
                         user.getHealthStatus(), user.getDateOfInfection());
 
                 contactList.add(closeContact);
+                numberOfContacts.setText(String.valueOf(currentMap.size()));
 
             }
             contactTable.setItems(contactList);
@@ -92,6 +100,10 @@ public class MainController extends AbstractController {
         try {
 
             List<User> currentMap = infectionTracer.getRelevantMap(username);
+            username_lbl.setText(username);
+            infectionStatus.setText(infectionTracer.getActiveUser(username).getHealthStatus());
+            
+
 
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("forname"));
             lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
@@ -102,7 +114,7 @@ public class MainController extends AbstractController {
                 return;
             }
             for (User user : currentMap) {
-                // user.setEmail(entry.getKey());
+                numberOfContacts.setText(String.valueOf(currentMap.size()));
                 User closeContact = new User(user.getForname(), user.getLastname(), user.getEmail(), user.getPassword(),
                         user.getHealthStatus(), user.getDateOfInfection());
                 contactList.add(closeContact);
@@ -113,4 +125,16 @@ public class MainController extends AbstractController {
         }
 
     }
+
+    @FXML
+    void MainToLogin(ActionEvent event) throws IOException {
+        screencontroller.switchToLogin(event);
+    }
+
+    @FXML
+    void closeMain(ActionEvent event) {
+        Stage stage = (Stage)closeBtnMain.getScene().getWindow();
+        stage.close();
+    }
+
 }

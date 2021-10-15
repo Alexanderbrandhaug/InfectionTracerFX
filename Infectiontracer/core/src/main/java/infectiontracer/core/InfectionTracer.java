@@ -74,4 +74,14 @@ public class InfectionTracer {
         }
         return null;
     }
+
+    public User getActiveUser(String username) throws IOException{
+        List<User> users  = fileHandler.getUsers();
+        for(User user : users){
+            if(username.equals(user.getEmail())){
+                return user;
+            }
+        }
+        return null;
+    }
 }
