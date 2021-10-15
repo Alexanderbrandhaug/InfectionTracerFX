@@ -38,7 +38,7 @@ public class InfectionTracerLoginTest extends ApplicationTest {
 
     @Test
     public void testValidLogin() {
-        String username = "test@gmail.com";
+        String username = "dummytest@gmail.com";
         String password = "Passord123";
         clickOn("#email_txt").write(username);
         clickOn("#password_txt").write(password);

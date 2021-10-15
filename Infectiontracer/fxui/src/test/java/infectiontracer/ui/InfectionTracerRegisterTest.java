@@ -42,7 +42,7 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
     public void testValidLogin() {
         String forename = "Test";
         String lastname = "Testersen";
-        String username = "test@gmail.com";
+        String username = "test9999@gmail.com";
         String password = "Passord123";
         clickOn("#forename_txt").write(forename);
         clickOn("#lastname_txt").write(lastname);
@@ -67,7 +67,8 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#password_txt").write(password);
         clickOn("#verify_password_txt").write(passwordConfirmation);
         clickOn("#registerBtnID");
-        verifyThat("#registrationSceneID", isVisible()); //should fail
+        verifyThat("#registrationSceneID", isVisible());
+        
 
     }
 
@@ -83,7 +84,8 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#password_txt").write(password);
         clickOn("#verify_password_txt").write(password);
         clickOn("#registerBtnID");
-        verifyThat("#registrationSceneID", isVisible()); //should still be in registration menu
+        verifyThat("#registrationSceneID", isVisible());
+     
 
     }
 
@@ -99,7 +101,8 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#password_txt").write(password);
         clickOn("#verify_password_txt").write(password);
         clickOn("#registerBtnID");
-        verifyThat("#registrationSceneID", isVisible()); //should fail
+        verifyThat("#registrationSceneID", isVisible());
+       
 
     }
 

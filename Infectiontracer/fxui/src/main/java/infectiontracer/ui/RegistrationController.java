@@ -45,10 +45,17 @@ public class RegistrationController extends AbstractController {
         try {
             // boolean test = false;
             String test1 = "";
-            User new_user = new User(forename_txt.getText(), lastname_txt.getText(), email_txt.getText(),
-                    password_txt.getText(), test1, test1);
-            file_handler.insertUser(new_user);
-            screencontroller.switchToLogin(event);
+                    
+                    if(password_txt.getText().equals(verify_password_txt.getText())){
+                        User new_user = new User(forename_txt.getText(), lastname_txt.getText(), email_txt.getText(),
+                        password_txt.getText(), test1, test1);
+                        file_handler.insertUser(new_user);
+                        screencontroller.switchToLogin(event);
+                    }
+                    else{
+                        createErrorDialogBox("Error", "Error", "Error");
+                    }
+            
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
