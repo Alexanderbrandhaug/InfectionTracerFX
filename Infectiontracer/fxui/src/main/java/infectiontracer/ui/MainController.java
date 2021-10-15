@@ -47,7 +47,7 @@ public class MainController extends AbstractController {
     private TableColumn<User, String> emailColumn;
 
     @FXML
-    private TableColumn<User, Boolean> healthstatusColumn;
+    private TableColumn<User, String> healthstatusColumn;
 
     @FXML
     private TableColumn<User, String> dateOfInfectionColumn;
@@ -77,6 +77,7 @@ public class MainController extends AbstractController {
                         user.getHealthStatus(), user.getDateOfInfection());
 
                 contactList.add(closeContact);
+                numberOfContacts.setText(String.valueOf(currentMap.size()));
 
             }
             contactTable.setItems(contactList);
@@ -92,6 +93,10 @@ public class MainController extends AbstractController {
         try {
 
             List<User> currentMap = infectionTracer.getRelevantMap(username);
+            username_lbl.setText(username);
+            infectionStatus.setText(infectionTracer.getActiveUser(username).getHealthStatus());
+            
+
 
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("forname"));
             lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
@@ -102,7 +107,7 @@ public class MainController extends AbstractController {
                 return;
             }
             for (User user : currentMap) {
-                // user.setEmail(entry.getKey());
+                numberOfContacts.setText(String.valueOf(currentMap.size()));
                 User closeContact = new User(user.getForname(), user.getLastname(), user.getEmail(), user.getPassword(),
                         user.getHealthStatus(), user.getDateOfInfection());
                 contactList.add(closeContact);

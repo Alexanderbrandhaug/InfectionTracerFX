@@ -10,30 +10,30 @@ public class UserTest {
 
     @BeforeEach
     public void setup() {
-        user = new User("Ola", "Nordmann", "test@gmail.com", "Passord321!", false, "");
+        user = new User("Ola", "Nordmann", "test@gmail.com", "Passord321!", "", "");
     }
 
     @Test
     public void testConstructor() {
         // test for specialchar in lastname
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new User("Alex", "@Test", "test@gmail.com", "Passord321", false, "");
+            new User("Alex", "@Test", "test@gmail.com", "Passord321", "", "");
         });
         // test for email without a @
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new User("Alex", "Test", "testgmail.com", "Passord321", false, "");
+            new User("Alex", "Test", "testgmail.com", "Passord321", "", "");
         });
         // test for email without a dot
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new User("Alex", "Nordmann", "test@gmailcom", "Passord321", false, "");
+            new User("Alex", "Nordmann", "test@gmailcom", "Passord321", "", "");
         });
         // test for weak password <5 chars
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new User("Alex", "Nordmann", "test@gmail.com", "12345", false, "");
+            new User("Alex", "Nordmann", "test@gmail.com", "12345", "", "");
         });
         // test for numbers in forname
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new User("Alex12", "Nordmann", "test@gmail.com", "Passord321", false, "");
+            new User("Alex12", "Nordmann", "test@gmail.com", "Passord321", "", "");
         });
     }
 

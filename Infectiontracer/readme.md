@@ -4,10 +4,15 @@ Målet med denne applikasjonen er å gi enkeltpersoner en oversikt over deres n�
 
 ## Filstruktur
 
-De ulike filene er fordelt i 3 mapper. <br>
-Klasser og kontrollere finner man i mappen [src/main/java/gr2181/infectiontracer](src/main/java/gr2181/infectiontracer/).<br>
-FXML-filer finner man under [src/main/resources/gr2181/infectiontracer](src/main/resources/gr2181/infectiontracer/). <br>
-Test-filer finner man under [src/test/java/gr2181/infectiontracer](src/test/java/gr2181/infectiontracer/). <br>
+De ulike filene er fordelt i ulike mapper. <br>
+
+FXML-filer finner man under [fxui/src/main/resources/infectiontracer/ui](fxui/src/main/resources/infectiontracer/ui/). <br>
+Kontrollere finner man i mappen [fxui/src/main/java/infectiontracer/ui](fxui/src/main/java/infectiontracer/ui/). <br>
+Klasser finner man i mappen [core/src/main/java/infectiontracer/core](core/src/main/java/infectiontracer/core/). <br>
+
+Test-filer for fxui finner man under [fxui/src/test/java/infectiontracer/ui](fxui/src/test/java/infectiontracer/ui/). <br>
+Test-filer for core klasser finner man under [core/src/test/java/infectiontracer/core](core/src/test/java/infectiontracer/core/). <br>
+
 
 # Brukerhistorier
 

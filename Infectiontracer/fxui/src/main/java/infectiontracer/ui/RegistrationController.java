@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import infectiontracer.core.*;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
 
 public class RegistrationController extends AbstractController {
 
@@ -28,7 +30,10 @@ public class RegistrationController extends AbstractController {
     private TextField verify_password_txt;
 
     @FXML
-    void CancelRegisterBtn(ActionEvent event) throws IOException {
+    private Button closeBtnRegistration;
+
+    @FXML
+    void BackToLoginBtn(ActionEvent event) throws IOException {
         screencontroller.switchToLogin(event);
     }
 
@@ -36,10 +41,10 @@ public class RegistrationController extends AbstractController {
     void RegisterBtn(ActionEvent event) {
 
         try {
-            boolean test = false;
+          //  boolean test = false;
             String test1 = "";
             User new_user = new User(forename_txt.getText(), lastname_txt.getText(), email_txt.getText(),
-                    password_txt.getText(), test, test1);
+                    password_txt.getText(), test1, test1);
             file_handler.insertUser(new_user);
             screencontroller.switchToLogin(event);
         } catch (Exception e) {
@@ -47,5 +52,11 @@ public class RegistrationController extends AbstractController {
             e.printStackTrace();
         }
 
+    }
+
+    @FXML
+    void closeRegistration(ActionEvent event) {
+        Stage stage = (Stage)closeBtnRegistration.getScene().getWindow();
+        stage.close();
     }
 }
