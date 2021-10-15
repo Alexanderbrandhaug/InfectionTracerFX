@@ -18,7 +18,7 @@ public class User {
         setLastname(lastname);
         setEmail(email);
         setPassword(password);
-        this.healthStatus = "Frisk";
+        this.healthStatus = "Covid19 Negative";
         closeContacts = new ArrayList<User>();
         this.dateOfInfection = dateOfInfection;
 
@@ -31,7 +31,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.closeContacts = closeContacts;
-        this.healthStatus = "Frisk";
+        this.healthStatus = "Covid19 Negative";
         this.dateOfInfection = dateOfInfection;
     }
 
