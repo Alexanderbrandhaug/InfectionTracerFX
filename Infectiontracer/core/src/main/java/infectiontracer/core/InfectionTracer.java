@@ -30,29 +30,17 @@ public class InfectionTracer {
     // Use email for now, as each user has a unique email
     public void addCloseContact2(String username, String email) throws IOException {
         FileWriter writer = null;
+        List<User> allUsers = getRelevantMap(username);
+        User newUser = getActiveUser(email);
 
-        if (!fileHandler.checkUserList(email)) {
+        if (newUser == null) {
             throw new IllegalArgumentException("The user does not exist");
 
         }
         try {
-
-            List<User> allUsers = fileHandler.getUsers();
             writer = new FileWriter(path, StandardCharsets.UTF_8);
-
-            for (User current_user : allUsers) {
-                if (current_user.getEmail().contains(username)) {
-                    for (User current_user2 : allUsers) {
-                        if (current_user2.getEmail().equals(email)) {
-                            current_user.addCloseContact(new User(current_user2.getForname(),
-                                    current_user2.getLastname(), current_user2.getEmail(), current_user2.getPassword(),
-                                    current_user2.getHealthStatus(), current_user2.getDateOfInfection()));
-
-                        }
-                    }
-                }
-            }
-
+            User currentUser = getActiveUser(username);
+            currentUser.addCloseContact(newUser);
             Gson gson = new Gson();
             gson.toJson(allUsers, writer);
             writer.flush();

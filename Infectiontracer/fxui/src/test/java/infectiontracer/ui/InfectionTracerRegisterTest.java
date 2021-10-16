@@ -39,10 +39,10 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
     }
     
     @Test
-    public void testValidLogin() {
+    public void testValidRegistration() {
         String forename = "Test";
         String lastname = "Testersen";
-        String username = "test9999@gmail.com";
+        String username = "test99299@gmail.com";
         String password = "Passord123";
         clickOn("#forename_txt").write(forename);
         clickOn("#lastname_txt").write(lastname);

@@ -71,7 +71,7 @@ public class User {
     // Adding a closecontact to the current user
     public void addCloseContact(User user) {
         if (closeContacts.contains(user) || checkIfUserAlreadyExistsAsCloseContact(user.getEmail())) {
-            System.out.println("User already exists as closecontact");
+            throw new IllegalArgumentException("User is already added");
         } else {
             closeContacts.add(user);
         }
