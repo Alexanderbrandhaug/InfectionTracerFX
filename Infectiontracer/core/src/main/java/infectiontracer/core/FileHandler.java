@@ -85,10 +85,13 @@ public class FileHandler {
     }
 
     public List<User> getUsers() {
-        try (JsonReader reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8))) {
-            return gson.fromJson(reader, new TypeToken<List<User>>() {
-            }.getType());
-
+        try  {
+            JsonReader reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8));
+            try {
+                return gson.fromJson(reader, new TypeToken<List<User>>() {}.getType());
+            } finally {
+                reader.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -4,7 +4,10 @@ import infectiontracer.core.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -29,15 +32,19 @@ public class InfectionTracerTest {
 
     @BeforeEach
     public void setup() {
-        file = new File("src/test/java/infectiontracer/user_test2.json");
-        filehandler.setFilePath("src/test/java/infectiontracer/user_test2.json");
-        infectiontracer.setPath("src/test/java/infectiontracer/user_test2.json");
+        //file = new File("src/test/java/infectiontracer/user_test2.json");
+        filehandler.setFilePath("src/test/java/infectiontracer/user_test.json");
+        infectiontracer.setPath("src/test/java/infectiontracer/user_test.json");
 
     }
 
     @AfterEach
     public void setupExit() {
-        file.delete();
+        try {
+            new PrintWriter("src/test/java/infectiontracer/user_test.json").close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -64,12 +71,12 @@ public class InfectionTracerTest {
 
     }
 
-    /*
-     * @Test public void testAddValidUser() throws IOException {
-     * filehandler.insertUser(user3); filehandler.insertUser(user4);
-     * infectiontracer.addCloseContact2(user4.getEmail(), user3.getEmail());
-     * 
-     * }
-     */
+    @Test public void testAddValidUser() throws IOException {
+        filehandler.insertUser(user3);
+        filehandler.insertUser(user4);
+        infectiontracer.addCloseContact2(user4.getEmail(), user3.getEmail());
+
+    }
+
 
 }

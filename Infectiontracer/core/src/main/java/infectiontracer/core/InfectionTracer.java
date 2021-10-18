@@ -21,6 +21,7 @@ public class InfectionTracer {
     private final FileHandler fileHandler = new FileHandler();
     private String path = "src/main/resources/infectiontracer/ui/users.json";
 
+    // method to set the path of Infectiontracer and filehandler, mostly needed for jUnit tests
     public void setPath(String path) {
         this.path = path;
         fileHandler.setFilePath(path);
@@ -29,34 +30,34 @@ public class InfectionTracer {
     // Method to add a close contact for the current active user
     // Use email for now, as each user has a unique email
     public void addCloseContact2(String username, String email) throws IOException {
-        FileWriter writer = null;
-        User newUser = getActiveUser(email);
-
-        if (newUser == null) {
+        if (!fileHandler.checkUserList(email)) {
             throw new IllegalArgumentException("The user does not exist");
-
         }
+
         try {
             List<User> allUsers = fileHandler.getUsers();
-            writer = new FileWriter(path, StandardCharsets.UTF_8);
-            User currentUser = getActiveUser(username);
-            currentUser.addCloseContact(newUser);
-            Gson gson = new Gson();
-            gson.toJson(allUsers, writer);
-            writer.flush();
-            writer.close();
-
+            FileWriter writer = new FileWriter(path, StandardCharsets.UTF_8);
+            try {
+                for (User current_user : allUsers) {
+                    if (current_user.getEmail().contains(username)) {
+                        for (User current_user2 : allUsers) {
+                            if (current_user2.getEmail().equals(email)) {
+                                current_user.addCloseContact(new User(current_user2.getForname(),
+                                        current_user2.getLastname(), current_user2.getEmail(), current_user2.getPassword(),
+                                        current_user2.getHealthStatus(), current_user2.getDateOfInfection()));
+                            }
+                        }
+                    }
+                }
+                Gson gson = new Gson();
+                gson.toJson(allUsers, writer);
+                writer.flush();
+            } finally {
+                writer.close();
+            }
         } catch (
-
         IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (writer != null)
-                    writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
