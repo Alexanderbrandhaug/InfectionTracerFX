@@ -35,6 +35,7 @@ public class FileHandler {
         try {
 
             List<User> registered_users = getUsers();
+
             if (registered_users == null) {
                 registered_users = new ArrayList<>();
             }

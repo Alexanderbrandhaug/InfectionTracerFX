@@ -13,15 +13,17 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
+import java.io.File;
+import infectiontracer.core.FileHandler;
+import infectiontracer.core.User;
+import infectiontracer.core.InfectionTracer;
 import infectiontracer.ui.*;
 import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.base.NodeMatchers.isDisabled;
-import static org.testfx.matcher.base.NodeMatchers.isEnabled;
-import static org.testfx.matcher.base.NodeMatchers.isInvisible;
 import static org.testfx.matcher.base.NodeMatchers.isNotNull;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 import static org.testfx.util.DebugUtils.informedErrorMessage;
+import org.junit.jupiter.api.*;
 
 public class InfectionTracerLoginTest extends ApplicationTest {
 
@@ -38,10 +40,8 @@ public class InfectionTracerLoginTest extends ApplicationTest {
 
     @Test
     public void testValidLogin() {
-        String username = "dummytest@gmail.com";
-        String password = "Passord123";
-        clickOn("#email_txt").write(username);
-        clickOn("#password_txt").write(password);
+        clickOn("#email_txt").write("test@gmail.com");
+        clickOn("#password_txt").write("Passord123");
         clickOn("#loginBtnID");
         verifyThat("#mainSceneID", isVisible());
 
@@ -49,7 +49,6 @@ public class InfectionTracerLoginTest extends ApplicationTest {
 
     @Test
     void testInvalidLogin() {
-
         String username = "test";
         String password = "";
         clickOn("#email_txt").write(username);

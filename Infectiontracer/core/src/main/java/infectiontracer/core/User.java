@@ -79,7 +79,7 @@ public class User {
     }
 
     public List<User> getAllCloseContacts() {
-        return this.closeContacts;
+        return new ArrayList<User>(closeContacts);
     }
 
     public void setForname(String forname) {

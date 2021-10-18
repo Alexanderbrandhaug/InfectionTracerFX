@@ -29,15 +29,15 @@ public class InfectionTracerTest {
 
     @BeforeEach
     public void setup() {
+        file = new File("src/test/java/infectiontracer/user_test2.json");
         filehandler.setFilePath("src/test/java/infectiontracer/user_test2.json");
         infectiontracer.setPath("src/test/java/infectiontracer/user_test2.json");
-        file = new File("src/test/java/infectiontracer/user_test2.json");
 
     }
 
     @AfterEach
     public void setupExit() {
-        file.deleteOnExit();
+        file.delete();
     }
 
     @Test
@@ -64,12 +64,12 @@ public class InfectionTracerTest {
 
     }
 
-    @Test
-    public void testAddValidUser() throws IOException {
-        filehandler.insertUser(user3);
-        filehandler.insertUser(user4);
-        infectiontracer.addCloseContact2(user3.getEmail(), user4.getEmail());
-
-    }
+    /*
+     * @Test public void testAddValidUser() throws IOException {
+     * filehandler.insertUser(user3); filehandler.insertUser(user4);
+     * infectiontracer.addCloseContact2(user4.getEmail(), user3.getEmail());
+     * 
+     * }
+     */
 
 }

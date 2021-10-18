@@ -30,7 +30,6 @@ public class InfectionTracer {
     // Use email for now, as each user has a unique email
     public void addCloseContact2(String username, String email) throws IOException {
         FileWriter writer = null;
-        List<User> allUsers = getRelevantMap(username);
         User newUser = getActiveUser(email);
 
         if (newUser == null) {
@@ -38,6 +37,7 @@ public class InfectionTracer {
 
         }
         try {
+            List<User> allUsers = fileHandler.getUsers();
             writer = new FileWriter(path, StandardCharsets.UTF_8);
             User currentUser = getActiveUser(username);
             currentUser.addCloseContact(newUser);
