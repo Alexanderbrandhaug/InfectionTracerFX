@@ -16,10 +16,11 @@ import java.lang.IllegalArgumentException;
 
 public class FileHandler {
 
-    private String filePath = "src/main/resources/infectiontracer/ui/users.json";
+    private String filePath = "C:\\Users\\sylte\\GitProjects\\IT1901\\Release 1\\gr2181\\Infectiontracer\\core\\src\\main\\java\\infectiontracer\\core\\users.json";
     final Gson gson;
 
     public FileHandler() {
+        //getClass().getResource("users.json").toString();
         // "src/main/java/gr2181/infectiontracer/users.json";
         gson = new Gson();
 

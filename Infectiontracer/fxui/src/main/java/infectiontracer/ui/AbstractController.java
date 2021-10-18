@@ -14,6 +14,7 @@ import javafx.scene.control.Alert.AlertType;
 import infectiontracer.core.*;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 // This class is meant to be inherited by all controllers in the project
@@ -28,12 +29,30 @@ public class AbstractController {
         this.username = username;
     }
 
-    protected void createErrorDialogBox(String setTitle, String setHeaderText, String setContentText) {
+    protected void createErrorDialogBox(String title, String header, String content) {
         Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle(setTitle);
-        alert.setHeaderText(setHeaderText);
-        alert.setContentText(setContentText);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    protected void createInformationDialogBox(String title, String header, String content) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    protected boolean createConfirmationDialogBox(String title, String header, String content) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.filter(buttonType -> buttonType == ButtonType.OK).isPresent();
     }
 
 }

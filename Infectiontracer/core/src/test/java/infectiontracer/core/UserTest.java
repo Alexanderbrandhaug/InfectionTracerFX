@@ -3,7 +3,6 @@ package infectiontracer.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import infectiontracer.core.*;
 
 public class UserTest {
     private User user;
@@ -38,18 +37,18 @@ public class UserTest {
     }
 
     @Test
-    public void testSetForname() {
-        user.setForname("Peter");
-        Assertions.assertEquals("Peter", user.getForname());
-        user.setForname("Maria");
-        Assertions.assertEquals("Maria", user.getForname());
+    public void testSetForename() {
+        user.setForename("Peter");
+        Assertions.assertEquals("Peter", user.getForename());
+        user.setForename("Maria");
+        Assertions.assertEquals("Maria", user.getForename());
         // test to see if you are able to set forName as a whitespace
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            user.setForname(" ");
+            user.setForename(" ");
         });
         // test to see if you can use numbers and whitespace
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            user.setForname("Alex 92");
+            user.setForename("Alex 92");
         });
 
     }

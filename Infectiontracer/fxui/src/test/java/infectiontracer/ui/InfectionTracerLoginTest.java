@@ -54,7 +54,7 @@ public class InfectionTracerLoginTest extends ApplicationTest {
         clickOn("#email_txt").write(username);
         clickOn("#password_txt").write(password);
         clickOn("#loginBtnID");
-        verifyThat("OK", isVisible());
+        verifyThat("#loginSceneID", isVisible());
 
     }
 }

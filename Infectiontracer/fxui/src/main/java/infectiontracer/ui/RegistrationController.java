@@ -43,24 +43,18 @@ public class RegistrationController extends AbstractController {
     void RegisterBtn(ActionEvent event) {
 
         try {
-            // boolean test = false;
-            String test1 = "";
-                    
-                    if(password_txt.getText().equals(verify_password_txt.getText())){
-                        User new_user = new User(forename_txt.getText(), lastname_txt.getText(), email_txt.getText(),
-                        password_txt.getText(), test1, test1);
-                        file_handler.insertUser(new_user);
-                        screencontroller.switchToLogin(event);
-                    }
-                    else{
-                        createErrorDialogBox("Error", "Error", "Error");
-                    }
-            
+            if(password_txt.getText().equals(verify_password_txt.getText())){
+                User new_user = new User(forename_txt.getText(), lastname_txt.getText(), email_txt.getText(),
+                        password_txt.getText(), "", "");
+                file_handler.insertUser(new_user);
+                createInformationDialogBox("Successful registration", null, "The registration was OK");
+                screencontroller.switchToLogin(event);
+            }
+        }catch (IllegalArgumentException e) {
+            createErrorDialogBox("Error", null, e.getMessage());
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            createErrorDialogBox("Error", null, "Error when creating user");
         }
-
     }
 
     @FXML

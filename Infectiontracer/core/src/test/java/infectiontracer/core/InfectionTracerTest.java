@@ -17,9 +17,8 @@ import org.junit.jupiter.api.*;
 @TestInstance(Lifecycle.PER_CLASS)
 public class InfectionTracerTest {
     private User user, user2, user3, user4;
-    private InfectionTracer infectiontracer = new InfectionTracer();
-    private FileHandler filehandler = new FileHandler();
-    private File file;
+    private final InfectionTracer infectiontracer = new InfectionTracer();
+    private final FileHandler filehandler = new FileHandler();
 
     @BeforeAll
     public void setUpUsers() {
@@ -27,15 +26,8 @@ public class InfectionTracerTest {
         user2 = new User("TestA", "Testesen", "dummy@gmail.com", "Passord321!", "frisk", "");
         user3 = new User("TestB", "TestesenTo", "dwadwa@gmail.com", "Passord321!", "frisk", "");
         user4 = new User("TestB", "TestesenTo", "tesdwa@gmail.com", "Passord321!", "frisk", "");
-
-    }
-
-    @BeforeEach
-    public void setup() {
-        //file = new File("src/test/java/infectiontracer/user_test2.json");
         filehandler.setFilePath("src/test/java/infectiontracer/user_test.json");
         infectiontracer.setPath("src/test/java/infectiontracer/user_test.json");
-
     }
 
     @AfterEach

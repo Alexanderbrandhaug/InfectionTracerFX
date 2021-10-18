@@ -46,8 +46,12 @@ public class LoginController extends AbstractController {
     }
 
     @FXML
-    void registerBtn(ActionEvent event) throws IOException {
-        screencontroller.switchToRegistration(event);
+    void registerBtn(ActionEvent event) {
+        try {
+            screencontroller.switchToRegistration(event);
+        } catch (IOException e) {
+            createErrorDialogBox("Failure of scene", null, "Failed to change scene");
+        }
     }
 
     @FXML
@@ -55,5 +59,4 @@ public class LoginController extends AbstractController {
         Stage stage = (Stage)closeBtnLogin.getScene().getWindow();
         stage.close();
     }
-    
 }

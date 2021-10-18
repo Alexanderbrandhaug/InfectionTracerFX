@@ -11,29 +11,17 @@ import java.lang.IllegalArgumentException;
 
 public class User {
 
-    private String forname, lastname, email, password, dateOfInfection, healthStatus;
-    private List<User> closeContacts;
+    private String forename, lastname, email, password, dateOfInfection, healthStatus;
+    private List<String> closeContacts;
 
-    public User(String forname, String lastname, String email, String password, String healthStatus,
-            String dateOfInfection) {
-        setForname(forname);
+    public User(String forename, String lastname, String email, String password, String healthStatus,
+                String dateOfInfection) {
+        setForename(forename);
         setLastname(lastname);
         setEmail(email);
         setPassword(password);
         this.healthStatus = "Covid19 Negative";
-        closeContacts = new ArrayList<User>();
-        this.dateOfInfection = dateOfInfection;
-
-    }
-
-    public User(String forname, String lastname, String email, String password, String healthStatus,
-            String dateOfInfection, List<User> closeContacts) {
-        this.forname = forname;
-        this.lastname = lastname;
-        this.email = email;
-        this.password = password;
-        this.closeContacts = closeContacts;
-        this.healthStatus = "Covid19 Negative";
+        closeContacts = new ArrayList<String>();
         this.dateOfInfection = dateOfInfection;
     }
 
@@ -60,17 +48,12 @@ public class User {
     // already
     // exists as a closecontact for the active user
     public boolean checkIfUserAlreadyExistsAsCloseContact(String email) {
-        for (User newUser : closeContacts) {
-            if (newUser.getEmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
+        return closeContacts.contains(email);
     }
 
     // Adding a closecontact to the current user
-    public void addCloseContact(User user) {
-        if (closeContacts.contains(user) || checkIfUserAlreadyExistsAsCloseContact(user.getEmail())) {
+    public void addCloseContact(String user) {
+        if (checkIfUserAlreadyExistsAsCloseContact(user)) {
             throw new IllegalArgumentException("User is already added");
         } else {
             closeContacts.add(user);
@@ -78,21 +61,21 @@ public class User {
 
     }
 
-    public List<User> getAllCloseContacts() {
-        return new ArrayList<User>(closeContacts);
+    public List<String> getAllCloseContacts() {
+        return new ArrayList<String>(closeContacts);
     }
 
-    public void setForname(String forname) {
+    public void setForename(String forename) {
         Pattern pattern = Pattern.compile("[^a-zA-Z]");
-        Matcher match = pattern.matcher(forname);
-        if (match.find() || forname.isEmpty()) {
+        Matcher match = pattern.matcher(forename);
+        if (match.find() || forename.isEmpty()) {
             throw new IllegalArgumentException("Invalid forname");
         }
-        this.forname = forname.trim();
+        this.forename = forename.trim();
     }
 
-    public String getForname() {
-        return this.forname;
+    public String getForename() {
+        return this.forename;
     }
 
     public void setLastname(String lastname) {

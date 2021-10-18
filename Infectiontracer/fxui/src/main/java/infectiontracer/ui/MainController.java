@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -13,11 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.util.List;
-import javafx.stage.Stage;
-import javafx.scene.control.Button;
 
 import java.io.IOException;
-import java.time.LocalDate;
+
 import infectiontracer.core.*;
 
 public class MainController extends AbstractController {
@@ -81,7 +78,7 @@ public class MainController extends AbstractController {
             for (User user : currentMap) {
 
                 System.out.println(contactList.toString());
-                User closeContact = new User(user.getForname(), user.getLastname(), user.getEmail(), user.getPassword(),
+                User closeContact = new User(user.getForename(), user.getLastname(), user.getEmail(), user.getPassword(),
                         user.getHealthStatus(), user.getDateOfInfection());
 
                 contactList.add(closeContact);
@@ -106,7 +103,7 @@ public class MainController extends AbstractController {
             
 
 
-            nameColumn.setCellValueFactory(new PropertyValueFactory<>("forname"));
+            nameColumn.setCellValueFactory(new PropertyValueFactory<>("forename"));
             lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
             emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
             healthstatusColumn.setCellValueFactory(new PropertyValueFactory<>("healthStatus"));
@@ -116,7 +113,7 @@ public class MainController extends AbstractController {
             }
             for (User user : currentMap) {
                 numberOfContacts.setText(String.valueOf(currentMap.size()));
-                User closeContact = new User(user.getForname(), user.getLastname(), user.getEmail(), user.getPassword(),
+                User closeContact = new User(user.getForename(), user.getLastname(), user.getEmail(), user.getPassword(),
                         user.getHealthStatus(), user.getDateOfInfection());
                 contactList.add(closeContact);
                 contactTable.setItems(contactList);

@@ -1,25 +1,18 @@
 package infectiontracer.core;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedMap;
 import java.nio.charset.StandardCharsets;
 import java.lang.IllegalArgumentException;
 
 public class InfectionTracer {
 
     private final FileHandler fileHandler = new FileHandler();
-    private String path = "src/main/resources/infectiontracer/ui/users.json";
+    private String path = "C:\\Users\\sylte\\GitProjects\\IT1901\\Release 1\\gr2181\\Infectiontracer\\core\\src\\main\\java\\infectiontracer\\core\\users.json";
 
     // method to set the path of Infectiontracer and filehandler, mostly needed for jUnit tests
     public void setPath(String path) {
@@ -42,9 +35,7 @@ public class InfectionTracer {
                     if (current_user.getEmail().contains(username)) {
                         for (User current_user2 : allUsers) {
                             if (current_user2.getEmail().equals(email)) {
-                                current_user.addCloseContact(new User(current_user2.getForname(),
-                                        current_user2.getLastname(), current_user2.getEmail(), current_user2.getPassword(),
-                                        current_user2.getHealthStatus(), current_user2.getDateOfInfection()));
+                                current_user.addCloseContact(current_user2.getEmail());
                             }
                         }
                     }
@@ -67,7 +58,13 @@ public class InfectionTracer {
         System.out.println(users.toString());
         for (User currentUser : users) {
             if (currentUser.getEmail().contains(username)) {
-                return currentUser.getAllCloseContacts();
+                List<User> closeContacts = new ArrayList<>();
+                for (User user : users) {
+                    if (currentUser.getAllCloseContacts().contains(user.getEmail())) {
+                        closeContacts.add(user);
+                    }
+                }
+                return closeContacts;
             }
         }
         return null;
