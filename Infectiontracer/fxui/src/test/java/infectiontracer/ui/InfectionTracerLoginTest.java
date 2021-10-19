@@ -14,6 +14,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import infectiontracer.core.FileHandler;
 import infectiontracer.core.User;
 import infectiontracer.core.InfectionTracer;
@@ -25,10 +28,25 @@ import static org.testfx.matcher.control.LabeledMatchers.hasText;
 import static org.testfx.util.DebugUtils.informedErrorMessage;
 import org.junit.jupiter.api.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class InfectionTracerLoginTest extends ApplicationTest {
 
-    private ScreenController screencontroller = new ScreenController();
-    // private MainController maincontroller = new MainController();
+    private final FileHandler fileHandler = new FileHandler();
+    private List<User> actualUsersList;
+
+    @BeforeAll
+    public void setupFile() {
+        actualUsersList = fileHandler.getUsers();
+        User testUser = new User("test", "test","test@gmail.com", "Passord123","", "");
+        List<User> testUsers = new ArrayList<>();
+        testUsers.add(testUser);
+        fileHandler.writeUsersToFile(testUsers);
+    }
+
+    @AfterAll
+    public void restoreFile() {
+        fileHandler.writeUsersToFile(actualUsersList);
+    }
 
     @Override
     public void start(Stage stage) throws Exception {

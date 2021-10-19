@@ -1,9 +1,7 @@
 package infectiontracer.core;
 
-import infectiontracer.core.*;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,7 +48,7 @@ public class InfectionTracerTest {
     public void testAddInvalidUser() throws IOException {
         filehandler.insertUser(user);
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            infectiontracer.addCloseContact2(user.getEmail(), user3.getEmail());
+            infectiontracer.addCloseContact(user.getEmail(), user3.getEmail());
         });
     }
 
@@ -66,7 +64,7 @@ public class InfectionTracerTest {
     @Test public void testAddValidUser() throws IOException {
         filehandler.insertUser(user3);
         filehandler.insertUser(user4);
-        infectiontracer.addCloseContact2(user4.getEmail(), user3.getEmail());
+        infectiontracer.addCloseContact(user4.getEmail(), user3.getEmail());
 
     }
 

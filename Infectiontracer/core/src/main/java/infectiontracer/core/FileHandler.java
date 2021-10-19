@@ -32,38 +32,15 @@ public class FileHandler {
 
     // Function that attempts to insert user into users.json
     public void insertUser(User user) {
-        FileWriter writer = null;
-        try {
+        List<User> registered_users = getUsers();
 
-            List<User> registered_users = getUsers();
-
-            if (registered_users == null) {
-                registered_users = new ArrayList<>();
+        for (User newUser : registered_users) {
+            if (user.getEmail().equals(newUser.getEmail())) {
+                throw new IllegalArgumentException("Email already exists");
             }
-            writer = new FileWriter(filePath, StandardCharsets.UTF_8);
-            for (User newUser : registered_users) {
-                if (user.getEmail().equals(newUser.getEmail())) {
-                    throw new IllegalArgumentException("Email already exists");
-                }
-            }
-            registered_users.add(user);
-            gson.toJson(registered_users, writer);
-            writer.flush();
-            writer.close();
-            System.out.println("User added!");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (writer != null) {
-                    writer.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
         }
+        registered_users.add(user);
+        writeUsersToFile(registered_users);
     }
 
     // Function to check if a user in is the users.json file
@@ -84,18 +61,43 @@ public class FileHandler {
         }
         return false;
     }
-
+    // Function to retrieve the list of users from the Json file
     public List<User> getUsers() {
+        JsonReader reader = null;
         try  {
-            JsonReader reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8));
-            try {
-                return gson.fromJson(reader, new TypeToken<List<User>>() {}.getType());
-            } finally {
-                reader.close();
-            }
+            reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8));
+                List<User> userList = gson.fromJson(reader, new TypeToken<List<User>>() {}.getType());
+                return Objects.requireNonNullElseGet(userList, ArrayList::new);
+
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return new ArrayList<>();
+    }
+    // Function to write users to the Json file
+    public void writeUsersToFile(List<User> userList) {
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(filePath, StandardCharsets.UTF_8);
+            gson.toJson(userList, writer);
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+                try {
+                    if (writer != null)
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        }
     }
 }

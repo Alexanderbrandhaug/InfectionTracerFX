@@ -47,7 +47,7 @@ public class RegistrationController extends AbstractController {
                 User new_user = new User(forename_txt.getText(), lastname_txt.getText(), email_txt.getText(),
                         password_txt.getText(), "", "");
                 file_handler.insertUser(new_user);
-                createInformationDialogBox("Successful registration", null, "The registration was OK");
+                createInformationDialogBox("Successful registration", null, "The registration was successful");
                 screencontroller.switchToLogin(event);
             }
         }catch (IllegalArgumentException e) {

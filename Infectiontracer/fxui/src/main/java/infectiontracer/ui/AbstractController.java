@@ -42,6 +42,8 @@ public class AbstractController {
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(content);
+        Button okButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+        okButton.setId("okButton");
         alert.showAndWait();
     }
 

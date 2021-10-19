@@ -58,7 +58,6 @@ public class User {
         } else {
             closeContacts.add(user);
         }
-
     }
 
     public List<String> getAllCloseContacts() {
@@ -69,7 +68,7 @@ public class User {
         Pattern pattern = Pattern.compile("[^a-zA-Z]");
         Matcher match = pattern.matcher(forename);
         if (match.find() || forename.isEmpty()) {
-            throw new IllegalArgumentException("Invalid forname");
+            throw new IllegalArgumentException("Invalid forename");
         }
         this.forename = forename.trim();
     }
@@ -93,7 +92,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        if (!email.contains("@") || !email.contains(".com") || email.isEmpty()) {
+        if (!email.contains("@") || !email.contains(".com")) {
             throw new IllegalArgumentException("Invalid email");
         }
         this.email = email;
