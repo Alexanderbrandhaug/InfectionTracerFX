@@ -1,32 +1,20 @@
 package infectiontracer.ui;
 import infectiontracer.core.FileHandler;
 import infectiontracer.core.User;
-import javafx.fxml.FXML;
-import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Objects;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import jdk.jfr.Timestamp;
-import javafx.event.ActionEvent;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.*;
 import org.testfx.framework.junit5.ApplicationTest;
-import infectiontracer.ui.*;
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.base.NodeMatchers.isDisabled;
-import static org.testfx.matcher.base.NodeMatchers.isEnabled;
-import static org.testfx.matcher.base.NodeMatchers.isInvisible;
-import static org.testfx.matcher.base.NodeMatchers.isNotNull;
-import static org.testfx.matcher.base.NodeMatchers.isVisible;
-import static org.testfx.matcher.control.LabeledMatchers.hasText;
-import static org.testfx.util.DebugUtils.informedErrorMessage;
 
+import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -47,7 +35,7 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Registration.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Registration.fxml")));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

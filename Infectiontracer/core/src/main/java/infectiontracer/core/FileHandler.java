@@ -1,31 +1,21 @@
 package infectiontracer.core;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+
 import java.nio.charset.StandardCharsets;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.*;
 import java.lang.IllegalArgumentException;
 
 public class FileHandler {
 
     // TODO Fix the filepath so that it is not absolute
-    private String filePath = "C:\\Users\\sylte\\GitProjects\\IT1901\\Release 1\\gr2181\\Infectiontracer\\core\\src\\main\\java\\infectiontracer\\users.json";
-    final Gson gson;
-
-    public FileHandler() {
-        //getClass().getResource("users.json").toString();
-        // "src/main/java/gr2181/infectiontracer/users.json";
-        gson = new Gson();
-
-    }
+    private String filePath = "C:\\Users\\sylte\\GitProjects\\IT1901\\Release 1\\gr2181\\Infectiontracer\\core\\src\\main\\resources\\users.json";
+    final Gson gson = new Gson();
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;

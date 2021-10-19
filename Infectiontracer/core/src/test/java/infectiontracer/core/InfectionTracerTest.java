@@ -1,14 +1,10 @@
 package infectiontracer.core;
 
-import org.junit.jupiter.api.Test;
-
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.*;
 
@@ -38,30 +34,26 @@ public class InfectionTracerTest {
     }
 
     @Test
-    public void testActivateUsers() throws IOException {
+    public void testActivateUsers() {
         filehandler.insertUser(user);
         assertNotNull(filehandler.getUsers());
 
     }
 
     @Test
-    public void testAddInvalidUser() throws IOException {
+    public void testAddInvalidUser() {
         filehandler.insertUser(user);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            infectiontracer.addCloseContact(user.getEmail(), user3.getEmail());
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> infectiontracer.addCloseContact(user.getEmail(), user3.getEmail()));
     }
 
     @Test
-    public void testRegisterDuplicateUser() throws IOException {
+    public void testRegisterDuplicateUser() {
         filehandler.insertUser(user2);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            filehandler.insertUser(user2);
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> filehandler.insertUser(user2));
 
     }
 
-    @Test public void testAddValidUser() throws IOException {
+    @Test public void testAddValidUser() {
         filehandler.insertUser(user3);
         filehandler.insertUser(user4);
         infectiontracer.addCloseContact(user4.getEmail(), user3.getEmail());

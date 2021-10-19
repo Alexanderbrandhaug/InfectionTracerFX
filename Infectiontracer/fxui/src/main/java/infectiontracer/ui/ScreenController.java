@@ -5,9 +5,10 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Node;
 import java.io.IOException;
+import java.util.Objects;
+
 import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
-import infectiontracer.core.*;
 
 public class ScreenController extends AbstractController {
     private Stage stage;
@@ -34,7 +35,7 @@ public class ScreenController extends AbstractController {
 
     public void switchToRegistration(ActionEvent event) {
         try {
-            root = FXMLLoader.load(getClass().getResource("Registration.fxml"));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Registration.fxml")));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -46,7 +47,7 @@ public class ScreenController extends AbstractController {
 
     public void switchToLogin(ActionEvent event) {
         try {
-            root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

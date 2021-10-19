@@ -3,7 +3,6 @@ package infectiontracer.core;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-
 import java.util.regex.Matcher;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,25 +19,30 @@ public class User {
         setLastname(lastname);
         setEmail(email);
         setPassword(password);
-        this.healthStatus = "Covid19 Negative";
-        closeContacts = new ArrayList<String>();
+        this.healthStatus = "Covid-19 Negative";
+        closeContacts = new ArrayList<>();
         this.dateOfInfection = dateOfInfection;
     }
 
     public void setDateOfInfected() {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-LLLL-dd");
-        String formattedString = today.format(formatter);
-        this.dateOfInfection = formattedString;
+        this.dateOfInfection = today.format(formatter);
+    }
+
+    public void setDateOfHealthy() {
+        this.dateOfInfection = "";
     }
 
     public String getDateOfInfection() {
         return this.dateOfInfection;
     }
 
-    public void setInfected(String infected) {
-        this.healthStatus = infected;
+    public void setInfected() {
+        this.healthStatus = "Infected";
     }
+
+    public void setHealthy() {this.healthStatus = "Covid-19 Negative";}
 
     public String getHealthStatus() {
         return this.healthStatus;
@@ -61,7 +65,7 @@ public class User {
     }
 
     public List<String> getAllCloseContacts() {
-        return new ArrayList<String>(closeContacts);
+        return new ArrayList<>(closeContacts);
     }
 
     public void setForename(String forename) {

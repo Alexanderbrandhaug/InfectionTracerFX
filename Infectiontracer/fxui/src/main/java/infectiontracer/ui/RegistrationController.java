@@ -1,7 +1,5 @@
 package infectiontracer.ui;
 
-import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -12,7 +10,7 @@ import javafx.scene.control.Button;
 public class RegistrationController extends AbstractController {
 
     final FileHandler file_handler = new FileHandler();
-    ScreenController screencontroller = new ScreenController();
+    final ScreenController screencontroller = new ScreenController();
 
     @FXML
     private TextField forename_txt;
@@ -35,12 +33,12 @@ public class RegistrationController extends AbstractController {
     private Button registerBtnID;
 
     @FXML
-    void RegisterToLogin(ActionEvent event) throws IOException {
+    void RegisterToLogin(ActionEvent event) {
         screencontroller.switchToLogin(event);
     }
 
     @FXML
-    void RegisterBtn(ActionEvent event) {
+    void RegisterUser(ActionEvent event) {
 
         try {
             if(password_txt.getText().equals(verify_password_txt.getText())){
@@ -61,11 +59,6 @@ public class RegistrationController extends AbstractController {
     void closeRegistration(ActionEvent event) {
         Stage stage = (Stage) closeBtnRegistration.getScene().getWindow();
         stage.close();
-    }
-
-    @FXML
-    void BackToLoginBtn(ActionEvent event) throws IOException {
-        screencontroller.switchToLogin(event);
     }
 
 }

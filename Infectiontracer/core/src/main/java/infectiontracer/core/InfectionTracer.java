@@ -1,14 +1,8 @@
 package infectiontracer.core;
 
-import com.google.gson.Gson;
-
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.nio.charset.StandardCharsets;
 import java.lang.IllegalArgumentException;
-import java.util.stream.Stream;
 
 public class InfectionTracer {
 
@@ -36,6 +30,34 @@ public class InfectionTracer {
         }
     }
 
+    // Method that changes a user's health status to 'infected'
+    public void makeUserInfected(String username) throws IllegalArgumentException {
+        List<User> allUsers = fileHandler.getUsers();
+        User currentUser = allUsers.stream().filter(user -> username.equals(user.getEmail())).findAny().orElse(null);
+
+        if (currentUser != null) {
+            if (currentUser.getHealthStatus().equals("Infected")) {
+                throw new IllegalArgumentException("User is already infected!");
+            }
+            currentUser.setInfected();
+            currentUser.setDateOfInfected();
+            fileHandler.writeUsersToFile(allUsers);
+        }
+    }
+    // Method that changes a user's health status to 'Covid-19 Negative'
+    public void makeUserHealthy(String username) throws IllegalArgumentException {
+        List<User> allUsers = fileHandler.getUsers();
+        User currentUser = allUsers.stream().filter(user -> username.equals(user.getEmail())).findAny().orElse(null);
+        if (currentUser != null) {
+            if (currentUser.getHealthStatus().equals("Covid-19 Negative")) {
+                throw new IllegalArgumentException("User is already healthy!");
+            }
+            currentUser.setHealthy();
+            currentUser.setDateOfHealthy();
+            fileHandler.writeUsersToFile(allUsers);
+        }
+    }
+
     // retrieving all closecontacts of a user with the help of the email
     public List<User> getUsersCloseContacts(String username) {
         List<User> users = fileHandler.getUsers();
@@ -51,7 +73,7 @@ public class InfectionTracer {
         return closeContacts;
     }
 
-    // Helper method to get the currently logged in user
+    // Helper method to get the currently logged-in user
     public User getActiveUser(String username) {
         List<User> users = fileHandler.getUsers();
         for (User user : users) {

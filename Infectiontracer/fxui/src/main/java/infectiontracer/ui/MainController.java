@@ -13,8 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.util.List;
 
-import java.io.IOException;
-
 import infectiontracer.core.*;
 
 public class MainController extends AbstractController {
@@ -24,6 +22,8 @@ public class MainController extends AbstractController {
     }
 
     private final InfectionTracer infectionTracer = new InfectionTracer();
+    final ObservableList<User> contactList = FXCollections.observableArrayList();
+    final ScreenController screencontroller = new ScreenController();
 
     @FXML
     private Label username_lbl;
@@ -55,16 +55,27 @@ public class MainController extends AbstractController {
     private TextField contactNameTxt;
 
     @FXML
-    private Button fireHealthyUser;
-
-    @FXML
-    private Button fireInfectedUser;
-
-    @FXML
     private Button closeBtnMain;
-    
-    ObservableList<User> contactList = FXCollections.observableArrayList();
-    ScreenController screencontroller = new ScreenController();
+
+    @FXML
+    void fireHealthyUser(ActionEvent event) {
+        try {
+            infectionTracer.makeUserHealthy(username);
+            infectionStatus.setText("Covid-19 Negative");
+        } catch (IllegalArgumentException e) {
+            createInformationDialogBox("Can't change health status", null, e.getMessage());
+        }
+    }
+
+    @FXML
+    void fireInfectedUser(ActionEvent event) {
+        try {
+            infectionTracer.makeUserInfected(username);
+            infectionStatus.setText("Infected");
+        } catch (IllegalArgumentException e) {
+            createInformationDialogBox("Can't change health status", null, e.getMessage());
+        }
+    }
 
     @FXML
     void addContact(ActionEvent event) {
@@ -80,7 +91,6 @@ public class MainController extends AbstractController {
         }
     }
 
-    // Function to refresh tableview after every insertion of a close contact
     @FXML
     private void initialize() {
         List<User> usersCloseContacts = infectionTracer.getUsersCloseContacts(username);
