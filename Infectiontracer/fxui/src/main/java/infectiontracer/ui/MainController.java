@@ -75,8 +75,6 @@ public class MainController extends AbstractController {
             contactList.addAll(currentMap);
             numberOfContacts.setText(String.valueOf(contactList.size()));
             contactTable.setItems(contactList);
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (IllegalArgumentException e) {
             createErrorDialogBox("Error", null, e.getMessage());
         }
@@ -104,7 +102,7 @@ public class MainController extends AbstractController {
 
 
     @FXML
-    void MainToLogin(ActionEvent event) throws IOException {
+    void MainToLogin(ActionEvent event) {
         screencontroller.switchToLogin(event);
     }
 

@@ -65,7 +65,6 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#password_txt").write(password);
         clickOn("#verify_password_txt").write(password);
         clickOn("#registerBtnID");
-        sleep(1000);
         verifyThat("#okButton", isVisible());
     }
 

@@ -12,7 +12,7 @@ import java.lang.IllegalArgumentException;
 public class User {
 
     private String forename, lastname, email, password, dateOfInfection, healthStatus;
-    private List<String> closeContacts;
+    private final List<String> closeContacts;
 
     public User(String forename, String lastname, String email, String password, String healthStatus,
                 String dateOfInfection) {
