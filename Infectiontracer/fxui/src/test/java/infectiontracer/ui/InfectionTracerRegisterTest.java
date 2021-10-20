@@ -1,18 +1,14 @@
 package infectiontracer.ui;
-import infectiontracer.core.FileHandler;
 import infectiontracer.core.User;
-
 import java.util.List;
 import java.util.Objects;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import infectiontracer.json.*;
 import org.junit.jupiter.api.*;
 import org.testfx.framework.junit5.ApplicationTest;
-
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 

@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 import org.junit.jupiter.api.*;
+import infectiontracer.json.*;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class InfectionTracerTest {

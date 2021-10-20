@@ -1,4 +1,4 @@
-package infectiontracer.core;
+package infectiontracer.json;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import java.lang.IllegalArgumentException;
+import infectiontracer.core.User;
 
 public class FileHandler {
 
