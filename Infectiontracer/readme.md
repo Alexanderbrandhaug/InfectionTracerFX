@@ -8,7 +8,8 @@ De ulike filene er fordelt i ulike mapper. <br>
 
 FXML-filer finner man under [fxui/src/main/resources/infectiontracer/ui](fxui/src/main/resources/infectiontracer/ui/). <br>
 Kontrollere finner man i mappen [fxui/src/main/java/infectiontracer/ui](fxui/src/main/java/infectiontracer/ui/). <br>
-Klasser finner man i mappen [core/src/main/java/infectiontracer/core](core/src/main/java/infectiontracer/core/). <br>
+Kjernelogikk finner man i mappen [core/src/main/java/infectiontracer/core](core/src/main/java/infectiontracer/core/). <br>
+Json-klasse finner man i mappen [core/src/main/java/infectiontracer/json](core/src/main/java/infectiontracer/json/). <br>
 
 Test-filer for fxui finner man under [fxui/src/test/java/infectiontracer/ui](fxui/src/test/java/infectiontracer/ui/). <br>
 Test-filer for core klasser finner man under [core/src/test/java/infectiontracer/core](core/src/test/java/infectiontracer/core/). <br>
