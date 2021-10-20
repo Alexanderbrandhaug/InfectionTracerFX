@@ -88,9 +88,8 @@ public class InfectionTracerTest {
         filehandler.insertUser(user7);
         infectiontracer.addCloseContact(user6.getEmail(), user7.getEmail());
         List<User> liste = infectiontracer.getUsersCloseContacts(user6.getEmail());
-        for (User ele : liste) {
-            Assertions.assertEquals(user7.getEmail(), ele.getEmail());
-        }
+        Assertions.assertEquals(user7.getEmail(), liste.get(0).getEmail());
+
 
     }
 }
