@@ -3,8 +3,11 @@ package infectiontracer.core;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import java.nio.file.Path;
 
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,7 +17,8 @@ import java.lang.IllegalArgumentException;
 public class FileHandler {
 
     // TODO Fix the filepath so that it is not absolute
-    private String filePath = "C:\\Users\\sylte\\GitProjects\\IT1901\\Release 1\\gr2181\\Infectiontracer\\core\\src\\main\\resources\\users.json";
+    private String sysHome = System.getProperty("user.dir");
+    String filePath = sysHome + File.separator + "users.json";
     final Gson gson = new Gson();
 
     public void setFilePath(String filePath) {
@@ -52,13 +56,15 @@ public class FileHandler {
         }
         return false;
     }
+
     // Function to retrieve the list of users from the Json file
     public List<User> getUsers() {
         JsonReader reader = null;
-        try  {
+        try {
             reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8));
-                List<User> userList = gson.fromJson(reader, new TypeToken<List<User>>() {}.getType());
-                return Objects.requireNonNullElseGet(userList, ArrayList::new);
+            List<User> userList = gson.fromJson(reader, new TypeToken<List<User>>() {
+            }.getType());
+            return Objects.requireNonNullElseGet(userList, ArrayList::new);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -73,6 +79,7 @@ public class FileHandler {
         }
         return new ArrayList<>();
     }
+
     // Function to write users to the Json file
     public void writeUsersToFile(List<User> userList) {
         FileWriter writer = null;
@@ -83,12 +90,12 @@ public class FileHandler {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-                try {
-                    if (writer != null)
+            try {
+                if (writer != null)
                     writer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

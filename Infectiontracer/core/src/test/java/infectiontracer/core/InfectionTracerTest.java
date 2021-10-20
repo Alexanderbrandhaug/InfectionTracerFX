@@ -43,7 +43,8 @@ public class InfectionTracerTest {
     @Test
     public void testAddInvalidUser() {
         filehandler.insertUser(user);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> infectiontracer.addCloseContact(user.getEmail(), user3.getEmail()));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> infectiontracer.addCloseContact(user.getEmail(), user3.getEmail()));
     }
 
     @Test
@@ -53,12 +54,12 @@ public class InfectionTracerTest {
 
     }
 
-    @Test public void testAddValidUser() {
+    @Test
+    public void testAddValidUser() {
         filehandler.insertUser(user3);
         filehandler.insertUser(user4);
         infectiontracer.addCloseContact(user4.getEmail(), user3.getEmail());
 
     }
-
 
 }
