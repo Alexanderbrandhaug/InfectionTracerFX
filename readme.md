@@ -1,7 +1,7 @@
 # Group gr2181 repository 
 
 ## Om prosjektet
-Dette er en Infectiontracer app som registrerer nærkontaktene til personer, og varsler nærkontater dersom man skulle bli smittet. Applikasjonen er laget med JavaFx, og lagrer og skriver informasjonen til/fra "skyen" (For release 1 lagres det lokalt) ved bruk av JSON-objekter.
+Dette er en Infectiontracer app som registrerer nærkontaktene til personer, og varsler nærkontater dersom man skulle bli smittet. Applikasjonen er laget med JavaFx, og lagrer og skriver informasjonen til/fra "skyen" (For release 1 og 2 lagres det lokalt) ved bruk av JSON-objekter.
 Selve applikasjonen finner man [her](Infectiontracer), her finner man også relevant README fil.
 
 ## Gitpod oppsett
