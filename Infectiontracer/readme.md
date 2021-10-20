@@ -19,3 +19,30 @@ Test-filer for core klasser finner man under [core/src/test/java/infectiontracer
 - Som Navn Navnesen som er smittet av koronaviruset, vil jeg logge meg inn på brukeren min på infectiontracer-applikasjonen og varsle nærkontaktene mine om at jeg er smittet av koronaviruset, slik at de kan bli varslet og holde seg i karantene i tilfelle de er smittet av meg.
 
 - Som Navn Navnesen som er utsatt for å bli smittet av koronaviruset, vil jeg registrere en bruker på infectiontracer-applikasjonen og registrere mine nærkontakter samt datoen jeg var med dem, slik at de kan bli varslet og holde seg i karantene om jeg blir smittet og så jeg kan bli varslet og holde meg i karantene om en av dem blir smittet.
+
+# Illustrasjoner
+
+**Her er noen bilder av selve applikasjonen.**
+
+ - Applikasjonen ved oppstart.  
+![](docs/release2/images/infectiontracerLoginpic.jpg)
+
+- Man må registrere seg ved manglende brukerkonto.
+![](docs/release2/images/infectiontraceRegPic.jpg)
+
+- Selve applikasjonen hvor en bruker kan administrere sine nærkontakter, og gi beskjed ved smitte. 
+
+![](docs/release2/images/infectiontraceMainscreen.jpg)
+
+
+# Diagrammer
+
+**Sekvensdiagram**
+
+![](docs/release2/images/core.png)
+
+
+
+# Json-Skjema
+
+![](docs/release2/images/jsonschema.jpg)
