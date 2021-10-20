@@ -20,7 +20,7 @@ public class App extends Application {
 		Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Login.fxml"))));
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
-		stage.initStyle(StageStyle.TRANSPARENT);
+		// stage.initStyle(StageStyle.TRANSPARENT);
 		stage.show();
 	}
 
