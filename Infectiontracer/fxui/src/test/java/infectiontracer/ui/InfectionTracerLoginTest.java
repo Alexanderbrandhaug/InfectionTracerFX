@@ -1,36 +1,46 @@
 package infectiontracer.ui;
 
-import javafx.fxml.FXML;
-import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import jdk.jfr.Timestamp;
-import javafx.event.ActionEvent;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
-import infectiontracer.ui.*;
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.base.NodeMatchers.isDisabled;
-import static org.testfx.matcher.base.NodeMatchers.isEnabled;
-import static org.testfx.matcher.base.NodeMatchers.isInvisible;
-import static org.testfx.matcher.base.NodeMatchers.isNotNull;
-import static org.testfx.matcher.base.NodeMatchers.isVisible;
-import static org.testfx.matcher.control.LabeledMatchers.hasText;
-import static org.testfx.util.DebugUtils.informedErrorMessage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import infectiontracer.core.FileHandler;
+import infectiontracer.core.User;
+
+import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.matcher.base.NodeMatchers.isVisible;
+
+import org.junit.jupiter.api.*;
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class InfectionTracerLoginTest extends ApplicationTest {
 
-    private ScreenController screencontroller = new ScreenController();
-    // private MainController maincontroller = new MainController();
+    private final FileHandler fileHandler = new FileHandler();
+    private List<User> actualUsersList;
+
+    @BeforeAll
+    public void setupFile() {
+        actualUsersList = fileHandler.getUsers();
+        User testUser = new User("test", "test","test@gmail.com", "Passord123","", "");
+        List<User> testUsers = new ArrayList<>();
+        testUsers.add(testUser);
+        fileHandler.writeUsersToFile(testUsers);
+    }
+
+    @AfterAll
+    public void restoreFile() {
+        fileHandler.writeUsersToFile(actualUsersList);
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -38,10 +48,8 @@ public class InfectionTracerLoginTest extends ApplicationTest {
 
     @Test
     public void testValidLogin() {
-        String username = "test@gmail.com";
-        String password = "Passord123";
-        clickOn("#email_txt").write(username);
-        clickOn("#password_txt").write(password);
+        clickOn("#email_txt").write("test@gmail.com");
+        clickOn("#password_txt").write("Passord123");
         clickOn("#loginBtnID");
         verifyThat("#mainSceneID", isVisible());
 
@@ -49,13 +57,12 @@ public class InfectionTracerLoginTest extends ApplicationTest {
 
     @Test
     void testInvalidLogin() {
-
         String username = "test";
         String password = "";
         clickOn("#email_txt").write(username);
         clickOn("#password_txt").write(password);
         clickOn("#loginBtnID");
-        verifyThat("OK", isVisible());
+        verifyThat("#loginSceneID", isVisible());
 
     }
 }

@@ -1,48 +1,51 @@
 package infectiontracer.ui;
-import javafx.fxml.FXML;
-import java.io.IOException;
+import infectiontracer.core.FileHandler;
+import infectiontracer.core.User;
+
+import java.util.List;
+import java.util.Objects;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import jdk.jfr.Timestamp;
-import javafx.event.ActionEvent;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
+import org.junit.jupiter.api.*;
 import org.testfx.framework.junit5.ApplicationTest;
-import infectiontracer.ui.*;
+
 import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.base.NodeMatchers.isDisabled;
-import static org.testfx.matcher.base.NodeMatchers.isEnabled;
-import static org.testfx.matcher.base.NodeMatchers.isInvisible;
-import static org.testfx.matcher.base.NodeMatchers.isNotNull;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
-import static org.testfx.matcher.control.LabeledMatchers.hasText;
-import static org.testfx.util.DebugUtils.informedErrorMessage;
 
 
-
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class InfectionTracerRegisterTest extends ApplicationTest {
-    
-    private ScreenController screencontroller = new ScreenController();
-    // private MainController maincontroller = new MainController();
+
+    private final FileHandler fileHandler = new FileHandler();
+    private List<User> actualUsersList;
+
+    @BeforeAll
+    public void setupFile() {
+        actualUsersList = fileHandler.getUsers();
+    }
+
+    @AfterAll
+    public void restoreFile() {
+        fileHandler.writeUsersToFile(actualUsersList);
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Registration.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Registration.fxml")));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
     
     @Test
-    public void testValidLogin() {
+    public void testValidRegistration() {
         String forename = "Test";
         String lastname = "Testersen";
-        String username = "test@gmail.com";
+        String username = "test99299@gmail.com";
         String password = "Passord123";
         clickOn("#forename_txt").write(forename);
         clickOn("#lastname_txt").write(lastname);
@@ -50,8 +53,7 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#password_txt").write(password);
         clickOn("#verify_password_txt").write(password);
         clickOn("#registerBtnID");
-        verifyThat("#loginSceneID", isVisible());
-
+        verifyThat("#okButton", isVisible());
     }
 
     @Test
@@ -67,8 +69,7 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#password_txt").write(password);
         clickOn("#verify_password_txt").write(passwordConfirmation);
         clickOn("#registerBtnID");
-        verifyThat("#registrationSceneID", isVisible()); //should fail
-
+        verifyThat("#registrationSceneID", isVisible());
     }
 
     @Test
@@ -83,7 +84,8 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#password_txt").write(password);
         clickOn("#verify_password_txt").write(password);
         clickOn("#registerBtnID");
-        verifyThat("#registrationSceneID", isVisible()); //should still be in registration menu
+        verifyThat("#registrationSceneID", isVisible());
+     
 
     }
 
@@ -99,10 +101,6 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#password_txt").write(password);
         clickOn("#verify_password_txt").write(password);
         clickOn("#registerBtnID");
-        verifyThat("#registrationSceneID", isVisible()); //should fail
-
+        verifyThat("#registrationSceneID", isVisible());
     }
-
-  
-  
 }

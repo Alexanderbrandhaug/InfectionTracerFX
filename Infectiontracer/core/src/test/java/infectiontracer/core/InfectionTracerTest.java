@@ -1,22 +1,18 @@
 package infectiontracer.core;
 
-import infectiontracer.core.*;
-import org.junit.jupiter.api.Test;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
-import java.io.File;
-import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.*;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class InfectionTracerTest {
     private User user, user2, user3, user4;
-    private InfectionTracer infectiontracer = new InfectionTracer();
-    private FileHandler filehandler = new FileHandler();
-    private File file;
+    private final InfectionTracer infectiontracer = new InfectionTracer();
+    private final FileHandler filehandler = new FileHandler();
 
     @BeforeAll
     public void setUpUsers() {
@@ -24,51 +20,45 @@ public class InfectionTracerTest {
         user2 = new User("TestA", "Testesen", "dummy@gmail.com", "Passord321!", "frisk", "");
         user3 = new User("TestB", "TestesenTo", "dwadwa@gmail.com", "Passord321!", "frisk", "");
         user4 = new User("TestB", "TestesenTo", "tesdwa@gmail.com", "Passord321!", "frisk", "");
-
-    }
-
-    @BeforeEach
-    public void setup() {
-        filehandler.setFilePath("src/test/java/infectiontracer/user_test2.json");
-        infectiontracer.setPath("src/test/java/infectiontracer/user_test2.json");
-        file = new File("src/test/java/infectiontracer/user_test2.json");
-
+        filehandler.setFilePath("src/test/java/infectiontracer/user_test.json");
+        infectiontracer.setPath("src/test/java/infectiontracer/user_test.json");
     }
 
     @AfterEach
     public void setupExit() {
-        file.deleteOnExit();
+        try {
+            new PrintWriter("src/test/java/infectiontracer/user_test.json").close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void testActivateUsers() throws IOException {
+    public void testActivateUsers() {
         filehandler.insertUser(user);
         assertNotNull(filehandler.getUsers());
 
     }
 
     @Test
-    public void testAddInvalidUser() throws IOException {
+    public void testAddInvalidUser() {
         filehandler.insertUser(user);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            infectiontracer.addCloseContact2(user.getEmail(), user3.getEmail());
-        });
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> infectiontracer.addCloseContact(user.getEmail(), user3.getEmail()));
     }
 
     @Test
-    public void testRegisterDuplicateUser() throws IOException {
+    public void testRegisterDuplicateUser() {
         filehandler.insertUser(user2);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            filehandler.insertUser(user2);
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> filehandler.insertUser(user2));
 
     }
 
     @Test
-    public void testAddValidUser() throws IOException {
+    public void testAddValidUser() {
         filehandler.insertUser(user3);
         filehandler.insertUser(user4);
-        infectiontracer.addCloseContact2(user3.getEmail(), user4.getEmail());
+        infectiontracer.addCloseContact(user4.getEmail(), user3.getEmail());
 
     }
 

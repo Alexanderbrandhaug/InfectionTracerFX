@@ -3,7 +3,6 @@ package infectiontracer.core;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-
 import java.util.regex.Matcher;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,46 +10,39 @@ import java.lang.IllegalArgumentException;
 
 public class User {
 
-    private String forname, lastname, email, password, dateOfInfection, healthStatus;
-    private List<User> closeContacts;
+    private String forename, lastname, email, password, dateOfInfection, healthStatus;
+    private final List<String> closeContacts;
 
-    public User(String forname, String lastname, String email, String password, String healthStatus,
-            String dateOfInfection) {
-        setForname(forname);
+    public User(String forename, String lastname, String email, String password, String healthStatus,
+                String dateOfInfection) {
+        setForename(forename);
         setLastname(lastname);
         setEmail(email);
         setPassword(password);
-        this.healthStatus = "Covid19 Negative";
-        closeContacts = new ArrayList<User>();
-        this.dateOfInfection = dateOfInfection;
-
-    }
-
-    public User(String forname, String lastname, String email, String password, String healthStatus,
-            String dateOfInfection, List<User> closeContacts) {
-        this.forname = forname;
-        this.lastname = lastname;
-        this.email = email;
-        this.password = password;
-        this.closeContacts = closeContacts;
-        this.healthStatus = "Covid19 Negative";
+        this.healthStatus = "Covid-19 Negative";
+        closeContacts = new ArrayList<>();
         this.dateOfInfection = dateOfInfection;
     }
 
     public void setDateOfInfected() {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-LLLL-dd");
-        String formattedString = today.format(formatter);
-        this.dateOfInfection = formattedString;
+        this.dateOfInfection = today.format(formatter);
+    }
+
+    public void setDateOfHealthy() {
+        this.dateOfInfection = "";
     }
 
     public String getDateOfInfection() {
         return this.dateOfInfection;
     }
 
-    public void setInfected(String infected) {
-        this.healthStatus = infected;
+    public void setInfected() {
+        this.healthStatus = "Infected";
     }
+
+    public void setHealthy() {this.healthStatus = "Covid-19 Negative";}
 
     public String getHealthStatus() {
         return this.healthStatus;
@@ -60,39 +52,33 @@ public class User {
     // already
     // exists as a closecontact for the active user
     public boolean checkIfUserAlreadyExistsAsCloseContact(String email) {
-        for (User newUser : closeContacts) {
-            if (newUser.getEmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
+        return closeContacts.contains(email);
     }
 
     // Adding a closecontact to the current user
-    public void addCloseContact(User user) {
-        if (closeContacts.contains(user) || checkIfUserAlreadyExistsAsCloseContact(user.getEmail())) {
-            System.out.println("User already exists as closecontact");
+    public void addCloseContact(String user) {
+        if (checkIfUserAlreadyExistsAsCloseContact(user)) {
+            throw new IllegalArgumentException("User is already added");
         } else {
             closeContacts.add(user);
         }
-
     }
 
-    public List<User> getAllCloseContacts() {
-        return this.closeContacts;
+    public List<String> getAllCloseContacts() {
+        return new ArrayList<>(closeContacts);
     }
 
-    public void setForname(String forname) {
+    public void setForename(String forename) {
         Pattern pattern = Pattern.compile("[^a-zA-Z]");
-        Matcher match = pattern.matcher(forname);
-        if (match.find() || forname.isEmpty()) {
-            throw new IllegalArgumentException("Invalid forname");
+        Matcher match = pattern.matcher(forename);
+        if (match.find() || forename.isEmpty()) {
+            throw new IllegalArgumentException("Invalid forename");
         }
-        this.forname = forname.trim();
+        this.forename = forename.trim();
     }
 
-    public String getForname() {
-        return this.forname;
+    public String getForename() {
+        return this.forename;
     }
 
     public void setLastname(String lastname) {
@@ -110,7 +96,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        if (!email.contains("@") || !email.contains(".com") || email.isEmpty()) {
+        if (!email.contains("@") || !email.contains(".com")) {
             throw new IllegalArgumentException("Invalid email");
         }
         this.email = email;

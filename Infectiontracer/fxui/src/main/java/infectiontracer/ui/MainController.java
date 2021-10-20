@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -13,11 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.util.List;
-import javafx.stage.Stage;
-import javafx.scene.control.Button;
 
-import java.io.IOException;
-import java.time.LocalDate;
 import infectiontracer.core.*;
 
 public class MainController extends AbstractController {
@@ -27,6 +22,8 @@ public class MainController extends AbstractController {
     }
 
     private final InfectionTracer infectionTracer = new InfectionTracer();
+    final ObservableList<User> contactList = FXCollections.observableArrayList();
+    final ScreenController screencontroller = new ScreenController();
 
     @FXML
     private Label username_lbl;
@@ -58,77 +55,64 @@ public class MainController extends AbstractController {
     private TextField contactNameTxt;
 
     @FXML
-    private Button fireHealthyUser;
-
-    @FXML
-    private Button fireInfectedUser;
-
-    @FXML
     private Button closeBtnMain;
-    
-    ObservableList<User> contactList = FXCollections.observableArrayList();
-    ScreenController screencontroller = new ScreenController();
-
-    // Filehandler filehandler = new FileHandler();
 
     @FXML
-    void addContact(ActionEvent event) throws IOException {
+    void fireHealthyUser(ActionEvent event) {
         try {
-            System.out.println(username);
-            infectionTracer.addCloseContact2(username, contactNameTxt.getText());
-            List<User> currentMap = infectionTracer.getRelevantMap(username);
-            contactList.clear();
-            for (User user : currentMap) {
-
-                System.out.println(contactList.toString());
-                User closeContact = new User(user.getForname(), user.getLastname(), user.getEmail(), user.getPassword(),
-                        user.getHealthStatus(), user.getDateOfInfection());
-
-                contactList.add(closeContact);
-                numberOfContacts.setText(String.valueOf(currentMap.size()));
-
-            }
-            contactTable.setItems(contactList);
-            System.out.println(contactList.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
+            infectionTracer.makeUserHealthy(username);
+            infectionStatus.setText("Covid-19 Negative");
+        } catch (IllegalArgumentException e) {
+            createInformationDialogBox("Can't change health status", null, e.getMessage());
         }
     }
 
-    // Function to refresh tableview after every insertion of a close contact
+    @FXML
+    void fireInfectedUser(ActionEvent event) {
+        try {
+            infectionTracer.makeUserInfected(username);
+            infectionStatus.setText("Infected");
+        } catch (IllegalArgumentException e) {
+            createInformationDialogBox("Can't change health status", null, e.getMessage());
+        }
+    }
+
+    @FXML
+    void addContact(ActionEvent event) {
+        try {
+            infectionTracer.addCloseContact(username, contactNameTxt.getText());
+            List<User> currentMap = infectionTracer.getUsersCloseContacts(username);
+            contactList.clear();
+            contactList.addAll(currentMap);
+            numberOfContacts.setText(String.valueOf(contactList.size()));
+            contactTable.setItems(contactList);
+        } catch (IllegalArgumentException e) {
+            createErrorDialogBox("Error", null, e.getMessage());
+        }
+    }
+
     @FXML
     private void initialize() {
-        try {
+        List<User> usersCloseContacts = infectionTracer.getUsersCloseContacts(username);
+        username_lbl.setText(username);
+        infectionStatus.setText(infectionTracer.getActiveUser(username).getHealthStatus());
 
-            List<User> currentMap = infectionTracer.getRelevantMap(username);
-            username_lbl.setText(username);
-            infectionStatus.setText(infectionTracer.getActiveUser(username).getHealthStatus());
-            
-
-
-            nameColumn.setCellValueFactory(new PropertyValueFactory<>("forname"));
-            lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
-            emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-            healthstatusColumn.setCellValueFactory(new PropertyValueFactory<>("healthStatus"));
-            dateOfInfectionColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfInfection"));
-            if (currentMap == null) {
-                return;
-            }
-            for (User user : currentMap) {
-                numberOfContacts.setText(String.valueOf(currentMap.size()));
-                User closeContact = new User(user.getForname(), user.getLastname(), user.getEmail(), user.getPassword(),
-                        user.getHealthStatus(), user.getDateOfInfection());
-                contactList.add(closeContact);
-                contactTable.setItems(contactList);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("forename"));
+        lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        healthstatusColumn.setCellValueFactory(new PropertyValueFactory<>("healthStatus"));
+        dateOfInfectionColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfInfection"));
+        if (usersCloseContacts == null) {
+            return;
         }
-
+        contactList.addAll(usersCloseContacts);
+        numberOfContacts.setText(String.valueOf(usersCloseContacts.size()));
+        contactTable.setItems(contactList);
     }
 
+
     @FXML
-    void MainToLogin(ActionEvent event) throws IOException {
+    void MainToLogin(ActionEvent event) {
         screencontroller.switchToLogin(event);
     }
 

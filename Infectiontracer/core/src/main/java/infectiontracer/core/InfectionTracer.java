@@ -1,91 +1,80 @@
 package infectiontracer.core;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedMap;
-import java.nio.charset.StandardCharsets;
 import java.lang.IllegalArgumentException;
 
 public class InfectionTracer {
 
     private final FileHandler fileHandler = new FileHandler();
-    private String path = "src/main/resources/infectiontracer/ui/users.json";
 
+    // method to set the path of Infectiontracer and filehandler, mostly needed for jUnit tests
     public void setPath(String path) {
-        this.path = path;
         fileHandler.setFilePath(path);
     }
 
     // Method to add a close contact for the current active user
     // Use email for now, as each user has a unique email
-    public void addCloseContact2(String username, String email) throws IOException {
-        FileWriter writer = null;
-
+    public void addCloseContact(String username, String email) {
         if (!fileHandler.checkUserList(email)) {
             throw new IllegalArgumentException("The user does not exist");
-
         }
-        try {
+        List<User> allUsers = fileHandler.getUsers();
+        // If one user adds another as close contact, both will become a close contact to each other
+        User currentUser = allUsers.stream().filter(user -> username.equals(user.getEmail())).findAny().orElse(null);
+        User closeContact = allUsers.stream().filter(user -> email.equals(user.getEmail())).findAny().orElse(null);
+        if (closeContact != null && currentUser != null) {
+            currentUser.addCloseContact(closeContact.getEmail());
+            closeContact.addCloseContact(currentUser.getEmail());
+            fileHandler.writeUsersToFile(allUsers);
+        }
+    }
 
-            List<User> allUsers = fileHandler.getUsers();
-            writer = new FileWriter(path, StandardCharsets.UTF_8);
+    // Method that changes a user's health status to 'infected'
+    public void makeUserInfected(String username) throws IllegalArgumentException {
+        List<User> allUsers = fileHandler.getUsers();
+        User currentUser = allUsers.stream().filter(user -> username.equals(user.getEmail())).findAny().orElse(null);
 
-            for (User current_user : allUsers) {
-                if (current_user.getEmail().contains(username)) {
-                    for (User current_user2 : allUsers) {
-                        if (current_user2.getEmail().equals(email)) {
-                            current_user.addCloseContact(new User(current_user2.getForname(),
-                                    current_user2.getLastname(), current_user2.getEmail(), current_user2.getPassword(),
-                                    current_user2.getHealthStatus(), current_user2.getDateOfInfection()));
+        if (currentUser != null) {
+            if (currentUser.getHealthStatus().equals("Infected")) {
+                throw new IllegalArgumentException("User is already infected!");
+            }
+            currentUser.setInfected();
+            currentUser.setDateOfInfected();
+            fileHandler.writeUsersToFile(allUsers);
+        }
+    }
+    // Method that changes a user's health status to 'Covid-19 Negative'
+    public void makeUserHealthy(String username) throws IllegalArgumentException {
+        List<User> allUsers = fileHandler.getUsers();
+        User currentUser = allUsers.stream().filter(user -> username.equals(user.getEmail())).findAny().orElse(null);
+        if (currentUser != null) {
+            if (currentUser.getHealthStatus().equals("Covid-19 Negative")) {
+                throw new IllegalArgumentException("User is already healthy!");
+            }
+            currentUser.setHealthy();
+            currentUser.setDateOfHealthy();
+            fileHandler.writeUsersToFile(allUsers);
+        }
+    }
 
-                        }
-                    }
+    // retrieving all closecontacts of a user with the help of the email
+    public List<User> getUsersCloseContacts(String username) {
+        List<User> users = fileHandler.getUsers();
+        User currentUser = users.stream().filter(user -> username.equals(user.getEmail())).findAny().orElse(null);
+        List<User> closeContacts = new ArrayList<>();
+        if (currentUser != null) {
+            for (User user : users) {
+                if (currentUser.getAllCloseContacts().contains(user.getEmail())) {
+                    closeContacts.add(user);
                 }
             }
-
-            Gson gson = new Gson();
-            gson.toJson(allUsers, writer);
-            writer.flush();
-            writer.close();
-
-        } catch (
-
-        IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (writer != null)
-                    writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
+        return closeContacts;
     }
 
-    // retrieving all closecontact of a user with the help of the email
-    public List<User> getRelevantMap(String username) throws IOException {
-        List<User> users = fileHandler.getUsers();
-        System.out.println(users.toString());
-        for (User currentUser : users) {
-            if (currentUser.getEmail().contains(username)) {
-                return currentUser.getAllCloseContacts();
-            }
-        }
-        return null;
-    }
-
-    // Helper method to get the currently logged in user
-    public User getActiveUser(String username) throws IOException {
+    // Helper method to get the currently logged-in user
+    public User getActiveUser(String username) {
         List<User> users = fileHandler.getUsers();
         for (User user : users) {
             if (username.equals(user.getEmail())) {
@@ -94,4 +83,5 @@ public class InfectionTracer {
         }
         return null;
     }
+
 }
