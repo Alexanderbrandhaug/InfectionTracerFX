@@ -3,6 +3,7 @@ package infectiontracer.core;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.IllegalArgumentException;
+import infectiontracer.json.*;
 
 public class InfectionTracer {
 

@@ -5,14 +5,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.testfx.framework.junit5.ApplicationTest;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import infectiontracer.core.FileHandler;
 import infectiontracer.core.User;
-
+import infectiontracer.json.*;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 

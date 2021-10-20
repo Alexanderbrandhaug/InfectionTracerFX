@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import infectiontracer.core.*;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import infectiontracer.json.*;
 
 public class RegistrationController extends AbstractController {
 

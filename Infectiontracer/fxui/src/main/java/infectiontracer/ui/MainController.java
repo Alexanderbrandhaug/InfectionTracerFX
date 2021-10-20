@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.util.List;
+import infectiontracer.json.*;
 
 import infectiontracer.core.*;
 
