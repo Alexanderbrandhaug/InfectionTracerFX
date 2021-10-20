@@ -2,15 +2,17 @@ package infectiontracer.core;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-
+import java.util.ArrayList;
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+
 import org.junit.jupiter.api.*;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class InfectionTracerTest {
-    private User user, user2, user3, user4;
+    private User user, user2, user3, user4, user5, user6, user7;
     private final InfectionTracer infectiontracer = new InfectionTracer();
     private final FileHandler filehandler = new FileHandler();
 
@@ -20,6 +22,9 @@ public class InfectionTracerTest {
         user2 = new User("TestA", "Testesen", "dummy@gmail.com", "Passord321!", "frisk", "");
         user3 = new User("TestB", "TestesenTo", "dwadwa@gmail.com", "Passord321!", "frisk", "");
         user4 = new User("TestB", "TestesenTo", "tesdwa@gmail.com", "Passord321!", "frisk", "");
+        user5 = new User("TestB", "TestesenTo", "tesdwa222@gmail.com", "Passord321!", "frisk", "");
+        user6 = new User("TestB", "TestesenTo", "tsdwa222@gmail.com", "Passord321!", "frisk", "");
+        user7 = new User("TestB", "TestesenTo", "dwa222@gmail.com", "Passord321!", "frisk", "");
         filehandler.setFilePath("src/test/java/infectiontracer/user_test.json");
         infectiontracer.setPath("src/test/java/infectiontracer/user_test.json");
     }
@@ -62,4 +67,30 @@ public class InfectionTracerTest {
 
     }
 
+    @Test
+    public void testMakeUserInfected() {
+        filehandler.insertUser(user);
+        infectiontracer.makeUserInfected(user.getEmail());
+        Assertions.assertEquals("Infected", infectiontracer.getActiveUser(user.getEmail()).getHealthStatus());
+    }
+
+    @Test
+    public void testMakeUserHealthy() {
+        filehandler.insertUser(user5);
+        infectiontracer.makeUserInfected(user5.getEmail());
+        infectiontracer.makeUserHealthy(user5.getEmail());
+        Assertions.assertEquals("Covid-19 Negative", infectiontracer.getActiveUser(user5.getEmail()).getHealthStatus());
+    }
+
+    @Test
+    public void testGetUsersCloseContacts() {
+        filehandler.insertUser(user6);
+        filehandler.insertUser(user7);
+        infectiontracer.addCloseContact(user6.getEmail(), user7.getEmail());
+        List<User> liste = infectiontracer.getUsersCloseContacts(user6.getEmail());
+        for (User ele : liste) {
+            Assertions.assertEquals(user7.getEmail(), ele.getEmail());
+        }
+
+    }
 }
