@@ -2,14 +2,14 @@
 
 skinparam SequenceMessageAlignment center
 group user register account
-user -> fxui: Create new user
+user -> fxui: RegisterUser()
 fxui -> core: insertUser()
 core -> users.json: validate
 users.json --> core: user not in json 
 core -> users.json: user added
 end
 group user logs in
-user -> fxui: User log in
+user -> fxui: LoginBtn()
 fxui -> core: getUsers()
 core -> users.json:validate login
 users.json --> core: user exist
@@ -23,20 +23,20 @@ Methods initialized:
 initialize()
 addContact(activeUser, newUser)
 end note
-fxui -> core: getRelevantMap()
+fxui -> core: getUsersCloseContacts()
 core -> users.json: read from json
 users.json --> core: return users.json
 core -> fxui: deserialize json
 fxui -> user: display closecontacts
 end
 group user add closecontacts
-user -> fxui: user logs in
+user -> fxui: LoginBtn()
 fxui -> core: addContact(email)
 core -> users.json: validate that user exist
 users.json --> core: user exist
 core -> users.json: user added
 users.json --> core: deserialize json
-core --> fxui: getRelevantMap()
+core --> fxui: getUsersCloseContacts()
 fxui --> user: tableview updates
 end
 
