@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.testfx.framework.junit5.ApplicationTest;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,6 +24,7 @@ public class InfectionTracerLoginTest extends ApplicationTest {
 
     @BeforeAll
     public void setupFile() {
+
         actualUsersList = fileHandler.getUsers();
         User testUser = new User("test", "test","test@gmail.com", "Passord123","", "");
         List<User> testUsers = new ArrayList<>();
@@ -45,8 +47,8 @@ public class InfectionTracerLoginTest extends ApplicationTest {
 
     @Test
     public void testValidLogin() {
-        clickOn("#email_txt").write("test@gmail.com");
-        clickOn("#password_txt").write("Passord123");
+        clickOn("#emailTxt").write("test@gmail.com");
+        clickOn("#passwordTxt").write("Passord123");
         clickOn("#loginBtnID");
         verifyThat("#mainSceneID", isVisible());
 
@@ -56,8 +58,8 @@ public class InfectionTracerLoginTest extends ApplicationTest {
     void testInvalidLogin() {
         String username = "test";
         String password = "";
-        clickOn("#email_txt").write(username);
-        clickOn("#password_txt").write(password);
+        clickOn("#emailTxt").write(username);
+        clickOn("#passwordTxt").write(password);
         clickOn("#loginBtnID");
         verifyThat("#loginSceneID", isVisible());
 

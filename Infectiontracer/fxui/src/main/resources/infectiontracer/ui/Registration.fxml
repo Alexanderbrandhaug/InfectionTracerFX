@@ -11,13 +11,13 @@
 
 <Pane fx:id="registrationSceneID" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="686.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="infectiontracer.ui.RegistrationController">
    <children>
-      <TextField fx:id="forename_txt" layoutX="237.0" layoutY="179.0" prefHeight="28.0" prefWidth="211.0" promptText="First name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-      <TextField fx:id="lastname_txt" layoutX="238.0" layoutY="225.0" prefHeight="28.0" prefWidth="211.0" promptText="Last name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-      <TextField fx:id="email_txt" layoutX="238.0" layoutY="267.0" prefHeight="28.0" prefWidth="211.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-      <TextField fx:id="password_txt" layoutX="238.0" layoutY="384.0" prefHeight="28.0" prefWidth="211.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-      <TextField fx:id="verify_password_txt" layoutX="237.0" layoutY="430.0" prefHeight="28.0" prefWidth="211.0" promptText="Verify password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-      <Button fx:id="registerBtnID" layoutX="237.0" layoutY="484.0" mnemonicParsing="false" onAction="#RegisterUser" prefHeight="26.0" prefWidth="214.0" style="-fx-background-color: #0598ff;" text="Register" textFill="WHITE" />
-      <Button layoutX="239.0" layoutY="555.0" mnemonicParsing="false" onAction="#RegisterToLogin" prefHeight="26.0" prefWidth="214.0" style="-fx-background-color: #0598ff;" text="Log in" textFill="WHITE" />
+      <TextField fx:id="forenameTxt" layoutX="237.0" layoutY="179.0" prefHeight="28.0" prefWidth="211.0" promptText="First name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+      <TextField fx:id="lastnameTxt" layoutX="238.0" layoutY="225.0" prefHeight="28.0" prefWidth="211.0" promptText="Last name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+      <TextField fx:id="emailTxt" layoutX="238.0" layoutY="267.0" prefHeight="28.0" prefWidth="211.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+      <TextField fx:id="passwordTxt" layoutX="238.0" layoutY="384.0" prefHeight="28.0" prefWidth="211.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+      <TextField fx:id="verifyPasswordTxt" layoutX="237.0" layoutY="430.0" prefHeight="28.0" prefWidth="211.0" promptText="Verify password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+      <Button fx:id="registerBtnId" layoutX="237.0" layoutY="484.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="26.0" prefWidth="214.0" style="-fx-background-color: #0598ff;" text="Register" textFill="WHITE" />
+      <Button layoutX="239.0" layoutY="555.0" mnemonicParsing="false" onAction="#registerToLogin" prefHeight="26.0" prefWidth="214.0" style="-fx-background-color: #0598ff;" text="Log in" textFill="WHITE" />
       <AnchorPane layoutY="-59.0" prefHeight="202.0" prefWidth="686.0" style="-fx-background-color: #0598ff;">
          <children>
             <Text fill="WHITE" layoutX="63.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register to keep track of your closest contacts and let them know if you get infected" wrappingWidth="533.1187744140625">

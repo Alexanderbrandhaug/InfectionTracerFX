@@ -27,7 +27,7 @@
       </Button>
       <AnchorPane layoutX="-133.0" layoutY="-142.0" prefHeight="210.0" prefWidth="1262.0" style="-fx-background-color: #0598ff;">
          <children>
-            <Label fx:id="username_lbl" layoutX="193.0" layoutY="163.0" prefHeight="35.0" prefWidth="203.0">
+            <Label fx:id="usernameLbl" layoutX="193.0" layoutY="163.0" prefHeight="35.0" prefWidth="203.0">
                <font>
                   <Font size="24.0" />
                </font>
@@ -42,7 +42,7 @@
                   <Image url="@16301547491543238901-128.png" />
                </image>
             </ImageView>
-            <Button layoutX="1173.0" layoutY="168.0" mnemonicParsing="false" onAction="#MainToLogin" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: #0598ff;" text="Log out" />
+            <Button layoutX="1173.0" layoutY="168.0" mnemonicParsing="false" onAction="#mainToLogin" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: #0598ff;" text="Log out" />
             <Text fill="WHITE" layoutX="401.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back to Infectiontracer" wrappingWidth="594.2476806640625">
                <font>
                   <Font size="39.0" />

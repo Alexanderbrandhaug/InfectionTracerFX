@@ -15,11 +15,23 @@ Test-filer for fxui finner man under [fxui/src/test/java/infectiontracer/ui](fxu
 Test-filer for core klasser finner man under [core/src/test/java/infectiontracer/core](core/src/test/java/infectiontracer/core/). <br>
 
 
+Foreløpig release plan for release 1 og 2 finnes under [docs](docs). <br>
+
 # Brukerhistorier
 
-- Som Navn Navnesen som er smittet av koronaviruset, vil jeg logge meg inn på brukeren min på infectiontracer-applikasjonen og varsle nærkontaktene mine om at jeg er smittet av koronaviruset, slik at de kan bli varslet og holde seg i karantene i tilfelle de er smittet av meg.
+- Som Navn Navnesen som er smittet av koronaviruset, vil jeg opprette meg en konto slik at jeg får tilgang til å bruke applikasjonen.
 
-- Som Navn Navnesen som er utsatt for å bli smittet av koronaviruset, vil jeg registrere en bruker på infectiontracer-applikasjonen og registrere mine nærkontakter samt datoen jeg var med dem, slik at de kan bli varslet og holde seg i karantene om jeg blir smittet og så jeg kan bli varslet og holde meg i karantene om en av dem blir smittet.
+- Som Navn Navnesen ønsker jeg tilbakemelding dersom noe går feil i applikasjon.
+
+- Som Navn Navnesen ønsker jeg muligheten til å legge til nærkontakter.
+
+- Som Navn Navnesen ønsker jeg muligheten til å varsle nærkontakter ved smitte.
+
+- Som Navn Navnesen ønsker jeg beskjed dersom av noen av mine nærkontakter tester positivt.
+
+- Som Navn Navnesen vil jeg ha muligheten til å friskmelde meg etter påvist smitte. 
+
+- Som Navn Navnesen vil jeg ha informasjon på hvilke av mine nærkontakter som er smittet. 
 
 # Illustrasjoner
 
