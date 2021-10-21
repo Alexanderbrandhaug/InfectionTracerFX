@@ -18,7 +18,7 @@ import infectiontracer.core.User;
 public class FileHandler {
 
     // TODO Fix the filepath so that it is not absolute
-    private String sysHome = System.getProperty("user.dir");
+    private String sysHome = System.getProperty("user.home");
     String filePath = sysHome + File.separator + "users.json";
     final Gson gson = new Gson();
 
