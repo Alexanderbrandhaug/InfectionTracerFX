@@ -43,12 +43,12 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         String lastname = "Testersen";
         String username = "test99299@gmail.com";
         String password = "Passord123";
-        clickOn("#forename_txt").write(forename);
-        clickOn("#lastname_txt").write(lastname);
-        clickOn("#email_txt").write(username);
-        clickOn("#password_txt").write(password);
-        clickOn("#verify_password_txt").write(password);
-        clickOn("#registerBtnID");
+        clickOn("#forenameTxt").write(forename);
+        clickOn("#lastnameTxt").write(lastname);
+        clickOn("#emailTxt").write(username);
+        clickOn("#passwordTxt").write(password);
+        clickOn("#verifyPasswordTxt").write(password);
+        clickOn("#registerBtnId");
         verifyThat("#okButton", isVisible());
     }
 
@@ -59,12 +59,12 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         String username = "ola@outlook.com";
         String password = "Passord1234";
         String passwordConfirmation = "pasSord123456";
-        clickOn("#forename_txt").write(forename);
-        clickOn("#lastname_txt").write(lastname);
-        clickOn("#email_txt").write(username);
-        clickOn("#password_txt").write(password);
-        clickOn("#verify_password_txt").write(passwordConfirmation);
-        clickOn("#registerBtnID");
+        clickOn("#forenameTxt").write(forename);
+        clickOn("#lastnameTxt").write(lastname);
+        clickOn("#emailTxt").write(username);
+        clickOn("#passwordTxt").write(password);
+        clickOn("#verifyPasswordTxt").write(passwordConfirmation);
+        clickOn("#registerBtnId");
         verifyThat("#registrationSceneID", isVisible());
     }
 
@@ -74,12 +74,12 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         String lastname = "Svenskman";
         String username = "ola&outlook.com";
         String password = "Passord1234";
-        clickOn("#forename_txt").write(forename);
-        clickOn("#lastname_txt").write(lastname);
-        clickOn("#email_txt").write(username);
-        clickOn("#password_txt").write(password);
-        clickOn("#verify_password_txt").write(password);
-        clickOn("#registerBtnID");
+        clickOn("#forenameTxt").write(forename);
+        clickOn("#lastnameTxt").write(lastname);
+        clickOn("#emailTxt").write(username);
+        clickOn("#passwordTxt").write(password);
+        clickOn("#verifyPasswordTxt").write(password);
+        clickOn("#registerBtnId");
         verifyThat("#registrationSceneID", isVisible());
      
 
@@ -91,12 +91,12 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         String lastname = "Svenskman";
         String username = "ola@outlook.com";
         String password = "P12P";
-        clickOn("#forename_txt").write(forename);
-        clickOn("#lastname_txt").write(lastname);
-        clickOn("#email_txt").write(username);
-        clickOn("#password_txt").write(password);
-        clickOn("#verify_password_txt").write(password);
-        clickOn("#registerBtnID");
+        clickOn("#forenameTxt").write(forename);
+        clickOn("#lastnameTxt").write(lastname);
+        clickOn("#emailTxt").write(username);
+        clickOn("#passwordTxt").write(password);
+        clickOn("#verifyPasswordTxt").write(password);
+        clickOn("#registerBtnId");
         verifyThat("#registrationSceneID", isVisible());
     }
 }
