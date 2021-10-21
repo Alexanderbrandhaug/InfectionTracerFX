@@ -15,6 +15,8 @@ Test-filer for fxui finner man under [fxui/src/test/java/infectiontracer/ui](fxu
 Test-filer for core klasser finner man under [core/src/test/java/infectiontracer/core](core/src/test/java/infectiontracer/core/). <br>
 
 
+Foreløpig release plan for release 1 og 2 finnes under [docs](docs). <br>
+
 # Brukerhistorier
 
 - Som Navn Navnesen som er smittet av koronaviruset, vil jeg logge meg inn på brukeren min på infectiontracer-applikasjonen og varsle nærkontaktene mine om at jeg er smittet av koronaviruset, slik at de kan bli varslet og holde seg i karantene i tilfelle de er smittet av meg.
