@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.testfx.framework.junit5.ApplicationTest;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,6 +24,7 @@ public class InfectionTracerLoginTest extends ApplicationTest {
 
     @BeforeAll
     public void setupFile() {
+
         actualUsersList = fileHandler.getUsers();
         User testUser = new User("test", "test","test@gmail.com", "Passord123","", "");
         List<User> testUsers = new ArrayList<>();

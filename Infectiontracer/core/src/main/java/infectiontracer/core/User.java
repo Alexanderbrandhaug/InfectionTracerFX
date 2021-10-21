@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.lang.IllegalArgumentException;
-import infectiontracer.json.*;
 
 public class User {
 

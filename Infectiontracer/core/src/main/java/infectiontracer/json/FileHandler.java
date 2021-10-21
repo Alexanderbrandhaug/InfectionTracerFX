@@ -3,7 +3,8 @@ package infectiontracer.json;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import java.nio.file.Path;
+
+import java.nio.file.Files;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
@@ -17,10 +18,17 @@ import infectiontracer.core.User;
 
 public class FileHandler {
 
-    // TODO Fix the filepath so that it is not absolute
-    private String sysHome = System.getProperty("user.home");
-    String filePath = sysHome + File.separator + "users.json";
+    String filePath = System.getProperty("user.home") + File.separator + "users.json";
     final Gson gson = new Gson();
+
+    public FileHandler() {
+        // If a json-file for the application does not exist, then make it
+        // Primarily necessary for the first time user starts program
+        String filePath = System.getProperty("user.home") + File.separator + "users.json";
+        if (Files.notExists(Paths.get(filePath))) {
+            writeUsersToFile(new ArrayList<>());
+        }
+    }
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;

@@ -1,8 +1,9 @@
 package infectiontracer.core;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -16,9 +17,11 @@ public class InfectionTracerTest {
     private User user, user2, user3, user4, user5, user6, user7;
     private final InfectionTracer infectiontracer = new InfectionTracer();
     private final FileHandler filehandler = new FileHandler();
+    File tempJsonFile;
+    final String testFilePath = System.getProperty("user.home") + File.separator + "user_test.json";
 
     @BeforeAll
-    public void setUpUsers() {
+    public void setUpUsers() throws IOException {
         user = new User("Ola", "Nordmann", "test@gmail.com", "Passord321!", "frisk", "");
         user2 = new User("TestA", "Testesen", "dummy@gmail.com", "Passord321!", "frisk", "");
         user3 = new User("TestB", "TestesenTo", "dwadwa@gmail.com", "Passord321!", "frisk", "");
@@ -26,17 +29,24 @@ public class InfectionTracerTest {
         user5 = new User("TestB", "TestesenTo", "tesdwa222@gmail.com", "Passord321!", "frisk", "");
         user6 = new User("TestB", "TestesenTo", "tsdwa222@gmail.com", "Passord321!", "frisk", "");
         user7 = new User("TestB", "TestesenTo", "dwa222@gmail.com", "Passord321!", "frisk", "");
-        filehandler.setFilePath("src/test/java/infectiontracer/user_test.json");
-        infectiontracer.setPath("src/test/java/infectiontracer/user_test.json");
+        tempJsonFile = new File(testFilePath);
+        tempJsonFile.createNewFile();
+        filehandler.setFilePath(testFilePath);
+        infectiontracer.setPath(testFilePath);
     }
 
     @AfterEach
     public void setupExit() {
         try {
-            new PrintWriter("src/test/java/infectiontracer/user_test.json").close();
+            new PrintWriter(testFilePath).close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    @AfterAll
+    public void closeFile() {
+        tempJsonFile.deleteOnExit();
     }
 
     @Test

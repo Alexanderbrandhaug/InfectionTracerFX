@@ -58,5 +58,4 @@ public class UserTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> user.setPassword(" "));
         Assertions.assertThrows(IllegalArgumentException.class, () -> user.setPassword("Password"));
     }
-
 }
