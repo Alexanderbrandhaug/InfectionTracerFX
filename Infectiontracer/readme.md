@@ -31,7 +31,7 @@ Foreløpig release plan for release 1 og 2 finnes under [docs](docs). <br>
 
 - Som Navn Navnesen vil jeg ha muligheten til å friskmelde meg etter påvist smitte. 
 
-- Som Navn Navnesen vil jeg ha informasjon på hvilke av mine nærkontakter som er smittet. 
+- Som Navn Navnesen vil jeg ha en applikasjon som er intuitiv og brukervennlig. 
 
 # Illustrasjoner
 
