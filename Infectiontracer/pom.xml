@@ -188,6 +188,7 @@
     <modules>
         <module>core</module>
         <module>fxui</module>
+        <module>rest</module>
     </modules>
 
 </project>
