@@ -1,4 +1,4 @@
-package infectiontracer.restserver;
+package infectiontracer.rest;
 
 import java.util.Arrays;
 
@@ -13,6 +13,7 @@ public class InfectionTracerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(InfectionTracerApplication.class, args);
+
 	}
 
 	@Bean
