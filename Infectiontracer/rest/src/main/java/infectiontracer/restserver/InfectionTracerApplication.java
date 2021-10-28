@@ -1,4 +1,5 @@
 package infectiontracer.restserver;
+
 import java.util.Arrays;
 
 import org.springframework.boot.CommandLineRunner;
@@ -9,9 +10,8 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class InfectionTracerApplication {
-    
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 		SpringApplication.run(InfectionTracerApplication.class, args);
 	}
 

@@ -130,8 +130,8 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.6</version>
                 <configuration>
-                            <mainClass>infectiontracer.ui/infectiontracer.ui.App</mainClass>
-                        </configuration>
+           <mainClass>infectiontracer.ui/infectiontracer.ui.App</mainClass>
+           </configuration>
             </plugin>
         </plugins>
     </build>
