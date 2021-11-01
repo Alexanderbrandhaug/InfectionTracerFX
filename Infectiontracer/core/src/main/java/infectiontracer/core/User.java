@@ -45,6 +45,11 @@ public class User {
     closeContacts = new ArrayList<>();
     this.dateOfInfection = dateOfInfection;
   }
+  
+  public User(){
+   super();
+   closeContacts = new ArrayList<>();
+  }
 
   /** Sets the dateOfInfection to today's date. */
   public void setDateOfInfected() {
