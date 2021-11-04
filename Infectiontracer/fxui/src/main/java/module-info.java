@@ -4,10 +4,9 @@ module infectiontracer.ui {
   requires javafx.controls;
   requires infectiontracer.core;
   requires infectiontracer.rest;
-  requires com.fasterxml.jackson.databind;
   requires java.net.http;
+    requires com.google.gson;
 
 
-
-  opens infectiontracer.ui to javafx.graphics, javafx.fxml;
+    opens infectiontracer.ui to javafx.graphics, javafx.fxml;
 }

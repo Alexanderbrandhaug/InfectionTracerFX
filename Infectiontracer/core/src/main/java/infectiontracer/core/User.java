@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.beans.ConstructorProperties;
 
 /**
  * Each user of the application needs to register themselves to use the
@@ -21,7 +22,7 @@ public class User {
   private String password;
   private String dateOfInfection;
   private String healthStatus;
-  private final List<String> closeContacts;
+  private List<String> closeContacts = new ArrayList<>();
 
   /**
    * Constructor for User class.
@@ -42,13 +43,23 @@ public class User {
     setEmail(email);
     setPassword(password);
     this.healthStatus = "Covid-19 Negative";
-    closeContacts = new ArrayList<>();
     this.dateOfInfection = dateOfInfection;
+
   }
-  
-  public User(){
-   super();
-   closeContacts = new ArrayList<>();
+
+  public User() {
+    super();
+  }
+
+  @ConstructorProperties({"forename","lastname","email","password","dateOfInfection", "healthStatus", "allCloseContacts"})
+  public User(String forename, String lastname, String email, String password, String dateOfInfection, String healthStatus, List<String> allCloseContacts){
+    this.forename = forename;
+    this.lastname = lastname;
+    this.email = email;
+    this.password = password;
+    this.dateOfInfection = dateOfInfection;
+    this.healthStatus = healthStatus;
+    this.closeContacts = allCloseContacts;
   }
 
   /** Sets the dateOfInfection to today's date. */
