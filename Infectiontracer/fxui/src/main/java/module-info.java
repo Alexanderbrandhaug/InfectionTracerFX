@@ -5,7 +5,7 @@ module infectiontracer.ui {
   requires infectiontracer.core;
   requires infectiontracer.rest;
   requires java.net.http;
-    requires com.google.gson;
+  requires com.google.gson;
 
 
     opens infectiontracer.ui to javafx.graphics, javafx.fxml;

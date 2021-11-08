@@ -6,8 +6,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
-
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import infectiontracer.core.User;
 import infectiontracer.json.FileHandler;
@@ -19,6 +17,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import infectiontracer.rest.*;
+import com.google.gson.Gson;
+
 
 /** Controller for the login screen of the application. */
 public class LoginController extends AbstractController {
@@ -43,18 +43,19 @@ public class LoginController extends AbstractController {
     
         
           try{
-          URI endpointBaseUri = new URI(myUrl+"user/"+emailTxt.getText());
-          HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
-          .header("Accept", "application/json")
-          .GET()
-          .build();
-            final HttpResponse<String> response = HttpClient.newBuilder().build()
-            .send(request,HttpResponse.BodyHandlers.ofString());
-            System.out.println(response);
-            User user = gson.fromJson(response.body(), new TypeToken<User>() {}.getType() /*User.class*/);
-            System.out.println(user.getEmail());
-            if(user.getPassword().equals(passwordTxt.getText())){
-              screencontroller.switchToMain(event, user.getEmail());
+            URI endpointBaseUri = new URI(myUrl+"user/"+emailTxt.getText());
+            HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
+            .header("Accept", "application/json")
+            .GET()
+            .build();
+              final HttpResponse<String> response = HttpClient.newBuilder().build()
+              .send(request,HttpResponse.BodyHandlers.ofString());
+              System.out.println(response);
+              User user = gson.fromJson(response.body(), new TypeToken<User>() {}.getType() /*User.class*/);
+              System.out.println(user.getEmail());
+              if(user.getPassword().equals(passwordTxt.getText())){
+                screencontroller.switchToMain(event, user.getEmail());
+  
             }
           } catch (Exception e) {
             e.printStackTrace();
