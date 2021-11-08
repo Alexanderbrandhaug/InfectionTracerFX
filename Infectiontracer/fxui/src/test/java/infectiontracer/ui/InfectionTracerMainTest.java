@@ -1,4 +1,5 @@
 package infectiontracer.ui;
+import infectiontracer.core.InfectionTracer;
 import infectiontracer.core.User;
 import java.util.ArrayList;
 import java.beans.Transient;
@@ -18,7 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -34,6 +35,7 @@ public class InfectionTracerMainTest extends ApplicationTest{
     private Parent root;
     private Stage stage;
     private Scene scene;
+    
 
     @BeforeAll
     public void setupFile() {
@@ -72,7 +74,8 @@ public class InfectionTracerMainTest extends ApplicationTest{
         clickOn("#addContactBtn");
         clickOn("#contactNameTxt").write(testUser3.getEmail());
         clickOn("#addContactBtn");
-
+        InfectionTracer tracer = new InfectionTracer();
+        assertNotNull(tracer.getUsersCloseContacts(testUser.getEmail()));
     }
 
 

@@ -50,7 +50,6 @@ public class LoginController extends AbstractController {
             .build();
               final HttpResponse<String> response = HttpClient.newBuilder().build()
               .send(request,HttpResponse.BodyHandlers.ofString());
-              System.out.println(response);
 
               User user = gson.fromJson(response.body(), new TypeToken<User>() {}.getType() /*User.class*/);
               System.out.println(user.getEmail());
@@ -58,8 +57,10 @@ public class LoginController extends AbstractController {
                 screencontroller.switchToMain(event, user.getEmail());
   
             }
+          } catch (IllegalArgumentException e) {
+            createErrorDialogBox("Error", null, e.getMessage());
           } catch (Exception e) {
-            e.printStackTrace();
+            createErrorDialogBox("Error", null, "Error when trying to sign in");
           }
   }
 
