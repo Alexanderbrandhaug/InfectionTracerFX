@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import infectiontracer.core.*;
 import infectiontracer.json.FileHandler;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
+
+
 
 @RestController
 public class InfectionTracerApiController {

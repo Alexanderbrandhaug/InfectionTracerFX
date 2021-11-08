@@ -51,6 +51,7 @@ public class LoginController extends AbstractController {
               final HttpResponse<String> response = HttpClient.newBuilder().build()
               .send(request,HttpResponse.BodyHandlers.ofString());
               System.out.println(response);
+
               User user = gson.fromJson(response.body(), new TypeToken<User>() {}.getType() /*User.class*/);
               System.out.println(user.getEmail());
               if(user.getPassword().equals(passwordTxt.getText())){

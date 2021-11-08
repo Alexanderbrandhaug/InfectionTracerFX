@@ -99,7 +99,7 @@ public class User {
    * @return True if the user is a close contact to the active user, false
    *         otherwise.
    */
-  public boolean checkIfUserAlreadyExistsAsCloseContact(String email) {
+  private boolean checkIfUserAlreadyExistsAsCloseContact(String email) {
     return closeContacts.contains(email);
   }
 
