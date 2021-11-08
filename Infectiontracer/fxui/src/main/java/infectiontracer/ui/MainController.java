@@ -61,6 +61,8 @@ public class MainController extends AbstractController {
 
   @FXML private Button closeBtnMain;
 
+
+
   @FXML
   void fireHealthyUser(ActionEvent event) {
     try {
@@ -131,6 +133,7 @@ public class MainController extends AbstractController {
       contactList.addAll(currentMap);
       numberOfContacts.setText(String.valueOf(contactList.size()));
       contactTable.setItems(contactList);
+      contactNameTxt.clear();
 
     } catch (IllegalArgumentException e) {
       createErrorDialogBox("Error", null, e.getMessage());

@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainSceneID" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="1129.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="mainSceneID" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="1129.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="135.0" layoutY="569.0" mnemonicParsing="false" onAction="#fireHealthyUser" prefHeight="32.0" prefWidth="125.0" style="-fx-background-color: GREEN; -fx-opacity: 0.4;" text="I am healthy" textFill="WHITE">
          <font>
@@ -55,14 +55,14 @@
             </Button>
          </children>
       </AnchorPane>
-      <Button layoutX="362.0" layoutY="394.0" mnemonicParsing="false" onAction="#addContact" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #0598ff;" text="Add" textFill="#fcfcfc">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
       <Text layoutX="142.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a new close contact by their registerd email to be notified if they get infected, and to let them know if you get infected" wrappingWidth="299.3356647491455">
          <font>
             <Font size="17.0" />
          </font></Text>
+      <Button fx:id="addContactBtn" layoutX="362.0" layoutY="394.0" mnemonicParsing="false" onAction="#addContact" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #0598ff;" text="Add" textFill="#fcfcfc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
       <ImageView fitHeight="69.0" fitWidth="75.0" layoutX="22.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@19256548621558965385-128.png" />
