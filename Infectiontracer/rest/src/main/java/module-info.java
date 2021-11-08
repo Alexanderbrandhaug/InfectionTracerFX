@@ -6,9 +6,10 @@ module infectiontracer.rest {
    requires spring.context;
    requires spring.web;
    requires infectiontracer.core;
-   
+    requires com.google.gson;
 
-   exports infectiontracer.rest;
+
+    exports infectiontracer.rest;
    opens infectiontracer.rest;
 
 }

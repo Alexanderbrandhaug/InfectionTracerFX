@@ -8,6 +8,5 @@ module infectiontracer.ui {
   requires com.google.gson;
 
 
-
-  opens infectiontracer.ui to javafx.graphics, javafx.fxml;
+    opens infectiontracer.ui to javafx.graphics, javafx.fxml;
 }

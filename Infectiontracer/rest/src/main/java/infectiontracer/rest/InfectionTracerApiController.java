@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import infectiontracer.core.*;
 import infectiontracer.json.FileHandler;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 public class InfectionTracerApiController {
 
-    private FileHandler filehandler = new FileHandler();
-    private InfectionTracer infectionTracer = new InfectionTracer();
+    private final FileHandler filehandler = new FileHandler();
+    private final InfectionTracer infectionTracer = new InfectionTracer();
 
     @GetMapping("/infectiontracer/users")
     protected List<User> getAllActiveUsersApi() {
@@ -29,9 +28,11 @@ public class InfectionTracerApiController {
         return infectionTracer.getActiveUser(email);
     }
 
-    @PostMapping("/infectiontracer/users")
-    protected boolean newUserApi(@RequestBody User newUser){
-             filehandler.insertUser(newUser);
+    @PostMapping(path = "/infectiontracer/users",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    protected boolean newUserApi(@RequestBody /*String json_file*/ User newUser) {
+        filehandler.insertUser(newUser);
              return true;
     }
 
