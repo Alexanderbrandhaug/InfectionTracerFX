@@ -125,7 +125,6 @@ public class MainController extends AbstractController {
     try {
       URI endpointBaseUri = new URI(myUrl+"user/"+username+"/closecontacts");
       String json = gson.toJson(infectionTracer.getActiveUser(contactNameTxt.getText()));
-      System.out.println(json);
       HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
               .header("Accept", "application/json")
               .header("Content-Type", "application/json")
@@ -147,6 +146,36 @@ public class MainController extends AbstractController {
   } catch (Exception e) {
     createErrorDialogBox("Error", null, "Error when updating healthstatus to sick");
   }
+  }
+
+  @FXML
+  void deleteCloseContact(ActionEvent event) {
+    try {
+      URI endpointBaseUri = new URI(myUrl+"user/"+username+"/closecontacts/removeContact");
+      User closeContact = contactTable.getSelectionModel().getSelectedItem();
+      String json = gson.toJson(closeContact);
+      System.out.println(json);
+      HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
+              .header("Accept", "application/json")
+              .header("Content-Type", "application/json")
+              .POST(HttpRequest.BodyPublishers.ofString(json))
+              .build();
+      final HttpResponse<String> response = HttpClient.newBuilder().build()
+              .send(request,HttpResponse.BodyHandlers.ofString());
+      System.out.println(response);
+
+      List<User> currentMap = infectionTracer.getUsersCloseContacts(username);
+      contactList.clear();
+      contactList.addAll(currentMap);
+      numberOfContacts.setText(String.valueOf(contactList.size()));
+      contactTable.setItems(contactList);
+
+    } catch (IllegalArgumentException e) {
+      createErrorDialogBox("Error", null, e.getMessage());
+
+    } catch (Exception e) {
+      createErrorDialogBox("Error", null, "Error when updating healthstatus to sick");
+    }
   }
 
   @FXML
