@@ -103,7 +103,11 @@ public class MainController extends AbstractController {
               infectionStatus.setText("Infected");
               System.out.println(response);
               List<User> currentMap = infectionTracer.getUsersCloseContacts(username);
+              createInformationDialogBox(
+                "Email sent", null, "Email notification was sent to your closecontacts");
               emailservice.sendEmail(username, currentMap);
+              
+           
               
       
     } catch (IllegalArgumentException e) {
