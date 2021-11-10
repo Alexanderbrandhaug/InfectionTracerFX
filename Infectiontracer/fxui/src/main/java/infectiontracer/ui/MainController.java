@@ -6,6 +6,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpResponse;
+
+import infectiontracer.core.EmailService;
 import infectiontracer.core.InfectionTracer;
 import infectiontracer.core.User;
 import java.util.List;
@@ -38,6 +40,7 @@ public class MainController extends AbstractController {
   final ScreenController screencontroller = new ScreenController();
   private final String myUrl = "http://localhost:8080/infectiontracer/";
   private Gson gson = new Gson();
+  private EmailService emailservice = new EmailService();
 
 
   @FXML private Label usernameLbl;
@@ -99,6 +102,8 @@ public class MainController extends AbstractController {
               .send(request,HttpResponse.BodyHandlers.ofString());
               infectionStatus.setText("Infected");
               System.out.println(response);
+              List<User> currentMap = infectionTracer.getUsersCloseContacts(username);
+              emailservice.sendEmail(username, currentMap);
               
       
     } catch (IllegalArgumentException e) {

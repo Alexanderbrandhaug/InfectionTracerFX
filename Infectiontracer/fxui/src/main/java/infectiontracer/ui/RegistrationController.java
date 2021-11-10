@@ -65,12 +65,11 @@ public class RegistrationController extends AbstractController {
                   .send(request,HttpResponse.BodyHandlers.ofString());
           System.out.println(response);
           if(newUser.getPassword().equals(passwordTxt.getText())){
-            screencontroller.switchToMain(event, newUser.getEmail());
-          }
         createInformationDialogBox(
             "Successful registration", null, "The registration was successful");
         screencontroller.switchToLogin(event);
       }
+    }
     } catch (IllegalArgumentException e) {
       createErrorDialogBox("Error", null, e.getMessage());
     } catch (Exception e) {
