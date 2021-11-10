@@ -25,8 +25,8 @@ public class LoginController extends AbstractController {
 
   private final FileHandler fileHandler = new FileHandler();
   private final ScreenController screencontroller = new ScreenController();
-  private final String myUrl = "http://localhost:8080/infectiontracer/";
-  private Gson gson = new Gson();
+  //private final String myUrl = "http://localhost:8080/infectiontracer/";
+  //private Gson gson = new Gson();
  
   @FXML
   private Button closeBtnLogin;
@@ -39,28 +39,15 @@ public class LoginController extends AbstractController {
 
   @FXML
   void loginBtn(ActionEvent event) {
-
-    
-        
-          try{
-            URI endpointBaseUri = new URI(myUrl+"user/"+emailTxt.getText());
-            HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
-            .header("Accept", "application/json")
-            .GET()
-            .build();
-              final HttpResponse<String> response = HttpClient.newBuilder().build()
-              .send(request,HttpResponse.BodyHandlers.ofString());
-              System.out.println(response);
-
-              User user = gson.fromJson(response.body(), new TypeToken<User>() {}.getType() /*User.class*/);
-              System.out.println(user.getEmail());
-              if(user.getPassword().equals(passwordTxt.getText())){
-                screencontroller.switchToMain(event, user.getEmail());
-  
-            }
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
+    String url = myUrl+"user/"+emailTxt.getText();
+    String JsonUser = createGetRequest(url);
+    User user = gson.fromJson(JsonUser, new TypeToken<User>() {}.getType() /*User.class*/);
+    if (user.getPassword().equals(passwordTxt.getText())) {
+      screencontroller.switchToMain(event, user.getEmail());
+    }
+    else {
+      createErrorDialogBox("Login information is incorrect", null, "Email/password combination is not valid.");
+    }
   }
 
 

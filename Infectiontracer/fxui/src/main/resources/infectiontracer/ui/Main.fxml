@@ -120,6 +120,6 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button layoutX="489.0" layoutY="395.0" mnemonicParsing="false" onAction="#deleteCloseContact" text="Delete user" />
+      <Button layoutX="489.0" layoutY="395.0" mnemonicParsing="false" onAction="#removeCloseContact" text="Delete user" />
    </children>
 </AnchorPane>
