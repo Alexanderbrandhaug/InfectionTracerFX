@@ -1,5 +1,6 @@
 package infectiontracer.ui;
 
+import com.google.gson.Gson;
 import infectiontracer.core.User;
 import infectiontracer.json.FileHandler;
 import javafx.event.ActionEvent;
@@ -8,11 +9,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 /** Controller for the registration screen of the application. */
 public class RegistrationController extends AbstractController {
 
   final FileHandler fileHandler = new FileHandler();
   final ScreenController screencontroller = new ScreenController();
+  private final String myUrl = "http://localhost:8080/infectiontracer/";
+  final Gson gson = new Gson();
 
   @FXML private TextField forenameTxt;
 
@@ -45,7 +53,20 @@ public class RegistrationController extends AbstractController {
                 passwordTxt.getText(),
                 "",
                 "");
-        fileHandler.insertUser(newUser);
+          URI endpointBaseUri = new URI(myUrl+"users");
+          String json = gson.toJson(newUser);
+          System.out.println(json);
+          HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
+                  .header("Accept", "application/json")
+                  .header("Content-Type", "application/json")
+                  .POST(HttpRequest.BodyPublishers.ofString(json))
+                  .build();
+          final HttpResponse<String> response = HttpClient.newBuilder().build()
+                  .send(request,HttpResponse.BodyHandlers.ofString());
+          System.out.println(response);
+          if(newUser.getPassword().equals(passwordTxt.getText())){
+            screencontroller.switchToMain(event, newUser.getEmail());
+          }
         createInformationDialogBox(
             "Successful registration", null, "The registration was successful");
         screencontroller.switchToLogin(event);
@@ -56,6 +77,7 @@ public class RegistrationController extends AbstractController {
       createErrorDialogBox("Error", null, "Error when creating user");
     }
   }
+
 
   @FXML
   void closeRegistration(ActionEvent event) {

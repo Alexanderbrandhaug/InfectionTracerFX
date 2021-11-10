@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.beans.ConstructorProperties;
 
 /**
- * Each user of the application needs to register themselves to use the application. The user they
- * create are analogous to the User class, and these objects are what is stored in the Json-file.
+ * Each user of the application needs to register themselves to use the
+ * application. The user they create are analogous to the User class, and these
+ * objects are what is stored in the Json-file.
  */
 public class User {
 
@@ -20,32 +22,44 @@ public class User {
   private String password;
   private String dateOfInfection;
   private String healthStatus;
-  private final List<String> closeContacts;
+  private List<String> closeContacts = new ArrayList<>();
 
   /**
    * Constructor for User class.
    *
-   * @param forename Forename of the user.
-   * @param lastname Lastname of the user.
-   * @param email Email of the user.
-   * @param password Password of the user.
-   * @param healthStatus Health status of the user, either 'Infected' or 'Covid-19 Negative'.
-   * @param dateOfInfection Date when user was infected with Covid-19, is empty when not infected.
+   * @param forename        Forename of the user.
+   * @param lastname        Lastname of the user.
+   * @param email           Email of the user.
+   * @param password        Password of the user.
+   * @param healthStatus    Health status of the user, either 'Infected' or
+   *                        'Covid-19 Negative'.
+   * @param dateOfInfection Date when user was infected with Covid-19, is empty
+   *                        when not infected.
    */
-  public User(
-      String forename,
-      String lastname,
-      String email,
-      String password,
-      String healthStatus,
+  public User(String forename, String lastname, String email, String password, String healthStatus,
       String dateOfInfection) {
     setForename(forename);
     setLastname(lastname);
     setEmail(email);
     setPassword(password);
     this.healthStatus = "Covid-19 Negative";
-    closeContacts = new ArrayList<>();
     this.dateOfInfection = dateOfInfection;
+
+  }
+
+  public User() {
+    super();
+  }
+
+  @ConstructorProperties({"forename","lastname","email","password","dateOfInfection", "healthStatus", "allCloseContacts"})
+  public User(String forename, String lastname, String email, String password, String dateOfInfection, String healthStatus, List<String> allCloseContacts){
+    this.forename = forename;
+    this.lastname = lastname;
+    this.email = email;
+    this.password = password;
+    this.dateOfInfection = dateOfInfection;
+    this.healthStatus = healthStatus;
+    this.closeContacts = allCloseContacts;
   }
 
   /** Sets the dateOfInfection to today's date. */
@@ -79,12 +93,13 @@ public class User {
   }
 
   /**
-   * Helper method to check if the user that is being added as a close contact already exists as a
-   * close contact for the active user.
+   * Helper method to check if the user that is being added as a close contact
+   * already exists as a close contact for the active user.
    *
-   * @return True if the user is a close contact to the active user, false otherwise.
+   * @return True if the user is a close contact to the active user, false
+   *         otherwise.
    */
-  public boolean checkIfUserAlreadyExistsAsCloseContact(String email) {
+  private boolean checkIfUserAlreadyExistsAsCloseContact(String email) {
     return closeContacts.contains(email);
   }
 
@@ -94,6 +109,15 @@ public class User {
       throw new IllegalArgumentException("User is already added");
     } else {
       closeContacts.add(user);
+    }
+  }
+
+  public void removeCloseContact(String user) {
+    if (!checkIfUserAlreadyExistsAsCloseContact(user)) {
+      throw new IllegalArgumentException("User is not a close contact!");
+    }
+    else {
+      closeContacts.remove(user);
     }
   }
 
@@ -162,6 +186,7 @@ public class User {
    *
    * @param password Password for user.
    */
+
   public void setPassword(String password) {
     if (password.length() >= 8) {
       Pattern letter = Pattern.compile("[a-zA-z]");
@@ -183,4 +208,10 @@ public class User {
   public String getPassword() {
     return this.password;
   }
+
+  @Override
+  public String toString() {
+    return this.email;
+  }
+
 }
