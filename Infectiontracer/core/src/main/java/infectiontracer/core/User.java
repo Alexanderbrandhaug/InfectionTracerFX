@@ -112,6 +112,15 @@ public class User {
     }
   }
 
+  public void removeCloseContact(String user) {
+    if (!checkIfUserAlreadyExistsAsCloseContact(user)) {
+      throw new IllegalArgumentException("User is not a close contact!");
+    }
+    else {
+      closeContacts.remove(user);
+    }
+  }
+
   public List<String> getAllCloseContacts() {
     return new ArrayList<>(closeContacts);
   }
