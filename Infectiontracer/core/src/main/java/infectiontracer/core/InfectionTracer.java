@@ -136,4 +136,28 @@ public class InfectionTracer {
     }
     return null;
   }
+
+  public void deleteUser(String username){
+    List<User> users = fileHandler.getUsers();
+    for(User user: users){
+      if(username.equals(user.getEmail())){
+        users.remove(user);
+      }
+    }
+  }
+
+
+  public void changePw(String username){
+    List<User> users = fileHandler.getUsers();
+    for(User user: users){
+      if(username.equals(user.getEmail())){
+        users.remove(user);
+        user.setPassword(new EmailService().sendEmailWithNewPassword(username));
+        users.add(user);
+        fileHandler.writeUsersToFile(users);
+      }
+  }
+  
+  }
+
 }

@@ -22,6 +22,7 @@ public class InfectionTracerApiController {
     private final FileHandler filehandler = new FileHandler();
     private final InfectionTracer infectionTracer = new InfectionTracer();
 
+
     @GetMapping("/infectiontracer/users")
     protected List<User> getAllActiveUsersApi() {
            return filehandler.getUsers();
@@ -71,7 +72,12 @@ public class InfectionTracerApiController {
         return true;
     }
 
-    
+    @PostMapping("infectiontracer/user/{email}/updatepassword")
+    protected boolean updatePasswordApi(@PathVariable String email, @RequestBody User currentUser){
+       infectionTracer.changePw(currentUser.getEmail());
+        return true;
+        
+    }
   
 
     
