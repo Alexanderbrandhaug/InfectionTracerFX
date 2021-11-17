@@ -146,18 +146,18 @@ public class InfectionTracer {
     }
   }
 
-
-  public void changePw(String username){
+  //made it boolean in order to not get 500 error when trying to updatepw on server-side
+  public boolean changePw(String username){
     List<User> users = fileHandler.getUsers();
     for(User user: users){
       if(username.equals(user.getEmail())){
-        users.remove(user);
-        user.setPassword(new EmailService().sendEmailWithNewPassword(username));
+        user.setPassword(new EmailService().sendEmailWithNewPassword(user.getEmail()));
         users.add(user);
         fileHandler.writeUsersToFile(users);
+        return true;
       }
   }
-  
+  return false;
   }
 
 }

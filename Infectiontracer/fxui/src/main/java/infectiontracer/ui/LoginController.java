@@ -30,7 +30,7 @@ public class LoginController extends AbstractController {
   private final ScreenController screencontroller = new ScreenController();
   private final String myUrl = "http://localhost:8080/infectiontracer/";
   private Gson gson = new Gson();
-  private EmailService emailService = new EmailService();
+ // private EmailService emailService = new EmailService();
   private InfectionTracer infectionTracer = new InfectionTracer();
  
   @FXML
@@ -73,16 +73,18 @@ public class LoginController extends AbstractController {
   void forgotPasswordBtn(ActionEvent event) {
   
     try {
-    URI endpointBaseUri = new URI(myUrl+"user/"+emailTxt.getText()+"/updatepassword");
+    URI endpointBaseUri = new URI(myUrl+"user/"+emailTxt.getText());
     String json = gson.toJson(infectionTracer.getActiveUser(emailTxt.getText()));
       HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
               .header("Accept", "application/json")
               .header("Content-Type", "application/json")
-              .POST(HttpRequest.BodyPublishers.ofString(json))
+              .PUT(HttpRequest.BodyPublishers.ofString(json))
               .build();
       final HttpResponse<String> response = HttpClient.newBuilder().build()
               .send(request,HttpResponse.BodyHandlers.ofString());
       System.out.println(response);
+
+     
 
       
     } catch (IllegalArgumentException e) {
