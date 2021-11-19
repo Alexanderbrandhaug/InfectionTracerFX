@@ -97,6 +97,7 @@
       </dependency>
     </dependencies>
 
+     
     <build>
         <plugins>
             <plugin>
@@ -111,6 +112,44 @@
                     </argLine>
                     </configuration>
             </plugin>
+
+
+      
+
+            
+        
+
+
+            <!--Jlink-->
+            
+              <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>infectiontracer.ui/infectiontracer.ui.App</mainClass>
+                    <!-- rest of options are for jlink -->
+                    <compress>2</compress>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <stripDebug>true</stripDebug>
+                    <noManPages>true</noManPages>
+                    <launcher>infectiontracerfx</launcher>
+                    <jlinkImageName>infectiontracerfx</jlinkImageName>
+                    <jlinkZipName>infectiontracerfx</jlinkZipName>
+                    <!-- linux options --> 
+                    <linuxShortcut>true</linuxShortcut>
+                    <linuxMenuGroup>InfectionTracerFX</linuxMenuGroup>
+
+                    <!-- windows options --> 
+                    <winDirChooser>true</winDirChooser>
+                    <winShortcut>true</winShortcut>
+                    <winMenu>true</winMenu>
+                    <winMenuGroup>InfectionTracerFX</winMenuGroup>
+
+                </configuration>
+            </plugin>
+ 
+
 
 
             

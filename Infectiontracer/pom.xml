@@ -39,6 +39,8 @@
             <version>1.6.2</version>
         </dependency>
 
+        
+
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -137,7 +139,9 @@
                         </execution>
                     </executions>
                 </plugin>
-        </plugins>
+
+
+ </plugins>
     </build>
     <modules>
         <module>core</module>
