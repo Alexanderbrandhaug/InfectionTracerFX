@@ -1,4 +1,4 @@
-package main.java.infectiontracer.ui;
+package infectiontracer.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import infectiontracer.core.*;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -40,7 +41,7 @@ public class ProfileController {
     private Button closeBtnProfile;
 
     @FXML
-    private java.awt.TextField newFirstNameTxt;
+    private TextField newFirstNameTxt;
 
     @FXML
     private TextField newLastNameTxt;
@@ -79,7 +80,7 @@ public class ProfileController {
     void saveChanges(ActionEvent event) {
       try {
         if (passwordTxt.getText().equals(verifyPasswordTxt.getText())) {
-          URI endpointBaseUri = new URI(myUrl+"user/"+username+"");
+          URI endpointBaseUri = new URI(myUrl+"user/"+username);
           String json = gson.toJson(infectionTracer.getActiveUser(username));
           System.out.println(json);
           HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
