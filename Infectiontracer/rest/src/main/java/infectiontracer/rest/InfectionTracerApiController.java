@@ -71,6 +71,12 @@ public class InfectionTracerApiController {
         return true;
     }
 
+    @PutMapping("infectiontracer/user/{email}")
+     protected boolean changeUserProfileApi(@PathVariable String email){
+         
+         return true;
+     }
+
     
   
 

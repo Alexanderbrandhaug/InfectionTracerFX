@@ -72,7 +72,7 @@ public class ProfileController {
     }
 
     @FXML
-    void profileToMain() {
+    void profileToMain(ActionEvent event) {
         screencontroller.switchToMain(event);
     }
 
