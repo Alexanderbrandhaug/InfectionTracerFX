@@ -72,8 +72,12 @@ public class InfectionTracerMainTest extends ApplicationTest{
     public void testAddValidCloseContact(){
         clickOn("#contactNameTxt").write(testUser2.getEmail());
         clickOn("#addContactBtn");
+        verifyThat("#okButton", isVisible());
+        clickOn("#okButton");
         clickOn("#contactNameTxt").write(testUser3.getEmail());
         clickOn("#addContactBtn");
+        verifyThat("#okButton", isVisible());
+        clickOn("#okButton");
         InfectionTracer tracer = new InfectionTracer();
         assertNotNull(tracer.getUsersCloseContacts(testUser.getEmail()));
     }

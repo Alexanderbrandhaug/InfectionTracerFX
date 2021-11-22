@@ -112,8 +112,10 @@ public class MainController extends AbstractController {
 
     if (createPostRequest(url, json)) {
       createInformationDialogBox("New close contact added", null, "New close contact successfully added.");
+
       List<User> currentMap = infectionTracer.getUsersCloseContacts(username);
       refreshInfo(currentMap);
+      contactNameTxt.setText("");
     }
     else {
       createErrorDialogBox("Failed to add close contact", null, "Failed to add new close contact.");
