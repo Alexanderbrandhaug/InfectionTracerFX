@@ -87,16 +87,12 @@
             <artifactId>gson</artifactId>
             <version>2.8.8</version>
         </dependency>
-
-
-
         <dependency>
         <groupId>org.eclipse.jgit</groupId>
         <artifactId>org.eclipse.jgit</artifactId>
         <version>5.4.0.201906121030-r</version>
       </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -107,10 +103,67 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                  <configuration>
                     <argLine>
-                 @{argLine}  --add-opens infectiontracer.ui/infectiontracer.ui=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                 @{argLine} 
+                  --add-opens infectiontracer.ui/infectiontracer.ui=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                   --add-opens javafx.graphics/com.sun.glass.ui=ALL-UNNAMED --add-exports javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
+                    --add-exports javafx.graphics/com.sun.glass.ui.delegate=ALL-UNNAMED
+
                     </argLine>
                     </configuration>
             </plugin>
+                     <plugin>
+                        <groupId>org.openjfx</groupId>
+                        <artifactId>javafx-maven-plugin</artifactId>
+                        <version>0.0.6</version>
+                        <configuration>                    
+                            <mainClass>infectiontracer.ui/infectiontracer.ui.App</mainClass>
+                        </configuration>
+                        </plugin>
+            <!--Jlink-->
+              <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>infectiontracer.ui/infectiontracer.ui.App</mainClass>
+                    <!-- rest of options are for jlink -->
+                    <compress>2</compress>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <stripDebug>true</stripDebug>
+                    <noManPages>true</noManPages>
+                    <launcher>infectiontracerfx</launcher>
+                    <jlinkImageName>infectiontracerfx</jlinkImageName>
+                    <jlinkZipName>infectiontracerfx</jlinkZipName>
+                </configuration>
+            </plugin>
+ 
+
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <name>InfectionTracerFX</name>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>it1901</vendor>
+                    <destination>target/dist</destination>
+                    <module>infectiontracer.ui/infectiontracer.ui.App</module>
+                    <runtimeImage>target/infectiontracerfx</runtimeImage>
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                    </javaOptions>
+                    <!-- linux options --> 
+                    <linuxShortcut>true</linuxShortcut>
+                    <linuxMenuGroup>InfectionTracerFX</linuxMenuGroup>
+
+                    <!-- windows options --> 
+                    <winDirChooser>true</winDirChooser>
+                    <winShortcut>true</winShortcut>
+                    <winMenu>true</winMenu>
+                    <winMenuGroup>InfectionTracerFX</winMenuGroup>
+                </configuration>
+            </plugin>
+
 
 
             
@@ -128,16 +181,6 @@
                 <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-            </plugin>
-
-                
-            <plugin>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.6</version>
-                <configuration>
-           <mainClass>infectiontracer.ui/infectiontracer.ui.App</mainClass>
-           </configuration>
             </plugin>
         </plugins>
     </build>

@@ -3,7 +3,7 @@ module infectiontracer.ui {
   requires javafx.fxml;
   requires javafx.controls;
   requires infectiontracer.core;
-  requires infectiontracer.rest;
+ // requires infectiontracer.rest;
   requires java.net.http;
   requires com.google.gson;
 

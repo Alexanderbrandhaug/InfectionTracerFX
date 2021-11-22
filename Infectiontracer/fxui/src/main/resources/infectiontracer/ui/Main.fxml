@@ -55,6 +55,10 @@
             </Button>
          </children>
       </AnchorPane>
+      <Button layoutX="380.0" layoutY="394.0" mnemonicParsing="false" onAction="#addContact" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #0598ff;" text="Add" textFill="#fcfcfc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
       <Text layoutX="142.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a new close contact by their registerd email to be notified if they get infected, and to let them know if you get infected" wrappingWidth="299.3356647491455">
          <font>
             <Font size="17.0" />
@@ -68,7 +72,7 @@
             <Image url="@19256548621558965385-128.png" />
          </image>
       </ImageView>
-      <TextField fx:id="contactNameTxt" layoutX="146.0" layoutY="388.0" prefHeight="35.0" prefWidth="166.0" promptText="Add new close contact" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+      <TextField fx:id="contactNameTxt" layoutX="146.0" layoutY="388.0" prefHeight="35.0" prefWidth="182.0" promptText="Add/delete new close contact" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
       <TableView fx:id="contactTable" layoutX="612.0" layoutY="116.0" prefHeight="628.0" prefWidth="518.0" style="-fx-background-color: white;">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="88.58746337890625" text="First name" />
@@ -79,7 +83,7 @@
         </columns>
       </TableView>
       <HBox layoutX="440.0" layoutY="835.0" spacing="10.0" />
-      <Label fx:id="infectionStatus" layoutX="146.0" layoutY="218.0" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
+      <Label fx:id="infectionStatus" layoutX="146.0" layoutY="218.0" prefHeight="35.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -120,5 +124,6 @@
             <Font size="18.0" />
          </font>
       </Text>
+      <Button layoutX="496.0" layoutY="393.0" mnemonicParsing="false" onAction="#removeCloseContact" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #0598ff;" text="Delete" textFill="WHITE" />
    </children>
 </AnchorPane>

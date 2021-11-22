@@ -26,22 +26,39 @@ public class InfectionTracer {
    * Method to add a close contact for the current active user Use email for now, as each user has a
    * unique email.
    *
-   * @param username The email to the user trying to add a close contact.
-   * @param email The email to the user being added as a close contact.
+   * @param userEmail The email to the user trying to add a close contact.
+   * @param closeContactEmail The email to the user being added as a close contact.
    */
-  public void addCloseContact(String username, String email) {
-    if (!fileHandler.checkUserList(email)) {
+  public void addCloseContact(String userEmail, String closeContactEmail) {
+    if (!fileHandler.checkUserList(closeContactEmail)) {
       throw new IllegalArgumentException("The user does not exist");
     }
     List<User> allUsers = fileHandler.getUsers();
     // If one user adds another as close contact, both will become a close contact to each other
     User currentUser =
-        allUsers.stream().filter(user -> username.equals(user.getEmail())).findAny().orElse(null);
+        allUsers.stream().filter(user -> userEmail.equals(user.getEmail())).findAny().orElse(null);
     User closeContact =
-        allUsers.stream().filter(user -> email.equals(user.getEmail())).findAny().orElse(null);
+        allUsers.stream().filter(user -> closeContactEmail.equals(user.getEmail())).findAny().orElse(null);
     if (closeContact != null && currentUser != null) {
       currentUser.addCloseContact(closeContact.getEmail());
       closeContact.addCloseContact(currentUser.getEmail());
+      fileHandler.writeUsersToFile(allUsers);
+    }
+  }
+
+  public void removeCloseContact(String userEmail, String closeContactEmail) {
+    if (!fileHandler.checkUserList(closeContactEmail)) {
+      throw new IllegalArgumentException("The user does not exist");
+    }
+    List<User> allUsers = fileHandler.getUsers();
+    User currentUser =
+            allUsers.stream().filter(user -> userEmail.equals(user.getEmail())).findAny().orElse(null);
+    User closeContact =
+            allUsers.stream().filter(user -> closeContactEmail.equals(user.getEmail())).findAny().orElse(null);
+
+    if (closeContact != null && currentUser != null) {
+      currentUser.removeCloseContact(closeContact.getEmail());
+      closeContact.removeCloseContact(currentUser.getEmail());
       fileHandler.writeUsersToFile(allUsers);
     }
   }
@@ -119,4 +136,28 @@ public class InfectionTracer {
     }
     return null;
   }
+
+  public void deleteUser(String username){
+    List<User> users = fileHandler.getUsers();
+    for(User user: users){
+      if(username.equals(user.getEmail())){
+        users.remove(user);
+      }
+    }
+  }
+
+  //made it boolean in order to not get 500 error when trying to updatepw on server-side
+  public boolean changePw(String username){
+    List<User> users = fileHandler.getUsers();
+    for(User user: users){
+      if(username.equals(user.getEmail())){
+        user.setPassword(new EmailService().sendEmailWithNewPassword(user.getEmail()));
+        users.add(user);
+        fileHandler.writeUsersToFile(users);
+        return true;
+      }
+  }
+  return false;
+  }
+
 }

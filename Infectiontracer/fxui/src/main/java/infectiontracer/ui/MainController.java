@@ -1,11 +1,10 @@
 package infectiontracer.ui;
-import java.net.*;  
 import java.net.URI;
-import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpResponse;
+
+import infectiontracer.core.EmailService;
 import infectiontracer.core.InfectionTracer;
 import infectiontracer.core.User;
 import java.util.List;
@@ -20,9 +19,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import java.io.OutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 
@@ -38,6 +34,7 @@ public class MainController extends AbstractController {
   final ScreenController screencontroller = new ScreenController();
   private final String myUrl = "http://localhost:8080/infectiontracer/";
   private Gson gson = new Gson();
+  private EmailService emailservice = new EmailService();
 
 
   @FXML private Label usernameLbl;
@@ -65,25 +62,15 @@ public class MainController extends AbstractController {
 
   @FXML
   void fireHealthyUser(ActionEvent event) {
-    try {
-      URI endpointBaseUri = new URI(myUrl+"user/"+username+"/healthstatus/makehealthy");
-      String json = gson.toJson(infectionTracer.getActiveUser(username));
-      System.out.println(json);
-      HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
-              .header("Accept", "application/json")
-              .header("Content-Type", "application/json")
-              .PUT(HttpRequest.BodyPublishers.ofString(json))
-              .build();
-      final HttpResponse<String> response = HttpClient.newBuilder().build()
-              .send(request,HttpResponse.BodyHandlers.ofString());
-              infectionStatus.setText("Infected");
-              System.out.println(response);
+    String url = myUrl+"user/"+username+"/healthstatus/makehealthy";
+    String json = gson.toJson(infectionTracer.getActiveUser(username));
+    if(createPutRequest(url, json)) {;
       infectionStatus.setText("Covid-19 Negative");
-    } catch (IllegalArgumentException e) {
-      createInformationDialogBox("Can't change health status", null, e.getMessage());
-  } catch (Exception e) {
-    createErrorDialogBox("Error", null, "Error when updating healthstatus to sick");
-  }
+    }
+    else {
+      createErrorDialogBox("Status change failed", null, "Failed to change infection status to 'Covid-19 Negative'");
+    }
+
   }
 
   @FXML
@@ -101,6 +88,12 @@ public class MainController extends AbstractController {
               .send(request,HttpResponse.BodyHandlers.ofString());
               infectionStatus.setText("Infected");
               System.out.println(response);
+              List<User> currentMap = infectionTracer.getUsersCloseContacts(username);
+              createInformationDialogBox(
+                "Email sent", null, "Email notification was sent to your closecontacts");
+              emailservice.sendEmail(username, currentMap);
+              
+           
               
       
     } catch (IllegalArgumentException e) {
@@ -109,38 +102,38 @@ public class MainController extends AbstractController {
     } catch (Exception e) {
       createErrorDialogBox("Error", null, "Error when updating healthstatus to sick");
     }
-
   }
 
 
   @FXML
   void addContact(ActionEvent event) {
-    try {
-      URI endpointBaseUri = new URI(myUrl+"user/"+username+"/closecontacts");
-      String json = gson.toJson(infectionTracer.getActiveUser(contactNameTxt.getText()));
-      System.out.println(json);
-      HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
-              .header("Accept", "application/json")
-              .header("Content-Type", "application/json")
-              .POST(HttpRequest.BodyPublishers.ofString(json))
-              .build();
-      final HttpResponse<String> response = HttpClient.newBuilder().build()
-              .send(request,HttpResponse.BodyHandlers.ofString());
-      System.out.println(response);
+    String url = myUrl+"user/"+username+"/closecontacts";
+    String json = gson.toJson(infectionTracer.getActiveUser(contactNameTxt.getText()));
 
+    if (createPostRequest(url, json)) {
+      createInformationDialogBox("New close contact added", null, "New close contact successfully added.");
       List<User> currentMap = infectionTracer.getUsersCloseContacts(username);
-      contactList.clear();
-      contactList.addAll(currentMap);
-      numberOfContacts.setText(String.valueOf(contactList.size()));
-      contactTable.setItems(contactList);
-      contactNameTxt.clear();
-
-    } catch (IllegalArgumentException e) {
-      createErrorDialogBox("Error", null, e.getMessage());
-    
-  } catch (Exception e) {
-    createErrorDialogBox("Error", null, "Error when updating healthstatus to sick");
+      refreshInfo(currentMap);
+    }
+    else {
+      createErrorDialogBox("Failed to add close contact", null, "Failed to add new close contact.");
+    }
   }
+
+  @FXML
+  void removeCloseContact(ActionEvent event) {
+    String url = myUrl+"user/"+username+"/closecontacts/removeContact";
+    User closeContact = contactTable.getSelectionModel().getSelectedItem();
+    String json = gson.toJson(closeContact);
+
+    if (createPostRequest(url, json)) {
+      createInformationDialogBox("Close contact removed", null, "The selected close contact has successfully been removed.");
+      List<User> currentMap = infectionTracer.getUsersCloseContacts(username);
+      refreshInfo(currentMap);
+    }
+    else {
+      createErrorDialogBox("Deletion failed", null, "Failed to remove selected close contact.");
+    }
   }
 
   @FXML
@@ -153,31 +146,15 @@ public class MainController extends AbstractController {
     emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
     healthstatusColumn.setCellValueFactory(new PropertyValueFactory<>("healthStatus"));
     dateOfInfectionColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfInfection"));
-    
-    try{
-      URI endpointBaseUri = new URI(myUrl+"user/"+username+"/closecontacts");
-      HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
-      .header("Accept", "application/json")
-      .GET()
-      .build();
-        final HttpResponse<String> response = HttpClient.newBuilder().build()
-        .send(request,HttpResponse.BodyHandlers.ofString());
-        System.out.println(response);
-        List<User> userList = gson.fromJson(response.body(), new TypeToken<List<User>>() {}.getType());
-        
-       
+
+    String url = myUrl+"user/"+username+"/closecontacts";
+    String closecontacts = createGetRequest(url);
+    List<User> userList = gson.fromJson(closecontacts, new TypeToken<List<User>>() {}.getType());
     if (userList == null) {
       return;
     }
-    contactList.addAll(userList);
-    numberOfContacts.setText(String.valueOf(userList.size()));
-    contactTable.setItems(contactList);
-  
-        
-      } catch (Exception e) {
-        e.printStackTrace();
+    refreshInfo(userList);
       }
-    }
 
   @FXML
   void mainToLogin(ActionEvent event) {
@@ -188,5 +165,12 @@ public class MainController extends AbstractController {
   void closeMain(ActionEvent event) {
     Stage stage = (Stage) closeBtnMain.getScene().getWindow();
     stage.close();
+  }
+
+  private void refreshInfo(List<User> userList) {
+    contactList.clear();
+    contactList.addAll(userList);
+    numberOfContacts.setText(String.valueOf(userList.size()));
+    contactTable.setItems(contactList);
   }
 }

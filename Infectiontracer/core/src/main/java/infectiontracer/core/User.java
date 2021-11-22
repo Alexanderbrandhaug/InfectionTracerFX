@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.beans.ConstructorProperties;
 
+
 /**
  * Each user of the application needs to register themselves to use the
  * application. The user they create are analogous to the User class, and these
@@ -23,6 +24,8 @@ public class User {
   private String dateOfInfection;
   private String healthStatus;
   private List<String> closeContacts = new ArrayList<>();
+  
+  
 
   /**
    * Constructor for User class.
@@ -109,6 +112,15 @@ public class User {
       throw new IllegalArgumentException("User is already added");
     } else {
       closeContacts.add(user);
+    }
+  }
+
+  public void removeCloseContact(String user) {
+    if (!checkIfUserAlreadyExistsAsCloseContact(user)) {
+      throw new IllegalArgumentException("User is not a close contact!");
+    }
+    else {
+      closeContacts.remove(user);
     }
   }
 
@@ -199,6 +211,9 @@ public class User {
   public String getPassword() {
     return this.password;
   }
+
+
+
 
   @Override
   public String toString() {
