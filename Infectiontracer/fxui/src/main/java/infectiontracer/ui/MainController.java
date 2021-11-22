@@ -58,6 +58,8 @@ public class MainController extends AbstractController {
 
   @FXML private Button closeBtnMain;
 
+
+
   @FXML
   void fireHealthyUser(ActionEvent event) {
     String url = myUrl+"user/"+username+"/healthstatus/makehealthy";

@@ -32,6 +32,8 @@ public class AbstractController {
     alert.setTitle(title);
     alert.setHeaderText(header);
     alert.setContentText(content);
+    Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+    errorButton.setId("errorButton");
     alert.showAndWait();
   }
 
