@@ -122,7 +122,7 @@ public class MainController extends AbstractController {
 
   @FXML
   void removeCloseContact(ActionEvent event) {
-    String url = myUrl+"user/"+username+"/closecontacts/removeContact";
+    String url = myUrl+"user/"+username+"/closecontacts/removecontact";
     User closeContact = contactTable.getSelectionModel().getSelectedItem();
     String json = gson.toJson(closeContact);
 
