@@ -151,7 +151,7 @@ public class MainController extends AbstractController {
   @FXML
   void deleteCloseContact(ActionEvent event) {
     try {
-      URI endpointBaseUri = new URI(myUrl+"user/"+username+"/closecontacts/removeContact");
+      URI endpointBaseUri = new URI(myUrl+"user/"+username+"/closecontacts/removecontact");
       User closeContact = contactTable.getSelectionModel().getSelectedItem();
       String json = gson.toJson(closeContact);
       System.out.println(json);

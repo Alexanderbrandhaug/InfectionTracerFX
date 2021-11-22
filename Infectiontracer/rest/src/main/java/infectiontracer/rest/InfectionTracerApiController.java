@@ -65,7 +65,7 @@ public class InfectionTracerApiController {
         return true;
     }
 
-    @PostMapping("infectiontracer/user/{email}/closecontacts/removeContact")
+    @PostMapping("infectiontracer/user/{email}/closecontacts/removecontact")
     protected boolean deleteCloseContactApi(@PathVariable String email, @RequestBody User newCloseContact){
         infectionTracer.removeCloseContact(email, newCloseContact.getEmail());
         return true;

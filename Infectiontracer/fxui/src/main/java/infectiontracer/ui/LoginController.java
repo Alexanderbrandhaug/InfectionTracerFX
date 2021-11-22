@@ -9,14 +9,14 @@ import java.nio.charset.StandardCharsets;
 import com.google.gson.reflect.TypeToken;
 import infectiontracer.core.User;
 import infectiontracer.json.FileHandler;
-import infectiontracer.rest.InfectionTracerApiController;
+//import infectiontracer.rest.InfectionTracerApiController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import infectiontracer.rest.*;
+//import infectiontracer.rest.*;
 import com.google.gson.Gson;
 
 
