@@ -72,6 +72,7 @@ public class InfectionTracer {
     List<User> allUsers = fileHandler.getUsers();
     User currentUser =
         allUsers.stream().filter(user -> username.equals(user.getEmail())).findAny().orElse(null);
+        System.out.println("TEST");
 
     if (currentUser != null) {
       if (currentUser.getHealthStatus().equals("Infected")) {
