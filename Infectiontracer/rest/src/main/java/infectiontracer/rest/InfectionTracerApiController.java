@@ -31,7 +31,7 @@ public class InfectionTracerApiController {
     }
 
     @GetMapping("/infectiontracer/user/{email}")
-    @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "User does not exist")
+    //@ResponseStatus(code = HttpStatus.OK, reason = "OK")
     protected User getUserByEmailApi(@PathVariable String email) {
         return infectionTracer.getActiveUser(email);
     }
@@ -46,7 +46,7 @@ public class InfectionTracerApiController {
 
     
     @GetMapping("/infectiontracer/user/{email}/closecontacts")
-    @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "User does not exist")
+   // @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "User does not exist")
      protected List<User> getUsersCloseContactsApi(@PathVariable String email){
          return infectionTracer.getUsersCloseContacts(email);
      }
