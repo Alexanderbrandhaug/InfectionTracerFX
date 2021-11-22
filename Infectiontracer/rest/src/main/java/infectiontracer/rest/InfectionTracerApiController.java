@@ -1,5 +1,4 @@
 package infectiontracer.rest;
-
 import java.util.List;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +12,8 @@ import infectiontracer.core.*;
 import infectiontracer.json.FileHandler;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
 
 
 
@@ -30,6 +31,7 @@ public class InfectionTracerApiController {
     }
 
     @GetMapping("/infectiontracer/user/{email}")
+    @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "User does not exist")
     protected User getUserByEmailApi(@PathVariable String email) {
         return infectionTracer.getActiveUser(email);
     }
@@ -42,8 +44,9 @@ public class InfectionTracerApiController {
              return true;
     }
 
-
+    
     @GetMapping("/infectiontracer/user/{email}/closecontacts")
+    @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "User does not exist")
      protected List<User> getUsersCloseContactsApi(@PathVariable String email){
          return infectionTracer.getUsersCloseContacts(email);
      }
