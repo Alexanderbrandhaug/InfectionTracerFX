@@ -3,6 +3,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+
+import infectiontracer.core.EmailService;
 import infectiontracer.core.InfectionTracer;
 import infectiontracer.core.User;
 import java.util.List;
@@ -30,8 +32,9 @@ public class MainController extends AbstractController {
   private final InfectionTracer infectionTracer = new InfectionTracer();
   final ObservableList<User> contactList = FXCollections.observableArrayList();
   final ScreenController screencontroller = new ScreenController();
-  //private final String myUrl = "http://localhost:8080/infectiontracer/";
-  //private Gson gson = new Gson();
+  private final String myUrl = "http://localhost:8080/infectiontracer/";
+  private Gson gson = new Gson();
+  private EmailService emailservice = new EmailService();
 
 
   @FXML private Label usernameLbl;
@@ -70,13 +73,32 @@ public class MainController extends AbstractController {
 
   @FXML
   void fireInfectedUser(ActionEvent event) {
-    String url = myUrl+"user/"+username+"/healthstatus/makesick";
-    String json = gson.toJson(infectionTracer.getActiveUser(username));
-    if (createPutRequest(url, json)) {
-      infectionStatus.setText("Infected");
-    }
-    else {
-      createErrorDialogBox("Status change failed", null, "Failed to change infection status to 'Infected'");
+    try {
+      URI endpointBaseUri = new URI(myUrl+"user/"+username+"/healthstatus/makesick");
+      String json = gson.toJson(infectionTracer.getActiveUser(username));
+      System.out.println(json);
+      HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
+              .header("Accept", "application/json")
+              .header("Content-Type", "application/json")
+              .PUT(HttpRequest.BodyPublishers.ofString(json))
+              .build();
+      final HttpResponse<String> response = HttpClient.newBuilder().build()
+              .send(request,HttpResponse.BodyHandlers.ofString());
+              infectionStatus.setText("Infected");
+              System.out.println(response);
+              List<User> currentMap = infectionTracer.getUsersCloseContacts(username);
+              createInformationDialogBox(
+                "Email sent", null, "Email notification was sent to your closecontacts");
+              emailservice.sendEmail(username, currentMap);
+              
+           
+              
+      
+    } catch (IllegalArgumentException e) {
+      createInformationDialogBox("Can't change health status", null, e.getMessage());
+      
+    } catch (Exception e) {
+      createErrorDialogBox("Error", null, "Error when updating healthstatus to sick");
     }
   }
 

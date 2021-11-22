@@ -136,4 +136,28 @@ public class InfectionTracer {
     }
     return null;
   }
+
+  public void deleteUser(String username){
+    List<User> users = fileHandler.getUsers();
+    for(User user: users){
+      if(username.equals(user.getEmail())){
+        users.remove(user);
+      }
+    }
+  }
+
+  //made it boolean in order to not get 500 error when trying to updatepw on server-side
+  public boolean changePw(String username){
+    List<User> users = fileHandler.getUsers();
+    for(User user: users){
+      if(username.equals(user.getEmail())){
+        user.setPassword(new EmailService().sendEmailWithNewPassword(user.getEmail()));
+        users.add(user);
+        fileHandler.writeUsersToFile(users);
+        return true;
+      }
+  }
+  return false;
+  }
+
 }

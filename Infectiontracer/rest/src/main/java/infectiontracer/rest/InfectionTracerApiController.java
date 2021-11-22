@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import infectiontracer.core.*;
 import infectiontracer.json.FileHandler;
@@ -20,6 +21,7 @@ public class InfectionTracerApiController {
 
     private final FileHandler filehandler = new FileHandler();
     private final InfectionTracer infectionTracer = new InfectionTracer();
+
 
     @GetMapping("/infectiontracer/users")
     protected List<User> getAllActiveUsersApi() {
@@ -64,13 +66,21 @@ public class InfectionTracerApiController {
         return true;
     }
 
-    @PostMapping("infectiontracer/user/{email}/closecontacts/removeContact")
+    @PostMapping("infectiontracer/user/{email}/closecontacts/removecontact")
     protected boolean deleteCloseContactApi(@PathVariable String email, @RequestBody User newCloseContact){
         infectionTracer.removeCloseContact(email, newCloseContact.getEmail());
         return true;
     }
 
     
+    @PutMapping("infectiontracer/user/{email}")
+    protected boolean updatePasswordApi(@PathVariable String email, @RequestBody User currentUser){
+       if(infectionTracer.changePw(currentUser.getEmail())){
+        return true;
+       }
+        return false;
+        
+    }
   
 
     

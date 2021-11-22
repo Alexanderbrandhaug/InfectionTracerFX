@@ -7,16 +7,19 @@ import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import com.google.gson.reflect.TypeToken;
+
+import infectiontracer.core.EmailService;
+import infectiontracer.core.InfectionTracer;
 import infectiontracer.core.User;
 import infectiontracer.json.FileHandler;
-import infectiontracer.rest.InfectionTracerApiController;
+//import infectiontracer.rest.InfectionTracerApiController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import infectiontracer.rest.*;
+//import infectiontracer.rest.*;
 import com.google.gson.Gson;
 
 
@@ -25,8 +28,10 @@ public class LoginController extends AbstractController {
 
   private final FileHandler fileHandler = new FileHandler();
   private final ScreenController screencontroller = new ScreenController();
-  //private final String myUrl = "http://localhost:8080/infectiontracer/";
-  //private Gson gson = new Gson();
+  private final String myUrl = "http://localhost:8080/infectiontracer/";
+  private Gson gson = new Gson();
+ // private EmailService emailService = new EmailService();
+  private InfectionTracer infectionTracer = new InfectionTracer();
  
   @FXML
   private Button closeBtnLogin;
@@ -49,6 +54,36 @@ public class LoginController extends AbstractController {
       createErrorDialogBox("Login information is incorrect", null, "Email/password combination is not valid.");
     }
   }
+
+
+  @FXML
+  void forgotPasswordBtn(ActionEvent event) {
+  
+    try {
+    URI endpointBaseUri = new URI(myUrl+"user/"+emailTxt.getText());
+    String json = gson.toJson(infectionTracer.getActiveUser(emailTxt.getText()));
+      HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
+              .header("Accept", "application/json")
+              .header("Content-Type", "application/json")
+              .PUT(HttpRequest.BodyPublishers.ofString(json))
+              .build();
+      final HttpResponse<String> response = HttpClient.newBuilder().build()
+              .send(request,HttpResponse.BodyHandlers.ofString());
+      System.out.println(response);
+
+     
+
+      
+    } catch (IllegalArgumentException e) {
+      createErrorDialogBox("Error", null, e.getMessage());
+    
+  } catch (Exception e) {
+    createErrorDialogBox("Error", null, "Error when updating healthstatus to sick");
+  }
+  }
+      
+  
+
 
 
   @FXML
