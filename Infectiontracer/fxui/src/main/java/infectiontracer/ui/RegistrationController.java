@@ -19,8 +19,8 @@ public class RegistrationController extends AbstractController {
 
   final FileHandler fileHandler = new FileHandler();
   final ScreenController screencontroller = new ScreenController();
-  private final String myUrl = "http://localhost:8080/infectiontracer/";
-  final Gson gson = new Gson();
+  //private final String myUrl = "http://localhost:8080/infectiontracer/";
+  //final Gson gson = new Gson();
 
   @FXML private TextField forenameTxt;
 
@@ -42,38 +42,18 @@ public class RegistrationController extends AbstractController {
 
   @FXML
   void registerUser(ActionEvent event) {
+    String url = myUrl+"users";
+    User newUser = new User(forenameTxt.getText(), lastnameTxt.getText(), emailTxt.getText(),
+            passwordTxt.getText(), "", "");
+    String json = gson.toJson(newUser);
 
-    try {
-      if (passwordTxt.getText().equals(verifyPasswordTxt.getText())) {
-        User newUser =
-            new User(
-                forenameTxt.getText(),
-                lastnameTxt.getText(),
-                emailTxt.getText(),
-                passwordTxt.getText(),
-                "",
-                "");
-          URI endpointBaseUri = new URI(myUrl+"users");
-          String json = gson.toJson(newUser);
-          System.out.println(json);
-          HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
-                  .header("Accept", "application/json")
-                  .header("Content-Type", "application/json")
-                  .POST(HttpRequest.BodyPublishers.ofString(json))
-                  .build();
-          final HttpResponse<String> response = HttpClient.newBuilder().build()
-                  .send(request,HttpResponse.BodyHandlers.ofString());
-          System.out.println(response);
-          if(newUser.getPassword().equals(passwordTxt.getText())){
-        createInformationDialogBox(
-            "Successful registration", null, "The registration was successful");
-        screencontroller.switchToLogin(event);
-      }
+    if (createPostRequest(url, json)) {
+      createInformationDialogBox(
+              "Successful registration", null, "The registration was successful");
+      screencontroller.switchToLogin(event);
     }
-    } catch (IllegalArgumentException e) {
-      createErrorDialogBox("Error", null, e.getMessage());
-    } catch (Exception e) {
-      createErrorDialogBox("Error", null, "Error when creating user");
+    else {
+      createErrorDialogBox("Unsuccessful registration", null, "The registration was not completed");
     }
   }
 

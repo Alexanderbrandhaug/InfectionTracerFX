@@ -120,6 +120,6 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button layoutX="496.0" layoutY="393.0" mnemonicParsing="false" onAction="#deleteCloseContact" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #0598ff;" text="Delete" textFill="WHITE" />
+      <Button layoutX="496.0" layoutY="393.0" mnemonicParsing="false" onAction="#removeCloseContact" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #0598ff;" text="Delete" textFill="WHITE" />
    </children>
 </AnchorPane>

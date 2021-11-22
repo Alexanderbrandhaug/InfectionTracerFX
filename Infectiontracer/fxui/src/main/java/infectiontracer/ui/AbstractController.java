@@ -1,6 +1,15 @@
 package infectiontracer.ui;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.List;
 import java.util.Optional;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import infectiontracer.core.User;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -15,6 +24,8 @@ public class AbstractController {
 
   // this will be email for now
   String username;
+  final String myUrl = "http://localhost:8080/infectiontracer/";
+  final Gson gson = new Gson();
 
   protected void createErrorDialogBox(String title, String header, String content) {
     Alert alert = new Alert(AlertType.ERROR);
@@ -42,5 +53,72 @@ public class AbstractController {
 
     Optional<ButtonType> result = alert.showAndWait();
     return result.filter(buttonType -> buttonType == ButtonType.OK).isPresent();
+  }
+
+  /**
+   * @param url Url that is applicable in for the API-controller
+   * @param json Json-string that is to be sent with HTTPS
+   * @return boolean, to know if request failed or not
+   */
+  protected boolean createPostRequest(String url, String json) {
+    try {
+      URI endpointBaseUri = new URI(url);
+      HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
+              .header("Accept", "application/json")
+              .header("Content-Type", "application/json")
+              .POST(HttpRequest.BodyPublishers.ofString(json))
+              .build();
+      final HttpResponse<String> response = HttpClient.newBuilder().build()
+              .send(request,HttpResponse.BodyHandlers.ofString());
+      System.out.println(response);
+      return response.statusCode() == 200;
+
+    } catch (IllegalArgumentException e) {
+      createErrorDialogBox("Error", null, e.getMessage());
+      return false;
+
+    } catch (Exception e) {
+      createErrorDialogBox("Error", null, "Error when updating healthstatus to sick");
+      return false;
+    }
+  }
+
+  protected boolean createPutRequest(String url, String json) {
+    try {
+      URI endpointBaseUri = new URI(url);
+      HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
+              .header("Accept", "application/json")
+              .header("Content-Type", "application/json")
+              .PUT(HttpRequest.BodyPublishers.ofString(json))
+              .build();
+      final HttpResponse<String> response = HttpClient.newBuilder().build()
+              .send(request,HttpResponse.BodyHandlers.ofString());
+      System.out.println(response);
+      return response.statusCode() == 200;
+    } catch (IllegalArgumentException e) {
+      createInformationDialogBox("Can't change health status", null, e.getMessage());
+      return false;
+    } catch (Exception e) {
+      createErrorDialogBox("Error", null, "Error when updating healthstatus to sick");
+      return false;
+    }
+  }
+
+  protected String createGetRequest(String url) {
+    try{
+      URI endpointBaseUri = new URI(url);
+      HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
+              .header("Accept", "application/json")
+              .GET()
+              .build();
+      final HttpResponse<String> response = HttpClient.newBuilder().build()
+              .send(request,HttpResponse.BodyHandlers.ofString());
+      System.out.println(response);
+
+      return response.body();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 }
