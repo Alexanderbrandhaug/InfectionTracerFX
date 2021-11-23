@@ -13,10 +13,14 @@ import infectiontracer.core.User;
 import infectiontracer.json.*;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.ContextConfiguration;
 
 import org.junit.jupiter.api.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ContextConfiguration(classes = { InfectionTracerApplication.class })
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class InfectionTracerLoginTest extends ApplicationTest {
 
     private final FileHandler fileHandler = new FileHandler();

@@ -20,9 +20,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.ContextConfiguration;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ContextConfiguration(classes = { InfectionTracerApplication.class })
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class InfectionTracerMainTest extends ApplicationTest{
 
     private final FileHandler fileHandler = new FileHandler();

@@ -11,9 +11,13 @@ import org.junit.jupiter.api.*;
 import org.testfx.framework.junit5.ApplicationTest;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.ContextConfiguration;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ContextConfiguration(classes = { InfectionTracerApplication.class })
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class InfectionTracerRegisterTest extends ApplicationTest {
 
     private final FileHandler fileHandler = new FileHandler();

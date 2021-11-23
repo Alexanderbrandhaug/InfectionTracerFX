@@ -15,7 +15,6 @@ import org.springframework.test.context.ContextConfiguration;
 import infectiontracer.rest.*;
 
 
-
 @ContextConfiguration(classes = { InfectionTracerApplication.class })
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class InfectiontracerTest {
