@@ -28,7 +28,7 @@ public class LoginController extends AbstractController {
 
   private final FileHandler fileHandler = new FileHandler();
   private final ScreenController screencontroller = new ScreenController();
-  private final String myUrl = "http://localhost:8080/infectiontracer/";
+  private final static String myUrl = "http://localhost:8080/infectiontracer/";
   private Gson gson = new Gson();
  // private EmailService emailService = new EmailService();
   private InfectionTracer infectionTracer = new InfectionTracer();

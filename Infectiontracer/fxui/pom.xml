@@ -9,10 +9,6 @@
     </parent>
 
     <artifactId>fxui</artifactId>
-   
-    <properties>
-        <skipUiTests>false</skipUiTests>
-    </properties>
 
     <dependencies>
     <dependency>
@@ -22,10 +18,11 @@
         </dependency>
 
         <dependency>
-            <groupId>it1901.infectiontracer</groupId>
-            <artifactId>rest</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+      <artifactId>wiremock-jre8</artifactId>
+      <groupId>com.github.tomakehurst</groupId>
+      <scope>test</scope>
+      <version>2.27.2</version>
+    </dependency>
 
 
         <!-- javafx -->
