@@ -28,7 +28,10 @@ public class AbstractController {
   static String myUrl = "http://localhost:" + port + "/infectiontracer/";
   final Gson gson = new Gson();
 
-  protected void setMyUrl(String port) {
+
+
+  //try to use other than static methods
+  protected static void setMyUrl(String port) {
     myUrl = "http://localhost:" + port + "/infectiontracer/";
   }
 
