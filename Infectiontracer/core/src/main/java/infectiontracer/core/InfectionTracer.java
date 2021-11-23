@@ -141,8 +141,10 @@ public class InfectionTracer {
         throw new IllegalArgumentException("There does not exist any user with email: "+username);
       }
     }
-    return null;
   }
+    throw new IllegalArgumentException("Invalid");
+  }
+
 
   public void deleteUser(String username){
     List<User> users = fileHandler.getUsers();
