@@ -137,9 +137,6 @@ public class InfectionTracer {
     for (User user : users) {
       if (username.equals(user.getEmail())) {
         return user;
-      }else{
-        throw new IllegalArgumentException("There does not exist any user with email: "+username);
-      }
     }
   }
     throw new IllegalArgumentException("Invalid");

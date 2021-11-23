@@ -132,7 +132,6 @@ public class MainController extends AbstractController {
   }
     catch (Exception e) {
       createErrorDialogBox("Failed to add close contact", null, "Failed to add new close contact.");
-      e.getStackTrace();
     }
   }
 
