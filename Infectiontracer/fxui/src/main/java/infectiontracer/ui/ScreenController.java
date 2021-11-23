@@ -8,7 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import javafx.scene.input.MouseEvent;
 /** Controller to change between the different scenes in the application. */
 public class ScreenController extends AbstractController {
   private Stage stage;
@@ -73,4 +73,19 @@ public class ScreenController extends AbstractController {
       createErrorDialogBox("Scene error", null, "Error when changing scenes");
     }
   }
+
+
+  public void switchToProfile(MouseEvent event){
+    try {
+      root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Profile.fxml")));
+      stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+      scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
+    } catch (IOException e) {
+      createErrorDialogBox("Scene error", null, "Error when changing scenes");
+    }
+  }
+
+
 }
