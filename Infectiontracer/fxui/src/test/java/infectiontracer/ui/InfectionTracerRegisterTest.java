@@ -49,11 +49,14 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#passwordTxt").write(password);
         clickOn("#verifyPasswordTxt").write(password);
         clickOn("#registerBtnId");
-        verifyThat("#okButton", isVisible());
+        verifyThat("#okButton", isVisible()); //should get confirmation everything is correct
+
+        clickOn("#okButton"); 
+        
     }
 
     @Test
-    public void testInValidConfirmationPassword() { //This test should fail in realese 2 due to not implementing it yet
+    public void testInValidConfirmationPassword() { 
         String forename = "Ola";
         String lastname = "Svenskman";
         String username = "ola@outlook.com";
@@ -65,7 +68,8 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#passwordTxt").write(password);
         clickOn("#verifyPasswordTxt").write(passwordConfirmation);
         clickOn("#registerBtnId");
-        verifyThat("#registrationSceneID", isVisible());
+        
+        verifyThat("errorButton",isVisible()); //should get error telling confimationpassword is wrong
     }
 
     @Test
@@ -82,7 +86,7 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#registerBtnId");
         verifyThat("#registrationSceneID", isVisible());
      
-
+        verifyThat("errorButton",isVisible()); //should get error telling confimationpassword is wrong
     }
 
     @Test
@@ -97,6 +101,7 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#passwordTxt").write(password);
         clickOn("#verifyPasswordTxt").write(password);
         clickOn("#registerBtnId");
-        verifyThat("#registrationSceneID", isVisible());
+        
+        verifyThat("errorButton",isVisible()); //should get error telling confimationpassword is wrong
     }
 }
