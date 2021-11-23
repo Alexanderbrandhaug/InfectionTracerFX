@@ -1,4 +1,4 @@
-package infectiontracer.integrationtests;
+package infectiontracer.ui;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class InfectiontracerTest {
   @Test
   void httpClientExample() {
     ResponseEntity<User> response = testRestTemplate.getForEntity("/infectiontracer/user/test@gmail.com", User.class);
-    assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    assertEquals(HttpStatus.OK, response.getStatusCode());
     assertNotNull(response.getBody());
     
   } 
