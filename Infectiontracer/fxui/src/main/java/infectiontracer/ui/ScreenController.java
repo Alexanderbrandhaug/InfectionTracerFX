@@ -75,12 +75,17 @@ public class ScreenController extends AbstractController {
   }
 
 
-  public void switchToProfile(MouseEvent event){
+  public void switchToProfile(MouseEvent event, String username){
     try {
-      root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Profile.fxml")));
+      ProfileController profileController = new ProfileController(username);
+      FXMLLoader loader = new FXMLLoader();
+      loader.setController(profileController);
+      loader.setLocation(getClass().getResource("Profile.fxml"));
       stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+      root = loader.load();
       scene = new Scene(root);
       stage.setScene(scene);
+      stage.centerOnScreen();
       stage.show();
     } catch (IOException e) {
       createErrorDialogBox("Scene error", null, "Error when changing scenes");

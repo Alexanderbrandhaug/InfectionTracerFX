@@ -228,6 +228,6 @@ public class MainController extends AbstractController {
 
   @FXML
     void profileBtn(MouseEvent event) {
-      screencontroller.switchToProfile(event);
+      screencontroller.switchToProfile(event, username);
     }
 }
