@@ -72,8 +72,8 @@ public class InfectionTracerApiController {
     }
 
     @PutMapping("infectiontracer/user/{email}")
-     protected boolean changeUserProfileApi(@PathVariable String email){
-         
+     protected boolean updateUserApi(@PathVariable String email, @RequestBody /*String json_file*/ User updatedUser){
+         infectionTracer.editUser(email, updatedUser);
          return true;
      }
 

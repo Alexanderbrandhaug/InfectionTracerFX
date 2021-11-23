@@ -136,4 +136,17 @@ public class InfectionTracer {
     }
     return null;
   }
+
+  public void editUser(String email, User updatedUser) {
+    List<User> users = fileHandler.getUsers();
+    for (User user : users) {
+      if (email.equals(user.getEmail())) {
+        user.setForename(updatedUser.getForename());
+        user.setLastname(updatedUser.getLastname());
+        user.setPassword(updatedUser.getPassword());
+        fileHandler.writeUsersToFile(users);
+        return;
+      }
+    }
+  }
 }
