@@ -68,22 +68,26 @@ public class InfectionTracer {
    *
    * @param username Username of the logged-in user.
    */
-  public void makeUserInfected(String username) throws IllegalArgumentException {
+  public void makeUserInfected(String username) {
+    try{
     List<User> allUsers = fileHandler.getUsers();
     User currentUser =
         allUsers.stream().filter(user -> username.equals(user.getEmail())).findAny().orElse(null);
         System.out.println("TEST");
 
-    if (currentUser != null) {
+      System.out.println(currentUser.toString());
+    
       if (currentUser.getHealthStatus().equals("Infected")) {
         throw new IllegalArgumentException("User is already infected!");
       }
       currentUser.setInfected();
       currentUser.setDateOfInfected();
       fileHandler.writeUsersToFile(allUsers);
-    }
+      
+    
+  } catch(Exception e){
   }
-
+  }
   /**
    * Method that changes a user's health status to 'Covid-19 Negative'.
    *
@@ -133,6 +137,8 @@ public class InfectionTracer {
     for (User user : users) {
       if (username.equals(user.getEmail())) {
         return user;
+      }else{
+        throw new IllegalArgumentException("There does not exist any user with email: "+username);
       }
     }
     return null;

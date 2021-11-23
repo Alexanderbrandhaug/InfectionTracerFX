@@ -47,7 +47,7 @@ public class LoginController extends AbstractController {
     String url = myUrl+"user/"+emailTxt.getText();
     String JsonUser = createGetRequest(url);
     User user = gson.fromJson(JsonUser, new TypeToken<User>() {}.getType() /*User.class*/);
-    if (user != null && user.getPassword().equals(passwordTxt.getText())) {
+    if (user.getPassword() != null && user.getPassword().equals(passwordTxt.getText())) {
       screencontroller.switchToMain(event, user.getEmail());
     }
     else {
@@ -58,6 +58,10 @@ public class LoginController extends AbstractController {
 
   @FXML
   void forgotPasswordBtn(ActionEvent event) {
+    if(emailTxt.getText().isEmpty()){
+      createErrorDialogBox("Error", null, "Please insert your email in the textfield");
+      return;
+    }
   
     try {
     URI endpointBaseUri = new URI(myUrl+"user/"+emailTxt.getText());
