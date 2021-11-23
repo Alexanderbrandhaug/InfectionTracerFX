@@ -44,10 +44,14 @@ public class LoginController extends AbstractController {
 
   @FXML
   void loginBtn(ActionEvent event) {
+    if(emailTxt.getText().isEmpty()){
+      createErrorDialogBox("Login information is incorrect", null, "Email/password combination is not valid.");
+    }
     String url = myUrl+"user/"+emailTxt.getText();
     String JsonUser = createGetRequest(url);
+    System.out.println(JsonUser);
     User user = gson.fromJson(JsonUser, new TypeToken<User>() {}.getType() /*User.class*/);
-    if (user != null && user.getPassword().equals(passwordTxt.getText())) {
+    if (user.getPassword() != null && user.getPassword().equals(passwordTxt.getText())) {
       screencontroller.switchToMain(event, user.getEmail());
     }
     else {

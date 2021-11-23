@@ -25,11 +25,20 @@ public class InfectiontracerTest {
 
   
   @Test
-  void httpClientExample() {
+  void httpgetUser() {
     ResponseEntity<User> response = testRestTemplate.getForEntity("/infectiontracer/user/test@gmail.com", User.class);
     assertEquals(HttpStatus.OK, response.getStatusCode());
     assertNotNull(response.getBody());
     
   } 
+
+  @Test
+  void httpgetInvalidUser() {
+    ResponseEntity<User> response = testRestTemplate.getForEntity("/infectiontracer/user/test", User.class);
+    assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    assertNotNull(response.getBody());
+    
+  } 
+
   }
   

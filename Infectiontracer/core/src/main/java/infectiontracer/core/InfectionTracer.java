@@ -133,10 +133,11 @@ public class InfectionTracer {
     for (User user : users) {
       if (username.equals(user.getEmail())) {
         return user;
-      }
     }
-    return null;
   }
+    throw new IllegalArgumentException("Invalid");
+  }
+
 
   public void deleteUser(String username){
     List<User> users = fileHandler.getUsers();
