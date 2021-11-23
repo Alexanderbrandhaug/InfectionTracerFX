@@ -76,7 +76,7 @@ public class InfectionTracer {
         System.out.println("TEST");
 
       System.out.println(currentUser.toString());
-    if (currentUser != null) {
+    
       if (currentUser.getHealthStatus().equals("Infected")) {
         throw new IllegalArgumentException("User is already infected!");
       }
@@ -84,9 +84,8 @@ public class InfectionTracer {
       currentUser.setDateOfInfected();
       fileHandler.writeUsersToFile(allUsers);
       
-    }
+    
   } catch(Exception e){
-   e.getStackTrace();
   }
   }
   /**
