@@ -32,7 +32,6 @@ public class MainController extends AbstractController {
   private final InfectionTracer infectionTracer = new InfectionTracer();
   final ObservableList<User> contactList = FXCollections.observableArrayList();
   final ScreenController screencontroller = new ScreenController();
-  private final static String myUrl = "http://localhost:8080/infectiontracer/";
   private Gson gson = new Gson();
   private EmailService emailservice = new EmailService();
 

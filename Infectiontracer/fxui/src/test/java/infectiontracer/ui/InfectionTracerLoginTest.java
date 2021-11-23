@@ -1,9 +1,15 @@
 package infectiontracer.ui;
 
+import infectiontracer.rest.InfectionTracerApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
+import org.springframework.core.env.Environment;
 import org.testfx.framework.junit5.ApplicationTest;
 
 import java.util.ArrayList;
@@ -21,7 +27,12 @@ import org.junit.jupiter.api.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ContextConfiguration(classes = { InfectionTracerApplication.class })
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+
 public class InfectionTracerLoginTest extends ApplicationTest {
+
+    @LocalServerPort
+    private int port;
+
 
     private final FileHandler fileHandler = new FileHandler();
     private List<User> actualUsersList;
@@ -30,6 +41,8 @@ public class InfectionTracerLoginTest extends ApplicationTest {
     public void setupFile() {
 
         actualUsersList = fileHandler.getUsers();
+        AbstractController abstractController = new AbstractController();
+        abstractController.setMyUrl(String.valueOf(port));
         User testUser = new User("test", "test","test@gmail.com", "Passord123","", "");
         List<User> testUsers = new ArrayList<>();
         testUsers.add(testUser);

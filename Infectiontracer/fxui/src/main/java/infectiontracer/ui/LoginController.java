@@ -28,7 +28,6 @@ public class LoginController extends AbstractController {
 
   private final FileHandler fileHandler = new FileHandler();
   private final ScreenController screencontroller = new ScreenController();
-  private final static String myUrl = "http://localhost:8080/infectiontracer/";
   private Gson gson = new Gson();
  // private EmailService emailService = new EmailService();
   private InfectionTracer infectionTracer = new InfectionTracer();
@@ -46,6 +45,7 @@ public class LoginController extends AbstractController {
   void loginBtn(ActionEvent event) {
     if(emailTxt.getText().isEmpty()){
       createErrorDialogBox("Login information is incorrect", null, "Email/password combination is not valid.");
+      return;
     }
     String url = myUrl+"user/"+emailTxt.getText();
     String JsonUser = createGetRequest(url);

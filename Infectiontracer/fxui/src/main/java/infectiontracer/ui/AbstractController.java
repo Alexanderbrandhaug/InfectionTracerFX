@@ -24,8 +24,13 @@ public class AbstractController {
 
   // this will be email for now
   String username;
-  final static String myUrl = "http://localhost:8080/infectiontracer/";
+  static String port = "8080";
+  static String myUrl = "http://localhost:" + port + "/infectiontracer/";
   final Gson gson = new Gson();
+
+  protected void setMyUrl(String port) {
+    myUrl = "http://localhost:" + port + "/infectiontracer/";
+  }
 
   protected void createErrorDialogBox(String title, String header, String content) {
     Alert alert = new Alert(AlertType.ERROR);
