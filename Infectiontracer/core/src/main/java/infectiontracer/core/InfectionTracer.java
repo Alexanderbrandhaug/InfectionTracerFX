@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class changes the status of users and their number of close contacts.
- * This is achieved through its FileHandler object, which changes the contents in a Json-file.
+ * This class changes the status of users and their number of close contacts. This is achieved
+ * through its FileHandler object, which changes the contents in a Json-file.
  */
 public class InfectionTracer {
 
@@ -38,7 +38,10 @@ public class InfectionTracer {
     User currentUser =
         allUsers.stream().filter(user -> userEmail.equals(user.getEmail())).findAny().orElse(null);
     User closeContact =
-        allUsers.stream().filter(user -> closeContactEmail.equals(user.getEmail())).findAny().orElse(null);
+        allUsers.stream()
+            .filter(user -> closeContactEmail.equals(user.getEmail()))
+            .findAny()
+            .orElse(null);
     if (closeContact != null && currentUser != null) {
       currentUser.addCloseContact(closeContact.getEmail());
       closeContact.addCloseContact(currentUser.getEmail());
@@ -46,15 +49,24 @@ public class InfectionTracer {
     }
   }
 
+  /**
+   * Method that removes a close contact from a user.
+   *
+   * @param userEmail Email to user that removes a close contact
+   * @param closeContactEmail Email to close contact
+   */
   public void removeCloseContact(String userEmail, String closeContactEmail) {
     if (!fileHandler.checkUserList(closeContactEmail)) {
       throw new IllegalArgumentException("The user does not exist");
     }
     List<User> allUsers = fileHandler.getUsers();
     User currentUser =
-            allUsers.stream().filter(user -> userEmail.equals(user.getEmail())).findAny().orElse(null);
+        allUsers.stream().filter(user -> userEmail.equals(user.getEmail())).findAny().orElse(null);
     User closeContact =
-            allUsers.stream().filter(user -> closeContactEmail.equals(user.getEmail())).findAny().orElse(null);
+        allUsers.stream()
+            .filter(user -> closeContactEmail.equals(user.getEmail()))
+            .findAny()
+            .orElse(null);
 
     if (closeContact != null && currentUser != null) {
       currentUser.removeCloseContact(closeContact.getEmail());
@@ -68,26 +80,21 @@ public class InfectionTracer {
    *
    * @param username Username of the logged-in user.
    */
-  public void makeUserInfected(String username) {
-    try{
+  public void makeUserInfected(String username) throws IllegalArgumentException {
+
     List<User> allUsers = fileHandler.getUsers();
     User currentUser =
         allUsers.stream().filter(user -> username.equals(user.getEmail())).findAny().orElse(null);
-        System.out.println("TEST");
 
-      System.out.println(currentUser.toString());
-    
-      if (currentUser.getHealthStatus().equals("Infected")) {
-        throw new IllegalArgumentException("User is already infected!");
-      }
-      currentUser.setInfected();
-      currentUser.setDateOfInfected();
-      fileHandler.writeUsersToFile(allUsers);
-      
-    
-  } catch(Exception e){
+    assert currentUser != null;
+    if (currentUser.getHealthStatus().equals("Infected")) {
+      throw new IllegalArgumentException("User is already infected!");
+    }
+    currentUser.setInfected();
+    currentUser.setDateOfInfected();
+    fileHandler.writeUsersToFile(allUsers);
   }
-  }
+
   /**
    * Method that changes a user's health status to 'Covid-19 Negative'.
    *
@@ -137,33 +144,61 @@ public class InfectionTracer {
     for (User user : users) {
       if (username.equals(user.getEmail())) {
         return user;
-    }
-  }
-    throw new IllegalArgumentException("Invalid");
-  }
-
-
-  public void deleteUser(String username){
-    List<User> users = fileHandler.getUsers();
-    for(User user: users){
-      if(username.equals(user.getEmail())){
-        users.remove(user);
       }
     }
+    return null;
   }
 
-  //made it boolean in order to not get 500 error when trying to updatepw on server-side
-  public boolean changePw(String username){
+  /**
+   * Method for user to delete themself.
+   *
+   * @param username User to be deleted.
+   */
+  public void deleteUser(String username) {
     List<User> users = fileHandler.getUsers();
-    for(User user: users){
-      if(username.equals(user.getEmail())){
+    for (User user : users) {
+      if (user.getAllCloseContacts().contains(username)) {
+        user.removeCloseContact(username);
+      }
+    }
+    users.removeIf(user -> user.getEmail().equals(username));
+    fileHandler.writeUsersToFile(users);
+  }
+
+  // made it boolean in order to not get 500 error when trying to updatepw on server-side
+
+  /**
+   * Method to change the password of a users, using the EmailService class.
+   *
+   * @param username Email of the user that is having password changed.
+   * @return True if successful, false otherwise.
+   */
+  public boolean changePw(String username) {
+    List<User> users = fileHandler.getUsers();
+    for (User user : users) {
+      if (username.equals(user.getEmail())) {
         user.setPassword(new EmailService().sendEmailWithNewPassword(user.getEmail()));
         users.add(user);
         fileHandler.writeUsersToFile(users);
         return true;
       }
-  }
-  return false;
+    }
+    return false;
   }
 
+  public void sendEmailToCloseContacts(User user) {
+    new EmailService().sendEmail(user.getEmail(), user.getAllCloseContacts());
+  }
+
+  public User jsonToUser(String userJson) {
+    return fileHandler.jsonToUser(userJson);
+  }
+
+  public List<User> jsonToUserList(String userListJson) {
+    return fileHandler.jsonToUserList(userListJson);
+  }
+
+  public String userToJson(User user) {
+    return fileHandler.userToJson(user);
+  }
 }

@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 /** Class responsible for writing and reading user objects to and from Json-files. */
 public class FileHandler {
 
@@ -24,8 +23,8 @@ public class FileHandler {
   final Gson gson = new Gson();
 
   /**
-   * If a json-file for the application does not exist, then make it.
-   * Primarily necessary for the first time user starts program.
+   * If a json-file for the application does not exist, then make it. Primarily necessary for the
+   * first time user starts program.
    */
   public FileHandler() {
     String filePath = System.getProperty("user.home") + File.separator + "users.json";
@@ -125,5 +124,17 @@ public class FileHandler {
         e.printStackTrace();
       }
     }
+  }
+
+  public User jsonToUser(String userJson) {
+    return gson.fromJson(userJson, new TypeToken<User>() {}.getType());
+  }
+
+  public List<User> jsonToUserList(String userListJson) {
+    return gson.fromJson(userListJson, new TypeToken<List<User>>() {}.getType());
+  }
+
+  public String userToJson(User user) {
+    return gson.toJson(user);
   }
 }

@@ -1,10 +1,5 @@
 package infectiontracer.ui;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 
-import infectiontracer.core.EmailService;
 import infectiontracer.core.InfectionTracer;
 import infectiontracer.core.User;
 import java.util.List;
@@ -19,9 +14,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.Gson;
-
 
 /** Controller for the main screen of the application. */
 public class MainController extends AbstractController {
@@ -31,11 +23,7 @@ public class MainController extends AbstractController {
   }
 
   private final InfectionTracer infectionTracer = new InfectionTracer();
-  final ObservableList<User> contactList = FXCollections.observableArrayList();
-  final ScreenController screencontroller = new ScreenController();
-  private Gson gson = new Gson();
-  private EmailService emailservice = new EmailService();
-
+  private final ObservableList<User> contactList = FXCollections.observableArrayList();
 
   @FXML private Label usernameLbl;
 
@@ -58,96 +46,72 @@ public class MainController extends AbstractController {
 
   @FXML private Button closeBtnMain;
 
-
-
   @FXML
   void fireHealthyUser(ActionEvent event) {
-    String url = myUrl+"user/"+username+"/healthstatus/makehealthy";
-    String json = gson.toJson(infectionTracer.getActiveUser(username));
-    if(createPutRequest(url, json)) {;
+    String getUrl = myUrl + "user/" + username;
+    String json = createGetRequest(getUrl);
+    String putUrl = myUrl + "user/" + username + "/healthstatus/makehealthy";
+    if (createPutRequest(putUrl, json)) {
       infectionStatus.setText("Covid-19 Negative");
-      createInformationDialogBox("Health status changed", null, "Health status successfully changed.");
+      createInformationDialogBox(
+          "Health status changed", null, "Health status successfully changed.");
+    } else {
+      createErrorDialogBox(
+          "Status change failed", null, "Failed to change infection status to 'Covid-19 Negative'");
     }
-    else {
-      createErrorDialogBox("Status change failed", null, "Failed to change infection status to 'Covid-19 Negative'");
-    }
-
   }
 
   @FXML
   void fireInfectedUser(ActionEvent event) {
-    try {
-      URI endpointBaseUri = new URI(myUrl+"user/"+username+"/healthstatus/makesick");
-      String json = gson.toJson(infectionTracer.getActiveUser(username));
-      System.out.println(json);
-      HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
-              .header("Accept", "application/json")
-              .header("Content-Type", "application/json")
-              .PUT(HttpRequest.BodyPublishers.ofString(json))
-              .build();
-      final HttpResponse<String> response = HttpClient.newBuilder().build()
-              .send(request,HttpResponse.BodyHandlers.ofString());
-              infectionStatus.setText("Infected");
-              System.out.println(response.toString() + "TEST RESPONSE");
-              int status = response.statusCode();
-              if(status <299){
-              System.out.println(status);
-                infectionStatus.setText("Infected");
-                List<User> currentMap = infectionTracer.getUsersCloseContacts(username);
-              createInformationDialogBox(
-                "Email sent", null, "Email notification was sent to your closecontacts");
-              emailservice.sendEmail(username, currentMap);
-              }else{
-                createErrorDialogBox("Error", null, "Error when updating healthstatus to sick");
-              }
 
-             
-              
-    } catch (IllegalArgumentException e) {
-      createInformationDialogBox("Can't change health status", null, e.getMessage());
-      
-    } catch (Exception e) {
+    String getUrl = myUrl + "user/" + username;
+    String userJson = createGetRequest(getUrl);
+    String putUrl = myUrl + "user/" + username + "/healthstatus/makesick";
+    if (createPutRequest(putUrl, userJson)) {
+      infectionStatus.setText("Infected");
+      createInformationDialogBox(
+          "Email sent", null, "Email notification was sent to your closecontacts");
+    } else {
       createErrorDialogBox("Error", null, "Error when updating healthstatus to sick");
     }
   }
 
-
   @FXML
   void addContact(ActionEvent event) {
-   
 
-    if(contactNameTxt.getText().isEmpty()){
-      createErrorDialogBox("Invalid closecontact", null, "Please insert email of an existing user in the textfield");
+    if (contactNameTxt.getText().isEmpty()) {
+      createErrorDialogBox(
+          "Invalid closecontact", null, "Please insert email of an existing user in the textfield");
       return;
     }
-    try{
-    String url = myUrl+"user/"+username+"/closecontacts";
-    String json = gson.toJson(infectionTracer.getActiveUser(contactNameTxt.getText()));
-    if (createPostRequest(url, json)) {
-      createInformationDialogBox("New close contact added", null, "New close contact successfully added.");
-
-      List<User> currentMap = infectionTracer.getUsersCloseContacts(username);
-      refreshInfo(currentMap);
+    String getUrl = myUrl + "user/" + contactNameTxt.getText();
+    String closeContactJson = createGetRequest(getUrl);
+    String postUrl = myUrl + "user/" + username + "/closecontacts";
+    if (createPostRequest(postUrl, closeContactJson)) {
+      createInformationDialogBox(
+          "New close contact added", null, "New close contact successfully added.");
+      contactList.add(infectionTracer.jsonToUser(closeContactJson));
+      refreshInfo();
       contactNameTxt.setText("");
-    }
-  }
-    catch (Exception e) {
-      createErrorDialogBox("Failed to add close contact", null, "Failed to add new close contact.");
+    } else {
+      createErrorDialogBox("Failed to add", null, "Error when attempting to add close contact.");
     }
   }
 
   @FXML
   void removeCloseContact(ActionEvent event) {
-    String url = myUrl+"user/"+username+"/closecontacts/removecontact";
+    String postUrl = myUrl + "user/" + username + "/closecontacts/removecontact";
     User closeContact = contactTable.getSelectionModel().getSelectedItem();
-    String json = gson.toJson(closeContact);
+    String userJson = infectionTracer.userToJson(closeContact);
 
-    if (createPostRequest(url, json)) {
-      createInformationDialogBox("Close contact removed", null, "The selected close contact has successfully been removed.");
-      List<User> currentMap = infectionTracer.getUsersCloseContacts(username);
-      refreshInfo(currentMap);
-    }
-    else {
+    if (createPostRequest(postUrl, userJson)) {
+      createInformationDialogBox(
+          "Close contact removed",
+          null,
+          "The selected close contact has successfully been removed.");
+      contactList.remove(closeContact);
+      refreshInfo();
+    } else {
       createErrorDialogBox("Deletion failed", null, "Failed to remove selected close contact.");
     }
   }
@@ -163,18 +127,19 @@ public class MainController extends AbstractController {
     healthstatusColumn.setCellValueFactory(new PropertyValueFactory<>("healthStatus"));
     dateOfInfectionColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfInfection"));
 
-    String url = myUrl+"user/"+username+"/closecontacts";
-    String closecontacts = createGetRequest(url);
-    List<User> userList = gson.fromJson(closecontacts, new TypeToken<List<User>>() {}.getType());
+    String getUrl = myUrl + "user/" + username + "/closecontacts";
+    String closeContactsJson = createGetRequest(getUrl);
+    List<User> userList = infectionTracer.jsonToUserList(closeContactsJson);
     if (userList == null) {
       return;
     }
-    refreshInfo(userList);
-      }
+    contactList.addAll(userList);
+    refreshInfo();
+  }
 
   @FXML
   void mainToLogin(ActionEvent event) {
-    screencontroller.switchToLogin(event);
+    screenController.switchToLogin(event);
   }
 
   @FXML
@@ -183,10 +148,8 @@ public class MainController extends AbstractController {
     stage.close();
   }
 
-  private void refreshInfo(List<User> userList) {
-    contactList.clear();
-    contactList.addAll(userList);
-    numberOfContacts.setText(String.valueOf(userList.size()));
+  private void refreshInfo() {
+    numberOfContacts.setText(String.valueOf(contactList.size()));
     contactTable.setItems(contactList);
   }
 }
