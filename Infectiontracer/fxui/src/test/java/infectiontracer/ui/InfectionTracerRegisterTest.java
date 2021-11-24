@@ -2,19 +2,32 @@ package infectiontracer.ui;
 import infectiontracer.core.User;
 import java.util.List;
 import java.util.Objects;
+
+import infectiontracer.rest.InfectionTracerApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import infectiontracer.json.*;
 import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.core.env.Environment;
 import org.testfx.framework.junit5.ApplicationTest;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.ContextConfiguration;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ContextConfiguration(classes = { InfectionTracerApplication.class })
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class InfectionTracerRegisterTest extends ApplicationTest {
+
+    @LocalServerPort
+    private int port;
 
     private final FileHandler fileHandler = new FileHandler();
     private List<User> actualUsersList;
@@ -22,6 +35,8 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
     @BeforeAll
     public void setupFile() {
         actualUsersList = fileHandler.getUsers();
+        AbstractController abstractController = new AbstractController();
+        abstractController.setMyUrl(String.valueOf(port));
     }
 
     @AfterAll
@@ -53,6 +68,7 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#okButton");
     }
 
+    /** 
     @Test
     public void testInValidConfirmationPassword() { 
         String forename = "Ola";
@@ -84,7 +100,7 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         verifyThat("#registrationSceneID", isVisible());
         verifyThat("#errorButton",isVisible()); //should get error for invalid email
     }
-
+ 
     @Test
     public void testInvalidPassword() {
         String forename = "Ola";

@@ -10,13 +10,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="loginSceneID" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="680.0" style="-fx-border-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="infectiontracer.ui.LoginController">
+<Pane fx:id="loginSceneID" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="680.0" style="-fx-border-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="infectiontracer.ui.LoginController">
    <children>
       <AnchorPane layoutX="305.0" prefHeight="465.0" prefWidth="380.0" style="-fx-background-color: white;">
          <children>
-            <TextField fx:id="emailTxt" layoutX="118.0" layoutY="165.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-            <PasswordField fx:id="passwordTxt" layoutX="118.0" layoutY="219.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-            <Button fx:id="loginBtnID" layoutX="203.0" layoutY="268.0" mnemonicParsing="false" onAction="#loginBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #0598ff;" text="Login" textFill="WHITE">
+            <TextField fx:id="emailTxt" layoutX="119.0" layoutY="102.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <PasswordField fx:id="passwordTxt" layoutX="119.0" layoutY="148.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button fx:id="loginBtnID" layoutX="203.0" layoutY="197.0" mnemonicParsing="false" onAction="#loginBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #0598ff;" text="Login" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
@@ -33,7 +33,7 @@
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Button>
-            <ImageView fitHeight="56.0" fitWidth="70.0" layoutX="165.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="56.0" fitWidth="70.0" layoutX="165.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@6372974_account_avatar_log%20in_login_register_icon.png" />
                </image>
@@ -43,7 +43,11 @@
                   <Font size="13.0" />
                </font>
             </Text>
-            <Button layoutX="71.0" layoutY="268.0" mnemonicParsing="false" onAction="#forgotPasswordBtn" text="Forgotten password" />
+            <Button layoutX="153.0" layoutY="277.0" mnemonicParsing="false" onAction="#forgotPasswordBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #0598ff;" text="Retrieve password" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Text fill="#0598ff" layoutX="118.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgotten your password?" wrappingWidth="149.0000000000001" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="465.0" prefWidth="320.0" style="-fx-background-color: #0598ff;">

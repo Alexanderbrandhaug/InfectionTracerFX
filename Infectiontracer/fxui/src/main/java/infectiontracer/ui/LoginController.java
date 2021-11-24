@@ -28,7 +28,6 @@ public class LoginController extends AbstractController {
 
   private final FileHandler fileHandler = new FileHandler();
   private final ScreenController screencontroller = new ScreenController();
-  private final String myUrl = "http://localhost:8080/infectiontracer/";
   private Gson gson = new Gson();
  // private EmailService emailService = new EmailService();
   private InfectionTracer infectionTracer = new InfectionTracer();
@@ -44,10 +43,15 @@ public class LoginController extends AbstractController {
 
   @FXML
   void loginBtn(ActionEvent event) {
+    if(emailTxt.getText().isEmpty()){
+      createErrorDialogBox("Login information is incorrect", null, "Email/password combination is not valid.");
+      return;
+    }
     String url = myUrl+"user/"+emailTxt.getText();
     String JsonUser = createGetRequest(url);
+    System.out.println(JsonUser);
     User user = gson.fromJson(JsonUser, new TypeToken<User>() {}.getType() /*User.class*/);
-    if (user != null && user.getPassword().equals(passwordTxt.getText())) {
+    if (user.getPassword() != null && user.getPassword().equals(passwordTxt.getText())) {
       screencontroller.switchToMain(event, user.getEmail());
     }
     else {
@@ -58,6 +62,10 @@ public class LoginController extends AbstractController {
 
   @FXML
   void forgotPasswordBtn(ActionEvent event) {
+    if(emailTxt.getText().isEmpty()){
+      createErrorDialogBox("Error", null, "Please insert your email in the textfield");
+      return;
+    }
   
     try {
     URI endpointBaseUri = new URI(myUrl+"user/"+emailTxt.getText());
