@@ -22,6 +22,21 @@ public class InfectiontracerTest {
   @Autowired
   private TestRestTemplate testRestTemplate;
 
+  @BeforeAll
+  public void setupFile() {
+
+      actualUsersList = fileHandler.getUsers();
+      User testUser = new User("test", "test","test@gmail.com", "Passord123","", "");
+      List<User> testUsers = new ArrayList<>();
+      testUsers.add(testUser);
+      fileHandler.writeUsersToFile(testUsers);
+  }
+
+  @AfterAll
+  public void restoreFile() {
+      fileHandler.writeUsersToFile(actualUsersList);
+  }
+
   
   @Test
   void httpgetUser() {
