@@ -18,6 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.env.Environment;
 import org.testfx.framework.junit5.ApplicationTest;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
 import javafx.fxml.FXMLLoader;
@@ -25,9 +27,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.ContextConfiguration;
+import org.testfx.matcher.control.TextInputControlMatchers;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -76,7 +78,7 @@ public class InfectionTracerMainTest extends ApplicationTest{
       loader.setController(maincontroller);
       loader.setLocation(getClass().getResource("Main.fxml"));
       root = loader.load();
-      scene = new Scene(root);
+      this.scene = new Scene(root);
       stage.setScene(scene);
       stage.centerOnScreen();
       stage.show();
@@ -96,6 +98,32 @@ public class InfectionTracerMainTest extends ApplicationTest{
         InfectionTracer tracer = new InfectionTracer();
         assertNotNull(tracer.getUsersCloseContacts(testUser.getEmail()));
     }
+
+    @Test
+    public void testChangeHealthStatus() {
+        clickOn("#fireInfectedBtnId");
+        verifyThat("#okButton", isVisible());
+        clickOn("#okButton");
+        System.out.println(scene.lookup("#infectionStatus").toString());
+        assertEquals("Label[id=infectionStatus, styleClass=label]'Infected'", scene.lookup("#infectionStatus").toString());
+        clickOn("#fireHealthyBtnId");
+        verifyThat("#okButton", isVisible());
+        clickOn("#okButton");
+        assertEquals("Label[id=infectionStatus, styleClass=label]'Covid-19 Negative'", scene.lookup("#infectionStatus").toString());
+    }
+
+    @Test
+    public void testLogOut() {
+        clickOn("#logOutBtnId");
+        verifyThat("#loginSceneID", isVisible());
+    }
+
+    @Test
+    public void testDeleteCloseContact() {
+
+    }
+
+
 
 
 

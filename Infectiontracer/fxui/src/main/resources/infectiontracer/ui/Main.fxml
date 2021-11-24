@@ -42,7 +42,7 @@
                   <Image url="@16301547491543238901-128.png" />
                </image>
             </ImageView>
-            <Button layoutX="1173.0" layoutY="168.0" mnemonicParsing="false" onAction="#mainToLogin" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: #0598ff;" text="Log out" />
+            <Button fx:id="logOutBtnId" layoutX="1173.0" layoutY="168.0" mnemonicParsing="false" onAction="#mainToLogin" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: #0598ff;" text="Log out" />
             <Text fill="WHITE" layoutX="401.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back to Infectiontracer" wrappingWidth="594.2476806640625">
                <font>
                   <Font size="39.0" />

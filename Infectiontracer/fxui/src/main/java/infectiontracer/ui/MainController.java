@@ -66,6 +66,7 @@ public class MainController extends AbstractController {
     String json = gson.toJson(infectionTracer.getActiveUser(username));
     if(createPutRequest(url, json)) {;
       infectionStatus.setText("Covid-19 Negative");
+      createInformationDialogBox("Health status changed", null, "Health status successfully changed.");
     }
     else {
       createErrorDialogBox("Status change failed", null, "Failed to change infection status to 'Covid-19 Negative'");
