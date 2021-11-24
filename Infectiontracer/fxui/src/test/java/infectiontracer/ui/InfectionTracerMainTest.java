@@ -118,10 +118,16 @@ public class InfectionTracerMainTest extends ApplicationTest{
         verifyThat("#loginSceneID", isVisible());
     }
 
-    @Test
+    // TODO fix test
+    /*@Test
     public void testDeleteCloseContact() {
+        clickOn("#contactNameTxt").write(testUser2.getEmail());
+        clickOn("#addContactBtn");
+        clickOn("#okButton");
+        clickOn("#contactTable");
 
-    }
+        sleep(3000);
+    }*/
 
 
 
