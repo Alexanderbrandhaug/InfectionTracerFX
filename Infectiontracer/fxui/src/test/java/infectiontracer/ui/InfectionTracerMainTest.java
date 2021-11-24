@@ -5,12 +5,18 @@ import java.util.ArrayList;
 import java.beans.Transient;
 import java.util.List;
 import java.util.Objects;
+
+import infectiontracer.rest.InfectionTracerApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import infectiontracer.json.*;
 import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.core.env.Environment;
 import org.testfx.framework.junit5.ApplicationTest;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
@@ -20,10 +26,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.ContextConfiguration;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ContextConfiguration(classes = { InfectionTracerApplication.class })
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class InfectionTracerMainTest extends ApplicationTest{
+
+    @LocalServerPort
+    private int port;
 
     private final FileHandler fileHandler = new FileHandler();
     private List<User> actualUsersList;
@@ -40,6 +53,8 @@ public class InfectionTracerMainTest extends ApplicationTest{
     @BeforeAll
     public void setupFile() {
         actualUsersList = fileHandler.getUsers();
+        AbstractController abstractController = new AbstractController();
+        abstractController.setMyUrl(String.valueOf(port));
         List<User> testUsers = new ArrayList<>();
         testUsers.add(testUser);
         testUsers.add(testUser2);
@@ -72,21 +87,14 @@ public class InfectionTracerMainTest extends ApplicationTest{
     public void testAddValidCloseContact(){
         clickOn("#contactNameTxt").write(testUser2.getEmail());
         clickOn("#addContactBtn");
+        verifyThat("#okButton", isVisible());
         clickOn("#okButton");
         clickOn("#contactNameTxt").write(testUser3.getEmail());
         clickOn("#addContactBtn");
+        verifyThat("#okButton", isVisible());
         clickOn("#okButton");
         InfectionTracer tracer = new InfectionTracer();
         assertNotNull(tracer.getUsersCloseContacts(testUser.getEmail()));
-    }
-
-    @Test
-    public void changeHealthStatus() {
-        clickOn("#fireHealthyBtnId");
-        verifyThat("#okButton", isVisible());
-        clickOn("#okButton");
-
-
     }
 
 

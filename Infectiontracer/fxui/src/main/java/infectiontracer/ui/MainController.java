@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 
+
 /** Controller for the main screen of the application. */
 public class MainController extends AbstractController {
 
@@ -32,7 +33,6 @@ public class MainController extends AbstractController {
   private final InfectionTracer infectionTracer = new InfectionTracer();
   final ObservableList<User> contactList = FXCollections.observableArrayList();
   final ScreenController screencontroller = new ScreenController();
-  private final String myUrl = "http://localhost:8080/infectiontracer/";
   private Gson gson = new Gson();
   private EmailService emailservice = new EmailService();
 
@@ -87,15 +87,21 @@ public class MainController extends AbstractController {
       final HttpResponse<String> response = HttpClient.newBuilder().build()
               .send(request,HttpResponse.BodyHandlers.ofString());
               infectionStatus.setText("Infected");
-              System.out.println(response);
-              List<User> currentMap = infectionTracer.getUsersCloseContacts(username);
+              System.out.println(response.toString() + "TEST RESPONSE");
+              int status = response.statusCode();
+              if(status <299){
+              System.out.println(status);
+                infectionStatus.setText("Infected");
+                List<User> currentMap = infectionTracer.getUsersCloseContacts(username);
               createInformationDialogBox(
                 "Email sent", null, "Email notification was sent to your closecontacts");
               emailservice.sendEmail(username, currentMap);
+              }else{
+                createErrorDialogBox("Error", null, "Error when updating healthstatus to sick");
+              }
+
+             
               
-           
-              
-      
     } catch (IllegalArgumentException e) {
       createInformationDialogBox("Can't change health status", null, e.getMessage());
       
@@ -107,22 +113,31 @@ public class MainController extends AbstractController {
 
   @FXML
   void addContact(ActionEvent event) {
+   
+
+    if(contactNameTxt.getText().isEmpty()){
+      createErrorDialogBox("Invalid closecontact", null, "Please insert email of an existing user in the textfield");
+      return;
+    }
+    try{
     String url = myUrl+"user/"+username+"/closecontacts";
     String json = gson.toJson(infectionTracer.getActiveUser(contactNameTxt.getText()));
-
     if (createPostRequest(url, json)) {
       createInformationDialogBox("New close contact added", null, "New close contact successfully added.");
+
       List<User> currentMap = infectionTracer.getUsersCloseContacts(username);
       refreshInfo(currentMap);
+      contactNameTxt.setText("");
     }
-    else {
+  }
+    catch (Exception e) {
       createErrorDialogBox("Failed to add close contact", null, "Failed to add new close contact.");
     }
   }
 
   @FXML
   void removeCloseContact(ActionEvent event) {
-    String url = myUrl+"user/"+username+"/closecontacts/removeContact";
+    String url = myUrl+"user/"+username+"/closecontacts/removecontact";
     User closeContact = contactTable.getSelectionModel().getSelectedItem();
     String json = gson.toJson(closeContact);
 

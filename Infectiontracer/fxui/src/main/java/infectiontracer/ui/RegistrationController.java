@@ -19,7 +19,6 @@ public class RegistrationController extends AbstractController {
 
   final FileHandler fileHandler = new FileHandler();
   final ScreenController screencontroller = new ScreenController();
-  //private final String myUrl = "http://localhost:8080/infectiontracer/";
   //final Gson gson = new Gson();
 
   @FXML private TextField forenameTxt;
