@@ -15,7 +15,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<<<<<<< HEAD
 <AnchorPane fx:id="mainSceneID" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="762.0" prefWidth="1273.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+=======
+<AnchorPane fx:id="mainSceneID" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="1129.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+>>>>>>> 42c151f49bad7ad7fb6e2d61760333dcee7419f2
    <children>
       <Button fx:id="infectedBtn" layoutX="321.0" layoutY="569.0" mnemonicParsing="false" onAction="#fireInfectedUser" prefHeight="32.0" prefWidth="125.0" stylesheets="@maincontroller.css" text="I am infected" textFill="WHITE">
          <font>
@@ -40,21 +44,30 @@
             <Button fx:id="logoutBtn" layoutX="1293.0" layoutY="169.0" mnemonicParsing="false" onAction="#mainToLogin" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: #0598ff;" stylesheets="@maincontroller.css" text="Log out" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
+<<<<<<< HEAD
                </cursor>
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
             <Text fill="WHITE" layoutX="548.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back to Infectiontracer" wrappingWidth="577.2476806640625">
+=======
+               </cursor></Button>
+            <Text fill="WHITE" layoutX="442.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back to Infectiontracer" wrappingWidth="577.2476806640625">
+>>>>>>> 42c151f49bad7ad7fb6e2d61760333dcee7419f2
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
             </Text>
+<<<<<<< HEAD
             <Button fx:id="profileBtnCss" layoutX="154.0" layoutY="150.0" mnemonicParsing="false" onAction="#profileBtn" prefHeight="51.0" prefWidth="69.0" stylesheets="@maincontroller.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
             <Button fx:id="closeBtnMain" layoutX="1372.0" layoutY="143.0" mnemonicParsing="false" onAction="#closeMain" style="-fx-background-color: #0598ff;" text="X" textFill="WHITE">
+=======
+            <Button fx:id="closeBtnMain" layoutX="1233.0" layoutY="136.0" mnemonicParsing="false" onAction="#closeMain" style="-fx-background-color: #0598ff;" text="X" textFill="WHITE">
+>>>>>>> 42c151f49bad7ad7fb6e2d61760333dcee7419f2
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -72,6 +85,12 @@
                <effect>
                   <InnerShadow />
                </effect>
+            </ImageView>
+            <Button fx:id="profileBtnCss" layoutX="1043.0" layoutY="168.0" mnemonicParsing="false" onAction="#profileBtn" style="-fx-background-color: #0598ff;" text="Edit profile" />
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="1011.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@14153043531554126445-128.png" />
+               </image>
             </ImageView>
          </children>
       </AnchorPane>
