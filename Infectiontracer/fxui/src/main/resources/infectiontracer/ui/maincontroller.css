@@ -1,0 +1,26 @@
+#profileBtnCss {
+    -fx-background-color: linear-gradient(#d6723f, #df7562);
+    -fx-background-radius: 25;
+    -fx-background-insets: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-text-fill: white;
+  }
+  
+  #profileBtnCss:hover {
+    -fx-effect: dropshadow( gaussian , rgba(255, 255, 255, 0.924) , 10,0,0,1 ); 
+    
+}
+
+
+#profileIconMain:hover{
+  -fx-effect: dropshadow( gaussian , rgba(255, 255, 255, 0.924) , 10,0,0,1 ); 
+}
+
+#addBtnMain {
+  -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+  -fx-text-fill: white;
+}
+
+#addBtnMain:hover{
+  -fx-effect: dropshadow( gaussian , rgba(54, 40, 185, 0.924) , 10,0,0,1 );
+}

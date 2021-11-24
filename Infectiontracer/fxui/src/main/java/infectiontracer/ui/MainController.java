@@ -6,7 +6,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpResponse;
-
+import javafx.scene.image.ImageView;
 import infectiontracer.core.EmailService;
 import infectiontracer.core.InfectionTracer;
 import infectiontracer.core.User;
@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
+
 
 /** Controller for the main screen of the application. */
 public class MainController extends AbstractController {
@@ -64,6 +65,9 @@ public class MainController extends AbstractController {
   @FXML private TextField contactNameTxt;
 
   @FXML private Button closeBtnMain;
+  
+  @FXML
+  private Button profileBtnCss;
 
   @FXML
   void fireHealthyUser(ActionEvent event) {
@@ -227,7 +231,7 @@ public class MainController extends AbstractController {
   }
 
   @FXML
-    void profileBtn(MouseEvent event) {
+    void profileBtn(ActionEvent event) {
       screencontroller.switchToProfile(event, username);
     }
 }

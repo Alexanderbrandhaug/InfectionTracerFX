@@ -40,6 +40,26 @@ public class ScreenController extends AbstractController {
     }
   }
 
+  public void switchToMain(MouseEvent event, String username) {
+    try {
+      MainController mainController = new MainController(username);
+      FXMLLoader loader = new FXMLLoader();
+      loader.setController(mainController);
+      loader.setLocation(getClass().getResource("Main.fxml"));
+      stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+      root = loader.load();
+      scene = new Scene(root);
+      stage.setScene(scene);
+      stage.centerOnScreen();
+      stage.show();
+
+    } catch (IOException e) {
+      createErrorDialogBox("Scene error", null, "Error when changing scenes");
+    }
+  }
+
+
+
   /**
    * Method to switch to the registration scene.
    *
@@ -75,7 +95,7 @@ public class ScreenController extends AbstractController {
   }
 
 
-  public void switchToProfile(MouseEvent event, String username){
+  public void switchToProfile(ActionEvent event, String username){
     try {
       ProfileController profileController = new ProfileController(username);
       FXMLLoader loader = new FXMLLoader();

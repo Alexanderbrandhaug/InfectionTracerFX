@@ -1,11 +1,11 @@
 package infectiontracer.ui;
-
+import javafx.scene.input.MouseEvent;
 import com.google.gson.reflect.TypeToken;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
-
+import javafx.scene.control.PasswordField;
 import com.google.gson.Gson;
 import infectiontracer.core.User;
 import infectiontracer.json.FileHandler;
@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import infectiontracer.core.*;
-
+import infectiontracer.json.*;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -26,40 +26,37 @@ import java.net.http.HttpResponse;
 
 public class ProfileController extends AbstractController {
 
-    @FXML
-    private Label emailLbl;
+  @FXML
+  private TextField emailTxt;
 
-    @FXML
-    private Label firstNameLbl;
+  @FXML
+  private TextField firstnameTxt;
 
-    @FXML
-    private Label lastNameLbl;
+  @FXML
+  private TextField lastnameTxt;
 
-    @FXML
-    private Label passwordLbl;
+  @FXML
+  private Button saveBtn;
 
-    @FXML
-    private Button closeBtnProfile;
+  @FXML
+  private PasswordField verifyPasswordTxt;
 
-    @FXML
-    private TextField newFirstNameTxt;
+  @FXML
+  private PasswordField newPasswordTxt;
 
-    @FXML
-    private TextField newLastNameTxt;
+  @FXML
+  private Button closeBtnProfile;
 
-    @FXML
-    private TextField newPasswordTxt;
+  @FXML
+  private Button deleteUserbtnID;
 
-    @FXML
-    private TextField newVerifyPasswordTxt;
-
-    @FXML
-    private Button saveBtn;
+  
 
     private final InfectionTracer infectionTracer = new InfectionTracer();
     final ScreenController screencontroller = new ScreenController();
     private final String myUrl = "http://localhost:8080/infectiontracer/";
     private Gson gson = new Gson();
+    private FileHandler filehandler = new FileHandler();
 
     ProfileController(String username) {
       this.username = username;
@@ -72,14 +69,9 @@ public class ProfileController extends AbstractController {
     }
 
     @FXML
-    void profileToMain(ActionEvent event) {
-        screencontroller.switchToMain(event, username);
-    }
-
-    @FXML
     void saveChanges(ActionEvent event) {
       try {
-        if (newPasswordTxt.getText().equals(newVerifyPasswordTxt.getText())) {
+        if (newPasswordTxt.getText().equals(verifyPasswordTxt.getText())) {
           URI endpointBaseUri = new URI(myUrl+"user/"+username);
             HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
                     .header("Accept", "application/json")
@@ -89,9 +81,9 @@ public class ProfileController extends AbstractController {
                     .send(request,HttpResponse.BodyHandlers.ofString());
 
             User originalUser = gson.fromJson(response.body(), new TypeToken<User>() {}.getType() /*User.class*/);
-          originalUser.setForename(newFirstNameTxt.getText());
-          originalUser.setLastname(newLastNameTxt.getText());
-          originalUser.setPassword(newPasswordTxt.getText());
+          originalUser.setForename(firstnameTxt.getText());
+          originalUser.setLastname(lastnameTxt.getText());
+          originalUser.setPassword(verifyPasswordTxt.getText());
 
           String updatedUserJson = gson.toJson(originalUser);
           System.out.println(updatedUserJson);
@@ -112,12 +104,32 @@ public class ProfileController extends AbstractController {
     }
   }
 
+
+
+  @FXML
+  void deleteUserBtn(ActionEvent event) {
+    if(filehandler.deleteUserFromFile(username)){
+      Stage stage = (Stage) deleteUserbtnID.getScene().getWindow();
+      stage.close();
+    }else{
+      createErrorDialogBox("Error", null, "Error when trying to delete your account");
+    }
+  }
+
+
+
+  @FXML
+    void backToMain(MouseEvent event) {
+      screencontroller.switchToMain(event, username);
+    }
+
+
   @FXML
   private void initialize() {
-    emailLbl.setText(username);
-    firstNameLbl.setText(infectionTracer.getActiveUser(username).getForename());
-    lastNameLbl.setText(infectionTracer.getActiveUser(username).getLastname());
-    passwordLbl.setText(infectionTracer.getActiveUser(username).getPassword());
+    emailTxt.setText(username);
+    firstnameTxt.setText(infectionTracer.getActiveUser(username).getForename());
+    lastnameTxt.setText(infectionTracer.getActiveUser(username).getLastname());
+    
   }
 
 }

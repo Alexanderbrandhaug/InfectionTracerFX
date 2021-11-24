@@ -38,6 +38,19 @@ public class FileHandler {
     this.filePath = filePath;
   }
 
+  public boolean deleteUserFromFile(String email){
+    List<User> currentUsers = getUsers();
+    System.out.println(currentUsers.toString());
+    for(User activeUser: currentUsers){
+      if(email.equals(activeUser.getEmail())){
+        currentUsers.remove(activeUser);
+        writeUsersToFile(currentUsers);
+        return true;
+      }
+    } 
+    return false;
+  }
+
   /**
    * Function that attempts to insert user into users.json.
    *
