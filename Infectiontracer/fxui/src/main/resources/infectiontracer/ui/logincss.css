@@ -1,0 +1,19 @@
+#loginBtnID{
+    -fx-background-radius: 25;
+    -fx-background-insets: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+#loginBtnID:hover{
+    -fx-effect: dropshadow( gaussian , rgba(247, 247, 247, 0.924) , 10,0,0,1 );
+}
+
+#registerBtn{
+    -fx-background-radius: 25;
+    -fx-background-insets: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#registerBtn:hover{
+    -fx-effect: dropshadow( gaussian , rgba(247, 247, 247, 0.924) , 10,0,0,1 );
+}
+

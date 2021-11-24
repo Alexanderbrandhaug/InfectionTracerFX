@@ -15,9 +15,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainSceneID" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="1129.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="mainSceneID" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="762.0" prefWidth="1273.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="135.0" layoutY="569.0" mnemonicParsing="false" onAction="#fireHealthyUser" prefHeight="32.0" prefWidth="125.0" style="-fx-background-color: #01FF70;" text="I am healthy" textFill="WHITE">
+      <Button fx:id="infectedBtn" layoutX="321.0" layoutY="569.0" mnemonicParsing="false" onAction="#fireInfectedUser" prefHeight="32.0" prefWidth="125.0" stylesheets="@maincontroller.css" text="I am infected" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -25,33 +25,28 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="321.0" layoutY="569.0" mnemonicParsing="false" onAction="#fireInfectedUser" prefHeight="32.0" prefWidth="125.0" style="-fx-background-color: #FF4136;" text="I am infected" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <AnchorPane layoutX="-133.0" layoutY="-142.0" prefHeight="210.0" prefWidth="1262.0" style="-fx-background-color: #0598ff;">
+      <AnchorPane layoutX="-133.0" layoutY="-142.0" prefHeight="210.0" prefWidth="1410.0" style="-fx-background-color: #0598ff;">
          <children>
-            <Label fx:id="usernameLbl" layoutX="250.0" layoutY="158.0" prefHeight="35.0" prefWidth="203.0" textFill="WHITE">
+            <Label fx:id="usernameLbl" layoutX="272.0" layoutY="158.0" prefHeight="35.0" prefWidth="240.0" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="1153.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="1249.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@16301547491543238901-128.png" />
                </image>
             </ImageView>
-            <Button layoutX="1173.0" layoutY="168.0" mnemonicParsing="false" onAction="#mainToLogin" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: #0598ff;" text="Log out">
+            <Button fx:id="logoutBtn" layoutX="1293.0" layoutY="169.0" mnemonicParsing="false" onAction="#mainToLogin" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: #0598ff;" stylesheets="@maincontroller.css" text="Log out" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Button>
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
             <Text fill="WHITE" layoutX="548.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back to Infectiontracer" wrappingWidth="577.2476806640625">
                <font>
-                  <Font size="39.0" />
+                  <Font name="System Bold" size="28.0" />
                </font>
             </Text>
             <Button fx:id="profileBtnCss" layoutX="154.0" layoutY="150.0" mnemonicParsing="false" onAction="#profileBtn" prefHeight="51.0" prefWidth="69.0" stylesheets="@maincontroller.css">
@@ -59,7 +54,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="closeBtnMain" layoutX="1233.0" layoutY="136.0" mnemonicParsing="false" onAction="#closeMain" style="-fx-background-color: #0598ff;" text="X" textFill="WHITE">
+            <Button fx:id="closeBtnMain" layoutX="1372.0" layoutY="143.0" mnemonicParsing="false" onAction="#closeMain" style="-fx-background-color: #0598ff;" text="X" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -80,7 +75,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Button fx:id="addBtnMain" layoutX="362.0" layoutY="394.0" mnemonicParsing="false" onAction="#addContact" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #0598ff;" text="Add" textFill="WHITE">
+      <Button fx:id="addBtnMain" layoutX="362.0" layoutY="394.0" mnemonicParsing="false" onAction="#addContact" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #0598ff;" stylesheets="@maincontroller.css" text="Add" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -97,13 +92,13 @@
          </image>
       </ImageView>
       <TextField fx:id="contactNameTxt" layoutX="146.0" layoutY="388.0" prefHeight="35.0" prefWidth="166.0" promptText="Add new close contact" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-      <TableView fx:id="contactTable" layoutX="612.0" layoutY="116.0" prefHeight="628.0" prefWidth="518.0" style="-fx-background-color: white;">
+      <TableView fx:id="contactTable" layoutX="612.0" layoutY="272.0" prefHeight="498.0" prefWidth="670.0" stylesheets="@maincontroller.css">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="88.58746337890625" text="First name" />
-          <TableColumn fx:id="lastnameColumn" minWidth="0.0" prefWidth="107.0865478515625" text="Last name" />
-            <TableColumn fx:id="healthstatusColumn" minWidth="5.0" prefWidth="102.5" text="Health status" />
-            <TableColumn fx:id="emailColumn" maxWidth="579.349853515625" minWidth="0.0" prefWidth="102.5" text="Email" />
-            <TableColumn fx:id="dateOfInfectionColumn" prefWidth="111.6951904296875" text="Infection date" />
+          <TableColumn fx:id="lastnameColumn" minWidth="0.0" prefWidth="140.5" text="Last name" />
+            <TableColumn fx:id="healthstatusColumn" minWidth="5.0" prefWidth="135.5" text="Health status" />
+            <TableColumn fx:id="emailColumn" maxWidth="579.349853515625" minWidth="0.0" prefWidth="148.5" text="Email" />
+            <TableColumn fx:id="dateOfInfectionColumn" prefWidth="155.5" text="Infection date" />
         </columns>
       </TableView>
       <HBox layoutX="440.0" layoutY="835.0" spacing="10.0" />
@@ -130,7 +125,7 @@
          <font>
             <Font size="19.0" />
          </font></Text>
-      <Label fx:id="numberOfContacts" layoutX="857.0" layoutY="70.0" prefHeight="43.0" prefWidth="52.0">
+      <Label fx:id="numberOfContacts" layoutX="848.0" layoutY="69.0" prefHeight="43.0" prefWidth="111.0" textFill="#0598ff">
          <font>
             <Font size="24.0" />
          </font>
@@ -142,12 +137,43 @@
       </Text>
       <Line endX="565.0" layoutX="47.0" layoutY="273.0" startX="-47.0000114440918" style="-fx-opacity: 0.2;" />
       <Line endX="574.0" endY="-18.662841796875" layoutX="38.0" layoutY="482.0" startX="-37.999996185302734" startY="-18.662841796875" style="-fx-opacity: 0.2;" />
-      <Line endX="7.0" endY="-39.00000762939453" layoutX="605.0" layoutY="108.0" startX="7.0" startY="636.0" style="-fx-opacity: 0.2;" />
-      <Text layoutX="643.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of close contacts:" wrappingWidth="208.67315667489197">
+      <Line endX="7.0" endY="-39.00000762939453" layoutX="605.0" layoutY="108.0" startX="7.0" startY="654.5" style="-fx-opacity: 0.2;" />
+      <Text fill="#0598ff" layoutX="619.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of close contacts:" wrappingWidth="229.17315667489197">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <Button layoutX="489.0" layoutY="395.0" mnemonicParsing="false" onAction="#deleteCloseContact" text="Delete user" />
+      <Button fx:id="deleteBtn" layoutX="1165.0" layoutY="223.0" mnemonicParsing="false" onAction="#deleteCloseContact" prefHeight="26.0" prefWidth="94.0" stylesheets="@maincontroller.css" text="Delete user" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="healthyBtn" layoutX="142.0" layoutY="569.0" mnemonicParsing="false" onAction="#fireHealthyUser" prefHeight="32.0" prefWidth="125.0" style="-fx-background-color: #0598ff;" stylesheets="@maincontroller.css" text="I am healthy" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Text fill="#0598ff" layoutX="1029.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mark a contact in the list followed by the delete button" wrappingWidth="229.17315667489197">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Text fill="#0598ff" layoutX="1029.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remove a contact?" wrappingWidth="229.17315667489197">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="35.0" fitWidth="32.0" layoutX="1196.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@bin.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="124.0" fitWidth="125.0" layoutX="749.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@spreading.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
