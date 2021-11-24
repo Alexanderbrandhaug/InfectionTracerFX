@@ -64,12 +64,13 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#passwordTxt").write(password);
         clickOn("#verifyPasswordTxt").write(password);
         clickOn("#registerBtnId");
-        verifyThat("#okButton", isVisible());
+        verifyThat("#okButton", isVisible()); //should get confirmation everything is correct
+        clickOn("#okButton");
     }
 
     /** 
     @Test
-    public void testInValidConfirmationPassword() { //This test should fail in realese 2 due to not implementing it yet
+    public void testInValidConfirmationPassword() { 
         String forename = "Ola";
         String lastname = "Svenskman";
         String username = "ola@outlook.com";
@@ -81,11 +82,11 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#passwordTxt").write(password);
         clickOn("#verifyPasswordTxt").write(passwordConfirmation);
         clickOn("#registerBtnId");
-        verifyThat("#registrationSceneID", isVisible());
+        verifyThat("#errorButton",isVisible()); //should get error telling confimationpassword is wrong
     }
 
     @Test
-    public void testInValidEmail() { //This test is to be changed after realese 2
+    public void testInValidEmail() {
         String forename = "Ola";
         String lastname = "Svenskman";
         String username = "ola&outlook.com";
@@ -97,12 +98,11 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#verifyPasswordTxt").write(password);
         clickOn("#registerBtnId");
         verifyThat("#registrationSceneID", isVisible());
-     
-
+        verifyThat("#errorButton",isVisible()); //should get error for invalid email
     }
  
     @Test
-    public void testInvalidConfirmationPassword() { //This test should fail in realese 2 due to not implementing it yet
+    public void testInvalidPassword() {
         String forename = "Ola";
         String lastname = "Svenskman";
         String username = "ola@outlook.com";
@@ -113,6 +113,35 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#passwordTxt").write(password);
         clickOn("#verifyPasswordTxt").write(password);
         clickOn("#registerBtnId");
-        verifyThat("#registrationSceneID", isVisible());
-    }*/
+        verifyThat("#errorButton",isVisible()); //should get error for invalid password length
+    }
+
+    @Test
+    public void testinValidName() {
+        String forename = "Test123";
+        String lastname = "Testersen123";
+        String username = "test99299@gmail.com";
+        String password = "Passord123";
+        clickOn("#forenameTxt").write(forename);
+        clickOn("#lastnameTxt").write(lastname);
+        clickOn("#emailTxt").write(username);
+        clickOn("#passwordTxt").write(password);
+        clickOn("#verifyPasswordTxt").write(password);
+        clickOn("#registerBtnId");
+        verifyThat("#errorButton", isVisible()); //should get error for invalid name
+    }
+
+    @Test
+    public void testMissingInfo() {
+        String forename = "Test123";
+        String lastname = "Testersen123";
+        String username = "test99299@gmail.com";
+        String password = "Passord123";
+        clickOn("#lastnameTxt").write(lastname);
+        clickOn("#emailTxt").write(username);
+        clickOn("#passwordTxt").write(password);
+        clickOn("#verifyPasswordTxt").write(password);
+        clickOn("#registerBtnId");
+        verifyThat("#errorButton", isVisible()); //should get error for missing information
+    }
 }

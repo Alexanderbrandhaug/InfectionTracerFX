@@ -42,17 +42,23 @@ public class RegistrationController extends AbstractController {
   @FXML
   void registerUser(ActionEvent event) {
     String url = myUrl+"users";
-    User newUser = new User(forenameTxt.getText(), lastnameTxt.getText(), emailTxt.getText(),
-            passwordTxt.getText(), "", "");
-    String json = gson.toJson(newUser);
-
-    if (createPostRequest(url, json)) {
-      createInformationDialogBox(
-              "Successful registration", null, "The registration was successful");
-      screencontroller.switchToLogin(event);
+    if (!passwordTxt.getText().equals(verifyPasswordTxt.getText())) {
+      createErrorDialogBox("Not identical passwords", null, "The two passwords entered are different.");
+      return;
     }
-    else {
-      createErrorDialogBox("Unsuccessful registration", null, "The registration was not completed");
+    try {
+      User newUser = new User(forenameTxt.getText(), lastnameTxt.getText(), emailTxt.getText(),
+              passwordTxt.getText(), "", "");
+      String json = gson.toJson(newUser);
+      if (createPostRequest(url, json)) {
+        createInformationDialogBox(
+                "Successful registration", null, "The registration was successful");
+        screencontroller.switchToLogin(event);
+      }
+    } catch (IllegalArgumentException e) {
+      createErrorDialogBox("Unsuccessful registration", null, e.getMessage());
+    } catch (Exception e) {
+      createErrorDialogBox("Unsuccessful registration", null, e.getMessage());
     }
   }
 
