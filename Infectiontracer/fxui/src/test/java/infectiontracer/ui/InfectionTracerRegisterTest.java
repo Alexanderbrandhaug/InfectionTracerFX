@@ -68,7 +68,7 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
         clickOn("#okButton");
     }
 
-    /** 
+     
     @Test
     public void testInValidConfirmationPassword() { 
         String forename = "Ola";
