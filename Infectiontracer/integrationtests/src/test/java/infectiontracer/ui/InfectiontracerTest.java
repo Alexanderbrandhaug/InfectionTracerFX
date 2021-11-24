@@ -13,14 +13,20 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import infectiontracer.core.User;
 import org.springframework.test.context.ContextConfiguration;
 import infectiontracer.rest.*;
+import org.junit.jupiter.api.*;
+import java.util.ArrayList;
+import java.util.List;
+import infectiontracer.json.*;
 
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ContextConfiguration(classes = { InfectionTracerApplication.class })
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class InfectiontracerTest {
  
   @Autowired
   private TestRestTemplate testRestTemplate;
+  private final FileHandler fileHandler = new FileHandler();
+  private List<User> actualUsersList;
 
   @BeforeAll
   public void setupFile() {
