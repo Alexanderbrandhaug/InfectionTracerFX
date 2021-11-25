@@ -1,9 +1,12 @@
 package infectiontracer.ui;
 
+import infectiontracer.rest.InfectionTracerApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.testfx.framework.junit5.ApplicationTest;
 
 import java.util.ArrayList;
@@ -13,55 +16,60 @@ import infectiontracer.core.User;
 import infectiontracer.json.*;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.ContextConfiguration;
 
 import org.junit.jupiter.api.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ContextConfiguration(classes = {InfectionTracerApplication.class})
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class InfectionTracerLoginTest extends ApplicationTest {
 
-    private final FileHandler fileHandler = new FileHandler();
-    private List<User> actualUsersList;
+  @LocalServerPort private int port;
 
-    @BeforeAll
-    public void setupFile() {
+  private final FileHandler fileHandler = new FileHandler();
+  private List<User> actualUsersList;
 
-        actualUsersList = fileHandler.getUsers();
-        User testUser = new User("test", "test","test@gmail.com", "Passord123","", "");
-        List<User> testUsers = new ArrayList<>();
-        testUsers.add(testUser);
-        fileHandler.writeUsersToFile(testUsers);
-    }
+  @BeforeAll
+  public void setupFile() {
 
-    @AfterAll
-    public void restoreFile() {
-        fileHandler.writeUsersToFile(actualUsersList);
-    }
+    actualUsersList = fileHandler.getUsers();
+    AbstractController.setMyUrl(String.valueOf(port));
+    User testUser = new User("test", "test", "test@gmail.com", "Passord123", "", "");
+    List<User> testUsers = new ArrayList<>();
+    testUsers.add(testUser);
+    fileHandler.writeUsersToFile(testUsers);
+  }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+  @AfterAll
+  public void restoreFile() {
+    fileHandler.writeUsersToFile(actualUsersList);
+  }
 
-    @Test
-    public void testValidLogin() {
-        clickOn("#emailTxt").write("test@gmail.com");
-        clickOn("#passwordTxt").write("Passord123");
-        clickOn("#loginBtnID");
-        verifyThat("#mainSceneID", isVisible());
+  @Override
+  public void start(Stage stage) throws Exception {
+    Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
 
-    }
+  @Test
+  public void testValidLogin() {
+    clickOn("#emailTxt").write("test@gmail.com");
+    clickOn("#passwordTxt").write("Passord123");
+    clickOn("#loginBtnID");
+    verifyThat("#mainSceneID", isVisible());
+  }
 
-    @Test
-    void testInvalidLogin() {
-        String username = "test";
-        String password = "";
-        clickOn("#emailTxt").write(username);
-        clickOn("#passwordTxt").write(password);
-        clickOn("#loginBtnID");
-        verifyThat("#loginSceneID", isVisible());
-
-    }
+  @Test
+  void testInvalidLogin() {
+    String username = "test";
+    String password = "";
+    clickOn("#emailTxt").write(username);
+    clickOn("#passwordTxt").write(password);
+    clickOn("#loginBtnID");
+    verifyThat("#errorButton", isVisible());
+  }
 }

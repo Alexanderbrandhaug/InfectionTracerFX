@@ -15,7 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import infectiontracer.core.*;
+import infectiontracer.core.User;
 import infectiontracer.json.*;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -52,14 +52,14 @@ public class ProfileController extends AbstractController {
 
   
 
-    private final InfectionTracer infectionTracer = new InfectionTracer();
+    
     final ScreenController screencontroller = new ScreenController();
     private final String myUrl = "http://localhost:8080/infectiontracer/";
     private Gson gson = new Gson();
     private FileHandler filehandler = new FileHandler();
 
-    ProfileController(String username) {
-      this.username = username;
+    ProfileController(User loggedInUser) {
+      this.loggedInUser = loggedInUser;
   }
 
     @FXML
@@ -72,7 +72,7 @@ public class ProfileController extends AbstractController {
     void saveChanges(ActionEvent event) {
       try {
         if (newPasswordTxt.getText().equals(verifyPasswordTxt.getText())) {
-          URI endpointBaseUri = new URI(myUrl+"user/"+username);
+          URI endpointBaseUri = new URI(myUrl+"user/"+loggedInUser.getEmail());
             HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
                     .header("Accept", "application/json")
                     .GET()
@@ -87,7 +87,7 @@ public class ProfileController extends AbstractController {
 
           String updatedUserJson = gson.toJson(originalUser);
           System.out.println(updatedUserJson);
-            URI endpointBaseUri2 = new URI(myUrl+"user/"+username);
+            URI endpointBaseUri2 = new URI(myUrl+"user/"+loggedInUser.getEmail());
           HttpRequest request2 = HttpRequest.newBuilder(endpointBaseUri2)
                   .header("Accept", "application/json")
                   .header("Content-Type", "application/json")
@@ -108,7 +108,7 @@ public class ProfileController extends AbstractController {
 
   @FXML
   void deleteUserBtn(ActionEvent event) {
-    if(filehandler.deleteUserFromFile(username)){
+    if(filehandler.deleteUserFromFile(loggedInUser.getEmail())){
       Stage stage = (Stage) deleteUserbtnID.getScene().getWindow();
       stage.close();
     }else{
@@ -120,15 +120,15 @@ public class ProfileController extends AbstractController {
 
   @FXML
     void backToMain(MouseEvent event) {
-      screencontroller.switchToMain(event, username);
+      screencontroller.switchToMainFromProfile(event, loggedInUser);
     }
 
 
   @FXML
   private void initialize() {
-    emailTxt.setText(username);
-    firstnameTxt.setText(infectionTracer.getActiveUser(username).getForename());
-    lastnameTxt.setText(infectionTracer.getActiveUser(username).getLastname());
+    emailTxt.setText(loggedInUser.getEmail());
+    firstnameTxt.setText(loggedInUser.getForename());
+    lastnameTxt.setText(loggedInUser.getLastname());
     
   }
 
