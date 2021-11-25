@@ -1,28 +1,19 @@
 package infectiontracer.ui;
-import javafx.scene.input.MouseEvent;
-import com.google.gson.reflect.TypeToken;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import com.google.gson.Gson;
+
 import infectiontracer.core.User;
-import infectiontracer.json.FileHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import infectiontracer.core.User;
-import infectiontracer.json.*;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-/* Contoller for the profile screen of the application*/
+/* Controller for the profile screen of the application*/
 
 public class ProfileController extends AbstractController {
 
@@ -50,13 +41,6 @@ public class ProfileController extends AbstractController {
   @FXML
   private Button deleteUserbtnID;
 
-  
-
-    
-    final ScreenController screencontroller = new ScreenController();
-    private Gson gson = new Gson();
-    private FileHandler filehandler = new FileHandler();
-
     ProfileController(User loggedInUser) {
       this.loggedInUser = loggedInUser;
   }
@@ -72,27 +56,17 @@ public class ProfileController extends AbstractController {
       try {
         if (newPasswordTxt.getText().equals(verifyPasswordTxt.getText())) {
           URI endpointBaseUri = new URI(myUrl+"user/"+loggedInUser.getEmail());
-            HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
-                    .header("Accept", "application/json")
-                    .GET()
-                    .build();
-            final HttpResponse<String> response = HttpClient.newBuilder().build()
-                    .send(request,HttpResponse.BodyHandlers.ofString());
+            HttpRequest request = createGetRequest(endpointBaseUri);
 
-            User originalUser = gson.fromJson(response.body(), new TypeToken<User>() {}.getType() /*User.class*/);
+            User originalUser = fileHandler.jsonToUser(response.body());
           originalUser.setForename(firstnameTxt.getText());
           originalUser.setLastname(lastnameTxt.getText());
           originalUser.setPassword(verifyPasswordTxt.getText());
 
-          String updatedUserJson = gson.toJson(originalUser);
+          String updatedUserJson = fileHandler.userToJson(originalUser);
             URI endpointBaseUri2 = new URI(myUrl+"user/"+loggedInUser.getEmail());
-          HttpRequest request2 = HttpRequest.newBuilder(endpointBaseUri2)
-                  .header("Accept", "application/json")
-                  .header("Content-Type", "application/json")
-                  .PUT(HttpRequest.BodyPublishers.ofString(updatedUserJson))
-                  .build();
-          final HttpResponse<String> response2 = HttpClient.newBuilder().build()
-                  .send(request2,HttpResponse.BodyHandlers.ofString());
+          HttpRequest request2 = createPutRequest(endpointBaseUri2, updatedUserJson);
+          
                   
         }
       } catch (IllegalArgumentException e) {
@@ -106,10 +80,10 @@ public class ProfileController extends AbstractController {
 
   @FXML
   void deleteUserBtn(ActionEvent event) {
-    if(filehandler.deleteUserFromFile(loggedInUser.getEmail())){
+    if (fileHandler.deleteUserFromFile(loggedInUser.getEmail())){
       Stage stage = (Stage) deleteUserbtnID.getScene().getWindow();
       stage.close();
-    }else{
+    } else {
       createErrorDialogBox("Error", null, "Error when trying to delete your account");
     }
   }
@@ -118,7 +92,7 @@ public class ProfileController extends AbstractController {
 
   @FXML
     void backToMain(MouseEvent event) {
-      screencontroller.switchToMainFromProfile(event, loggedInUser);
+      screenController.switchToMainFromProfile(event, loggedInUser);
     }
 
 
