@@ -20,11 +20,17 @@
       <Button fx:id="registerBtnId" layoutX="237.0" layoutY="484.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="26.0" prefWidth="214.0" style="-fx-background-color: #0598ff;" stylesheets="@registrationstyle.css" text="Register" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
+         </cursor>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
       <Button fx:id="loginBtn" layoutX="239.0" layoutY="555.0" mnemonicParsing="false" onAction="#registerToLogin" prefHeight="26.0" prefWidth="214.0" style="-fx-background-color: #0598ff;" stylesheets="@registrationstyle.css" text="Log in" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
+         </cursor>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
       <AnchorPane layoutY="-59.0" prefHeight="202.0" prefWidth="686.0" style="-fx-background-color: #0598ff;">
          <children>
             <Text fill="WHITE" layoutX="63.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register to keep track of your closest contacts and let them know if you get infected" wrappingWidth="533.1187744140625">

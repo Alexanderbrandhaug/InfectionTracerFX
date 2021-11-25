@@ -141,8 +141,8 @@ public class InfectionTracerApiController {
    * @return True if change is successful.
    */
   @PutMapping("infectiontracer/user/{email}/updatepw")
-  protected boolean updatePasswordApi(@PathVariable String email, @RequestParam String userEmail) {
-    return infectionTracer.changePw(userEmail);
+  protected boolean updatePasswordApi(@PathVariable String email, @RequestBody User user) {
+    return infectionTracer.changePw(user.getEmail());
   }
 
   @PutMapping("infectiontracer/user/{email}")

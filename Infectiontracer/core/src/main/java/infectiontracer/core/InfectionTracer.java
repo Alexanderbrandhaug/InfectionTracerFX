@@ -186,7 +186,6 @@ public class InfectionTracer {
     for (User user : users) {
       if (username.equals(user.getEmail())) {
         user.setPassword(new EmailService().sendEmailWithNewPassword(user.getEmail()));
-        users.add(user);
         fileHandler.writeUsersToFile(users);
         return true;
       }
