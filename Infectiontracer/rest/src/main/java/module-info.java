@@ -1,16 +1,14 @@
 module infectiontracer.rest {
-   
-   requires java.annotation;
-   requires spring.boot;
-   requires spring.boot.autoconfigure;
-   requires spring.context;
-   requires spring.web;
-   requires spring.beans;
-   requires infectiontracer.core;
-    requires com.google.gson;
+  requires spring.boot;
+  requires spring.boot.autoconfigure;
+  requires spring.context;
+  requires spring.web;
+  requires infectiontracer.core;
 
+  exports infectiontracer.rest;
 
-    exports infectiontracer.rest;
-    opens infectiontracer.rest to spring.beans, spring.context, spring.web;
-
+  opens infectiontracer.rest to
+      spring.beans,
+      spring.context,
+      spring.web;
 }
