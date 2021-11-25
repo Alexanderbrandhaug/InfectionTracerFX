@@ -54,7 +54,6 @@ public class ProfileController extends AbstractController {
 
     
     final ScreenController screencontroller = new ScreenController();
-    private final String myUrl = "http://localhost:8080/infectiontracer/";
     private Gson gson = new Gson();
     private FileHandler filehandler = new FileHandler();
 
@@ -86,7 +85,6 @@ public class ProfileController extends AbstractController {
           originalUser.setPassword(verifyPasswordTxt.getText());
 
           String updatedUserJson = gson.toJson(originalUser);
-          System.out.println(updatedUserJson);
             URI endpointBaseUri2 = new URI(myUrl+"user/"+loggedInUser.getEmail());
           HttpRequest request2 = HttpRequest.newBuilder(endpointBaseUri2)
                   .header("Accept", "application/json")
@@ -95,7 +93,7 @@ public class ProfileController extends AbstractController {
                   .build();
           final HttpResponse<String> response2 = HttpClient.newBuilder().build()
                   .send(request2,HttpResponse.BodyHandlers.ofString());
-                  System.out.println(response2);
+                  
         }
       } catch (IllegalArgumentException e) {
         createInformationDialogBox("Can't save changes to users profile", null, e.getMessage());
