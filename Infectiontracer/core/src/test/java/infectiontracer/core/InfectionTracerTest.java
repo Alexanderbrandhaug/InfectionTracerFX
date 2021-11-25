@@ -30,7 +30,9 @@ public class InfectionTracerTest {
     user6 = new User("TestB", "TestesenTo", "tsdwa222@gmail.com", "Passord321!", "frisk", "");
     user7 = new User("TestB", "TestesenTo", "dwa222@gmail.com", "Passord321!", "frisk", "");
     tempJsonFile = new File(testFilePath);
-    tempJsonFile.createNewFile();
+     if (!tempJsonFile.createNewFile()) {
+       throw new IOException();
+     }
     filehandler.setFilePath(testFilePath);
     infectiontracer.setPath(testFilePath);
   }

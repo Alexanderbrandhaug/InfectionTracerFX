@@ -165,6 +165,14 @@ public class InfectionTracer {
     fileHandler.writeUsersToFile(users);
   }
 
+  public void addUser(User newUser) {
+    fileHandler.insertUser(newUser);
+  }
+
+  public List<User> getUsers() {
+    return fileHandler.getUsers();
+  }
+
   // made it boolean in order to not get 500 error when trying to updatepw on server-side
 
   /**

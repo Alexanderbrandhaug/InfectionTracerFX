@@ -2,7 +2,6 @@ package infectiontracer.rest;
 
 import infectiontracer.core.InfectionTracer;
 import infectiontracer.core.User;
-import infectiontracer.json.FileHandler;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class InfectionTracerApiController {
 
-  private final FileHandler filehandler = new FileHandler();
   private final InfectionTracer infectionTracer = new InfectionTracer();
 
   /**
@@ -33,7 +31,7 @@ public class InfectionTracerApiController {
    */
   @GetMapping("/infectiontracer/users")
   protected List<User> getAllActiveUsersApi() {
-    return filehandler.getUsers();
+    return infectionTracer.getUsers();
   }
 
   /**
@@ -63,8 +61,8 @@ public class InfectionTracerApiController {
       path = "/infectiontracer/users",
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  protected boolean newUserApi(@RequestBody /*String json_file*/ User newUser) {
-    filehandler.insertUser(newUser);
+  protected boolean newUserApi(@RequestBody User newUser) {
+    infectionTracer.addUser(newUser);
     return true;
   }
 
@@ -75,7 +73,6 @@ public class InfectionTracerApiController {
    * @return List of close contacts belonging to user.
    */
   @GetMapping("/infectiontracer/user/{email}/closecontacts")
-  // @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "User does not exist")
   protected List<User> getUsersCloseContactsApi(@PathVariable String email) {
     return infectionTracer.getUsersCloseContacts(email);
   }
