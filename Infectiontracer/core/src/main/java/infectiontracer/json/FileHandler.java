@@ -37,11 +37,16 @@ public class FileHandler {
     this.filePath = filePath;
   }
 
-  public boolean deleteUserFromFile(String email){
+  /**
+   * Method that deletes a user from the Json-file
+   *
+   * @param email Email to the user that is to be deleted
+   * @return True if change was successful, False otherwise.
+   */
+  public boolean deleteUserFromFile(String email) {
     List<User> currentUsers = getUsers();
-    System.out.println(currentUsers.toString());
-    for(User activeUser: currentUsers){
-      if(email.equals(activeUser.getEmail())){
+    for (User activeUser: currentUsers) {
+      if (email.equals(activeUser.getEmail())) {
         currentUsers.remove(activeUser);
         writeUsersToFile(currentUsers);
         return true;

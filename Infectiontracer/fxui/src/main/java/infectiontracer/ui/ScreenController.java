@@ -24,7 +24,7 @@ public class ScreenController {
    * Method to switch scene to main screen.
    *
    * @param event Event from pressing button used to get current stage.
-   * @param user User passed to the main controller, so that the application knows which
+   * @param loggedInUser User passed to the main controller, so that the application knows which
    *     user is currently logged in.
    */
   public void switchToMain(ActionEvent event, User loggedInUser) {
