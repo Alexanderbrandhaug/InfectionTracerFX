@@ -4,6 +4,5 @@ module infectiontracer.core {
     requires jakarta.mail;
     exports infectiontracer.core;
     exports infectiontracer.json;
-    requires jakarta.activation;
     opens infectiontracer.core;
 }
