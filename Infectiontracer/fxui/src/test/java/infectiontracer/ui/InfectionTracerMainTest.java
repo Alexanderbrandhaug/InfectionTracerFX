@@ -55,7 +55,7 @@ public class InfectionTracerMainTest extends ApplicationTest {
 
   @Override
   public void start(Stage stage) throws Exception {
-    MainController maincontroller = new MainController("test123@gmail.com");
+    MainController maincontroller = new MainController(testUser);
     FXMLLoader loader = new FXMLLoader();
     loader.setController(maincontroller);
     loader.setLocation(getClass().getResource("Main.fxml"));

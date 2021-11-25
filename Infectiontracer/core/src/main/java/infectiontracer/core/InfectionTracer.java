@@ -189,16 +189,4 @@ public class InfectionTracer {
   public void sendEmailToCloseContacts(User user) {
     new EmailService().sendEmail(user.getEmail(), user.getAllCloseContacts());
   }
-
-  public User jsonToUser(String userJson) {
-    return fileHandler.jsonToUser(userJson);
-  }
-
-  public List<User> jsonToUserList(String userListJson) {
-    return fileHandler.jsonToUserList(userListJson);
-  }
-
-  public String userToJson(User user) {
-    return fileHandler.userToJson(user);
-  }
 }

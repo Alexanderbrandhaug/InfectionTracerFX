@@ -1,5 +1,6 @@
 package infectiontracer.ui;
 
+import infectiontracer.core.User;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
@@ -23,12 +24,12 @@ public class ScreenController {
    * Method to switch scene to main screen.
    *
    * @param event Event from pressing button used to get current stage.
-   * @param username Username passed to the main controller, so that the application knows which
+   * @param user User passed to the main controller, so that the application knows which
    *     user is currently logged in.
    */
-  public void switchToMain(ActionEvent event, String username) {
+  public void switchToMain(ActionEvent event, User user) {
     try {
-      MainController mainController = new MainController(username);
+      MainController mainController = new MainController(user);
       FXMLLoader loader = new FXMLLoader();
       loader.setController(mainController);
       loader.setLocation(getClass().getResource("Main.fxml"));

@@ -1,6 +1,5 @@
 package infectiontracer.ui;
 
-import infectiontracer.core.InfectionTracer;
 import infectiontracer.core.User;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -18,11 +17,10 @@ import javafx.stage.Stage;
 /** Controller for the main screen of the application. */
 public class MainController extends AbstractController {
 
-  MainController(String username) {
-    this.username = username;
+  MainController(User loggedInUser) {
+    this.loggedInUser = loggedInUser;
   }
 
-  private final InfectionTracer infectionTracer = new InfectionTracer();
   private final ObservableList<User> contactList = FXCollections.observableArrayList();
 
   @FXML private Label usernameLbl;
@@ -48,9 +46,9 @@ public class MainController extends AbstractController {
 
   @FXML
   void fireHealthyUser(ActionEvent event) {
-    String getUrl = myUrl + "user/" + username;
+    String getUrl = myUrl + "user/" + loggedInUser.getEmail();
     String json = createGetRequest(getUrl);
-    String putUrl = myUrl + "user/" + username + "/healthstatus/makehealthy";
+    String putUrl = myUrl + "user/" + loggedInUser.getEmail() + "/healthstatus/makehealthy";
     if (createPutRequest(putUrl, json)) {
       infectionStatus.setText("Covid-19 Negative");
       createInformationDialogBox(
@@ -64,9 +62,9 @@ public class MainController extends AbstractController {
   @FXML
   void fireInfectedUser(ActionEvent event) {
 
-    String getUrl = myUrl + "user/" + username;
+    String getUrl = myUrl + "user/" + loggedInUser.getEmail();
     String userJson = createGetRequest(getUrl);
-    String putUrl = myUrl + "user/" + username + "/healthstatus/makesick";
+    String putUrl = myUrl + "user/" + loggedInUser.getEmail() + "/healthstatus/makesick";
     if (createPutRequest(putUrl, userJson)) {
       infectionStatus.setText("Infected");
       createInformationDialogBox(
@@ -86,11 +84,11 @@ public class MainController extends AbstractController {
     }
     String getUrl = myUrl + "user/" + contactNameTxt.getText();
     String closeContactJson = createGetRequest(getUrl);
-    String postUrl = myUrl + "user/" + username + "/closecontacts";
+    String postUrl = myUrl + "user/" + loggedInUser.getEmail() + "/closecontacts";
     if (createPostRequest(postUrl, closeContactJson)) {
       createInformationDialogBox(
           "New close contact added", null, "New close contact successfully added.");
-      contactList.add(infectionTracer.jsonToUser(closeContactJson));
+      contactList.add(fileHandler.jsonToUser(closeContactJson));
       refreshInfo();
       contactNameTxt.setText("");
     } else {
@@ -100,9 +98,9 @@ public class MainController extends AbstractController {
 
   @FXML
   void removeCloseContact(ActionEvent event) {
-    String postUrl = myUrl + "user/" + username + "/closecontacts/removecontact";
+    String postUrl = myUrl + "user/" + loggedInUser.getEmail() + "/closecontacts/removecontact";
     User closeContact = contactTable.getSelectionModel().getSelectedItem();
-    String userJson = infectionTracer.userToJson(closeContact);
+    String userJson = fileHandler.userToJson(closeContact);
 
     if (createPostRequest(postUrl, userJson)) {
       createInformationDialogBox(
@@ -118,8 +116,8 @@ public class MainController extends AbstractController {
 
   @FXML
   private void initialize() {
-    usernameLbl.setText(username);
-    infectionStatus.setText(infectionTracer.getActiveUser(username).getHealthStatus());
+    usernameLbl.setText(loggedInUser.getEmail());
+    infectionStatus.setText(loggedInUser.getHealthStatus());
 
     nameColumn.setCellValueFactory(new PropertyValueFactory<>("forename"));
     lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
@@ -127,9 +125,9 @@ public class MainController extends AbstractController {
     healthstatusColumn.setCellValueFactory(new PropertyValueFactory<>("healthStatus"));
     dateOfInfectionColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfInfection"));
 
-    String getUrl = myUrl + "user/" + username + "/closecontacts";
+    String getUrl = myUrl + "user/" + loggedInUser.getEmail() + "/closecontacts";
     String closeContactsJson = createGetRequest(getUrl);
-    List<User> userList = infectionTracer.jsonToUserList(closeContactsJson);
+    List<User> userList = fileHandler.jsonToUserList(closeContactsJson);
     if (userList == null) {
       return;
     }

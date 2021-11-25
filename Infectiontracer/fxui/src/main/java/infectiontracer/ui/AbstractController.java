@@ -1,6 +1,7 @@
 package infectiontracer.ui;
 
-import infectiontracer.core.InfectionTracer;
+import infectiontracer.core.User;
+import infectiontracer.json.FileHandler;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -19,10 +20,10 @@ import javafx.scene.control.ButtonType;
 public class AbstractController {
 
   // this will be email for now
-  String username;
+  User loggedInUser;
   static final String port = "8080";
   static String myUrl = "http://localhost:" + port + "/infectiontracer/";
-  final InfectionTracer infectionTracer = new InfectionTracer();
+  final FileHandler fileHandler = new FileHandler();
   final ScreenController screenController = new ScreenController();
 
   // TODO find methods such that this is not static

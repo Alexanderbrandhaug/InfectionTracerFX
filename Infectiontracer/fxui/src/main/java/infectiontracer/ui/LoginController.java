@@ -28,10 +28,10 @@ public class LoginController extends AbstractController {
     }
     String url = myUrl + "user/" + emailTxt.getText();
     String userJson = createGetRequest(url);
-    User user = infectionTracer.jsonToUser(userJson);
+    User user = fileHandler.jsonToUser(userJson);
     if (user != null) {
       if (user.getPassword() != null && user.getPassword().equals(passwordTxt.getText())) {
-        screenController.switchToMain(event, user.getEmail());
+        screenController.switchToMain(event, user);
       }
     } else {
       createErrorDialogBox(

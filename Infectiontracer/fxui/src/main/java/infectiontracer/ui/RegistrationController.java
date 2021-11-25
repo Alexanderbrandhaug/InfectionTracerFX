@@ -21,6 +21,7 @@ public class RegistrationController extends AbstractController {
   @FXML private TextField verifyPasswordTxt;
 
   @FXML private Button closeBtnRegistration;
+
   @FXML private Button registerBtnId;
 
   @FXML
@@ -45,7 +46,7 @@ public class RegistrationController extends AbstractController {
               passwordTxt.getText(),
               "",
               "");
-      String userJson = infectionTracer.userToJson(newUser);
+      String userJson = fileHandler.userToJson(newUser);
       if (createPostRequest(postUrl, userJson)) {
         createInformationDialogBox(
             "Successful registration", null, "The registration was successful");
