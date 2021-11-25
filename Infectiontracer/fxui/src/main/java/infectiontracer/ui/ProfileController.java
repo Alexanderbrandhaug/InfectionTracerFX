@@ -53,21 +53,24 @@ public class ProfileController extends AbstractController {
 
     @FXML
     void saveChanges(ActionEvent event) {
+      
       try {
-        if (newPasswordTxt.getText().equals(verifyPasswordTxt.getText())) {
-          URI endpointBaseUri = new URI(myUrl+"user/"+loggedInUser.getEmail());
-            HttpRequest request = createGetRequest(endpointBaseUri);
+        if (newPasswordTxt.getText().equals(verifyPasswordTxt.getText()) && !newPasswordTxt.getText().isEmpty()) {
+          loggedInUser.setForename(firstnameTxt.getText());
+          loggedInUser.setLastname(lastnameTxt.getText());
+          loggedInUser.setPassword(verifyPasswordTxt.getText());
 
-            User originalUser = fileHandler.jsonToUser(response.body());
-          originalUser.setForename(firstnameTxt.getText());
-          originalUser.setLastname(lastnameTxt.getText());
-          originalUser.setPassword(verifyPasswordTxt.getText());
-
-          String updatedUserJson = fileHandler.userToJson(originalUser);
-            URI endpointBaseUri2 = new URI(myUrl+"user/"+loggedInUser.getEmail());
-          HttpRequest request2 = createPutRequest(endpointBaseUri2, updatedUserJson);
+          String updatedUserJson = fileHandler.userToJson(loggedInUser);
+          String endpointBaseUri = myUrl+"user/"+loggedInUser.getEmail();
+          createPutRequest(endpointBaseUri, updatedUserJson);            
+        } 
+        if(newPasswordTxt.getText().isEmpty() && verifyPasswordTxt.getText().isEmpty()){
+          loggedInUser.setForename(firstnameTxt.getText());
+          loggedInUser.setLastname(lastnameTxt.getText());
           
-                  
+          String updatedUserJson = fileHandler.userToJson(loggedInUser);
+          String endpointBaseUri = myUrl+"user/"+loggedInUser.getEmail();
+          createPutRequest(endpointBaseUri, updatedUserJson); 
         }
       } catch (IllegalArgumentException e) {
         createInformationDialogBox("Can't save changes to users profile", null, e.getMessage());

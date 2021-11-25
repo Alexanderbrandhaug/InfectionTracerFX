@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -139,8 +140,16 @@ public class InfectionTracerApiController {
    * @param currentUser User that is having password changed.
    * @return True if change is successful.
    */
-  @PutMapping("infectiontracer/user/{email}")
-  protected boolean updatePasswordApi(@PathVariable String email, @RequestBody User currentUser) {
-    return infectionTracer.changePw(currentUser.getEmail());
+  @PutMapping("infectiontracer/user/{email}/updatepw")
+  protected boolean updatePasswordApi(@PathVariable String email, @RequestParam String userEmail) {
+    return infectionTracer.changePw(userEmail);
   }
+
+  @PutMapping("infectiontracer/user/{email}")
+  protected boolean updateUser(@PathVariable String email, @RequestBody User currentUser){
+    infectionTracer.editUser(currentUser);
+    return true;
+  }
+
+
 }

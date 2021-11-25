@@ -194,6 +194,23 @@ public class InfectionTracer {
     return false;
   }
 
+  public void editUser(User user){
+   List<User> currentUsers = fileHandler.getUsers();
+   for(User userToBeEdit: currentUsers){
+     if(user.getEmail().equals(userToBeEdit.getEmail()) && user.getPassword().equals(userToBeEdit.getPassword())){
+       userToBeEdit.setForename(user.getForename());
+       userToBeEdit.setLastname(user.getLastname());
+       fileHandler.writeUsersToFile(currentUsers);
+     }
+     else if(user.getEmail().equals(userToBeEdit.getEmail()) && !user.getPassword().equals(userToBeEdit.getPassword())){
+      userToBeEdit.setForename(user.getForename());
+      userToBeEdit.setLastname(user.getLastname());
+      userToBeEdit.setPassword(user.getPassword());
+      fileHandler.writeUsersToFile(currentUsers);
+     }
+   }
+  }
+
   public void sendEmailToCloseContacts(User user) {
     new EmailService().sendEmail(user.getEmail(), user.getAllCloseContacts());
   }

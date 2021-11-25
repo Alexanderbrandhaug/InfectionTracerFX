@@ -158,7 +158,7 @@ public class AbstractController {
               .build();
       final HttpResponse<String> response =
           HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-      System.out.println(response);
+      
 
       return response.body();
     } catch (Exception e) {

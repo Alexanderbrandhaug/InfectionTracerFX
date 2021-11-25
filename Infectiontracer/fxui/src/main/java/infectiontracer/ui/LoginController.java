@@ -52,7 +52,7 @@ public class LoginController extends AbstractController {
     if (userJson == null) {
       return;
     }
-    String putUrl = myUrl + "user/" + emailTxt.getText();
+    String putUrl = myUrl + "user/" + emailTxt.getText() + "/updatepw";
     if (createPutRequest(putUrl, userJson)) {
       createInformationDialogBox(
           "Email sent", null, "Email was successfully sent with your new password.");
