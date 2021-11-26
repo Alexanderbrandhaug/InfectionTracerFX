@@ -7,8 +7,5 @@ module infectiontracer.rest {
 
   exports infectiontracer.rest;
 
-  opens infectiontracer.rest to
-      spring.beans,
-      spring.context,
-      spring.web;
+  opens infectiontracer.rest;
 }
