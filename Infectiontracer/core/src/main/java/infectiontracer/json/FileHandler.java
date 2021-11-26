@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.IllegalArgumentException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -23,13 +22,17 @@ public class FileHandler {
   final Gson gson = new Gson();
 
   /**
-   * If a json-file for the application does not exist, then make it. Primarily necessary for the
-   * first time user starts program.
+   * If a json-file for the application does not exist, then make it. Primarily necessary the first
+   * time a user starts the application.
    */
   public FileHandler() {
     String filePath = System.getProperty("user.home") + File.separator + "users.json";
     if (Files.notExists(Paths.get(filePath))) {
-      writeUsersToFile(new ArrayList<>());
+      try {
+        writeUsersToFile(new ArrayList<>());
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
   }
 
@@ -38,68 +41,15 @@ public class FileHandler {
   }
 
   /**
-   * Function that attempts to insert user into users.json.
-   *
-   * @param user User that is inserted.
-   */
-  public void insertUser(User user) {
-    List<User> registeredUsers = getUsers();
-
-    for (User newUser : registeredUsers) {
-      if (user.getEmail().equals(newUser.getEmail())) {
-        throw new IllegalArgumentException("Email already exists");
-      }
-    }
-    registeredUsers.add(user);
-    writeUsersToFile(registeredUsers);
-  }
-
-  /**
-   * Function to check if a user in is the users.json file.
-   *
-   * @param email Email to the user that file is checked for.
-   * @return True if user is in the file, False otherwise.
-   */
-  public boolean checkUserList(String email) {
-    try (JsonReader reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8))) {
-
-      List<User> userList = gson.fromJson(reader, new TypeToken<List<User>>() {}.getType());
-      for (User currentUser : userList) {
-        if (currentUser.getEmail().equals(email)) {
-          reader.close();
-          return true;
-        }
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    return false;
-  }
-
-  /**
    * Function to retrieve the list of users from the Json-file.
    *
    * @return List of users in Json-file.
    */
-  public List<User> getUsers() {
-    JsonReader reader = null;
-    try {
-      reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8));
-      List<User> userList = gson.fromJson(reader, new TypeToken<List<User>>() {}.getType());
-      return Objects.requireNonNullElseGet(userList, ArrayList::new);
-
-    } catch (IOException e) {
-      e.printStackTrace();
-    } finally {
-      try {
-        if (reader != null) {
-          reader.close();
-        }
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-    return new ArrayList<>();
+  public List<User> getUsers() throws IOException {
+    JsonReader reader = new JsonReader(new FileReader(filePath, StandardCharsets.UTF_8));
+    List<User> userList = gson.fromJson(reader, new TypeToken<List<User>>() {}.getType());
+    reader.close();
+    return Objects.requireNonNullElseGet(userList, ArrayList::new);
   }
 
   /**
@@ -107,21 +57,17 @@ public class FileHandler {
    *
    * @param userList List of users to write to file.
    */
-  public void writeUsersToFile(List<User> userList) {
+  public void writeUsersToFile(List<User> userList) throws IOException {
     FileWriter writer = null;
     try {
       writer = new FileWriter(filePath, StandardCharsets.UTF_8);
       gson.toJson(userList, writer);
       writer.flush();
+      writer.close();
     } catch (IOException e) {
-      e.printStackTrace();
-    } finally {
-      try {
-        if (writer != null) {
-          writer.close();
-        }
-      } catch (IOException e) {
-        e.printStackTrace();
+      if (writer != null) {
+        writer.close();
+        throw new IOException(e);
       }
     }
   }
