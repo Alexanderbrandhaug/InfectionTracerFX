@@ -94,7 +94,7 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
     clickOn("#passwordTxt").write(password);
     clickOn("#verifyPasswordTxt").write(password);
     clickOn("#registerBtnId");
-    verifyThat("#registrationSceneID", isVisible());
+    verifyThat("#registrationSceneId", isVisible());
     verifyThat("#errorButton", isVisible()); // should get error for invalid email
   }
 

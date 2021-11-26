@@ -59,8 +59,8 @@ public class InfectionTracerLoginTest extends ApplicationTest {
   public void testValidLogin() {
     clickOn("#emailTxt").write("test@gmail.com");
     clickOn("#passwordTxt").write("Passord123");
-    clickOn("#loginBtnID");
-    verifyThat("#mainSceneID", isVisible());
+    clickOn("#loginBtnId");
+    verifyThat("#mainSceneId", isVisible());
   }
 
   @Test
@@ -69,7 +69,7 @@ public class InfectionTracerLoginTest extends ApplicationTest {
     String password = "";
     clickOn("#emailTxt").write(username);
     clickOn("#passwordTxt").write(password);
-    clickOn("#loginBtnID");
+    clickOn("#loginBtnId");
     verifyThat("#errorButton", isVisible());
   }
 }

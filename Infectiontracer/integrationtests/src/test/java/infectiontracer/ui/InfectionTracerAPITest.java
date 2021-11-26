@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ContextConfiguration(classes = {InfectionTracerApplication.class})
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class InfectionTracerTest {
+public class InfectionTracerAPITest {
 
   @Autowired private TestRestTemplate testRestTemplate;
   private final FileHandler fileHandler = new FileHandler();
