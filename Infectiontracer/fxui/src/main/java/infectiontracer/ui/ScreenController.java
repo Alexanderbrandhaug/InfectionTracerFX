@@ -23,21 +23,39 @@ public class ScreenController {
   /**
    * Method to switch scene to main screen.
    *
-   * @param event Event from pressing button used to get current stage.
+   * @param node The node (button) used to get current stage.
    * @param user User passed to the main controller, so that the application knows which
    *     user is currently logged in.
    */
-  public void switchToMain(ActionEvent event, User user) {
+  public void switchToMain(Node node, User user) {
     try {
       MainController mainController = new MainController(user);
       FXMLLoader loader = new FXMLLoader();
       loader.setController(mainController);
       loader.setLocation(getClass().getResource("Main.fxml"));
-      stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+      stage = (Stage) node.getScene().getWindow();
       root = loader.load();
       scene = new Scene(root);
       stage.setScene(scene);
       stage.centerOnScreen();
+      stage.show();
+
+    } catch (IOException e) {
+      createErrorDialogBox("Scene error", null, "Error when changing scenes");
+    }
+  }
+
+  /**
+   * Method to switch scene to main screen. Used for testing in fxui module
+   *
+   * @param node The node (button) used to get current stage.
+   */
+  public void switchToMainTest(Node node) {
+    try {
+      root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainTest.fxml")));
+      stage = (Stage) node.getScene().getWindow();
+      scene = new Scene(root);
+      stage.setScene(scene);
       stage.show();
 
     } catch (IOException e) {

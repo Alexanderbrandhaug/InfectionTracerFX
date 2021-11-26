@@ -102,7 +102,7 @@ public class InfectionTracerMainTest extends ApplicationTest {
   @Test
   public void testLogOut() {
     clickOn("#logOutBtnId");
-    verifyThat("#loginSceneID", isVisible());
+    verifyThat("#loginSceneId", isVisible());
   }
 
   // TODO fix test

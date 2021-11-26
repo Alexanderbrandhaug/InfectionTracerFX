@@ -10,17 +10,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="loginSceneID" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="680.0" style="-fx-border-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="infectiontracer.ui.LoginController">
+<Pane fx:id="loginSceneId" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="680.0" style="-fx-border-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="infectiontracer.ui.LoginController">
    <children>
       <AnchorPane layoutX="305.0" prefHeight="465.0" prefWidth="380.0" style="-fx-background-color: white;">
          <children>
             <TextField fx:id="emailTxt" layoutX="119.0" layoutY="102.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
             <PasswordField fx:id="passwordTxt" layoutX="119.0" layoutY="148.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-            <Button fx:id="loginBtnID" layoutX="203.0" layoutY="197.0" mnemonicParsing="false" onAction="#loginBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #0598ff;" text="Login" textFill="WHITE">
+            <Button fx:id="loginBtnId" layoutX="203.0" layoutY="197.0" mnemonicParsing="false" onAction="#loginBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #0598ff;" text="Login" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
-            <Button layoutX="203.0" layoutY="371.0" mnemonicParsing="false" onAction="#registerBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #0598ff;" text="Register" textFill="WHITE">
+            <Button fx:id="registerBtnId" layoutX="203.0" layoutY="371.0" mnemonicParsing="false" onAction="#registerBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #0598ff;" text="Register" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
@@ -43,7 +43,7 @@
                   <Font size="13.0" />
                </font>
             </Text>
-            <Button layoutX="153.0" layoutY="277.0" mnemonicParsing="false" onAction="#forgotPasswordBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #0598ff;" text="Retrieve password" textFill="WHITE">
+            <Button fx:id="retrievePasswordBtnId" layoutX="153.0" layoutY="277.0" mnemonicParsing="false" onAction="#forgotPasswordBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #0598ff;" text="Retrieve password" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>

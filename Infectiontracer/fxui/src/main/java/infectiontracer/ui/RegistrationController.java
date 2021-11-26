@@ -20,7 +20,7 @@ public class RegistrationController extends AbstractController {
 
   @FXML private TextField verifyPasswordTxt;
 
-  @FXML private Button closeBtnRegistration;
+  @FXML private Button registrationCloseBtnId;
 
   @FXML private Button registerBtnId;
 
@@ -59,7 +59,7 @@ public class RegistrationController extends AbstractController {
 
   @FXML
   void closeRegistration(ActionEvent event) {
-    Stage stage = (Stage) closeBtnRegistration.getScene().getWindow();
+    Stage stage = (Stage) registrationCloseBtnId.getScene().getWindow();
     stage.close();
   }
 }

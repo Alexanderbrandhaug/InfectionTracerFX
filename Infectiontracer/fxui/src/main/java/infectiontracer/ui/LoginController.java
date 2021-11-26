@@ -4,6 +4,7 @@ import infectiontracer.core.User;
 // import infectiontracer.rest.InfectionTracerApiController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -31,7 +32,7 @@ public class LoginController extends AbstractController {
     User user = fileHandler.jsonToUser(userJson);
     if (user != null) {
       if (user.getPassword() != null && user.getPassword().equals(passwordTxt.getText())) {
-        screenController.switchToMain(event, user);
+        screenController.switchToMain((Node) event.getSource(), user);
       }
     } else {
       createErrorDialogBox(
