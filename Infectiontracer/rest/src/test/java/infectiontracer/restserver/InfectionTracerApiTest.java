@@ -1,4 +1,4 @@
-package infectiontracer.ui;
+package infectiontracer.restserver;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import infectiontracer.core.User;
 import org.springframework.test.context.ContextConfiguration;
-import infectiontracer.rest.*;
 import org.junit.jupiter.api.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ContextConfiguration(classes = {InfectionTracerApplication.class})
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class InfectionTracerTest {
+public class InfectionTracerApiTest {
 
   @Autowired private TestRestTemplate testRestTemplate;
   private final FileHandler fileHandler = new FileHandler();
