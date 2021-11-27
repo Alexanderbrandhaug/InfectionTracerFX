@@ -76,15 +76,15 @@ public class ProfileController extends AbstractController {
   }
 
 
-/*
+
   @FXML
   void deleteUserBtn(ActionEvent event) {
-    if (fileHandler.deleteUserFromFile(loggedInUser.getEmail())){
+   /* if (fileHandler.deleteUserFromFile(loggedInUser.getEmail())){
       Stage stage = (Stage) deleteUserbtnID.getScene().getWindow();
       stage.close();
-    }
+    } */
   }
-*/
+
 
   @FXML
     void backToMain(MouseEvent event) {
