@@ -1,7 +1,6 @@
 package infectiontracer.ui;
 
 import infectiontracer.core.User;
-// import infectiontracer.rest.InfectionTracerApiController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -9,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-// import infectiontracer.rest.*;
 
 /** Controller for the login screen of the application. */
 public class LoginController extends AbstractController {

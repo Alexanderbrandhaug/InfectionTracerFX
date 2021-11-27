@@ -129,8 +129,9 @@ public class InfectionTracer {
     // Need to loop through list because a user only store their close contacts' emails.
     List<User> closeContacts = new ArrayList<>();
     if (currentUser != null) {
+      users.removeIf(user -> user.getEmail().equals(username));
       for (User user : users) {
-        if (!user.getEmail().equals(currentUser.getEmail())) {
+        if (currentUser.getAllCloseContacts().contains(user.getEmail())) {
           closeContacts.add(user);
         }
       }
