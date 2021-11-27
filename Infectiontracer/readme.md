@@ -47,7 +47,7 @@ Foreløpig release plan for release 1 og 2 finnes under [docs](docs). <br>
 
 ![](docs/release3/images/main.png)
 
-- Profilsiden hvor en bruker kan redigere attributer som fornavn, etternavn og passord. 
+- Profilsiden hvor en bruker kan redigere fornavn, etternavn og passord, og slette brukerkontoen sin.
 
 ![](docs/release3/images/profile.png)
 
