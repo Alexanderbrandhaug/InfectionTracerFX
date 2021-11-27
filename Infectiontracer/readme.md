@@ -20,6 +20,8 @@ Test-filer for rest-tjenesten finner man under [rest/src/test/java/infectiontrac
 
 Foreløpig release plan for release 1 og 2 finnes under [docs](docs). <br>
 
+**API-dokumentasjon** av REST-tjenesten finner du [her](https://documenter.getpostman.com/view/14944616/UVJYHySS?fbclid=IwAR0qR2jcDQGa54JkL8ySvVE5ZJCRAWiQy8QLyaC8vfphxTTRo-owYuh9gB0). <br>
+
 # Brukerhistorier
 
 - Som Navn Navnesen som er smittet av koronaviruset, vil jeg opprette meg en konto slik at jeg får tilgang til å bruke applikasjonen.
