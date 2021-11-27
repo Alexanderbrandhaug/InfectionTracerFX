@@ -6,5 +6,5 @@ module infectiontracer.ui {
   requires java.net.http;
 
 
-    opens infectiontracer.ui to javafx.graphics, javafx.fxml;
+  opens infectiontracer.ui to javafx.graphics, javafx.fxml;
 }

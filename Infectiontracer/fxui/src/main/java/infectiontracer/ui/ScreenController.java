@@ -13,7 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
-
+import javafx.scene.input.MouseEvent;
 /** Controller to change between the different scenes in the application. */
 public class ScreenController {
   private Stage stage;
@@ -42,8 +42,12 @@ public class ScreenController {
 
     } catch (IOException e) {
       createErrorDialogBox("Scene error", null, "Error when changing scenes");
+      e.printStackTrace();
     }
   }
+
+
+
 
   /**
    * Method to switch scene to main screen. Used for testing in fxui module
@@ -97,6 +101,26 @@ public class ScreenController {
     }
   }
 
+
+  public void switchToProfile(ActionEvent event, User loggedInUser){
+    try {
+      ProfileController profileController = new ProfileController(loggedInUser);
+      FXMLLoader loader = new FXMLLoader();
+      loader.setController(profileController);
+      loader.setLocation(getClass().getResource("Profile.fxml"));
+      stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+      root = loader.load();
+      scene = new Scene(root);
+      stage.setScene(scene);
+      stage.centerOnScreen();
+      stage.show();
+    } catch (IOException e) {
+      createErrorDialogBox("Scene error", null, "Error when changing scenes");
+    }
+  }
+
+
+
   void createErrorDialogBox(String title, String header, String content) {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle(title);
@@ -126,4 +150,24 @@ public class ScreenController {
     Optional<ButtonType> result = alert.showAndWait();
     return result.filter(buttonType -> buttonType == ButtonType.OK).isPresent();
   }
+
+
+  public void switchToMainFromProfile(MouseEvent event, User loggedInUser) {
+    try {
+      MainController mainController = new MainController(loggedInUser);
+      FXMLLoader loader = new FXMLLoader();
+      loader.setController(mainController);
+      loader.setLocation(getClass().getResource("Main.fxml"));
+      stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+      root = loader.load();
+      scene = new Scene(root);
+      stage.setScene(scene);
+      stage.centerOnScreen();
+      stage.show();
+
+    } catch (IOException e) {
+      createErrorDialogBox("Scene error", null, "Error when changing scenes");
+    }
+  }
+
 }

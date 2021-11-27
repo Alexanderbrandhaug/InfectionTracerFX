@@ -28,6 +28,7 @@ public class LoginController extends AbstractController {
     String url = myUrl + "user/" + emailTxt.getText();
     String userJson = createGetRequest(url);
     User user = fileHandler.jsonToUser(userJson);
+    
     if (user != null) {
       if (user.getPassword() != null && user.getPassword().equals(passwordTxt.getText())) {
         screenController.switchToMain((Node) event.getSource(), user);
@@ -50,7 +51,7 @@ public class LoginController extends AbstractController {
     if (userJson == null) {
       return;
     }
-    String putUrl = myUrl + "user/" + emailTxt.getText();
+    String putUrl = myUrl + "user/" + emailTxt.getText() + "/updatepw";
     if (createPutRequest(putUrl, userJson)) {
       createInformationDialogBox(
           "Email sent", null, "Email was successfully sent with your new password.");

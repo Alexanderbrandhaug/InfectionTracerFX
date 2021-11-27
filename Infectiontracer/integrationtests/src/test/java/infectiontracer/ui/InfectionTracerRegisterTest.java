@@ -5,7 +5,7 @@ import infectiontracer.core.User;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-
+import infectiontracer.ui.*;
 import infectiontracer.rest.InfectionTracerApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -55,7 +55,7 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
   public void testValidRegistration() {
     String forename = "Test";
     String lastname = "Testersen";
-    String username = "test99299@gmail.com";
+    String username = "test321@gmail.com";
     String password = "Passord123";
     clickOn("#forenameTxt").write(forename);
     clickOn("#lastnameTxt").write(lastname);

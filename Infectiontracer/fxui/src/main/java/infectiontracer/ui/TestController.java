@@ -48,6 +48,9 @@ public class TestController extends AbstractController {
   void removeCloseContact(ActionEvent event) {}
 
   @FXML
+  void profileBtn(ActionEvent event) {}
+
+  @FXML
   void mainToLogin(ActionEvent event) {
     screenController.switchToLogin(event);
   }

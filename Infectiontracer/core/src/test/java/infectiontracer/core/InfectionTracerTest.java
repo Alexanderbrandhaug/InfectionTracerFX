@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
@@ -52,7 +54,59 @@ public class InfectionTracerTest {
   public void testActivateUsers() throws IOException {
     infectionTracer.addUser(user);
     assertNotNull(infectionTracer.getUsers());
+
   }
+  @Test  
+  public void testEditUser() throws IOException{
+    infectionTracer.addUser(user);
+    user.setForename("Bjarne");
+    user.setLastname("navnesen");
+    infectionTracer.editUser(user);
+
+    Assertions.assertEquals(
+        "Bjarne", infectionTracer.getActiveUser(user.getEmail()).getForename());
+        
+  }
+  
+  @Test
+  public void testNotifyCloseContacts() throws IOException{
+    infectionTracer.addUser(user);
+    infectionTracer.addUser(user2);
+    infectionTracer.addUser(user3);
+    infectionTracer.addCloseContact(user.getEmail(), user2.getEmail());
+    infectionTracer.addCloseContact(user.getEmail(), user3.getEmail());
+    infectionTracer.sendEmailToCloseContacts(user);
+    
+  }
+
+  @Test 
+  void testDeleteUser() throws IOException{
+    infectionTracer.addUser(user);
+    infectionTracer.deleteUser(user.getEmail());
+    Assertions.assertEquals(
+        true, infectionTracer.getUsers().isEmpty());
+  }
+
+  @Test
+  void testGeneratePw() throws IOException{
+    infectionTracer.addUser(user);
+    String pw = user.getPassword();
+    infectionTracer.changePw(user.getEmail());
+    assertNotEquals(infectionTracer.getUsers().get(0).getPassword(), pw);
+  }
+
+  @Test
+  void testRemoveCloseContact() throws IOException{
+    infectionTracer.addUser(user);
+    infectionTracer.addUser(user2);
+    infectionTracer.addCloseContact(user.getEmail(), user2.getEmail());
+    assertNotNull(infectionTracer.getUsersCloseContacts(user.getEmail()));
+    infectionTracer.removeCloseContact(user.getEmail(), user2.getEmail());
+    Assertions.assertEquals(
+      true, infectionTracer.getUsersCloseContacts(user.getEmail()).isEmpty());
+  }
+  
+
 
   @Test
   public void testAddInvalidUser() throws IOException {
