@@ -140,7 +140,7 @@ public class InfectionTracerApiController {
    * @param currentUser User that is having password changed.
    * @return True if change is successful.
    */
-  @GetMapping("/infectiontracer/user/{email}/updatepw")
+  @PutMapping("/infectiontracer/user/{email}/updatepw")
   protected boolean updatePasswordApi(@PathVariable String email, @RequestBody User user) {
     return infectionTracer.changePw(user.getEmail());
   }
