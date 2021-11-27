@@ -87,7 +87,6 @@ public class InfectionTracerMainTest extends ApplicationTest {
     clickOn("#deleteBtn");
     clickOn("#okButton");
     assertTrue(infectionTracer.getUsersCloseContacts(testUser.getEmail()).isEmpty());
-
   }
 
   @Test
