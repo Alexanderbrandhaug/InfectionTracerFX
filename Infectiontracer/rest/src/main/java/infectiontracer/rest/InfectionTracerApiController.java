@@ -7,14 +7,13 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.DeleteMapping;
 
 /**
  * Controller that controls calls to the REST-API, mainly controlled by the URL's sent in the
@@ -64,7 +63,7 @@ public class InfectionTracerApiController {
    * Method to add a new user to the application.
    *
    * @param newUser User to be added.
-   * @return True if user was successfully added.
+   * @return A http response.
    */
   @PostMapping(
       path = "/infectiontracer/users",
@@ -85,7 +84,7 @@ public class InfectionTracerApiController {
    * Method to retrieve a user's close contacts.
    *
    * @param email Email to the user with close contacts that is to be returned.
-   * @return List of close contacts belonging to user.
+   * @return List of close contacts belonging to user in a http response.
    */
   @GetMapping("/infectiontracer/user/{email}/closecontacts")
   public ResponseEntity<List<User>> getUsersCloseContactsApi(@PathVariable String email) {
@@ -102,7 +101,7 @@ public class InfectionTracerApiController {
    *
    * @param email Email to user that has health status changed.
    * @param infectedUser Infected User object.
-   * @return True if change is successful.
+   * @return A http response.
    */
   @PutMapping("infectiontracer/user/{email}/healthstatus/makesick")
   public ResponseEntity<String> setHealthStatusSickApi(
@@ -122,7 +121,7 @@ public class InfectionTracerApiController {
    * Method that changes a user's health status to 'Covid-19 negative'.
    *
    * @param email Email to user that has health status changed.
-   * @return True if change is successful.
+   * @return A http response.
    */
   @PutMapping("infectiontracer/user/{email}/healthstatus/makehealthy")
   public ResponseEntity<String> setHealthStatusHealthyApi(@PathVariable String email) {
@@ -141,7 +140,7 @@ public class InfectionTracerApiController {
    *
    * @param email Email to user that is adding close contact.
    * @param newCloseContact User that is being added as a close contact.
-   * @return True if change is successful.
+   * @return A http response.
    */
   @PostMapping("infectiontracer/user/{email}/closecontacts")
   public ResponseEntity<String> addCloseContactApi(
@@ -161,7 +160,7 @@ public class InfectionTracerApiController {
    *
    * @param email Email of user that is deleting a close contact.
    * @param oldCloseContact User that is to be removed as close contact.
-   * @return True if change is successful.
+   * @return A http response.
    */
   @PostMapping("infectiontracer/user/{email}/closecontacts/removecontact")
   public ResponseEntity<String> deleteCloseContactApi(
@@ -181,7 +180,7 @@ public class InfectionTracerApiController {
    *
    * @param email Email to user that is having password changed.
    * @param currentUser User that is having password changed.
-   * @return True if change is successful.
+   * @return A http response.
    */
   @PutMapping("infectiontracer/user/{email}/updatepw")
   public ResponseEntity<String> updatePasswordApi(
@@ -196,10 +195,18 @@ public class InfectionTracerApiController {
     }
   }
 
+  /**
+   * Method that updates a user's credentials.
+   *
+   * @param email Email to the user being changed.
+   * @param changedUser User object that contains the changes.
+   * @return A http response.
+   */
   @PutMapping("/infectiontracer/user/{email}")
-  public ResponseEntity<String> updateUser(@PathVariable String email, @RequestBody User currentUser){
+  public ResponseEntity<String> updateUser(
+      @PathVariable String email, @RequestBody User changedUser) {
     try {
-      infectionTracer.editUser(currentUser);
+      infectionTracer.editUser(changedUser);
       return ResponseEntity.ok(null);
     } catch (IOException e) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
@@ -208,16 +215,21 @@ public class InfectionTracerApiController {
     }
   }
 
+  /**
+   * Method that deletes a user from file.
+   *
+   * @param email Email to the user being deleted.
+   * @return A http response.
+   */
   @DeleteMapping(value = "/infectiontracer/user/{email}")
-    public ResponseEntity<String> deletePost(@PathVariable String email) {
-      try {
-        infectionTracer.deleteUser(email);
-        return ResponseEntity.ok(null);
-      } catch (IOException e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-      } catch (IllegalArgumentException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-      }
+  public ResponseEntity<String> deletePost(@PathVariable String email) {
+    try {
+      infectionTracer.deleteUser(email);
+      return ResponseEntity.ok(null);
+    } catch (IOException e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    } catch (IllegalArgumentException e) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
   }
-
+}

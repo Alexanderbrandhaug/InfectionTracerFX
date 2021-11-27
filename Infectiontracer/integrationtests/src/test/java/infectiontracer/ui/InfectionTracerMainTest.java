@@ -3,7 +3,9 @@ package infectiontracer.ui;
 import infectiontracer.core.InfectionTracer;
 import infectiontracer.core.User;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import infectiontracer.ui.*;
@@ -32,6 +34,7 @@ public class InfectionTracerMainTest extends ApplicationTest {
   @LocalServerPort private int port;
 
   private final FileHandler fileHandler = new FileHandler();
+  private final InfectionTracer infectionTracer = new InfectionTracer();
   private List<User> actualUsersList;
   final User testUser = new User("test", "test", "test123@gmail.com", "Passord123", "", "");
   final User testUser2 = new User("test", "test", "test123456@gmail.com", "Passord123", "", "");
@@ -69,19 +72,35 @@ public class InfectionTracerMainTest extends ApplicationTest {
   }
 
   @Test
-  public void testAddValidCloseContact() throws IOException {
+  public void testAddAndDeleteCloseContact() throws IOException {
     clickOn("#contactNameTxt").write(testUser2.getEmail());
     clickOn("#addContactBtnId");
-    verifyThat("#okButton", isVisible());
     clickOn("#okButton");
     clickOn("#contactNameTxt").write(testUser3.getEmail());
     clickOn("#addContactBtnId");
-    verifyThat("#okButton", isVisible());
     clickOn("#okButton");
-    InfectionTracer tracer = new InfectionTracer();
     assertArrayEquals(
-        tracer.getActiveUser(testUser.getEmail()).getAllCloseContacts().toArray(),
+        infectionTracer.getActiveUser(testUser.getEmail()).getAllCloseContacts().toArray(),
         new String[] {testUser2.getEmail(), testUser3.getEmail()});
+    clickOn("#deleteBtn");
+    clickOn("#okButton");
+    clickOn("#deleteBtn");
+    clickOn("#okButton");
+    assertTrue(infectionTracer.getUsersCloseContacts(testUser.getEmail()).isEmpty());
+
+  }
+
+  @Test
+  public void testAddDuplicateCloseContact() {
+    clickOn("#contactNameTxt").write(testUser2.getEmail());
+    clickOn("#addContactBtnId");
+    clickOn("#okButton");
+    clickOn("#contactNameTxt").write(testUser2.getEmail());
+    clickOn("#addContactBtnId");
+    verifyThat("#errorButton", isVisible());
+    clickOn("#errorButton");
+    clickOn("#deleteBtn");
+    clickOn("#okButton");
   }
 
   @Test
@@ -99,12 +118,6 @@ public class InfectionTracerMainTest extends ApplicationTest {
     assertEquals(
         "Label[id=infectionStatus, styleClass=label]'Covid-19 Negative'",
         scene.lookup("#infectionStatus").toString());
-  }
-
-  @Test
-  public void testLogOut() {
-    clickOn("#logOutBtnId");
-    verifyThat("#loginSceneId", isVisible());
   }
 
   // TODO fix test

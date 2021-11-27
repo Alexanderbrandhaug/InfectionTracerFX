@@ -244,4 +244,26 @@ public class User {
   public String toString() {
     return this.email;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this) {
+      return true;
+    }
+    if (!(obj instanceof User)) {
+      return false;
+    }
+    User comparedUser = (User) obj;
+    return forename.equals(comparedUser.getForename())
+        && lastname.equals(comparedUser.getLastname())
+        && email.equals(comparedUser.getEmail())
+        && password.equals(comparedUser.getPassword())
+        && healthStatus.equals(comparedUser.getHealthStatus())
+        && dateOfInfection.equals(comparedUser.getDateOfInfection());
+  }
+
+  public int hashCode() {
+    assert false : "hashCode not designed";
+    return 42; // any arbitrary constant will do
+  }
 }
