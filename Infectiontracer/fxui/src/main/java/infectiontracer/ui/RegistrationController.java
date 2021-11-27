@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
 /** Controller for the registration screen of the application. */
@@ -16,9 +17,9 @@ public class RegistrationController extends AbstractController {
 
   @FXML private TextField emailTxt;
 
-  @FXML private TextField passwordTxt;
+  @FXML private PasswordField passwordTxt;
 
-  @FXML private TextField verifyPasswordTxt;
+  @FXML private PasswordField verifyPasswordTxt;
 
   @FXML private Button registrationCloseBtnId;
 
