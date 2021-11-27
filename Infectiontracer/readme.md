@@ -1,6 +1,6 @@
 # Infectiontracer
 
-Målet med denne applikasjonen er å gi enkeltpersoner en oversikt over deres nærkontakter, samt varslinger dersom noen av de tester positivt på coronavirus. Dette gjøres ved å registrere en bruker, og deretter legge inn nærkontakter som senere kan varsles.
+Målet med denne applikasjonen er å gi enkeltpersoner en oversikt over deres nærkontakter, samt E-post varsel dersom noen av de tester positivt på coronavirus. Dette gjøres ved å registrere en bruker, og deretter legge inn nærkontakter som senere kan varsles. Man kan fjerne nærkontakter dersom en kontakt ikke lengre er nærkontakt, eller ved å legge til en person ved en feil. Man kan også endre personalia, passord og/eller slette brukerkontoen sin. 
 
 ## Filstruktur
 
@@ -10,9 +10,12 @@ FXML-filer finner man under [fxui/src/main/resources/infectiontracer/ui](fxui/sr
 Kontrollere finner man i mappen [fxui/src/main/java/infectiontracer/ui](fxui/src/main/java/infectiontracer/ui/). <br>
 Kjernelogikk finner man i mappen [core/src/main/java/infectiontracer/core](core/src/main/java/infectiontracer/core/). <br>
 Json-klasse finner man i mappen [core/src/main/java/infectiontracer/json](core/src/main/java/infectiontracer/json/). <br>
+Rest-tjenesten finner man i mappen [rest/src/main/java/infectiontracer/rest](rest/src/main/java/infectiontracer/rest/). <br>
 
 Test-filer for fxui finner man under [fxui/src/test/java/infectiontracer/ui](fxui/src/test/java/infectiontracer/ui/). <br>
 Test-filer for core klasser finner man under [core/src/test/java/infectiontracer/core](core/src/test/java/infectiontracer/core/). <br>
+Integrasjonstester finner man under [integrationtests/src/test/java/infectiontracer/ui](integrationtests/src/test/java/infectiontracer/ui/). <br>
+Test-filer for rest-tjenesten finner man under [rest/src/test/java/infectiontracer/ui](rest/src/test/java/infectiontracer/ui/). <br>
 
 
 Foreløpig release plan for release 1 og 2 finnes under [docs](docs). <br>
