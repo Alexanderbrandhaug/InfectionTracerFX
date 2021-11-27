@@ -55,7 +55,7 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
   public void testValidRegistration() {
     String forename = "Test";
     String lastname = "Testersen";
-    String username = "test99299@gmail.com";
+    String username = "test321@gmail.com";
     String password = "Passord123";
     clickOn("#forenameTxt").write(forename);
     clickOn("#lastnameTxt").write(lastname);

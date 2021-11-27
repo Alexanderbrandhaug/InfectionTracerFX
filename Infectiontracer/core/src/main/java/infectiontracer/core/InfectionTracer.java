@@ -217,10 +217,26 @@ public class InfectionTracer {
       if (username.equals(user.getEmail())) {
         // TODO Change so that mail is only sent if user is successfully written to file
         user.setPassword(new EmailService().sendEmailWithNewPassword(user.getEmail()));
-        users.add(user);
         fileHandler.writeUsersToFile(users);
       }
     }
+  }
+
+  public void editUser(User user) throws IOException{
+   List<User> currentUsers = fileHandler.getUsers();
+   for(User userToBeEdit: currentUsers){
+     if(user.getEmail().equals(userToBeEdit.getEmail()) && user.getPassword().equals(userToBeEdit.getPassword())){
+       userToBeEdit.setForename(user.getForename());
+       userToBeEdit.setLastname(user.getLastname());
+       fileHandler.writeUsersToFile(currentUsers);
+     }
+     else if(user.getEmail().equals(userToBeEdit.getEmail()) && !user.getPassword().equals(userToBeEdit.getPassword())){
+      userToBeEdit.setForename(user.getForename());
+      userToBeEdit.setLastname(user.getLastname());
+      userToBeEdit.setPassword(user.getPassword());
+      fileHandler.writeUsersToFile(currentUsers);
+     }
+   }
   }
 
   public void sendEmailToCloseContacts(User user) {

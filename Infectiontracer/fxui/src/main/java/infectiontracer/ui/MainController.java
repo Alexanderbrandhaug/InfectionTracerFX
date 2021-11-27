@@ -1,5 +1,4 @@
 package infectiontracer.ui;
-
 import infectiontracer.core.User;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -13,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
 
 /** Controller for the main screen of the application. */
 public class MainController extends AbstractController {
@@ -43,6 +43,9 @@ public class MainController extends AbstractController {
   @FXML private TextField contactNameTxt;
 
   @FXML private Button closeBtnMain;
+  
+  @FXML
+  private Button profileBtnCss;
 
   @FXML
   void fireHealthyUser(ActionEvent event) {
@@ -137,4 +140,9 @@ public class MainController extends AbstractController {
     numberOfContacts.setText(String.valueOf(contactList.size()));
     contactTable.setItems(contactList);
   }
+  @FXML
+  void profileBtn(ActionEvent event) {
+    screenController.switchToProfile(event, loggedInUser);
+  }
+
 }

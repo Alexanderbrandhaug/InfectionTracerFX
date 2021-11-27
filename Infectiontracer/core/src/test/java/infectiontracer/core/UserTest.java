@@ -1,15 +1,18 @@
 package infectiontracer.core;
 
+import java.beans.Transient;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class UserTest {
-  private User user;
+  private User user, user2;
 
   @BeforeEach
   public void setup() {
     user = new User("Ola", "Nordmann", "test@gmail.com", "Passord321!", "", "");
+    user2 = new User("Petter", "Nordmann", "test123@gmail.com", "Passord321!", "", "");
   }
 
   @Test
@@ -66,4 +69,18 @@ public class UserTest {
     Assertions.assertThrows(IllegalArgumentException.class, () -> user.setPassword(" "));
     Assertions.assertThrows(IllegalArgumentException.class, () -> user.setPassword("Password"));
   }
+
+    @Test
+    public void testAddDuplicateContact(){
+      user.addCloseContact(user2.getEmail());
+      Assertions.assertThrows(IllegalArgumentException.class, () -> user.addCloseContact(user2.getEmail()));
+
+    }
+
+    @Test
+    public void testRemoveDuplicateContact(){
+      user.addCloseContact(user2.getEmail());
+      user.removeCloseContact(user2.getEmail());
+      Assertions.assertThrows(IllegalArgumentException.class, () -> user.removeCloseContact(user2.getEmail()));
+    }
 }

@@ -75,6 +75,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>
+                        @{argLine}
+                        --add-opens infectiontracer.rest/infectiontracer.ui=ALL-UNNAMED
+                    </argLine>
+                </configuration>
+
             </plugin>
 
             <!-- Jacoco test -->
