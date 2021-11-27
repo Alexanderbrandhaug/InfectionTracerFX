@@ -41,15 +41,15 @@ Foreløpig release plan for release 1 og 2 finnes under [docs](docs). <br>
 ![](docs/release3/images/login.png)
 
 - Man må registrere seg ved manglende brukerkonto.
-![](docs/release2/images/registration.png)
+![](docs/release3/images/registration.png)
 
 - Selve applikasjonen hvor en bruker kan administrere sine nærkontakter, og gi beskjed ved smitte. 
 
-![](docs/release2/images/main.png)
+![](docs/release3/images/main.png)
 
 - Profilsiden hvor en bruker kan redigere attributer som fornavn, etternavn og passord. 
 
-![](docs/release2/images/profile.png)
+![](docs/release3/images/profile.png)
 
 # Diagrammer
 
