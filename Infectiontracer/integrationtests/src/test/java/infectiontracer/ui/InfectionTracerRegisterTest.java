@@ -5,7 +5,7 @@ import infectiontracer.core.User;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-
+import infectiontracer.ui.*;
 import infectiontracer.rest.InfectionTracerApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

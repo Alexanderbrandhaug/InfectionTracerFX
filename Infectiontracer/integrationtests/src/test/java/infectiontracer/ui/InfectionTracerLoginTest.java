@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.testfx.framework.junit5.ApplicationTest;
-
+import infectiontracer.ui.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
