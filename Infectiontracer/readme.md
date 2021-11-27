@@ -38,15 +38,18 @@ Foreløpig release plan for release 1 og 2 finnes under [docs](docs). <br>
 **Her er noen bilder av selve applikasjonen.**
 
  - Applikasjonen ved oppstart.  
-![](docs/release2/images/infectiontracerLoginpic.jpg)
+![](docs/release3/images/login.png)
 
 - Man må registrere seg ved manglende brukerkonto.
-![](docs/release2/images/infectiontraceRegPic.jpg)
+![](docs/release2/images/registration.png)
 
 - Selve applikasjonen hvor en bruker kan administrere sine nærkontakter, og gi beskjed ved smitte. 
 
-![](docs/release2/images/infectiontraceMainscreen.jpg)
+![](docs/release2/images/main.png)
 
+- Profilsiden hvor en bruker kan redigere attributer som fornavn, etternavn og passord. 
+
+![](docs/release2/images/profile.png)
 
 # Diagrammer
 
