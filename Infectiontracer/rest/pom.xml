@@ -79,8 +79,6 @@
                     <argLine>
                         @{argLine}
                         --add-opens infectiontracer.rest/infectiontracer.ui=ALL-UNNAMED
-
-
                     </argLine>
                 </configuration>
 

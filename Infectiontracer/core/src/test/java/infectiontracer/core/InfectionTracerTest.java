@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
@@ -50,6 +52,57 @@ public class InfectionTracerTest {
   public void closeFile() {
     tempJsonFile.deleteOnExit();
   }
+
+  @Test
+  public void testEditUser(){
+    filehandler.insertUser(user);
+    user.setForename("Bjarne");
+    user.setLastname("navnesen");
+    infectiontracer.editUser(user);
+
+    Assertions.assertEquals(
+        "Bjarne", infectiontracer.getActiveUser(user.getEmail()).getForename());
+        
+  }
+
+  @Test
+  public void testNotifyCloseContacts(){
+    filehandler.insertUser(user);
+    filehandler.insertUser(user2);
+    filehandler.insertUser(user3);
+    infectiontracer.addCloseContact(user.getEmail(), user2.getEmail());
+    infectiontracer.addCloseContact(user.getEmail(), user3.getEmail());
+    infectiontracer.sendEmailToCloseContacts(user);
+    
+  }
+
+  @Test 
+  void testDeleteUser(){
+    filehandler.insertUser(user);
+    infectiontracer.deleteUser(user.getEmail());
+    Assertions.assertEquals(
+        true, filehandler.getUsers().isEmpty());
+  }
+
+  @Test
+  void testGeneratePw(){
+    filehandler.insertUser(user);
+    String pw = user.getPassword();
+    infectiontracer.changePw(user.getEmail());
+    assertNotEquals(filehandler.getUsers().get(0).getPassword(), pw);
+  }
+
+  @Test
+  void testRemoveCloseContact(){
+    filehandler.insertUser(user);
+    filehandler.insertUser(user2);
+    infectiontracer.addCloseContact(user.getEmail(), user2.getEmail());
+    assertNotNull(infectiontracer.getUsersCloseContacts(user.getEmail()));
+    infectiontracer.removeCloseContact(user.getEmail(), user2.getEmail());
+    Assertions.assertEquals(
+      true, infectiontracer.getUsersCloseContacts(user.getEmail()).isEmpty());
+  }
+  
 
   @Test
   public void testActivateUsers() {

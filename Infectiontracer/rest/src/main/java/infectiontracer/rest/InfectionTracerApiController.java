@@ -85,7 +85,7 @@ public class InfectionTracerApiController {
    * @param infectedUser Infected User object.
    * @return True if change is successful.
    */
-  @PutMapping("infectiontracer/user/{email}/healthstatus/makesick")
+  @PutMapping("/infectiontracer/user/{email}/healthstatus/makesick")
   protected boolean setHealthStatusSickApi(
       @PathVariable String email, @RequestBody User infectedUser) {
     infectionTracer.makeUserInfected(email);
@@ -99,7 +99,7 @@ public class InfectionTracerApiController {
    * @param email Email to user that has health status changed.
    * @return True if change is successful.
    */
-  @PutMapping("infectiontracer/user/{email}/healthstatus/makehealthy")
+  @PutMapping("/infectiontracer/user/{email}/healthstatus/makehealthy")
   protected boolean setHealthStatusHealthyApi(@PathVariable String email) {
     infectionTracer.makeUserHealthy(email);
     return true;
@@ -112,7 +112,7 @@ public class InfectionTracerApiController {
    * @param newCloseContact User that is being added as a close contact.
    * @return True if change is successful.
    */
-  @PostMapping("infectiontracer/user/{email}/closecontacts")
+  @PostMapping("/infectiontracer/user/{email}/closecontacts")
   protected boolean addCloseContactApi(
       @PathVariable String email, @RequestBody User newCloseContact) {
     infectionTracer.addCloseContact(email, newCloseContact.getEmail());
@@ -126,7 +126,7 @@ public class InfectionTracerApiController {
    * @param oldCloseContact User that is to be removed as close contact.
    * @return True if change is successful.
    */
-  @PostMapping("infectiontracer/user/{email}/closecontacts/removecontact")
+  @PostMapping("/infectiontracer/user/{email}/closecontacts/removecontact")
   protected boolean deleteCloseContactApi(
       @PathVariable String email, @RequestBody User oldCloseContact) {
     infectionTracer.removeCloseContact(email, oldCloseContact.getEmail());
@@ -140,12 +140,12 @@ public class InfectionTracerApiController {
    * @param currentUser User that is having password changed.
    * @return True if change is successful.
    */
-  @PutMapping("infectiontracer/user/{email}/updatepw")
+  @GetMapping("/infectiontracer/user/{email}/updatepw")
   protected boolean updatePasswordApi(@PathVariable String email, @RequestBody User user) {
     return infectionTracer.changePw(user.getEmail());
   }
 
-  @PutMapping("infectiontracer/user/{email}")
+  @PutMapping("/infectiontracer/user/{email}")
   protected boolean updateUser(@PathVariable String email, @RequestBody User currentUser){
     infectionTracer.editUser(currentUser);
     return true;
