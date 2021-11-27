@@ -15,8 +15,6 @@ import static org.testfx.matcher.base.NodeMatchers.isVisible;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class InfectionTracerMainUnitTest extends ApplicationTest {
 
-  Scene scene;
-
   @Test
   public void checkBtnsAndTxtFields() {
     verifyThat("#usernameLbl", isVisible());
@@ -37,10 +35,16 @@ public class InfectionTracerMainUnitTest extends ApplicationTest {
     verifyThat("#loginSceneId", isVisible());
   }
 
+  @Test
+  public void mainToProfile() {
+    clickOn("#profileBtnCss");
+    verifyThat("#profileSceneId", isVisible());
+  }
+
   @Override
   public void start(Stage stage) throws Exception {
     Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainTest.fxml")));
-    scene = new Scene(root);
+    Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
   }

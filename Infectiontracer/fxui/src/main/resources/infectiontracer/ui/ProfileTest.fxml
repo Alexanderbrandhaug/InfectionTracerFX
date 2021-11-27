@@ -10,9 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="727.0" prefWidth="834.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="profileSceneId" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="727.0" prefWidth="834.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="infectiontracer.ui.ProfileTestController">
    <children>
-      <AnchorPane fx:id="profileSceneId" layoutX="-325.0" prefHeight="728.0" prefWidth="815.0" style="-fx-background-color: #0598ff;">
+      <AnchorPane layoutX="-325.0" prefHeight="728.0" prefWidth="815.0" style="-fx-background-color: #0598ff;">
          <children>
             <ImageView fitHeight="89.0" fitWidth="87.0" layoutX="411.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -60,6 +60,26 @@ public class ScreenController {
       stage = (Stage) node.getScene().getWindow();
       scene = new Scene(root);
       stage.setScene(scene);
+      stage.centerOnScreen();
+      stage.show();
+
+    } catch (IOException e) {
+      createErrorDialogBox("Scene error", null, "Error when changing scenes");
+    }
+  }
+
+  /**
+   * Method to switch scene to main screen. Used for testing in fxui module
+   *
+   * @param node The node (button) used to get current stage.
+   */
+  public void switchToProfileTest(Node node) {
+    try {
+      root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ProfileTest.fxml")));
+      stage = (Stage) node.getScene().getWindow();
+      scene = new Scene(root);
+      stage.setScene(scene);
+      stage.centerOnScreen();
       stage.show();
 
     } catch (IOException e) {
@@ -78,6 +98,7 @@ public class ScreenController {
       stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       scene = new Scene(root);
       stage.setScene(scene);
+      stage.centerOnScreen();
       stage.show();
     } catch (IOException e) {
       createErrorDialogBox("Scene error", null, "Error when changing scenes");
@@ -95,6 +116,7 @@ public class ScreenController {
       stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       scene = new Scene(root);
       stage.setScene(scene);
+      stage.centerOnScreen();
       stage.show();
     } catch (IOException e) {
       createErrorDialogBox("Scene error", null, "Error when changing scenes");
