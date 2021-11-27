@@ -1,0 +1,29 @@
+#loginBtnId{
+    -fx-background-radius: 25;
+    -fx-background-insets: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+#loginBtnId:hover{
+    -fx-effect: dropshadow( gaussian , rgba(247, 247, 247, 0.924) , 10,0,0,1 );
+}
+
+#registerBtnId{
+    -fx-background-radius: 25;
+    -fx-background-insets: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#registerBtnId:hover{
+    -fx-effect: dropshadow( gaussian , rgba(247, 247, 247, 0.924) , 10,0,0,1 );
+}
+
+#retrievePasswordBtnId{
+    -fx-background-radius: 25;
+    -fx-background-insets: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#retrievePasswordBtnId:hover{
+    -fx-effect: dropshadow( gaussian , rgba(247, 247, 247, 0.924) , 10,0,0,1 );
+}
+

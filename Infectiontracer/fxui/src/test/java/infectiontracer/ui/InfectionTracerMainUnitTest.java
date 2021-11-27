@@ -22,12 +22,13 @@ public class InfectionTracerMainUnitTest extends ApplicationTest {
     verifyThat("#usernameLbl", isVisible());
     verifyThat("#infectionStatus", isVisible());
     verifyThat("#contactNameTxt", isVisible());
-    verifyThat("#addContactBtn", isVisible());
-    verifyThat("#fireHealthyBtnId", isVisible());
-    verifyThat("#fireInfectedBtnId", isVisible());
+    verifyThat("#addContactBtnId", isVisible());
+    verifyThat("#healthyBtnId", isVisible());
+    verifyThat("#infectedBtnId", isVisible());
     verifyThat("#contactTable", isVisible());
     verifyThat("#numberOfContacts", isVisible());
     verifyThat("#logOutBtnId", isVisible());
+    verifyThat("#mainSceneId", isVisible());
   }
 
   @Test

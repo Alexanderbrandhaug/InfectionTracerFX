@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 /**
  * Controller that controls calls to the REST-API, mainly controlled by the URL's sent in the
@@ -181,7 +183,7 @@ public class InfectionTracerApiController {
    * @param currentUser User that is having password changed.
    * @return True if change is successful.
    */
-  @PutMapping("infectiontracer/user/{email}")
+  @PutMapping("infectiontracer/user/{email}/updatepw")
   public ResponseEntity<String> updatePasswordApi(
       @PathVariable String email, @RequestBody User currentUser) {
     try {
@@ -193,4 +195,29 @@ public class InfectionTracerApiController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
   }
-}
+
+  @PutMapping("/infectiontracer/user/{email}")
+  public ResponseEntity<String> updateUser(@PathVariable String email, @RequestBody User currentUser){
+    try {
+      infectionTracer.editUser(currentUser);
+      return ResponseEntity.ok(null);
+    } catch (IOException e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    } catch (IllegalArgumentException e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+  }
+
+  @DeleteMapping(value = "/infectiontracer/user/{email}")
+    public ResponseEntity<String> deletePost(@PathVariable String email) {
+      try {
+        infectionTracer.deleteUser(email);
+        return ResponseEntity.ok(null);
+      } catch (IOException e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+      } catch (IllegalArgumentException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+      }
+    }
+  }
+

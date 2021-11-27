@@ -71,11 +71,11 @@ public class InfectionTracerMainTest extends ApplicationTest {
   @Test
   public void testAddValidCloseContact() throws IOException {
     clickOn("#contactNameTxt").write(testUser2.getEmail());
-    clickOn("#addContactBtn");
+    clickOn("#addContactBtnId");
     verifyThat("#okButton", isVisible());
     clickOn("#okButton");
     clickOn("#contactNameTxt").write(testUser3.getEmail());
-    clickOn("#addContactBtn");
+    clickOn("#addContactBtnId");
     verifyThat("#okButton", isVisible());
     clickOn("#okButton");
     InfectionTracer tracer = new InfectionTracer();
@@ -86,14 +86,14 @@ public class InfectionTracerMainTest extends ApplicationTest {
 
   @Test
   public void testChangeHealthStatus() {
-    clickOn("#fireInfectedBtnId");
+    clickOn("#infectedBtnId");
     verifyThat("#okButton", isVisible());
     clickOn("#okButton");
     System.out.println(scene.lookup("#infectionStatus").toString());
     assertEquals(
         "Label[id=infectionStatus, styleClass=label]'Infected'",
         scene.lookup("#infectionStatus").toString());
-    clickOn("#fireHealthyBtnId");
+    clickOn("#healthyBtnId");
     verifyThat("#okButton", isVisible());
     clickOn("#okButton");
     assertEquals(
