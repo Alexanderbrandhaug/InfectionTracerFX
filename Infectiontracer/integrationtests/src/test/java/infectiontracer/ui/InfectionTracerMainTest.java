@@ -6,7 +6,7 @@ import infectiontracer.core.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import infectiontracer.ui.*;
 import infectiontracer.rest.InfectionTracerApplication;
 import infectiontracer.json.*;
 import org.junit.jupiter.api.*;
