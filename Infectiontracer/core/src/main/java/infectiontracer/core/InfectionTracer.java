@@ -225,11 +225,9 @@ public class InfectionTracer {
   }
 
   /**
-   * Method to edit a user's name and password
+   * Method to edit a user's name and password.
    *
    * @param changedUser User object with the new values
-   * @throws IOException
-   * @throws IllegalArgumentException
    */
   public void editUser(User changedUser) throws IOException, IllegalArgumentException {
     List<User> currentUsers = fileHandler.getUsers();

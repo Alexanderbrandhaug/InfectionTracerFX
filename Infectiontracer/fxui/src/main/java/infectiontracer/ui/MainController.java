@@ -1,4 +1,5 @@
 package infectiontracer.ui;
+
 import infectiontracer.core.User;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -13,7 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-
 /** Controller for the main screen of the application. */
 public class MainController extends AbstractController {
 
@@ -23,28 +23,26 @@ public class MainController extends AbstractController {
 
   private final ObservableList<User> contactList = FXCollections.observableArrayList();
 
-  @FXML Label usernameLbl;
+  @FXML private Label usernameLbl;
 
-  @FXML Label infectionStatus;
+  @FXML private Label infectionStatus;
 
-  @FXML Label numberOfContacts;
+  @FXML private Label numberOfContacts;
 
-  @FXML TableView<User> contactTable;
-  @FXML TableColumn<User, String> nameColumn;
+  @FXML private TableView<User> contactTable;
+  @FXML private TableColumn<User, String> nameColumn;
 
-  @FXML TableColumn<User, String> lastnameColumn;
+  @FXML private TableColumn<User, String> lastnameColumn;
 
-  @FXML TableColumn<User, String> emailColumn;
+  @FXML private TableColumn<User, String> emailColumn;
 
-  @FXML TableColumn<User, String> healthstatusColumn;
+  @FXML private TableColumn<User, String> healthstatusColumn;
 
-  @FXML TableColumn<User, String> dateOfInfectionColumn;
+  @FXML private TableColumn<User, String> dateOfInfectionColumn;
 
-  @FXML TextField contactNameTxt;
+  @FXML private TextField contactNameTxt;
 
-  @FXML Button closeBtnMain;
-
-  @FXML Button profileBtnCss;
+  @FXML private Button closeBtnMain;
 
   @FXML
   void fireHealthyUser(ActionEvent event) {
@@ -98,6 +96,7 @@ public class MainController extends AbstractController {
     String userJson = fileHandler.userToJson(closeContact);
 
     if (createPostRequest(postUrl, userJson)) {
+      createInformationDialogBox("Close contact removed", null, "Close contact successfully removed.");
       contactList.remove(closeContact);
       refreshInfo();
     }
@@ -138,10 +137,11 @@ public class MainController extends AbstractController {
   private void refreshInfo() {
     numberOfContacts.setText(String.valueOf(contactList.size()));
     contactTable.setItems(contactList);
+    contactTable.getSelectionModel().selectFirst();
   }
+
   @FXML
   void profileBtn(ActionEvent event) {
     screenController.switchToProfile(event, loggedInUser);
   }
-
 }

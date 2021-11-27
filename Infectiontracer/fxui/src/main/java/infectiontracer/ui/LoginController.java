@@ -28,14 +28,13 @@ public class LoginController extends AbstractController {
     String url = myUrl + "user/" + emailTxt.getText();
     String userJson = createGetRequest(url);
     User user = fileHandler.jsonToUser(userJson);
-    
+
     if (user != null) {
       if (user.getPassword() != null && user.getPassword().equals(passwordTxt.getText())) {
         screenController.switchToMain((Node) event.getSource(), user);
-      }
-      else {
+      } else {
         createErrorDialogBox(
-                "Login information is incorrect", null, "Email/password combination is not valid.");
+            "Login information is incorrect", null, "Email/password combination is not valid.");
       }
     }
   }

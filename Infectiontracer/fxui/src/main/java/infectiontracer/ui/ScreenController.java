@@ -12,10 +12,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
 /** Controller to change between the different scenes in the application. */
 public class ScreenController {
+
   private Stage stage;
   private Scene scene;
   private Parent root;
@@ -24,8 +26,8 @@ public class ScreenController {
    * Method to switch scene to main screen.
    *
    * @param node The node (button) used to get current stage.
-   * @param user User passed to the main controller, so that the application knows which
-   *     user is currently logged in.
+   * @param user User passed to the main controller, so that the application knows which user is
+   *     currently logged in.
    */
   public void switchToMain(Node node, User user) {
     try {
@@ -45,9 +47,6 @@ public class ScreenController {
       e.printStackTrace();
     }
   }
-
-
-
 
   /**
    * Method to switch scene to main screen. Used for testing in fxui module
@@ -123,8 +122,13 @@ public class ScreenController {
     }
   }
 
-
-  public void switchToProfile(ActionEvent event, User loggedInUser){
+  /**
+   * Method to switch to the Profile scene.
+   *
+   * @param event Event used to get the current stage.
+   * @param loggedInUser User that is currently logged into application.
+   */
+  public void switchToProfile(ActionEvent event, User loggedInUser) {
     try {
       ProfileController profileController = new ProfileController(loggedInUser);
       FXMLLoader loader = new FXMLLoader();
@@ -140,8 +144,6 @@ public class ScreenController {
       createErrorDialogBox("Scene error", null, "Error when changing scenes");
     }
   }
-
-
 
   void createErrorDialogBox(String title, String header, String content) {
     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -173,7 +175,12 @@ public class ScreenController {
     return result.filter(buttonType -> buttonType == ButtonType.OK).isPresent();
   }
 
-
+  /**
+   * Method used to switch to Main scene from Profile scene.
+   *
+   * @param event Event used to get the current stage.
+   * @param loggedInUser User that is currently logged into application.
+   */
   public void switchToMainFromProfile(MouseEvent event, User loggedInUser) {
     try {
       MainController mainController = new MainController(loggedInUser);
@@ -191,5 +198,4 @@ public class ScreenController {
       createErrorDialogBox("Scene error", null, "Error when changing scenes");
     }
   }
-
 }

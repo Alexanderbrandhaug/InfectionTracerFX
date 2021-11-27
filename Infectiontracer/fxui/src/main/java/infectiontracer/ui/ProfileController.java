@@ -3,13 +3,13 @@ package infectiontracer.ui;
 import infectiontracer.core.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-/** Controller for the profile screen of the application*/
+/** Controller for the profile screen of the application. */
 public class ProfileController extends AbstractController {
 
   @FXML private TextField emailTxt;
@@ -25,8 +25,6 @@ public class ProfileController extends AbstractController {
   @FXML private PasswordField newPasswordTxt;
 
   @FXML private Button closeBtnProfile;
-
-  @FXML private Button deleteUserbtnID;
 
   ProfileController(User loggedInUser) {
     this.loggedInUser = loggedInUser;
@@ -49,8 +47,10 @@ public class ProfileController extends AbstractController {
           && !lastNameTxt.getText().equals(loggedInUser.getLastname())) {
         loggedInUser.setLastname(lastNameTxt.getText());
       }
-      if (newPasswordTxt.getText().equals(verifyPasswordTxt.getText())
-          && !newPasswordTxt.getText().isEmpty()) {
+      if (!newPasswordTxt.getText().equals(verifyPasswordTxt.getText()) && (!verifyPasswordTxt.getText().isEmpty() || !newPasswordTxt.getText().isEmpty())) {
+        throw new IllegalArgumentException("Passwords must be identical!");
+      }
+      if (!newPasswordTxt.getText().isEmpty()) {
         loggedInUser.setPassword(verifyPasswordTxt.getText());
       }
       String updatedUserJson = fileHandler.userToJson(loggedInUser);
@@ -60,7 +60,7 @@ public class ProfileController extends AbstractController {
             "Changes saved", null, "Changes to user profile successfully saved.");
       }
     } catch (IllegalArgumentException e) {
-      createInformationDialogBox("Can't save changes to users profile", null, e.getMessage());
+      createErrorDialogBox("Can't save changes to users profile", null, e.getMessage());
     }
   }
 

@@ -17,8 +17,8 @@ import org.junit.jupiter.api.*;
 public class InfectionTracerTest {
   private User user, user2, user3, user4, user5, user6, user7;
   private final InfectionTracer infectionTracer = new InfectionTracer();
-  File tempJsonFile;
-  final String testFilePath = System.getProperty("user.home") + File.separator + "user_test.json";
+  private File tempJsonFile;
+  final String testFilePath = System.getProperty("user.home") + File.separator + "user_test_infectionTracer.json";
 
   @BeforeAll
   public void setUpUsers() throws IOException {
@@ -51,9 +51,9 @@ public class InfectionTracerTest {
   }
 
   @Test
-  public void testActivateUsers() throws IOException {
+  public void testAddUser() throws IOException {
     infectionTracer.addUser(user);
-    assertNotNull(infectionTracer.getUsers());
+    Assertions.assertEquals(infectionTracer.getUsers().get(0), user);
 
   }
   @Test  
