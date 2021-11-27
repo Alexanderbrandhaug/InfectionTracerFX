@@ -2,7 +2,8 @@
 
 ## Om prosjektet
 
-Dette er en Infectiontracer app som registrerer nærkontaktene til personer, og varsler nærkontater dersom man skulle bli smittet. Applikasjonen er laget med JavaFx, og lagrer og skriver informasjonen til/fra "skyen" (For release 1 og 2 lagres det lokalt) ved bruk av JSON-objekter.
+Dette er en Infectiontracer app som registrerer nærkontaktene til personer, og varsler nærkontater dersom man skulle bli smittet. Frontend er skrevet i Java, med JavaFx. Backend er skrevet i Java med det populære rammeverket Spring-boot. Applikasjonen skriver og leser data via et REST-API som igjen skriver til en JSON-fil som lagres i brukerens hjemmekatalog lokalt på PC'en. For å sikre god kodekvalitet og testdekning har vi benyttet oss av [jacoco](https://www.eclemma.org/jacoco/), [checkstyle](https://checkstyle.sourceforge.io/) og [spotbugs](https://spotbugs.github.io/). 
+Applikasjonen kan pakkes til et innstallerbart program på en PC, uavhengig av operativsystem. Fremgangsmåte er beskrevet under.
 Selve applikasjonen finner man [her](Infectiontracer), her finner man også relevant README fil.
 
 ## Gitpod oppsett
