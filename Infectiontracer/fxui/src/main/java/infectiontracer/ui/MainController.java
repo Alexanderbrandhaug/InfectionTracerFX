@@ -23,29 +23,28 @@ public class MainController extends AbstractController {
 
   private final ObservableList<User> contactList = FXCollections.observableArrayList();
 
-  @FXML private Label usernameLbl;
+  @FXML Label usernameLbl;
 
-  @FXML private Label infectionStatus;
+  @FXML Label infectionStatus;
 
-  @FXML private Label numberOfContacts;
+  @FXML Label numberOfContacts;
 
-  @FXML private TableView<User> contactTable;
-  @FXML private TableColumn<User, String> nameColumn;
+  @FXML TableView<User> contactTable;
+  @FXML TableColumn<User, String> nameColumn;
 
-  @FXML private TableColumn<User, String> lastnameColumn;
+  @FXML TableColumn<User, String> lastnameColumn;
 
-  @FXML private TableColumn<User, String> emailColumn;
+  @FXML TableColumn<User, String> emailColumn;
 
-  @FXML private TableColumn<User, String> healthstatusColumn;
+  @FXML TableColumn<User, String> healthstatusColumn;
 
-  @FXML private TableColumn<User, String> dateOfInfectionColumn;
+  @FXML TableColumn<User, String> dateOfInfectionColumn;
 
-  @FXML private TextField contactNameTxt;
+  @FXML TextField contactNameTxt;
 
-  @FXML private Button closeBtnMain;
-  
-  @FXML
-  private Button profileBtnCss;
+  @FXML Button closeBtnMain;
+
+  @FXML Button profileBtnCss;
 
   @FXML
   void fireHealthyUser(ActionEvent event) {

@@ -107,7 +107,7 @@ public abstract class AbstractController {
       }
       return true;
     } catch (URISyntaxException e) {
-      createInformationDialogBox("URL error", null, e.getMessage());
+      createErrorDialogBox("URL error", null, e.getMessage());
       return false;
     } catch (Exception e) {
       createErrorDialogBox("Http error", null, e.getMessage());
@@ -139,7 +139,7 @@ public abstract class AbstractController {
       }
       return true;
     } catch (URISyntaxException e) {
-      createInformationDialogBox("URL error", null, e.getMessage());
+      createErrorDialogBox("URL error", null, e.getMessage());
       return false;
     } catch (Exception e) {
       createErrorDialogBox("Http error", null, e.getMessage());
@@ -172,11 +172,35 @@ public abstract class AbstractController {
       }
       return response.body();
     } catch (URISyntaxException e) {
-      createInformationDialogBox("URL error", null, e.getMessage());
+      createErrorDialogBox("URL error", null, e.getMessage());
       return null;
     } catch (Exception e) {
       createErrorDialogBox("Http error", null, e.getMessage());
       return null;
+    }
+  }
+
+  Boolean createDeleteRequest(String url) {
+    try {
+      URI endpointBaseUri = new URI(url);
+      HttpRequest request =
+              HttpRequest.newBuilder(endpointBaseUri)
+                      .header("Accept", "application/json")
+                      .DELETE()
+                      .build();
+      final HttpResponse<String> response =
+              HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+      if (response.statusCode() != 200) {
+        createErrorDialogBox(String.valueOf(response.statusCode()), null, response.body());
+        return false;
+      }
+      return true;
+    } catch (URISyntaxException e) {
+      createErrorDialogBox("URL error", null, e.getMessage());
+      return false;
+    } catch (Exception e) {
+      createErrorDialogBox("Http error", null, e.getMessage());
+      return false;
     }
   }
 }

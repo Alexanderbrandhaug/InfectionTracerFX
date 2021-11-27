@@ -31,7 +31,7 @@ public class InfectionTracer {
    * @param closeContactEmail The email to the user being added as a close contact.
    */
   public void addCloseContact(String userEmail, String closeContactEmail)
-          throws IOException, IllegalArgumentException {
+      throws IOException, IllegalArgumentException {
     List<User> allUsers = fileHandler.getUsers();
     if (!checkUserList(closeContactEmail, allUsers)) {
       throw new IllegalArgumentException("The user does not exist!");
@@ -58,7 +58,7 @@ public class InfectionTracer {
    * @param closeContactEmail Email to close contact
    */
   public void removeCloseContact(String userEmail, String closeContactEmail)
-          throws IOException, IllegalArgumentException {
+      throws IOException, IllegalArgumentException {
     List<User> allUsers = fileHandler.getUsers();
     if (!checkUserList(userEmail, allUsers)) {
       throw new IllegalArgumentException("The user does not exist");
@@ -155,8 +155,8 @@ public class InfectionTracer {
   }
 
   /**
-   * Methods that checks if a user is already added in the Json-file.
-   * We can compare emails to achieve this, because users need unique emails.
+   * Methods that checks if a user is already added in the Json-file. We can compare emails to
+   * achieve this, because users need unique emails.
    *
    * @param userEmail Email to user being checked.
    * @param userList List of users in file.
@@ -205,7 +205,6 @@ public class InfectionTracer {
     return fileHandler.getUsers();
   }
 
-  // made it boolean in order to not get 500 error when trying to updatepw on server-side
   /**
    * Method to change the password of a users, using the EmailService class.
    *
@@ -213,6 +212,9 @@ public class InfectionTracer {
    */
   public void changePw(String username) throws IOException, IllegalArgumentException {
     List<User> users = fileHandler.getUsers();
+    if (!checkUserList(username, users)) {
+      throw new IllegalArgumentException("User not in file!");
+    }
     for (User user : users) {
       if (username.equals(user.getEmail())) {
         // TODO Change so that mail is only sent if user is successfully written to file
@@ -222,21 +224,26 @@ public class InfectionTracer {
     }
   }
 
-  public void editUser(User user) throws IOException{
-   List<User> currentUsers = fileHandler.getUsers();
-   for(User userToBeEdit: currentUsers){
-     if(user.getEmail().equals(userToBeEdit.getEmail()) && user.getPassword().equals(userToBeEdit.getPassword())){
-       userToBeEdit.setForename(user.getForename());
-       userToBeEdit.setLastname(user.getLastname());
-       fileHandler.writeUsersToFile(currentUsers);
-     }
-     else if(user.getEmail().equals(userToBeEdit.getEmail()) && !user.getPassword().equals(userToBeEdit.getPassword())){
-      userToBeEdit.setForename(user.getForename());
-      userToBeEdit.setLastname(user.getLastname());
-      userToBeEdit.setPassword(user.getPassword());
-      fileHandler.writeUsersToFile(currentUsers);
-     }
-   }
+  /**
+   * Method to edit a user's name and password
+   *
+   * @param changedUser User object with the new values
+   * @throws IOException
+   * @throws IllegalArgumentException
+   */
+  public void editUser(User changedUser) throws IOException, IllegalArgumentException {
+    List<User> currentUsers = fileHandler.getUsers();
+    if (!checkUserList(changedUser.getEmail(), currentUsers)) {
+      throw new IllegalArgumentException("User not in file!");
+    }
+    for (User unchangedUser : currentUsers) {
+      if (changedUser.getEmail().equals(unchangedUser.getEmail())) {
+        unchangedUser.setForename(changedUser.getForename());
+        unchangedUser.setLastname(changedUser.getLastname());
+        unchangedUser.setPassword(changedUser.getPassword());
+        fileHandler.writeUsersToFile(currentUsers);
+      }
+    }
   }
 
   public void sendEmailToCloseContacts(User user) {

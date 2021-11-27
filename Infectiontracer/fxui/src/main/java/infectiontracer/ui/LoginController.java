@@ -20,7 +20,7 @@ public class LoginController extends AbstractController {
 
   @FXML
   void loginBtn(ActionEvent event) {
-    if (emailTxt.getText().isEmpty()) {
+    if (emailTxt.getText().isEmpty() || passwordTxt.getText().isEmpty()) {
       createErrorDialogBox(
           "Login information is incorrect", null, "Email/password combination is not valid.");
       return;
@@ -33,9 +33,10 @@ public class LoginController extends AbstractController {
       if (user.getPassword() != null && user.getPassword().equals(passwordTxt.getText())) {
         screenController.switchToMain((Node) event.getSource(), user);
       }
-    } else {
-      createErrorDialogBox(
-          "Login information is incorrect", null, "Email/password combination is not valid.");
+      else {
+        createErrorDialogBox(
+                "Login information is incorrect", null, "Email/password combination is not valid.");
+      }
     }
   }
 

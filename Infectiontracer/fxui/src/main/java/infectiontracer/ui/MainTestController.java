@@ -3,6 +3,7 @@ package infectiontracer.ui;
 import infectiontracer.core.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -12,7 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 /** Controller for testing the main screen of the application. */
-public class TestController extends AbstractController {
+public class MainTestController extends AbstractController {
 
   @FXML private Label usernameLbl;
 
@@ -21,6 +22,7 @@ public class TestController extends AbstractController {
   @FXML private Label numberOfContacts;
 
   @FXML private TableView<User> contactTable;
+
   @FXML private TableColumn<User, String> nameColumn;
 
   @FXML private TableColumn<User, String> lastnameColumn;
@@ -33,7 +35,7 @@ public class TestController extends AbstractController {
 
   @FXML private TextField contactNameTxt;
 
-  @FXML private Button closeBtnMain;
+  @FXML Button closeBtnMain;
 
   @FXML
   void fireHealthyUser(ActionEvent event) {}
@@ -48,7 +50,9 @@ public class TestController extends AbstractController {
   void removeCloseContact(ActionEvent event) {}
 
   @FXML
-  void profileBtn(ActionEvent event) {}
+  void profileBtn(ActionEvent event) {
+    screenController.switchToProfileTest((Node) event.getSource());
+  }
 
   @FXML
   void mainToLogin(ActionEvent event) {
