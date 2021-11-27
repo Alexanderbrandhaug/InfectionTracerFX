@@ -1,6 +1,8 @@
 package infectiontracer.ui;
 
 import infectiontracer.core.User;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,13 +32,13 @@ public class InfectionTracerRegisterTest extends ApplicationTest {
   private List<User> actualUsersList;
 
   @BeforeAll
-  public void setupFile() {
+  public void setupFile() throws IOException {
     actualUsersList = fileHandler.getUsers();
     AbstractController.setMyUrl(String.valueOf(port));
   }
 
   @AfterAll
-  public void restoreFile() {
+  public void restoreFile() throws IOException {
     fileHandler.writeUsersToFile(actualUsersList);
   }
 

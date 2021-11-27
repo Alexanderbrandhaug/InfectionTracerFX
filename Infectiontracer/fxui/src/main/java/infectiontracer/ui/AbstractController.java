@@ -3,6 +3,7 @@ package infectiontracer.ui;
 import infectiontracer.core.User;
 import infectiontracer.json.FileHandler;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -17,7 +18,7 @@ import javafx.scene.control.ButtonType;
  * to preserve information across scenes with different controllers. Also, some javafx dialogs
  * methods in this class will make it easier to provide feedback to the user.
  */
-public class AbstractController {
+public abstract class AbstractController {
 
   // this will be email for now
   User loggedInUser;
@@ -100,15 +101,16 @@ public class AbstractController {
               .build();
       final HttpResponse<String> response =
           HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-      System.out.println(response);
-      return response.statusCode() == 200;
-
-    } catch (IllegalArgumentException e) {
-      createErrorDialogBox("Error", null, e.getMessage());
+      if (response.statusCode() != 200) {
+        createErrorDialogBox(String.valueOf(response.statusCode()), null, response.body());
+        return false;
+      }
+      return true;
+    } catch (URISyntaxException e) {
+      createInformationDialogBox("URL error", null, e.getMessage());
       return false;
-
     } catch (Exception e) {
-      createErrorDialogBox("Error", null, "Error when updating healthstatus to sick");
+      createErrorDialogBox("Http error", null, e.getMessage());
       return false;
     }
   }
@@ -131,13 +133,16 @@ public class AbstractController {
               .build();
       final HttpResponse<String> response =
           HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-      System.out.println(response);
-      return response.statusCode() == 200;
-    } catch (IllegalArgumentException e) {
-      createInformationDialogBox("Can't change health status", null, e.getMessage());
+      if (response.statusCode() != 200) {
+        createErrorDialogBox(String.valueOf(response.statusCode()), null, response.body());
+        return false;
+      }
+      return true;
+    } catch (URISyntaxException e) {
+      createInformationDialogBox("URL error", null, e.getMessage());
       return false;
     } catch (Exception e) {
-      createErrorDialogBox("Error", null, "Error when updating healthstatus to sick");
+      createErrorDialogBox("Http error", null, e.getMessage());
       return false;
     }
   }
@@ -158,12 +163,20 @@ public class AbstractController {
               .build();
       final HttpResponse<String> response =
           HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-      System.out.println(response);
-
+      if (response.statusCode() == 404) {
+        createErrorDialogBox("404 error", null, "Object not found");
+        return null;
+      } else if (response.statusCode() == 500) {
+        createErrorDialogBox("500 error", null, "Internal server error");
+        return null;
+      }
       return response.body();
+    } catch (URISyntaxException e) {
+      createInformationDialogBox("URL error", null, e.getMessage());
+      return null;
     } catch (Exception e) {
-      e.printStackTrace();
+      createErrorDialogBox("Http error", null, e.getMessage());
+      return null;
     }
-    return null;
   }
 }

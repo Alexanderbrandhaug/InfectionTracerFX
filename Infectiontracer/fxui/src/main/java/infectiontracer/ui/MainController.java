@@ -53,9 +53,6 @@ public class MainController extends AbstractController {
       infectionStatus.setText("Covid-19 Negative");
       createInformationDialogBox(
           "Health status changed", null, "Health status successfully changed.");
-    } else {
-      createErrorDialogBox(
-          "Status change failed", null, "Failed to change infection status to 'Covid-19 Negative'");
     }
   }
 
@@ -69,8 +66,6 @@ public class MainController extends AbstractController {
       infectionStatus.setText("Infected");
       createInformationDialogBox(
           "Email sent", null, "Email notification was sent to your closecontacts");
-    } else {
-      createErrorDialogBox("Error", null, "Error when updating healthstatus to sick");
     }
   }
 
@@ -91,8 +86,6 @@ public class MainController extends AbstractController {
       contactList.add(fileHandler.jsonToUser(closeContactJson));
       refreshInfo();
       contactNameTxt.setText("");
-    } else {
-      createErrorDialogBox("Failed to add", null, "Error when attempting to add close contact.");
     }
   }
 
@@ -103,14 +96,8 @@ public class MainController extends AbstractController {
     String userJson = fileHandler.userToJson(closeContact);
 
     if (createPostRequest(postUrl, userJson)) {
-      createInformationDialogBox(
-          "Close contact removed",
-          null,
-          "The selected close contact has successfully been removed.");
       contactList.remove(closeContact);
       refreshInfo();
-    } else {
-      createErrorDialogBox("Deletion failed", null, "Failed to remove selected close contact.");
     }
   }
 

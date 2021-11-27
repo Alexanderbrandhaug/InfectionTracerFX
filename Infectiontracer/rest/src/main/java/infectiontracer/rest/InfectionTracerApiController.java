@@ -2,6 +2,7 @@ package infectiontracer.rest;
 
 import infectiontracer.core.InfectionTracer;
 import infectiontracer.core.User;
+import java.io.IOException;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,8 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-
 
 /**
  * Controller that controls calls to the REST-API, mainly controlled by the URL's sent in the
@@ -27,11 +26,16 @@ public class InfectionTracerApiController {
   /**
    * Method that returns all users stored in the application.
    *
-   * @return All users
+   * @return Http status code and all users in Json-file.
    */
   @GetMapping("/infectiontracer/users")
-  protected List<User> getAllActiveUsersApi() {
-    return infectionTracer.getUsers();
+  public ResponseEntity<List<User>> getAllActiveUsersApi() {
+    try {
+      List<User> userlist = infectionTracer.getUsers();
+      return ResponseEntity.ok(userlist);
+    } catch (IOException e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    }
   }
 
   /**
@@ -44,11 +48,14 @@ public class InfectionTracerApiController {
             produces = MediaType.APPLICATION_JSON_VALUE*/)
   // @ResponseStatus(code = HttpStatus.OK, reason = "OK")
   public ResponseEntity<User> getUserByEmailApi(@PathVariable String email) {
-    User user = infectionTracer.getActiveUser(email);
-    if (user == null) {
+    try {
+      User user = infectionTracer.getActiveUser(email);
+      return ResponseEntity.ok(user);
+    } catch (IOException e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    } catch (IllegalArgumentException e) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
-    return ResponseEntity.ok(user);
   }
 
   /**
@@ -61,9 +68,15 @@ public class InfectionTracerApiController {
       path = "/infectiontracer/users",
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  protected boolean newUserApi(@RequestBody User newUser) {
-    infectionTracer.addUser(newUser);
-    return true;
+  public ResponseEntity<String> newUserApi(@RequestBody User newUser) {
+    try {
+      infectionTracer.addUser(newUser);
+      return ResponseEntity.ok(null);
+    } catch (IOException e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    } catch (IllegalArgumentException e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
   }
 
   /**
@@ -73,8 +86,13 @@ public class InfectionTracerApiController {
    * @return List of close contacts belonging to user.
    */
   @GetMapping("/infectiontracer/user/{email}/closecontacts")
-  protected List<User> getUsersCloseContactsApi(@PathVariable String email) {
-    return infectionTracer.getUsersCloseContacts(email);
+  public ResponseEntity<List<User>> getUsersCloseContactsApi(@PathVariable String email) {
+    try {
+      List<User> closeContacts = infectionTracer.getUsersCloseContacts(email);
+      return ResponseEntity.ok(closeContacts);
+    } catch (IOException e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    }
   }
 
   /**
@@ -85,11 +103,17 @@ public class InfectionTracerApiController {
    * @return True if change is successful.
    */
   @PutMapping("infectiontracer/user/{email}/healthstatus/makesick")
-  protected boolean setHealthStatusSickApi(
+  public ResponseEntity<String> setHealthStatusSickApi(
       @PathVariable String email, @RequestBody User infectedUser) {
-    infectionTracer.makeUserInfected(email);
-    infectionTracer.sendEmailToCloseContacts(infectedUser);
-    return true;
+    try {
+      infectionTracer.makeUserInfected(email);
+      infectionTracer.sendEmailToCloseContacts(infectedUser);
+      return ResponseEntity.ok(null);
+    } catch (IOException e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    } catch (IllegalArgumentException e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
   }
 
   /**
@@ -99,9 +123,15 @@ public class InfectionTracerApiController {
    * @return True if change is successful.
    */
   @PutMapping("infectiontracer/user/{email}/healthstatus/makehealthy")
-  protected boolean setHealthStatusHealthyApi(@PathVariable String email) {
-    infectionTracer.makeUserHealthy(email);
-    return true;
+  public ResponseEntity<String> setHealthStatusHealthyApi(@PathVariable String email) {
+    try {
+      infectionTracer.makeUserHealthy(email);
+      return ResponseEntity.ok(null);
+    } catch (IOException e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    } catch (IllegalArgumentException e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
   }
 
   /**
@@ -112,10 +142,16 @@ public class InfectionTracerApiController {
    * @return True if change is successful.
    */
   @PostMapping("infectiontracer/user/{email}/closecontacts")
-  protected boolean addCloseContactApi(
+  public ResponseEntity<String> addCloseContactApi(
       @PathVariable String email, @RequestBody User newCloseContact) {
-    infectionTracer.addCloseContact(email, newCloseContact.getEmail());
-    return true;
+    try {
+      infectionTracer.addCloseContact(email, newCloseContact.getEmail());
+      return ResponseEntity.ok(null);
+    } catch (IOException e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    } catch (IllegalArgumentException e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
   }
 
   /**
@@ -126,10 +162,16 @@ public class InfectionTracerApiController {
    * @return True if change is successful.
    */
   @PostMapping("infectiontracer/user/{email}/closecontacts/removecontact")
-  protected boolean deleteCloseContactApi(
+  public ResponseEntity<String> deleteCloseContactApi(
       @PathVariable String email, @RequestBody User oldCloseContact) {
-    infectionTracer.removeCloseContact(email, oldCloseContact.getEmail());
-    return true;
+    try {
+      infectionTracer.removeCloseContact(email, oldCloseContact.getEmail());
+      return ResponseEntity.ok(null);
+    } catch (IOException e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    } catch (IllegalArgumentException e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
   }
 
   /**
@@ -140,7 +182,15 @@ public class InfectionTracerApiController {
    * @return True if change is successful.
    */
   @PutMapping("infectiontracer/user/{email}")
-  protected boolean updatePasswordApi(@PathVariable String email, @RequestBody User currentUser) {
-    return infectionTracer.changePw(currentUser.getEmail());
+  public ResponseEntity<String> updatePasswordApi(
+      @PathVariable String email, @RequestBody User currentUser) {
+    try {
+      infectionTracer.changePw(currentUser.getEmail());
+      return ResponseEntity.ok(null);
+    } catch (IOException e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    } catch (IllegalArgumentException e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
   }
 }

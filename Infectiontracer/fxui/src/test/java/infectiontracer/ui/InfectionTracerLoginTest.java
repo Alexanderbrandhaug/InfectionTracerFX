@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.testfx.framework.junit5.ApplicationTest;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -32,7 +33,7 @@ public class InfectionTracerLoginTest extends ApplicationTest {
   private List<User> actualUsersList;
 
   @BeforeAll
-  public void setupFile() {
+  public void setupFile() throws IOException {
 
     actualUsersList = fileHandler.getUsers();
     AbstractController.setMyUrl(String.valueOf(port));
@@ -43,7 +44,7 @@ public class InfectionTracerLoginTest extends ApplicationTest {
   }
 
   @AfterAll
-  public void restoreFile() {
+  public void restoreFile() throws IOException {
     fileHandler.writeUsersToFile(actualUsersList);
   }
 

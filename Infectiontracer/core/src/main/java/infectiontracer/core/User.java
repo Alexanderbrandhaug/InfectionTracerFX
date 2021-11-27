@@ -130,7 +130,7 @@ public class User {
   }
 
   /** Adds a close contact to the current user. */
-  public void addCloseContact(String user) {
+  public void addCloseContact(String user) throws IllegalArgumentException {
     if (checkIfUserAlreadyExistsAsCloseContact(user)) {
       throw new IllegalArgumentException("User is already added");
     } else {
@@ -143,7 +143,7 @@ public class User {
    *
    * @param user Email to close contact that is to be removed.
    */
-  public void removeCloseContact(String user) {
+  public void removeCloseContact(String user) throws IllegalArgumentException {
     if (!checkIfUserAlreadyExistsAsCloseContact(user)) {
       throw new IllegalArgumentException("User is not a close contact!");
     } else {
@@ -161,7 +161,7 @@ public class User {
    *
    * @param forename Forename for user.
    */
-  public void setForename(String forename) {
+  public void setForename(String forename) throws IllegalArgumentException {
     Pattern pattern = Pattern.compile("[^a-zA-Z]");
     Matcher match = pattern.matcher(forename);
     if (match.find() || forename.isEmpty()) {
@@ -180,7 +180,7 @@ public class User {
    *
    * @param lastname Lastname for user.
    */
-  public void setLastname(String lastname) {
+  public void setLastname(String lastname) throws IllegalArgumentException {
     Pattern pattern = Pattern.compile("[^a-zA-Z]");
     Matcher match = pattern.matcher(lastname);
     if (match.find() || lastname.isEmpty()) {
@@ -199,7 +199,7 @@ public class User {
    *
    * @param email Email for user.
    */
-  public void setEmail(String email) {
+  public void setEmail(String email) throws IllegalArgumentException {
     if (!email.contains("@") || !email.contains(".com")) {
       throw new IllegalArgumentException("Invalid email");
     }
@@ -216,7 +216,7 @@ public class User {
    *
    * @param password Password for user.
    */
-  public void setPassword(String password) {
+  public void setPassword(String password) throws IllegalArgumentException {
     if (password.length() >= 8) {
       Pattern letter = Pattern.compile("[a-zA-z]");
       Pattern digit = Pattern.compile("[0-9]");
@@ -226,11 +226,13 @@ public class User {
       if (hasLetter.find() && hasDigit.find()) {
         this.password = password;
       } else {
-        throw new IllegalArgumentException("Not correct");
+        throw new IllegalArgumentException(
+            "The password must consist of both letters and numbers.");
       }
 
     } else {
-      throw new IllegalArgumentException("Not enough");
+      throw new IllegalArgumentException(
+          "The entered password is not long enough. Minimum length is 8.");
     }
   }
 

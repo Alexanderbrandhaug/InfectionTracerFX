@@ -2,6 +2,8 @@ package infectiontracer.ui;
 
 import infectiontracer.core.InfectionTracer;
 import infectiontracer.core.User;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class InfectionTracerMainTest extends ApplicationTest {
   private Scene scene;
 
   @BeforeAll
-  public void setupFile() {
+  public void setupFile() throws IOException {
     actualUsersList = fileHandler.getUsers();
     AbstractController.setMyUrl(String.valueOf(port));
     List<User> testUsers = new ArrayList<>();
@@ -49,7 +51,7 @@ public class InfectionTracerMainTest extends ApplicationTest {
   }
 
   @AfterAll
-  public void restoreFile() {
+  public void restoreFile() throws IOException {
     fileHandler.writeUsersToFile(actualUsersList);
   }
 
@@ -67,7 +69,7 @@ public class InfectionTracerMainTest extends ApplicationTest {
   }
 
   @Test
-  public void testAddValidCloseContact() {
+  public void testAddValidCloseContact() throws IOException {
     clickOn("#contactNameTxt").write(testUser2.getEmail());
     clickOn("#addContactBtn");
     verifyThat("#okButton", isVisible());

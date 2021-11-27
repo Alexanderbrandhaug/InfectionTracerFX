@@ -1,6 +1,7 @@
 package infectiontracer.core;
 
 import infectiontracer.json.FileHandler;
+import java.io.IOException;
 import java.lang.IllegalArgumentException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +30,12 @@ public class InfectionTracer {
    * @param userEmail The email to the user trying to add a close contact.
    * @param closeContactEmail The email to the user being added as a close contact.
    */
-  public void addCloseContact(String userEmail, String closeContactEmail) {
-    if (!fileHandler.checkUserList(closeContactEmail)) {
-      throw new IllegalArgumentException("The user does not exist");
-    }
+  public void addCloseContact(String userEmail, String closeContactEmail)
+          throws IOException, IllegalArgumentException {
     List<User> allUsers = fileHandler.getUsers();
+    if (!checkUserList(closeContactEmail, allUsers)) {
+      throw new IllegalArgumentException("The user does not exist!");
+    }
     // If one user adds another as close contact, both will become a close contact to each other
     User currentUser =
         allUsers.stream().filter(user -> userEmail.equals(user.getEmail())).findAny().orElse(null);
@@ -55,11 +57,12 @@ public class InfectionTracer {
    * @param userEmail Email to user that removes a close contact
    * @param closeContactEmail Email to close contact
    */
-  public void removeCloseContact(String userEmail, String closeContactEmail) {
-    if (!fileHandler.checkUserList(closeContactEmail)) {
+  public void removeCloseContact(String userEmail, String closeContactEmail)
+          throws IOException, IllegalArgumentException {
+    List<User> allUsers = fileHandler.getUsers();
+    if (!checkUserList(userEmail, allUsers)) {
       throw new IllegalArgumentException("The user does not exist");
     }
-    List<User> allUsers = fileHandler.getUsers();
     User currentUser =
         allUsers.stream().filter(user -> userEmail.equals(user.getEmail())).findAny().orElse(null);
     User closeContact =
@@ -80,7 +83,7 @@ public class InfectionTracer {
    *
    * @param username Username of the logged-in user.
    */
-  public void makeUserInfected(String username) throws IllegalArgumentException {
+  public void makeUserInfected(String username) throws IllegalArgumentException, IOException {
 
     List<User> allUsers = fileHandler.getUsers();
     User currentUser =
@@ -100,7 +103,7 @@ public class InfectionTracer {
    *
    * @param username Username of the logged-in user.
    */
-  public void makeUserHealthy(String username) throws IllegalArgumentException {
+  public void makeUserHealthy(String username) throws IllegalArgumentException, IOException {
     List<User> allUsers = fileHandler.getUsers();
     User currentUser =
         allUsers.stream().filter(user -> username.equals(user.getEmail())).findAny().orElse(null);
@@ -119,12 +122,14 @@ public class InfectionTracer {
    *
    * @param username Username of the logged-in user.
    */
-  public List<User> getUsersCloseContacts(String username) {
+  public List<User> getUsersCloseContacts(String username) throws IOException {
     List<User> users = fileHandler.getUsers();
     User currentUser =
         users.stream().filter(user -> username.equals(user.getEmail())).findAny().orElse(null);
+    // Need to loop through list because a user only store their close contacts' emails.
     List<User> closeContacts = new ArrayList<>();
     if (currentUser != null) {
+      users.removeIf(user -> user.getEmail().equals(username));
       for (User user : users) {
         if (currentUser.getAllCloseContacts().contains(user.getEmail())) {
           closeContacts.add(user);
@@ -139,22 +144,39 @@ public class InfectionTracer {
    *
    * @param username Username of the logged-in user.
    */
-  public User getActiveUser(String username) {
+  public User getActiveUser(String username) throws IOException {
     List<User> users = fileHandler.getUsers();
     for (User user : users) {
       if (username.equals(user.getEmail())) {
         return user;
       }
     }
-    return null;
+    throw new IllegalArgumentException("No user with that email!");
   }
 
   /**
-   * Method for user to delete themself.
+   * Methods that checks if a user is already added in the Json-file.
+   * We can compare emails to achieve this, because users need unique emails.
+   *
+   * @param userEmail Email to user being checked.
+   * @param userList List of users in file.
+   * @return True if user in file, false otherwise.
+   */
+  public Boolean checkUserList(String userEmail, List<User> userList) {
+    for (User user : userList) {
+      if (user.getEmail().equals(userEmail)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Method for user to delete themselves.
    *
    * @param username User to be deleted.
    */
-  public void deleteUser(String username) {
+  public void deleteUser(String username) throws IOException {
     List<User> users = fileHandler.getUsers();
     for (User user : users) {
       if (user.getAllCloseContacts().contains(username)) {
@@ -165,33 +187,40 @@ public class InfectionTracer {
     fileHandler.writeUsersToFile(users);
   }
 
-  public void addUser(User newUser) {
-    fileHandler.insertUser(newUser);
+  /**
+   * Function that attempts to insert user into users.json.
+   *
+   * @param newUser User that is inserted.
+   */
+  public void addUser(User newUser) throws IOException {
+    List<User> allUsers = fileHandler.getUsers();
+    if (checkUserList(newUser.getEmail(), allUsers)) {
+      throw new IllegalArgumentException("User is already in file!");
+    }
+    allUsers.add(newUser);
+    fileHandler.writeUsersToFile(allUsers);
   }
 
-  public List<User> getUsers() {
+  public List<User> getUsers() throws IOException {
     return fileHandler.getUsers();
   }
 
   // made it boolean in order to not get 500 error when trying to updatepw on server-side
-
   /**
    * Method to change the password of a users, using the EmailService class.
    *
    * @param username Email of the user that is having password changed.
-   * @return True if successful, false otherwise.
    */
-  public boolean changePw(String username) {
+  public void changePw(String username) throws IOException, IllegalArgumentException {
     List<User> users = fileHandler.getUsers();
     for (User user : users) {
       if (username.equals(user.getEmail())) {
+        // TODO Change so that mail is only sent if user is successfully written to file
         user.setPassword(new EmailService().sendEmailWithNewPassword(user.getEmail()));
         users.add(user);
         fileHandler.writeUsersToFile(users);
-        return true;
       }
     }
-    return false;
   }
 
   public void sendEmailToCloseContacts(User user) {

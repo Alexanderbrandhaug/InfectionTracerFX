@@ -10,13 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 import org.junit.jupiter.api.*;
-import infectiontracer.json.*;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class InfectionTracerTest {
   private User user, user2, user3, user4, user5, user6, user7;
-  private final InfectionTracer infectiontracer = new InfectionTracer();
-  private final FileHandler filehandler = new FileHandler();
+  private final InfectionTracer infectionTracer = new InfectionTracer();
   File tempJsonFile;
   final String testFilePath = System.getProperty("user.home") + File.separator + "user_test.json";
 
@@ -33,8 +31,7 @@ public class InfectionTracerTest {
      if (!tempJsonFile.createNewFile()) {
        throw new IOException();
      }
-    filehandler.setFilePath(testFilePath);
-    infectiontracer.setPath(testFilePath);
+    infectionTracer.setPath(testFilePath);
   }
 
   @AfterEach
@@ -52,55 +49,55 @@ public class InfectionTracerTest {
   }
 
   @Test
-  public void testActivateUsers() {
-    filehandler.insertUser(user);
-    assertNotNull(filehandler.getUsers());
+  public void testActivateUsers() throws IOException {
+    infectionTracer.addUser(user);
+    assertNotNull(infectionTracer.getUsers());
   }
 
   @Test
-  public void testAddInvalidUser() {
-    filehandler.insertUser(user);
+  public void testAddInvalidUser() throws IOException {
+    infectionTracer.addUser(user);
     Assertions.assertThrows(
         IllegalArgumentException.class,
-        () -> infectiontracer.addCloseContact(user.getEmail(), user3.getEmail()));
+        () -> infectionTracer.addCloseContact(user.getEmail(), user3.getEmail()));
   }
 
   @Test
-  public void testRegisterDuplicateUser() {
-    filehandler.insertUser(user2);
-    Assertions.assertThrows(IllegalArgumentException.class, () -> filehandler.insertUser(user2));
+  public void testRegisterDuplicateUser() throws IOException {
+    infectionTracer.addUser(user2);
+    Assertions.assertThrows(IllegalArgumentException.class, () -> infectionTracer.addUser(user2));
   }
 
   @Test
-  public void testAddValidUser() {
-    filehandler.insertUser(user3);
-    filehandler.insertUser(user4);
-    infectiontracer.addCloseContact(user4.getEmail(), user3.getEmail());
+  public void testAddValidUser() throws IOException {
+    infectionTracer.addUser(user3);
+    infectionTracer.addUser(user4);
+    infectionTracer.addCloseContact(user4.getEmail(), user3.getEmail());
   }
 
   @Test
-  public void testMakeUserInfected() {
-    filehandler.insertUser(user);
-    infectiontracer.makeUserInfected(user.getEmail());
+  public void testMakeUserInfected() throws IOException {
+    infectionTracer.addUser(user);
+    infectionTracer.makeUserInfected(user.getEmail());
     Assertions.assertEquals(
-        "Infected", infectiontracer.getActiveUser(user.getEmail()).getHealthStatus());
+        "Infected", infectionTracer.getActiveUser(user.getEmail()).getHealthStatus());
   }
 
   @Test
-  public void testMakeUserHealthy() {
-    filehandler.insertUser(user5);
-    infectiontracer.makeUserInfected(user5.getEmail());
-    infectiontracer.makeUserHealthy(user5.getEmail());
+  public void testMakeUserHealthy() throws IOException {
+    infectionTracer.addUser(user5);
+    infectionTracer.makeUserInfected(user5.getEmail());
+    infectionTracer.makeUserHealthy(user5.getEmail());
     Assertions.assertEquals(
-        "Covid-19 Negative", infectiontracer.getActiveUser(user5.getEmail()).getHealthStatus());
+        "Covid-19 Negative", infectionTracer.getActiveUser(user5.getEmail()).getHealthStatus());
   }
 
   @Test
-  public void testGetUsersCloseContacts() {
-    filehandler.insertUser(user6);
-    filehandler.insertUser(user7);
-    infectiontracer.addCloseContact(user6.getEmail(), user7.getEmail());
-    List<User> liste = infectiontracer.getUsersCloseContacts(user6.getEmail());
+  public void testGetUsersCloseContacts() throws IOException {
+    infectionTracer.addUser(user6);
+    infectionTracer.addUser(user7);
+    infectionTracer.addCloseContact(user6.getEmail(), user7.getEmail());
+    List<User> liste = infectionTracer.getUsersCloseContacts(user6.getEmail());
     Assertions.assertEquals(user7.getEmail(), liste.get(0).getEmail());
   }
 }

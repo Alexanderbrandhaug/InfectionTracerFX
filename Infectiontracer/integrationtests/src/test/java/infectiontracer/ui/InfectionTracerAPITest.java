@@ -10,6 +10,8 @@ import infectiontracer.core.User;
 import org.springframework.test.context.ContextConfiguration;
 import infectiontracer.rest.*;
 import org.junit.jupiter.api.*;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import infectiontracer.json.*;
@@ -26,7 +28,7 @@ public class InfectionTracerAPITest {
   private List<User> actualUsersList;
 
   @BeforeAll
-  public void setupFile() {
+  public void setupFile() throws IOException {
 
     actualUsersList = fileHandler.getUsers();
     User testUser = new User("test", "test", "test@gmail.com", "Passord123", "", "");
@@ -36,7 +38,7 @@ public class InfectionTracerAPITest {
   }
 
   @AfterAll
-  public void restoreFile() {
+  public void restoreFile() throws IOException {
     fileHandler.writeUsersToFile(actualUsersList);
   }
 
