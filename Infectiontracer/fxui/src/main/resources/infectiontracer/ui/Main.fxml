@@ -168,5 +168,10 @@
             <Image url="@spreading.png" />
          </image>
       </ImageView>
+      <Label fx:id="numberOfContacts" layoutX="875.0" layoutY="76.0" prefHeight="30.0" prefWidth="45.0" textFill="#0598ff">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

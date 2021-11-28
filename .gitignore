@@ -1,6 +1,7 @@
 # Default ignored files
 target/
 .idea/
+.settings/
 
 .project
 .classpath
