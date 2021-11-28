@@ -2,7 +2,6 @@ package infectiontracer.ui;
 
 import infectiontracer.rest.InfectionTracerApplication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -15,7 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.junit.jupiter.api.*;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import java.beans.Transient;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,6 @@ import infectiontracer.json.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import static org.junit.jupiter.api.Assertions.*;
-import org.springframework.http.HttpMethod;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ContextConfiguration(classes = {InfectionTracerApplication.class})
@@ -34,7 +32,7 @@ public class InfectionTracerApiTest {
   private final FileHandler fileHandler = new FileHandler();
   private List<User> actualUsersList;
   private User testUser;
-  private InfectionTracer infectiontracer = new InfectionTracer();
+  private final InfectionTracer infectiontracer = new InfectionTracer();
  
 
   @BeforeAll

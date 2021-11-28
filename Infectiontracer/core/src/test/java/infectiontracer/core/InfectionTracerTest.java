@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -83,8 +82,7 @@ public class InfectionTracerTest {
   void testDeleteUser() throws IOException{
     infectionTracer.addUser(user);
     infectionTracer.deleteUser(user.getEmail());
-    Assertions.assertEquals(
-        true, infectionTracer.getUsers().isEmpty());
+    Assertions.assertTrue(infectionTracer.getUsers().isEmpty());
   }
 
   @Test
@@ -102,8 +100,7 @@ public class InfectionTracerTest {
     infectionTracer.addCloseContact(user.getEmail(), user2.getEmail());
     assertNotNull(infectionTracer.getUsersCloseContacts(user.getEmail()));
     infectionTracer.removeCloseContact(user.getEmail(), user2.getEmail());
-    Assertions.assertEquals(
-      true, infectionTracer.getUsersCloseContacts(user.getEmail()).isEmpty());
+    Assertions.assertTrue(infectionTracer.getUsersCloseContacts(user.getEmail()).isEmpty());
   }
   
 

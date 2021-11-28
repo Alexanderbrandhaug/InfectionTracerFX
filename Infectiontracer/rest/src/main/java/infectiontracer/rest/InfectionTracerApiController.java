@@ -103,7 +103,7 @@ public class InfectionTracerApiController {
    * @param infectedUser Infected User object.
    * @return A http response.
    */
-  @PutMapping("infectiontracer/user/{email}/healthstatus/makesick")
+  @PutMapping("/infectiontracer/user/{email}/healthstatus/makesick")
   public ResponseEntity<String> setHealthStatusSickApi(
       @PathVariable String email, @RequestBody User infectedUser) {
     try {
@@ -123,7 +123,7 @@ public class InfectionTracerApiController {
    * @param email Email to user that has health status changed.
    * @return A http response.
    */
-  @PutMapping("infectiontracer/user/{email}/healthstatus/makehealthy")
+  @PutMapping("/infectiontracer/user/{email}/healthstatus/makehealthy")
   public ResponseEntity<String> setHealthStatusHealthyApi(@PathVariable String email) {
     try {
       infectionTracer.makeUserHealthy(email);
@@ -142,7 +142,7 @@ public class InfectionTracerApiController {
    * @param newCloseContact User that is being added as a close contact.
    * @return A http response.
    */
-  @PostMapping("infectiontracer/user/{email}/closecontacts")
+  @PostMapping("/infectiontracer/user/{email}/closecontacts")
   public ResponseEntity<String> addCloseContactApi(
       @PathVariable String email, @RequestBody User newCloseContact) {
     try {
@@ -162,7 +162,7 @@ public class InfectionTracerApiController {
    * @param oldCloseContact User that is to be removed as close contact.
    * @return A http response.
    */
-  @PostMapping("infectiontracer/user/{email}/closecontacts/removecontact")
+  @PostMapping("/infectiontracer/user/{email}/closecontacts/removecontact")
   public ResponseEntity<String> deleteCloseContactApi(
       @PathVariable String email, @RequestBody User oldCloseContact) {
     try {
@@ -182,7 +182,7 @@ public class InfectionTracerApiController {
    * @param currentUser User that is having password changed.
    * @return A http response.
    */
-  @PutMapping("infectiontracer/user/{email}/updatepw")
+  @PutMapping("/infectiontracer/user/{email}/updatepw")
   public ResponseEntity<String> updatePasswordApi(
       @PathVariable String email, @RequestBody User currentUser) {
     try {
