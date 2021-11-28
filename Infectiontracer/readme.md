@@ -38,6 +38,14 @@ Foreløpig release plan for release 1 og 2 finnes under [docs](docs). <br>
 
 - Som Navn Navnesen vil jeg ha en applikasjon som er intuitiv og brukervennlig. 
 
+- Som Navn Navnesen ønsker jeg å ha mulighet til å generere et nytt passord og få det tilsendt på mail dersom jeg glemmer passordet mitt.
+
+- Som Navn Navnesen ønsker jeg å ha muligheten til å slette brukeren min dersom jeg ikke ønkser å ha en bruker på InfectionTracer lenger.
+
+- Som Navn Navnesen ønsker jeg å ha muligheten til å endre fornavn, etternavn og passord på brukeren.
+
+- Som Navn Navnesen ønsker jeg å ha mulighet til å slette en nærkontakt dersom nærkontakten er lagt til ved en feil.
+
 # Illustrasjoner
 
 **Her er noen bilder av selve applikasjonen.**
