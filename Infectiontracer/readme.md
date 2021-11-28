@@ -28,7 +28,7 @@ Integrasjonstester finner man under [integrationtests/src/test/java/infectiontra
 Test-filer for rest-tjenesten finner man under [rest/src/test/java/infectiontracer/ui](rest/src/test/java/infectiontracer/ui/). <br>
 
 
-Foreløpig release plan for release 1 og 2 finnes under [docs](docs). <br>
+
 
 **API-dokumentasjon** av REST-tjenesten finner du [her](https://documenter.getpostman.com/view/14944616/UVJYHySS?fbclid=IwAR0qR2jcDQGa54JkL8ySvVE5ZJCRAWiQy8QLyaC8vfphxTTRo-owYuh9gB0). <br>
 
