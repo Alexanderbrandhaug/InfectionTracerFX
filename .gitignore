@@ -1,6 +1,9 @@
 # Default ignored files
 target/
+idea/
 
 .project
 .classpath
 *.prefs
+
+
