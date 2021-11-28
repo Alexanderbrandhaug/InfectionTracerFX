@@ -11,7 +11,6 @@ Spotbugs vil stoppe byggingen om det rapporteres en bug.
 Checkstyle standariserer vår formattering av kode ihht [Google sin kode konvensjoner](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml)
 
 
-
 ## Filstruktur
 
 De ulike filene er fordelt i ulike mapper. <br>
