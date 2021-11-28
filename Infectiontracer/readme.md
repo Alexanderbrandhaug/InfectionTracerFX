@@ -60,7 +60,7 @@ Foreløpig release plan for release 1 og 2 finnes under [docs](docs). <br>
 
 **Sekvensdiagram**
 
-![](docs/release2/images/core.png)
+![](docs/release3/diagrams/sequencediagram.png)
 
 
 
