@@ -54,3 +54,4 @@ core -> fxui: deserialize [JsonToUser]
 fxui --> user: tableview updates
 end
 @enduml
+
