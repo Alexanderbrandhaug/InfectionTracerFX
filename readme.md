@@ -26,7 +26,7 @@ så må kommandoen: `sudo apt-get update` etterfulgt av `sudo apt-get install -y
 
 ## Utvikler oppsett
 
-1. git clone https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2181/gr2181.git
+1. `git clone` https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2181/gr2181.git
 2. Åpne prosjektet som et Maven bygg i din IDE.
 3. Installer nødvendige avhengigheter ved å kjøre `mvn install` i root.
 4. Start Spring-boot serveren ved å kjøre `mvn spring-boot:run`i rest-mappen.
