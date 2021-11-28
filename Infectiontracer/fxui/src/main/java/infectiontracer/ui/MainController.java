@@ -96,7 +96,8 @@ public class MainController extends AbstractController {
     String userJson = fileHandler.userToJson(closeContact);
 
     if (createPostRequest(postUrl, userJson)) {
-      createInformationDialogBox("Close contact removed", null, "Close contact successfully removed.");
+      createInformationDialogBox(
+          "Close contact removed", null, "Close contact successfully removed.");
       contactList.remove(closeContact);
       refreshInfo();
     }

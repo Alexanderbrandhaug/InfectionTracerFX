@@ -3,9 +3,7 @@ package infectiontracer.ui;
 import infectiontracer.core.InfectionTracer;
 import infectiontracer.core.User;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import infectiontracer.ui.*;
@@ -87,7 +85,6 @@ public class InfectionTracerMainTest extends ApplicationTest {
     clickOn("#deleteBtn");
     clickOn("#okButton");
     assertTrue(infectionTracer.getUsersCloseContacts(testUser.getEmail()).isEmpty());
-
   }
 
   @Test

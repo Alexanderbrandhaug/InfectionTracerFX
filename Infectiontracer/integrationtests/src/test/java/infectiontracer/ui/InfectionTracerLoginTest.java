@@ -49,7 +49,7 @@ public class InfectionTracerLoginTest extends ApplicationTest {
   }
 
   @Override
-  public void start(Stage stage) throws Exception {
+  public void start(Stage stage) throws IOException {
     Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
     Scene scene = new Scene(root);
     stage.setScene(scene);
@@ -65,7 +65,7 @@ public class InfectionTracerLoginTest extends ApplicationTest {
   }
 
   @Test
-  void testInvalidLogin() {
+  public void testInvalidLogin() {
     String username = "test";
     String password = "";
     clickOn("#emailTxt").write(username);
@@ -73,4 +73,15 @@ public class InfectionTracerLoginTest extends ApplicationTest {
     clickOn("#loginBtnId");
     verifyThat("#errorButton", isVisible());
   }
+
+  //TODO fix test if possible
+  /*
+  @Test
+  public void testForgottenPassword() {
+    clickOn("#emailTxt").write("test@gmail.com");
+    clickOn("#retrievePasswordBtnId");
+    sleep(3000);
+    verifyThat("#okButton", isVisible());
+    clickOn("#okButton");
+  }*/
 }

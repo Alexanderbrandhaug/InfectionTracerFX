@@ -47,7 +47,8 @@ public class ProfileController extends AbstractController {
           && !lastNameTxt.getText().equals(loggedInUser.getLastname())) {
         loggedInUser.setLastname(lastNameTxt.getText());
       }
-      if (!newPasswordTxt.getText().equals(verifyPasswordTxt.getText()) && (!verifyPasswordTxt.getText().isEmpty() || !newPasswordTxt.getText().isEmpty())) {
+      if (!newPasswordTxt.getText().equals(verifyPasswordTxt.getText())
+          && (!verifyPasswordTxt.getText().isEmpty() || !newPasswordTxt.getText().isEmpty())) {
         throw new IllegalArgumentException("Passwords must be identical!");
       }
       if (!newPasswordTxt.getText().isEmpty()) {

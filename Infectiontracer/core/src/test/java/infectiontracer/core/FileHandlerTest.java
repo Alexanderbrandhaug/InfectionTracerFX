@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class FileHandlerTest {
@@ -51,7 +50,7 @@ public class FileHandlerTest {
 
     @Test
     public void testGetUsers() throws IOException {
-        ArrayList<User> userArrayList = new ArrayList<User>();
+        ArrayList<User> userArrayList = new ArrayList<>();
         userArrayList.add(user);
         userArrayList.add(user2);
         fileHandler.writeUsersToFile(userArrayList);
