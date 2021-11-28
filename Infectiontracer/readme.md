@@ -10,7 +10,7 @@ Jacoco vil generere en rapport som HTML.fil etter endt kjøring til hver modul s
 Spotbugs vil stoppe byggingen om det rapporteres en bug.
 Checkstyle standariserer vår formattering av kode ihht [Google sin kode konvensjoner](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml)
 
-Applikasjonen kan pakkes til et innstallerbart program på en PC, uavhengig av operativsystem. Fremgangsmåte er beskrevet under.
+
 
 ## Filstruktur
 
