@@ -63,7 +63,3 @@ Foreløpig release plan for release 1 og 2 finnes under [docs](docs). <br>
 ![](docs/release3/diagrams/sequencediagram.png)
 
 
-
-# Json-Skjema
-
-![](docs/release2/images/jsonschema.jpg)
