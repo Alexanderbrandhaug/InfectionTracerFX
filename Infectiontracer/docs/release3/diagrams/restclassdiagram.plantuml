@@ -1,0 +1,22 @@
+@startuml
+class InfectionTracerApiController [[java:infectiontracer.rest.InfectionTracerApiController]] {
+	-InfectionTracer infectionTracer
+	+ResponseEntity<List<User>> getAllActiveUsersApi()
+	+ResponseEntity<User> getUserByEmailApi(String email)
+	+ResponseEntity<String> newUserApi(User newUser)
+	+ResponseEntity<List<User>> getUsersCloseContactsApi(String email)
+	+ResponseEntity<String> setHealthStatusSickApi(String email, User infectedUser)
+	+ResponseEntity<String> setHealthStatusHealthyApi(String email)
+	+ResponseEntity<String> addCloseContactApi(String email, User newCloseContact)
+	+ResponseEntity<String> deleteCloseContactApi(String email, User oldCloseContact)
+	+ResponseEntity<String> updatePasswordApi(String email, User currentUser)
+	+ResponseEntity<String> updateUser(String email, User changedUser)
+	+ResponseEntity<String> deletePost(String email)
+}
+class InfectionTracerApplication [[java:infectiontracer.rest.InfectionTracerApplication]] {
+	+{static}void main(String[] args)
+	+CommandLineRunner commandLineRunner(ApplicationContext ctx)
+}
+
+InfectionTracerApiController ..> InfectionTracerApplication
+@enduml
