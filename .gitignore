@@ -1,2 +1,6 @@
 # Default ignored files
 target/
+
+.project
+.classpath
+*.prefs
