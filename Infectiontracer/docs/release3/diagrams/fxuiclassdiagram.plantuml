@@ -1,0 +1,73 @@
+@startuml
+class AbstractController [[java:infectiontracer.ui.AbstractController]] {
+	~String username
+	~{static}String port
+	~{static}String myUrl
+	~Gson gson
+	#{static}void setMyUrl(String port)
+	#void createErrorDialogBox(String title, String header, String content)
+	#void createInformationDialogBox(String title, String header, String content)
+	#boolean createConfirmationDialogBox(String title, String header, String content)
+	#boolean createPostRequest(String url, String json)
+	#boolean createPutRequest(String url, String json)
+	#String createGetRequest(String url)
+}
+class MainController [[java:infectiontracer.ui.MainController]] {
+	-InfectionTracer infectionTracer
+	~ObservableList<User> contactList
+	-Gson gson
+	-EmailService emailservice
+	-TableView<User> contactTable
+	~MainController(String username)
+	~void fireHealthyUser(ActionEvent event)
+	~void fireInfectedUser(ActionEvent event)
+	~void addContact(ActionEvent event)
+	~void removeCloseContact(ActionEvent event)
+	~void mainToLogin(ActionEvent event)
+	~void closeMain(ActionEvent event)
+	-void refreshInfo(List<User> userList)
+}
+class ScreenController [[java:bookingsystem.ScreenController]] {
+}
+MainController --> "1" ScreenController : screencontroller
+class AbstractController [[java:infectiontracer.ui.AbstractController]] {
+}
+AbstractController <|-- MainController
+
+
+class ScreenController [[java:infectiontracer.ui.ScreenController]] {
+	+void switchToMain(ActionEvent event, String username)
+	+void switchToRegistration(ActionEvent event)
+	+void switchToLogin(ActionEvent event)
+}
+class AbstractController [[java:infectiontracer.ui.AbstractController]] {
+}
+AbstractController <|-- ScreenController
+class RegistrationController [[java:infectiontracer.ui.RegistrationController]] {
+	~FileHandler fileHandler
+	~void registerToLogin(ActionEvent event)
+	~void registerUser(ActionEvent event)
+	~void closeRegistration(ActionEvent event)
+}
+class ScreenController [[java:bookingsystem.ScreenController]] {
+}
+RegistrationController --> "1" ScreenController : screencontroller
+class AbstractController [[java:infectiontracer.ui.AbstractController]] {
+}
+AbstractController <|-- RegistrationController
+class LoginController [[java:infectiontracer.ui.LoginController]] {
+	-FileHandler fileHandler
+	-Gson gson
+	-InfectionTracer infectionTracer
+	~void loginBtn(ActionEvent event)
+	~void forgotPasswordBtn(ActionEvent event)
+	~void registerBtn(ActionEvent event)
+	~void closeLogin(ActionEvent event)
+}
+class ScreenController [[java:bookingsystem.ScreenController]] {
+}
+LoginController --> "1" ScreenController : screencontroller
+class AbstractController [[java:infectiontracer.ui.AbstractController]] {
+}
+AbstractController <|-- LoginController
+@enduml

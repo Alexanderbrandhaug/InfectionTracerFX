@@ -1,0 +1,21 @@
+@startuml
+class InfectionTracerApiController [[java:infectiontracer.rest.InfectionTracerApiController]] {
+	-FileHandler filehandler
+	-InfectionTracer infectionTracer
+	#List<User> getAllActiveUsersApi()
+	#User getUserByEmailApi(String email)
+	#boolean newUserApi(User newUser)
+	#List<User> getUsersCloseContactsApi(String email)
+	#boolean setHealthStatusSickApi(String email)
+	#boolean setHealthStatusHealthyApi(String email)
+	#boolean addCloseContactApi(String email, User newCloseContact)
+	#boolean deleteCloseContactApi(String email, User newCloseContact)
+	#boolean updatePasswordApi(String email, User currentUser)
+}
+class InfectionTracerApplication [[java:infectiontracer.rest.InfectionTracerApplication]] {
+	+{static}void main(String[] args)
+	+CommandLineRunner commandLineRunner(ApplicationContext ctx)
+}
+
+InfectionTracerApiController --> "1" InfectionTracerApplication : InfectionTracerApplication
+@enduml

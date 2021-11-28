@@ -1,0 +1,66 @@
+@startuml
+class FileHandler [[java:infectiontracer.json.FileHandler]] {
+	~String filePath
+	~Gson gson
+	+FileHandler()
+	+void setFilePath(String filePath)
+	+void insertUser(User user)
+	+boolean checkUserList(String email)
+	+List<User> getUsers()
+	+void writeUsersToFile(List<User> userList)
+}
+
+class User [[java:infectiontracer.core.User]] {
+	-String forename
+	-String lastname
+	-String email
+	-String password
+	-String dateOfInfection
+	-String healthStatus
+	-List<String> closeContacts
+	+User(String forename, String lastname, String email, String password, String healthStatus, String dateOfInfection)
+	+User()
+	+User(String forename, String lastname, String email, String password, String dateOfInfection, String healthStatus, List<String> allCloseContacts)
+	+void setDateOfInfected()
+	+void setDateOfHealthy()
+	+String getDateOfInfection()
+	+void setInfected()
+	+void setHealthy()
+	+String getHealthStatus()
+	-boolean checkIfUserAlreadyExistsAsCloseContact(String email)
+	+void addCloseContact(String user)
+	+void removeCloseContact(String user)
+	+List<String> getAllCloseContacts()
+	+void setForename(String forename)
+	+String getForename()
+	+void setLastname(String lastname)
+	+String getLastname()
+	+void setEmail(String email)
+	+String getEmail()
+	+void setPassword(String password)
+	+String getPassword()
+	+String toString()
+}
+class InfectionTracer [[java:infectiontracer.core.InfectionTracer]] {
+	-FileHandler fileHandler
+	+void setPath(String path)
+	+void addCloseContact(String userEmail, String closeContactEmail)
+	+void removeCloseContact(String userEmail, String closeContactEmail)
+	+void makeUserInfected(String username)
+	+void makeUserHealthy(String username)
+	+List<User> getUsersCloseContacts(String username)
+	+User getActiveUser(String username)
+	+void deleteUser(String username)
+	+boolean changePw(String username)
+}
+class EmailService [[java:infectiontracer.core.EmailService]] {
+	-String from
+	-String pw
+	-{static}String host
+	+void sendEmail(String currentUser, List<User> closecontacts)
+	+String sendEmailWithNewPassword(String currentUser)
+}
+class InfectionTracer [[java:infectiontracer.core.InfectionTracer]] {
+}
+EmailService --> "1" InfectionTracer : infectionTracer
+@enduml

@@ -1,0 +1,56 @@
+@startuml
+
+skinparam SequenceMessageAlignment center
+group user register account
+user -> fxui: RegisterUser()
+fxui -> rest: POST [serialize(input)]
+rest -> core: insertUser()
+core -> users.json: validate
+users.json --> core: user not in json 
+core -> users.json: user saved to json
+end
+group user logs in
+user -> fxui: LoginBtn()
+fxui -> rest: GET [getUser()]
+rest -> core: getActiveUser()
+core -> users.json:validate login
+users.json --> core: return users.json
+core -> rest: return user
+rest --> fxui: response [User exist]
+fxui --> user: initialize()
+end
+group initializeTableview()
+fxui --> fxui: initializeTableview
+note left 
+Methods initialized:
+initialize()
+addContact(activeUser, newUser)
+end note
+fxui -> rest: GET[getUsersCloseContacts()]
+rest -> core: getUsersCloseContacts()
+core -> users.json: read from json
+users.json --> core: return users.json
+core -> rest: return closecontacts
+rest -> fxui: response[Closecontacts]
+fxui -> user: display closecontacts
+end
+group user add closecontacts
+user -> fxui: LoginBtn()
+fxui -> rest: GET [User to add]
+rest -> core: getActiveUser()
+core -> users.json: validate that user exists
+users.json -> core: return users.json
+core -> rest: return user
+rest -> fxui: response [User]
+fxui -> rest: POST[serialize(User)]
+rest -> core: addContact()
+core --> core: check if already added
+core -> users.json: closecontact saved
+users.json --> core: response
+core --> rest: reponse OK
+rest --> fxui: response 200 OK
+fxui -> core: jsonToUser()
+core -> fxui: deserialize [JsonToUser]
+fxui --> user: tableview updates
+end
+@enduml
