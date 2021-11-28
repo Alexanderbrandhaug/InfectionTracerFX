@@ -2,6 +2,16 @@
 
 Målet med denne applikasjonen er å gi enkeltpersoner en oversikt over deres nærkontakter, samt E-post varsel dersom noen av de tester positivt på coronavirus. Dette gjøres ved å registrere en bruker, og deretter legge inn nærkontakter som senere kan varsles. Man kan fjerne nærkontakter dersom en kontakt ikke lengre er nærkontakt, eller ved å legge til en person ved en feil. Man kan også endre personalia, passord og/eller slette brukerkontoen sin. 
 
+## Struktur og Maven bygg
+
+Frontend er skrevet i Java, med JavaFx. Backend er skrevet i Java med det populære rammeverket Spring-boot. Applikasjonen skriver og leser data via et REST-API som igjen skriver til en JSON-fil som lagres i brukerens hjemmekatalog lokalt på PC'en. For å sikre god kodekvalitet og testdekning har vi benyttet oss av [jacoco](https://www.eclemma.org/jacoco/), [checkstyle](https://checkstyle.sourceforge.io/) og [spotbugs](https://spotbugs.github.io/). 
+
+Jacoco vil generere en rapport som HTML.fil etter endt kjøring til hver modul som enkelt kan leses vha en nettleser. 
+Spotbugs vil stoppe byggingen om det rapporteres en bug.
+Checkstyle standariserer vår formattering av kode ihht [Google sin kode konvensjoner](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml)
+
+Applikasjonen kan pakkes til et innstallerbart program på en PC, uavhengig av operativsystem. Fremgangsmåte er beskrevet under.
+
 ## Filstruktur
 
 De ulike filene er fordelt i ulike mapper. <br>
