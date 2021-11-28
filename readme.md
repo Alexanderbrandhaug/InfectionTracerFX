@@ -2,8 +2,10 @@
 
 ## Om prosjektet
 
-Dette er en Infectiontracer app som registrerer nærkontaktene til personer, og varsler nærkontater dersom man skulle bli smittet. Frontend er skrevet i Java, med JavaFx. Backend er skrevet i Java med det populære rammeverket Spring-boot. Applikasjonen skriver og leser data via et REST-API som igjen skriver til en JSON-fil som lagres i brukerens hjemmekatalog lokalt på PC'en. For å sikre god kodekvalitet og testdekning har vi benyttet oss av [jacoco](https://www.eclemma.org/jacoco/), [checkstyle](https://checkstyle.sourceforge.io/) og [spotbugs](https://spotbugs.github.io/). 
-Applikasjonen kan pakkes til et innstallerbart program på en PC, uavhengig av operativsystem. Fremgangsmåte er beskrevet under.
+Dette er en Infectiontracer app som registrerer nærkontaktene til personer, og varsler nærkontakter dersom man skulle bli smittet.
+Applikasjonen lar deg enkelt administrere antall nærkontakter, personalia til nærkontaktene dine og varsler dine nærkontakter dersom du registrerer at du har blitt smittet av Covid-19. 
+Applikasjonen krever en aktiv brukerkonto for å la deg bruke den. Nærkontakter som legges til må også ha en aktiv bruker i applikasjonen. 
+I tillegg kan man enkelt endre sin egen personalia og slette kontoen dersom det skulle bli aktuelt. 
 
 Selve applikasjonen finner man [her](Infectiontracer), her finner man også relevant README fil.
 
@@ -20,3 +22,14 @@ Selve applikasjonen finner man [her](Infectiontracer), her finner man også rele
 - Du må registere minimum to brukere for at testing av applikasjonen skal gi noe mening, ettersom man kun kan legge til nærkontakter som også er brukere av applikasjonen.
 - CD til fxui mappen og skriv kommandoen `mvn javafx:jlink jpackage:jpackage` for å bygge applikasjonen til en kjørbar applikasjon som kan installeres på en vilkårlig PC. **Merk:** For å kunne få bygget applikasjonen til en kjørbar applikasjon vha Gitpod, 
 så må kommandoen: `sudo apt-get update` etterfulgt av `sudo apt-get install -y fakeroot` kjøres før ovennevnte kommando.
+
+
+## Utvikler oppsett
+
+1. `git clone` https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2181/gr2181.git
+2. Åpne prosjektet som et Maven bygg i din IDE.
+3. Installer nødvendige avhengigheter ved å kjøre `mvn install` i root.
+4. Start Spring-boot serveren ved å kjøre `mvn spring-boot:run`i rest-mappen.
+5. Start applikasjonen ved å kjøre `mvn javafx:run` i fxui-mappen. 
+
+ - For å generere en **innstallerbar** applikasjon kan følgende kommando benyttes `mvn javafx:jlink jpackage:jpackage` i fxui-mappen.  

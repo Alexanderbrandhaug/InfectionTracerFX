@@ -1,0 +1,54 @@
+@startuml
+folder infectiontracer   {
+
+    component core #F0F8FF {
+        package infectiontracer.core #FFFFCC{
+               
+        }
+        package infectiontracer.json #FFFFCC{
+
+        }
+    }
+
+    component fxui #F0F8FF {
+        package infectiontracer.fxui #FFFFCC{
+        }
+    }
+
+    component resources #F0F8FF {
+        component fxml {
+                
+        }
+    }
+    component rest #F0F8FF {
+        package infectiontracer.rest #FFFFCC {
+
+        }
+    }
+
+    component springboot {
+
+    }
+
+    component Gson {
+
+    }
+
+}
+
+infectiontracer.fxui ..> fxml
+
+infectiontracer.fxui ..> infectiontracer.json
+infectiontracer.core ..> infectiontracer.json
+
+
+rest .> springboot
+
+infectiontracer.json ..> Gson
+
+infectiontracer.rest ..> infectiontracer.json
+
+infectiontracer.rest ..> infectiontracer.core
+
+infectiontracer.fxui .> infectiontracer.rest
+@enduml
