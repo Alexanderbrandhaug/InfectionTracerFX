@@ -1,21 +1,22 @@
 @startuml
 class InfectionTracerApiController [[java:infectiontracer.rest.InfectionTracerApiController]] {
-	-FileHandler filehandler
 	-InfectionTracer infectionTracer
-	#List<User> getAllActiveUsersApi()
-	#User getUserByEmailApi(String email)
-	#boolean newUserApi(User newUser)
-	#List<User> getUsersCloseContactsApi(String email)
-	#boolean setHealthStatusSickApi(String email)
-	#boolean setHealthStatusHealthyApi(String email)
-	#boolean addCloseContactApi(String email, User newCloseContact)
-	#boolean deleteCloseContactApi(String email, User newCloseContact)
-	#boolean updatePasswordApi(String email, User currentUser)
+	+ResponseEntity<List<User>> getAllActiveUsersApi()
+	+ResponseEntity<User> getUserByEmailApi(String email)
+	+ResponseEntity<String> newUserApi(User newUser)
+	+ResponseEntity<List<User>> getUsersCloseContactsApi(String email)
+	+ResponseEntity<String> setHealthStatusSickApi(String email, User infectedUser)
+	+ResponseEntity<String> setHealthStatusHealthyApi(String email)
+	+ResponseEntity<String> addCloseContactApi(String email, User newCloseContact)
+	+ResponseEntity<String> deleteCloseContactApi(String email, User oldCloseContact)
+	+ResponseEntity<String> updatePasswordApi(String email, User currentUser)
+	+ResponseEntity<String> updateUser(String email, User changedUser)
+	+ResponseEntity<String> deletePost(String email)
 }
 class InfectionTracerApplication [[java:infectiontracer.rest.InfectionTracerApplication]] {
 	+{static}void main(String[] args)
 	+CommandLineRunner commandLineRunner(ApplicationContext ctx)
 }
 
-InfectionTracerApiController --> "1" InfectionTracerApplication : InfectionTracerApplication
+InfectionTracerApiController ..> InfectionTracerApplication
 @enduml

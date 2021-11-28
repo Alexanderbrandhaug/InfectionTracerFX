@@ -1,72 +1,113 @@
 @startuml
-class AbstractController [[java:infectiontracer.ui.AbstractController]] {
-	~String username
+abstract class AbstractController [[java:infectiontracer.ui.AbstractController]] {
+	~User loggedInUser
 	~{static}String port
 	~{static}String myUrl
-	~Gson gson
-	#{static}void setMyUrl(String port)
-	#void createErrorDialogBox(String title, String header, String content)
-	#void createInformationDialogBox(String title, String header, String content)
-	#boolean createConfirmationDialogBox(String title, String header, String content)
-	#boolean createPostRequest(String url, String json)
-	#boolean createPutRequest(String url, String json)
-	#String createGetRequest(String url)
+	~FileHandler fileHandler
+	~{static}void setMyUrl(String port)
+	~void createErrorDialogBox(String title, String header, String content)
+	~void createInformationDialogBox(String title, String header, String content)
+	~boolean createConfirmationDialogBox(String title, String header, String content)
+	~boolean createPostRequest(String url, String json)
+	~boolean createPutRequest(String url, String json)
+	~String createGetRequest(String url)
+	~Boolean createDeleteRequest(String url)
 }
+
+AbstractController --> ScreenController
 class MainController [[java:infectiontracer.ui.MainController]] {
-	-InfectionTracer infectionTracer
-	~ObservableList<User> contactList
-	-Gson gson
-	-EmailService emailservice
+	-ObservableList<User> contactList
+	-Label usernameLbl
+	-Label infectionStatus
+	-Label numberOfContacts
 	-TableView<User> contactTable
-	~MainController(String username)
+	-TableColumn<User,String> nameColumn
+	-TableColumn<User,String> lastnameColumn
+	-TableColumn<User,String> emailColumn
+	-TableColumn<User,String> healthstatusColumn
+	-TableColumn<User,String> dateOfInfectionColumn
+	-TextField contactNameTxt
+	-Button closeBtnMain
+	~MainController(User loggedInUser)
 	~void fireHealthyUser(ActionEvent event)
 	~void fireInfectedUser(ActionEvent event)
 	~void addContact(ActionEvent event)
 	~void removeCloseContact(ActionEvent event)
+	-void initialize()
 	~void mainToLogin(ActionEvent event)
 	~void closeMain(ActionEvent event)
-	-void refreshInfo(List<User> userList)
+	-void refreshInfo()
+	~void profileBtn(ActionEvent event)
 }
-class ScreenController [[java:bookingsystem.ScreenController]] {
-}
-MainController --> "1" ScreenController : screencontroller
 class AbstractController [[java:infectiontracer.ui.AbstractController]] {
 }
 AbstractController <|-- MainController
 
-
-class ScreenController [[java:infectiontracer.ui.ScreenController]] {
-	+void switchToMain(ActionEvent event, String username)
-	+void switchToRegistration(ActionEvent event)
-	+void switchToLogin(ActionEvent event)
+class ProfileController [[java:infectiontracer.ui.ProfileController]] {
+	-TextField emailTxt
+	-TextField firstNameTxt
+	-TextField lastNameTxt
+	-Button saveBtn
+	-PasswordField verifyPasswordTxt
+	-PasswordField newPasswordTxt
+	-Button closeBtnProfile
+	~ProfileController(User loggedInUser)
+	~void closeProfile(ActionEvent event)
+	~void saveChanges(ActionEvent event)
+	~void deleteUserBtn(ActionEvent event)
+	~void backToMain(MouseEvent event)
+	-void initialize()
 }
 class AbstractController [[java:infectiontracer.ui.AbstractController]] {
 }
-AbstractController <|-- ScreenController
+AbstractController <|-- ProfileController
+
+class AbstractController [[java:infectiontracer.ui.AbstractController]] {
+}
+
+class ScreenController [[java:infectiontracer.ui.ScreenController]] {
+	-Stage stage
+	-Scene scene
+	-Parent root
+	+void switchToMain(Node node, User user)
+	+void switchToMainTest(Node node)
+	+void switchToProfileTest(Node node)
+	+void switchToRegistration(ActionEvent event)
+	+void switchToLogin(ActionEvent event)
+	+void switchToProfile(ActionEvent event, User loggedInUser)
+	~void createErrorDialogBox(String title, String header, String content)
+	~void createInformationDialogBox(String title, String header, String content)
+	~boolean createConfirmationDialogBox(String title, String header, String content)
+	+void switchToMainFromProfile(MouseEvent event, User loggedInUser)
+}
+
+class AbstractController [[java:infectiontracer.ui.AbstractController]] {
+}
+
 class RegistrationController [[java:infectiontracer.ui.RegistrationController]] {
-	~FileHandler fileHandler
+	-TextField forenameTxt
+	-TextField lastnameTxt
+	-TextField emailTxt
+	-PasswordField passwordTxt
+	-PasswordField verifyPasswordTxt
+	-Button registrationCloseBtnId
+	-Button registerBtnId
 	~void registerToLogin(ActionEvent event)
 	~void registerUser(ActionEvent event)
 	~void closeRegistration(ActionEvent event)
 }
-class ScreenController [[java:bookingsystem.ScreenController]] {
-}
-RegistrationController --> "1" ScreenController : screencontroller
 class AbstractController [[java:infectiontracer.ui.AbstractController]] {
 }
 AbstractController <|-- RegistrationController
 class LoginController [[java:infectiontracer.ui.LoginController]] {
-	-FileHandler fileHandler
-	-Gson gson
-	-InfectionTracer infectionTracer
+	-Button closeBtnLogin
+	-TextField emailTxt
+	-PasswordField passwordTxt
 	~void loginBtn(ActionEvent event)
 	~void forgotPasswordBtn(ActionEvent event)
 	~void registerBtn(ActionEvent event)
 	~void closeLogin(ActionEvent event)
 }
-class ScreenController [[java:bookingsystem.ScreenController]] {
-}
-LoginController --> "1" ScreenController : screencontroller
 class AbstractController [[java:infectiontracer.ui.AbstractController]] {
 }
 AbstractController <|-- LoginController

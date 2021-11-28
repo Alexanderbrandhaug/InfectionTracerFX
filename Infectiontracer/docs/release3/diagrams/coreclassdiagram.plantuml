@@ -1,15 +1,4 @@
 @startuml
-class FileHandler [[java:infectiontracer.json.FileHandler]] {
-	~String filePath
-	~Gson gson
-	+FileHandler()
-	+void setFilePath(String filePath)
-	+void insertUser(User user)
-	+boolean checkUserList(String email)
-	+List<User> getUsers()
-	+void writeUsersToFile(List<User> userList)
-}
-
 class User [[java:infectiontracer.core.User]] {
 	-String forename
 	-String lastname
@@ -40,6 +29,8 @@ class User [[java:infectiontracer.core.User]] {
 	+void setPassword(String password)
 	+String getPassword()
 	+String toString()
+	+boolean equals(Object obj)
+	+int hashCode()
 }
 class InfectionTracer [[java:infectiontracer.core.InfectionTracer]] {
 	-FileHandler fileHandler
@@ -50,17 +41,37 @@ class InfectionTracer [[java:infectiontracer.core.InfectionTracer]] {
 	+void makeUserHealthy(String username)
 	+List<User> getUsersCloseContacts(String username)
 	+User getActiveUser(String username)
+	+Boolean checkUserList(String userEmail, List<User> userList)
 	+void deleteUser(String username)
-	+boolean changePw(String username)
+	+void addUser(User newUser)
+	+List<User> getUsers()
+	+void changePw(String username)
+	+void editUser(User changedUser)
+	+void sendEmailToCloseContacts(User user)
 }
 class EmailService [[java:infectiontracer.core.EmailService]] {
-	-String from
-	-String pw
+	-{static}String from
+	-{static}String pw
 	-{static}String host
-	+void sendEmail(String currentUser, List<User> closecontacts)
+	+void sendEmail(String currentUser, List<String> closecontacts)
+	#String getRandomGeneratedPassword()
 	+String sendEmailWithNewPassword(String currentUser)
 }
-class InfectionTracer [[java:infectiontracer.core.InfectionTracer]] {
+
+class FileHandler [[java:infectiontracer.json.FileHandler]] {
+	~String filePath
+	~Gson gson
+	+FileHandler()
+	+void setFilePath(String filePath)
+	+List<User> getUsers()
+	+void writeUsersToFile(List<User> userList)
+	+User jsonToUser(String userJson)
+	+List<User> jsonToUserList(String userListJson)
+	+String userToJson(User user)
 }
-EmailService --> "1" InfectionTracer : infectionTracer
+
+InfectionTracer --> FileHandler
+InfectionTracer ..> User
+InfectionTracer ..> EmailService
+FileHandler ..> User
 @enduml
